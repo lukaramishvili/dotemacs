@@ -17,6 +17,8 @@
 
 (setq default-directory "d:/htdocs/lisp/")
 
+(column-number-mode)
+
 (w32-register-hot-key [A-tab])
 
 ;;;;idk why I need upper things on Linux or FreeBSD.
