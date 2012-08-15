@@ -21,12 +21,22 @@
 
 (w32-register-hot-key [A-tab])
 
-;;;;idk why I need upper things on Linux or FreeBSD.
+;;;;idk why I need above things on Linux or FreeBSD.
 
 (keyboard-translate ?\( ?\[) 
 (keyboard-translate ?\[ ?\() 
 (keyboard-translate ?\) ?\]) 
 (keyboard-translate ?\] ?\))
+
+(defun previous-window ()
+  (interactive)
+  (other-window -1))
+
+(global-set-key (kbd "<C-tab>") 'other-window)
+(global-set-key (kbd "<C-S-tab>") 'previous-window)
+
+(global-set-key (kbd "<C-M-tab>") 'next-buffer)
+(global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
 
 (defun google (query)
   "googles a query"
