@@ -1,27 +1,14 @@
-; try to improve slow performance on windows.
-(setq w32-get-true-file-attributes nil)
+;;;;
+;;;; Luka Ramishvili's .emacs file
+;;;;
 
-(prefer-coding-system       'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(setq slime-net-coding-system 'utf-8-unix)
-;; This from a japanese individual.  I hope it works.
-(setq default-buffer-file-coding-system 'utf-8)
-;; From Emacs wiki
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-;; MS Windows clipboard is UTF-16LE 
-(set-clipboard-coding-system 'utf-16le-dos)
+(setq inhibit-startup-message t)
 
-(cd "d:/htdocs/lisp/")
+(cd "/projects/")
 
-(setq default-directory "d:/htdocs/lisp/")
+(setq default-directory "/projects/")
 
 (column-number-mode)
-
-(w32-register-hot-key [A-tab])
-
-;;;;idk why I need above things on Linux or FreeBSD.
 
 (keyboard-translate ?\( ?\[) 
 (keyboard-translate ?\[ ?\() 
@@ -42,3 +29,12 @@
   "googles a query"
   (interactive "sQuery:")
   (browse-url (concat "http://www.google.com/search?q=" query)))
+
+;setq load-slime-by-hand t in .emacs on computers where you want
+(when (and (boundp 'load-slime-by-hand) load-slime-by-hand)
+  (add-to-list 'load-path "/usr/local/slime")
+  (require 'slime)
+  (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+  (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+  ;; Optionally, specify the lisp program you are using. Default is "lisp"
+  (setq inferior-lisp-program "sbcl"))
