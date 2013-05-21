@@ -21,6 +21,7 @@
 
 (global-set-key (kbd "<C-tab>") 'other-window)
 (global-set-key (kbd "<C-S-tab>") 'previous-window)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'previous-window)
 
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
@@ -38,3 +39,5 @@
   (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
   ;; Optionally, specify the lisp program you are using. Default is "lisp"
   (setq inferior-lisp-program "sbcl"))
+
+(load "~/dotemacs/haskellito/haskellito.el")
