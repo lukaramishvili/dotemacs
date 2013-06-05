@@ -3,6 +3,7 @@
 ;;;;
 
 (setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
 
 (cd "/projects/")
 
@@ -19,12 +20,16 @@
   (interactive)
   (other-window -1))
 
+;;;navigate between windows using C-*-tab
 (global-set-key (kbd "<C-tab>") 'other-window)
 (global-set-key (kbd "<C-S-tab>") 'previous-window)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'previous-window)
 
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
+
+;;switch buffer now doesn't touch other windows
+(global-set-key "\C-x\C-b" 'buffer-menu)
 
 (defun google (query)
   "googles a query"
