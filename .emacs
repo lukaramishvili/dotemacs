@@ -82,5 +82,6 @@
 ;; rainbow delimiters colors every delimiter pair with different color
 (add-to-list 'load-path "~/.emacs.d/rainbow-delimiters/")
 (when (require 'rainbow-delimiters nil 'noerror) 
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
 ;;(global-rainbow-delimiters-mode) ; enable everywhere
