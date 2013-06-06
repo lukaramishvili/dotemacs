@@ -70,5 +70,17 @@
   ;; Optionally, specify the lisp program you are using. Default is "lisp"
   (setq inferior-lisp-program "sbcl"))
 
+;;; colors
+(set-background-color "#3f3f3f")
+(set-foreground-color "white")
+
+;;; plugins
+
 ; this is my little haskell plugin I'm writing to ease writing in Haskell
 (load "~/dotemacs/haskellito/haskellito.el")
+
+;; rainbow delimiters colors every delimiter pair with different color
+(add-to-list 'load-path "~/.emacs.d/rainbow-delimiters/")
+(when (require 'rainbow-delimiters nil 'noerror) 
+  (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
+;;(global-rainbow-delimiters-mode) ; enable everywhere
