@@ -80,6 +80,7 @@
 (load "~/dotemacs/haskellito/haskellito.el")
 
 ;; rainbow delimiters colors every delimiter pair with different color
+;; with lame color theme, it's useless, but looks great nevertheless
 (add-to-list 'load-path "~/.emacs.d/rainbow-delimiters/")
 (when (require 'rainbow-delimiters nil 'noerror) 
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
