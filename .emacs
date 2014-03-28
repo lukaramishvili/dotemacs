@@ -63,6 +63,7 @@
 
 ;setq load-slime-by-hand t in .emacs on computers where you dont want auto slime
 (when (and (boundp 'load-slime-by-hand) load-slime-by-hand)
+  ;;if "cannot open load file, slime", then $ cd /usr/local && git clone https://github.com/slime/slime
   (add-to-list 'load-path "/usr/local/slime")
   (require 'slime)
   (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
