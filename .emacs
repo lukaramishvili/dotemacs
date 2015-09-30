@@ -41,9 +41,39 @@
 (global-set-key (kbd "<C-tab>") 'other-window)
 (global-set-key (kbd "<C-S-tab>") 'previous-window)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'previous-window)
+(global-set-key (kbd "M-±") 'previous-window);; same as M-S-§
+(global-set-key (kbd "M-§") 'other-window)
 
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
+
+(defun set-windmove-keybindings ()
+  (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
+    (global-unset-key (kbd key))
+    (local-unset-key (kbd key)))
+  
+  (global-set-key (kbd "<C-left>") 'windmove-left)
+  (global-set-key (kbd "<C-right>") 'windmove-right)
+  (global-set-key (kbd "<C-up>") 'windmove-up)
+  (global-set-key (kbd "<C-down>") 'windmove-down)
+  
+  (progn
+    (require 'shell)
+    (define-key shell-mode-map (kbd "<C-left>") 'windmove-left)
+    (define-key shell-mode-map (kbd "<C-right>") 'windmove-right)
+    (define-key shell-mode-map (kbd "<C-up>") 'windmove-up)
+    (define-key shell-mode-map (kbd "<C-down>") 'windmove-down)))
+
+(set-windmove-keybindings)
+
+
+;;switch buffer now doesn't touch other windows, opens in same buffer
+(global-set-key "\C-x\C-b" 'buffer-menu)
+
+;;currently "Control" (corner key labeled fn) is mapped to "Alt" on my macbook, 
+;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
+(global-set-key (kbd "C-§") 'other-frame)
+
 
 ; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 (global-set-key (kbd "<C-M-r>") 'isearch-backward-regexp)
@@ -52,13 +82,6 @@
 ; C-M-w copies to OS clipboard; C-M-y yanks from OS clipboard
 (global-set-key "\C-\M-w" 'clipboard-kill-ring-save)
 (global-set-key "\C-\M-y" 'clipboard-yank)
-
-;;switch buffer now doesn't touch other windows, opens in same buffer
-(global-set-key "\C-x\C-b" 'buffer-menu)
-
-;;currently "Control" (corner key labeled fn) is mapped to "Alt" on my macbook, 
-;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
-(global-set-key (kbd "C-§") 'other-frame)
 
 ; maximize emacs frame on startup (X11-specific but I'm not using anything else)
 (defun x11-maximize-frame ()
