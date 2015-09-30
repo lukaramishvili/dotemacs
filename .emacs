@@ -101,7 +101,7 @@
   (browse-url (concat "http://www.google.com/search?q=" query)))
 
 
-; from Tikhon Jelvis
+; from Tikhon Jelvis (modified to include bash profile)
 (defun new-shell (name)
   "Opens a new shell buffer with the given name in
 asterisks (*name*) in the current directory and changes the
@@ -112,8 +112,9 @@ prompt to 'name>'."
     (shell (current-buffer))
     (sleep-for 0 200)
     (delete-region (point-min) (point-max))
+    ;; set prompt name && include user bash profile
     (comint-simple-send (get-buffer-process (current-buffer)) 
-                        (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\""))))
+                        (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\" && source ~/.bash_profile"))))
 (global-set-key "\C-c\ s" 'new-shell)
 
 
