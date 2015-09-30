@@ -56,6 +56,10 @@
 ;;switch buffer now doesn't touch other windows, opens in same buffer
 (global-set-key "\C-x\C-b" 'buffer-menu)
 
+;;currently "Control" (corner key labeled fn) is mapped to "Alt" on my macbook, 
+;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
+(global-set-key (kbd "C-§") 'other-frame)
+
 ; maximize emacs frame on startup (X11-specific but I'm not using anything else)
 (defun x11-maximize-frame ()
   "Maximize the current frame (to full screen)"
@@ -74,6 +78,22 @@
   (browse-url (concat "http://www.google.com/search?q=" query)))
 
 
+; from Tikhon Jelvis
+(defun new-shell (name)
+  "Opens a new shell buffer with the given name in
+asterisks (*name*) in the current directory and changes the
+prompt to 'name>'."
+  (interactive "sName: ")
+  (pop-to-buffer (concat "*" name "*"))
+  (unless (eq major-mode 'shell-mode)
+    (shell (current-buffer))
+    (sleep-for 0 200)
+    (delete-region (point-min) (point-max))
+    (comint-simple-send (get-buffer-process (current-buffer)) 
+                        (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\""))))
+(global-set-key "\C-c\ s" 'new-shell)
+
+
 
 (setq inferior-lisp-program "sbcl")
 
@@ -90,8 +110,15 @@
   (setq inferior-lisp-program "sbcl"))
 
 ;;; colors
-(set-background-color "#3f3f3f")
-(set-foreground-color "white")
+;(set-background-color "#3f3f3f")
+;(set-foreground-color "white")
+
+;; themes
+(add-to-list 'custom-theme-load-path "~/dotemacs/blackboard-theme")
+(load-theme 'blackboard t)
+
+;;; fonts
+(set-default-font "DejaVu Sans Mono")
 
 ;;; plugins
 
