@@ -27,14 +27,12 @@
 ; stops selection with a mouse being immediately injected to the kill ring
 (setq mouse-drag-copy-region nil)
 ; hide the toolbar (check if available, or signals error in terminal)
-(if tool-bar-mode
-    (tool-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 ; hide the menu (no benefits in hiding the menu on osx)
-;(menu-bar-mode -1)
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 ; hide the scrollbars, not using them anyway
 ; also check if available, or signals error in terminal
-(if (boundp 'scroll-bar-mode)
-    (scroll-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ; show column numbers
 (column-number-mode)
 
