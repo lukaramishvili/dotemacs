@@ -60,6 +60,13 @@
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
 
+
+; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
+(global-set-key "\C-h" 'backward-delete-char-untabify)
+; also use C-h for backspace in regex search
+(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
+(global-set-key [(super h)] 'help-command)
+
 ; variations on Steve Yegge recommendations
 (defun kill-current-word ()
   (interactive)
@@ -111,14 +118,17 @@
 ;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
 (global-set-key (kbd "C-§") 'other-frame)
 
-;; show recent files list
+
 (defun show-recent-file-list()
+  (interactive)
   (recentf-mode)
   (recentf-open-files))
+; on load, show recent file list
 (defun on-new-window ()
   (other-window 1)
   (show-recent-file-list))
 (add-hook 'window-setup-hook 'show-recent-file-list)
+; when splitting a window ("tab"), show recent file list
 (defun split-and-switch-window-below ()
   (interactive)
   (split-window-below)
@@ -129,8 +139,9 @@
   (on-new-window))
 (global-set-key (kbd "C-x 2") 'split-and-switch-window-below)
 (global-set-key (kbd "C-x 3") 'split-and-switch-window-right)
-
-
+; quick shortcuts for invoking recent file list
+(global-set-key (kbd "C-x M-f") 'show-recent-file-list)
+(global-set-key (kbd "C-x C-a") 'show-recent-file-list)
 
 ; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 (global-set-key (kbd "<C-M-r>") 'isearch-backward-regexp)
