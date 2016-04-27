@@ -2,6 +2,15 @@
 ;;;; Luka Ramishvili's .emacs file
 ;;;;
 
+;;; installed packages
+;;;2048-game          20140704.... installed  play 2048 in Emacs
+;;;auctex             11.87.7      installed  Integrated environment for *TeX*
+;;;markdown-mode      20151214.... installed  Emacs Major mode for Markdown-formatted text files
+;;;markdown-mode+     20120829.510 installed  extra functions for markdown-mode
+;;;php-mode           20140502.... installed  Major mode for editing PHP code
+;;;recentf-ext        20130130.... installed  Recentf extensions
+;;;slime              20140702.... installed  Superior Lisp Interaction Mode for Emacs
+
 (require 'package)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -17,10 +26,15 @@
 
 ; stops selection with a mouse being immediately injected to the kill ring
 (setq mouse-drag-copy-region nil)
-; hide the toolbar
-(tool-bar-mode -1)
+; hide the toolbar (check if available, or signals error in terminal)
+(if tool-bar-mode
+    (tool-bar-mode -1))
 ; hide the menu (no benefits in hiding the menu on osx)
 ;(menu-bar-mode -1)
+; hide the scrollbars, not using them anyway
+; also check if available, or signals error in terminal
+(if (boundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
 ; show column numbers
 (column-number-mode)
 
@@ -31,7 +45,8 @@
 (keyboard-translate ?\] ?\))
 
 (setq mac-command-modifier 'control)
-(setq mac-control-modifier 'meta)
+(setq mac-control-modifier 'super)
+; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
 
 (defun previous-window ()
   (interactive)
@@ -46,6 +61,30 @@
 
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
+
+; variations on Steve Yegge recommendations
+(defun kill-current-word ()
+  (interactive)
+  ;in case cursor was at the end of current word, prevent jumping to next word's end
+  (left-word 1)
+  (right-word 1)
+  (backward-kill-word 1))
+(defun kill-current-symbol ()
+  (interactive)
+  (backward-sexp 1)
+  (kill-sexp 1))
+(defun kill-current-line ()
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line 1))
+(global-set-key (kbd "C-1") 'backward-kill-word)
+(global-set-key (kbd "C-2") 'kill-current-word)
+(global-set-key (kbd "C-3") 'kill-current-symbol)
+(global-set-key (kbd "C-4") 'kill-current-line)
+(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-region)
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
 
 (defun set-windmove-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
@@ -74,6 +113,26 @@
 ;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
 (global-set-key (kbd "C-§") 'other-frame)
 
+;; show recent files list
+(defun show-recent-file-list()
+  (recentf-mode)
+  (recentf-open-files))
+(defun on-new-window ()
+  (other-window 1)
+  (show-recent-file-list))
+(add-hook 'window-setup-hook 'show-recent-file-list)
+(defun split-and-switch-window-below ()
+  (interactive)
+  (split-window-below)
+  (on-new-window))
+(defun split-and-switch-window-right ()
+  (interactive)
+  (split-window-right)
+  (on-new-window))
+(global-set-key (kbd "C-x 2") 'split-and-switch-window-below)
+(global-set-key (kbd "C-x 3") 'split-and-switch-window-right)
+
+
 
 ; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 (global-set-key (kbd "<C-M-r>") 'isearch-backward-regexp)
@@ -94,6 +153,10 @@
 
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+; open .scss and .sass files in css-mode
+(add-to-list 'auto-mode-alist '(".scss" . css-mode))
+(add-to-list 'auto-mode-alist '(".sass" . css-mode))
 
 (defun google (query)
   "googles a query"
@@ -156,3 +219,4 @@ prompt to 'name>'."
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
 ;;(global-rainbow-delimiters-mode) ; enable everywhere
+
