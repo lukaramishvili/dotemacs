@@ -100,13 +100,23 @@
   (global-set-key (kbd "<C-right>") 'windmove-right)
   (global-set-key (kbd "<C-up>") 'windmove-up)
   (global-set-key (kbd "<C-down>") 'windmove-down)
+
+  (global-set-key [(control super b)] 'windmove-left)
+  (global-set-key [(control super f)] 'windmove-right)
+  (global-set-key [(control super p)] 'windmove-up)
+  (global-set-key [(control super n)] 'windmove-down)
   
   (progn
     (require 'shell)
     (define-key shell-mode-map (kbd "<C-left>") 'windmove-left)
     (define-key shell-mode-map (kbd "<C-right>") 'windmove-right)
     (define-key shell-mode-map (kbd "<C-up>") 'windmove-up)
-    (define-key shell-mode-map (kbd "<C-down>") 'windmove-down)))
+    (define-key shell-mode-map (kbd "<C-down>") 'windmove-down)
+
+    (define-key shell-mode-map [(control super b)] 'windmove-left)
+    (define-key shell-mode-map [(control super f)] 'windmove-right)
+    (define-key shell-mode-map [(control super p)] 'windmove-up)
+    (define-key shell-mode-map [(control super n)] 'windmove-down)))
 
 (set-windmove-keybindings)
 
