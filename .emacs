@@ -2,7 +2,7 @@
 ;;;; Luka Ramishvili's .emacs file
 ;;;;
 
-;;; installed packages
+;;; installed packages (copied from M-x package-list-packages)
 ;;;2048-game          20140704.... installed  play 2048 in Emacs
 ;;;auctex             11.87.7      installed  Integrated environment for *TeX*
 ;;;markdown-mode      20151214.... installed  Emacs Major mode for Markdown-formatted text files
