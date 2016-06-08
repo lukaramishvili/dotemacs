@@ -174,6 +174,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 ; open .scss and .sass files in css-mode
+(add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
 (add-to-list 'auto-mode-alist '(".scss" . css-mode))
 (add-to-list 'auto-mode-alist '(".sass" . css-mode))
 
