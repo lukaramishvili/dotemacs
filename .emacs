@@ -99,17 +99,19 @@
   (move-end-of-line 1)
   (newline-and-indent))
 (global-set-key (kbd "<C-S-return>") 'open-indented-line)
-;; Command-{ opens a {\n cursor will be here \n} block at the end of the line
-(defun open-brackets-block ()
+;; Command-{ opens a {\n cursor will be here \n} block after the end of the line
+;; Command-Alt-{ opens the {\n cursor \n} block at the cursor position
+(defun open-brackets-block (at-the-end-of-line)
   (interactive)
-  (move-end-of-line 1)
+  (if at-the-end-of-line (move-end-of-line 1))
   (insert "{")
   (newline-and-indent)
   (insert "}")
   (indent-for-tab-command)
   (previous-line 1)
   (open-indented-line))
-(global-set-key (kbd "C-{") 'open-brackets-block)
+(global-set-key (kbd "C-{") (lambda () (interactive) (open-brackets-block t)))
+(global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
 
 (defun set-windmove-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
