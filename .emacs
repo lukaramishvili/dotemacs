@@ -2,6 +2,8 @@
 ;;;; Luka Ramishvili's .emacs file
 ;;;;
 
+;;; use C-x C-e to reload any s-exp
+
 ;;; installed packages (copied from M-x package-list-packages)
 ;;;2048-game          20140704.... installed  play 2048 in Emacs
 ;;;auctex             11.87.7      installed  Integrated environment for *TeX*
@@ -90,6 +92,24 @@
 (global-set-key "\C-c\C-k" 'kill-region)
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
+
+;; Command-Shift-Enter adds an indented line after current line and moves cursor there
+(defun open-indented-line ()
+  (interactive)
+  (move-end-of-line 1)
+  (newline-and-indent))
+(global-set-key (kbd "<C-S-return>") 'open-indented-line)
+;; Command-{ opens a {\n cursor will be here \n} block at the end of the line
+(defun open-brackets-block ()
+  (interactive)
+  (move-end-of-line 1)
+  (insert "{")
+  (newline-and-indent)
+  (insert "}")
+  (indent-for-tab-command)
+  (previous-line 1)
+  (open-indented-line))
+(global-set-key (kbd "C-{") 'open-brackets-block)
 
 (defun set-windmove-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
