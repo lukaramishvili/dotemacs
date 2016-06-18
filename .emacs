@@ -92,6 +92,10 @@
 (global-set-key "\C-c\C-k" 'kill-region)
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
+;; make Alt-Ctrl-h the same as Alt-Backspace
+(global-set-key (kbd "C-M-h") 'backward-kill-word)
+
+(global-set-key (kbd "C-z") 'undo)
 
 ;; Command-Shift-Enter adds an indented line after current line and moves cursor there
 (defun open-indented-line ()
