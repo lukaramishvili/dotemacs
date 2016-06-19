@@ -69,6 +69,24 @@
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 (global-set-key [(super h)] 'help-command)
 
+(defun inside-string? ()
+  "Returns non-nil if inside string, else nil.
+This depends on major mode having setup syntax table properly."
+  (interactive)
+  (let ((result (nth 3 (syntax-ppss))))
+    (message "%s" result)
+    result))
+
+(fset 'original-backward-up-list (symbol-function 'backward-up-list))
+(defun backward-up-list ()
+  (interactive)
+  (cond
+   ((equal (inside-string?) 34)
+    (search-backward "\"")); get out of "" string
+   ((equal (inside-string?) 39)
+    (search-backward "'")))
+  (original-backward-up-list))
+
 ; variations on Steve Yegge recommendations
 (defun kill-current-word ()
   (interactive)
@@ -84,18 +102,25 @@
   (interactive)
   (move-beginning-of-line 1)
   (kill-line 1))
+(defun kill-current-sexp ()
+  (interactive)
+  (backward-up-list)
+  (kill-sexp))
 (global-set-key (kbd "C-1") 'backward-kill-word)
 (global-set-key (kbd "C-2") 'kill-current-word)
 (global-set-key (kbd "C-3") 'kill-current-symbol)
 (global-set-key (kbd "C-4") 'kill-current-line)
+(global-set-key (kbd "C-5") 'kill-current-sexp)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
-;; make Alt-Ctrl-h the same as Alt-Backspace
+;; make Alt-h and Alt-Ctrl-h the same as Alt-Backspace
+(global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
 
 (global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "C--") 'undo)
 
 ;; Command-Shift-Enter adds an indented line after current line and moves cursor there
 (defun open-indented-line ()
@@ -117,7 +142,7 @@
 (global-set-key (kbd "C-{") (lambda () (interactive) (open-brackets-block t)))
 (global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
 
-(defun set-windmove-keybindings ()
+(defun set-windmovk-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
     (global-unset-key (kbd key))
     (local-unset-key (kbd key)))
@@ -126,6 +151,11 @@
   (global-set-key (kbd "<C-right>") 'windmove-right)
   (global-set-key (kbd "<C-up>") 'windmove-up)
   (global-set-key (kbd "<C-down>") 'windmove-down)
+
+  (global-set-key [(super b)] 'windmove-left)
+  (global-set-key [(super f)] 'windmove-right)
+  (global-set-key [(super p)] 'windmove-up)
+  (global-set-key [(super n)] 'windmove-down)
 
   (global-set-key [(control super b)] 'windmove-left)
   (global-set-key [(control super f)] 'windmove-right)
@@ -138,6 +168,11 @@
     (define-key shell-mode-map (kbd "<C-right>") 'windmove-right)
     (define-key shell-mode-map (kbd "<C-up>") 'windmove-up)
     (define-key shell-mode-map (kbd "<C-down>") 'windmove-down)
+
+    (global-set-key [(super b)] 'windmove-left)
+    (global-set-key [(super f)] 'windmove-right)
+    (global-set-key [(super p)] 'windmove-up)
+    (global-set-key [(super n)] 'windmove-down)
 
     (define-key shell-mode-map [(control super b)] 'windmove-left)
     (define-key shell-mode-map [(control super f)] 'windmove-right)
