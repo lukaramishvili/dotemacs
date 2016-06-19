@@ -62,8 +62,8 @@
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
 
-(global-set-key (kbd "M-n") 'new-frame)
-(global-set-key (kbd "M-S-n") 'new-frame)
+;(global-set-key (kbd "M-n") 'new-frame)
+;(global-set-key (kbd "M-S-n") 'new-frame)
 
 
 ; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
@@ -158,7 +158,8 @@ This depends on major mode having setup syntax table properly."
   (global-set-key [(super b)] 'windmove-left)
   (global-set-key [(super f)] 'windmove-right)
   (global-set-key [(super p)] 'windmove-up)
-  (global-set-key [(super n)] 'windmove-down)
+  ;; super-n is well used on new-frame, so use super-meta-n
+  (global-set-key [(super meta n)] 'windmove-down)
 
   (global-set-key [(control super b)] 'windmove-left)
   (global-set-key [(control super f)] 'windmove-right)
