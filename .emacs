@@ -62,6 +62,9 @@
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
 
+(global-set-key (kbd "M-n") 'new-frame)
+(global-set-key (kbd "M-S-n") 'new-frame)
+
 
 ; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
 (global-set-key "\C-h" 'backward-delete-char-untabify)
