@@ -159,6 +159,11 @@ This depends on major mode having setup syntax table properly."
   (global-set-key [(super f)] 'windmove-right)
   (global-set-key [(super p)] 'windmove-up)
   ;; super-n is well used on new-frame, so use super-meta-n
+  ;(global-set-key [(super n)] 'windmove-down)
+
+  (global-set-key [(super meta b)] 'windmove-left)
+  (global-set-key [(super meta f)] 'windmove-right)
+  (global-set-key [(super meta p)] 'windmove-up)
   (global-set-key [(super meta n)] 'windmove-down)
 
   (global-set-key [(control super b)] 'windmove-left)
@@ -176,7 +181,13 @@ This depends on major mode having setup syntax table properly."
     (global-set-key [(super b)] 'windmove-left)
     (global-set-key [(super f)] 'windmove-right)
     (global-set-key [(super p)] 'windmove-up)
-    (global-set-key [(super n)] 'windmove-down)
+    ;; super-n is well used on new-frame, so use super-meta-n
+    ;(global-set-key [(super n)] 'windmove-down)
+
+    (global-set-key [(super meta b)] 'windmove-left)
+    (global-set-key [(super meta f)] 'windmove-right)
+    (global-set-key [(super meta p)] 'windmove-up)
+    (global-set-key [(super meta n)] 'windmove-down)
 
     (define-key shell-mode-map [(control super b)] 'windmove-left)
     (define-key shell-mode-map [(control super f)] 'windmove-right)
