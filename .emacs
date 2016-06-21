@@ -178,7 +178,10 @@ This depends on major mode having setup syntax table properly."
   (interactive)
   (move-end-of-line 1)
   (newline-and-indent))
-(global-set-key (kbd "<C-S-return>") 'open-indented-line)
+(global-set-key (kbd "<C-return>") 'open-indented-line)
+(global-set-key (kbd "<C-M-return>") 'newline-and-indent)
+;; C-S-return is vacant, use it for something
+
 ;; Command-{ opens a {\n cursor will be here \n} block after the end of the line
 ;; Command-Alt-{ opens the {\n cursor \n} block at the cursor position
 (defun open-brackets-block (at-the-end-of-line)
@@ -193,7 +196,7 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "C-{") (lambda () (interactive) (open-brackets-block t)))
 (global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
 
-(defun set-windmovk-keybindings ()
+(defun set-windmove-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
     (global-unset-key (kbd key))
     (local-unset-key (kbd key)))
