@@ -43,6 +43,9 @@
 (keyboard-translate ?\[ ?\() 
 (keyboard-translate ?\) ?\]) 
 (keyboard-translate ?\] ?\))
+; Also use Alt-[ as Alt-( and Alt-] as Alt-)
+(global-set-key (kbd "M-[") 'insert-parentheses)
+(global-set-key (kbd "M-]") 'move-past-close-and-reindent)
 
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
@@ -202,10 +205,19 @@ This depends on major mode having setup syntax table properly."
   (insert "}")
   (unless at-the-end-of-line (backward-char 1))
   (indent-for-tab-command))
+;; inserts anonymous function at cursor
+(defun open-js-lambda-block ()
+  (interactive)
+  (insert "function()")
+  (open-brackets-block nil))
 (global-set-key (kbd "C-{") (lambda () (interactive) (open-brackets-block t)))
 (global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
 (global-set-key (kbd "C-}") (lambda () (interactive) (close-brackets-block t)))
 (global-set-key (kbd "C-M-}") (lambda () (interactive) (close-brackets-block nil)))
+
+(add-hook 'js-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "C-c f") 'open-js-lambda-block)))
 
 (defun set-windmove-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
