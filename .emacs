@@ -193,8 +193,19 @@ This depends on major mode having setup syntax table properly."
   (indent-for-tab-command)
   (previous-line 1)
   (open-indented-line))
+;; Command-} closes a {} block on a new line (e.g. if or while), cursor will be after }
+;; Command-M-} closes a {} block right after cursor, cursor will be before }
+(defun close-brackets-block (at-the-end-of-line)
+  (interactive)
+  (if at-the-end-of-line (move-end-of-line 1))
+  (newline-and-indent)
+  (insert "}")
+  (unless at-the-end-of-line (backward-char 1))
+  (indent-for-tab-command))
 (global-set-key (kbd "C-{") (lambda () (interactive) (open-brackets-block t)))
 (global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
+(global-set-key (kbd "C-}") (lambda () (interactive) (close-brackets-block t)))
+(global-set-key (kbd "C-M-}") (lambda () (interactive) (close-brackets-block nil)))
 
 (defun set-windmove-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
