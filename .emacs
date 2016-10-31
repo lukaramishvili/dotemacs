@@ -288,7 +288,9 @@ This depends on major mode having setup syntax table properly."
 
 ;;currently "Control" (corner key labeled fn) is mapped to "Alt" on my macbook, 
 ;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
-(global-set-key (kbd "C-§") 'other-frame)
+;;(global-set-key (kbd "C-§") 'other-frame)
+;;on the external keyboard, there's no § key, just a normal `
+(global-set-key (kbd "C-`") 'other-frame)
 
 
 (defun show-recent-file-list()
