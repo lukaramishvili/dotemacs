@@ -26,6 +26,8 @@
 
 ;(setq default-directory "/projects/")
 
+(setq-default indent-tabs-mode nil)
+
 (defun ask-before-closing ()
   "Ask whether or not to close, and then close if y was pressed"
   (interactive)
@@ -36,7 +38,8 @@
     (message "Canceled exit")))
 
 (when window-system
-  (global-set-key (kbd "C-x C-c") 'ask-before-closing))
+  (global-set-key (kbd "C-x C-c") 'ask-before-closing)
+  (global-set-key (kbd "s-q") 'ask-before-closing))
 
 ; stops selection with a mouse being immediately injected to the kill ring
 (setq mouse-drag-copy-region nil)
@@ -288,9 +291,11 @@ This depends on major mode having setup syntax table properly."
 
 ;;currently "Control" (corner key labeled fn) is mapped to "Alt" on my macbook, 
 ;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
-;;(global-set-key (kbd "C-§") 'other-frame)
+;; pass -1 to other-frame to switch frames in the order they were opened
+(global-set-key (kbd "C-§") '(lambda() (interactive) (other-frame -1)))
+(global-set-key (kbd "C-±") 'other-frame)
 ;;on the external keyboard, there's no § key, just a normal `
-(global-set-key (kbd "C-`") 'other-frame)
+;;(global-set-key (kbd "C-`") 'other-frame)
 
 
 (defun show-recent-file-list()
