@@ -342,11 +342,6 @@ This depends on major mode having setup syntax table properly."
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
-; open .scss and .sass files in css-mode
-(add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
-(add-to-list 'auto-mode-alist '(".scss" . css-mode))
-(add-to-list 'auto-mode-alist '(".sass" . css-mode))
-
 (defun google (query)
   "googles a query"
   (interactive "sQuery:")
@@ -409,3 +404,27 @@ prompt to 'name>'."
   (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
 ;;(global-rainbow-delimiters-mode) ; enable everywhere
 
+
+
+(when (require 'web-mode nil 'noerror)
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  ;;
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (setq web-mode-engines-alist
+      '(("php"    . "\\.phtml\\'")
+        ("blade"  . "\\.blade\\."))))
+
+(when (require 'web-mode-edit-element nil 'noerror)
+  (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
+
+
+; open .scss and .sass files in css-mode
+(add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
+(add-to-list 'auto-mode-alist '(".scss" . css-mode))
+(add-to-list 'auto-mode-alist '(".sass" . css-mode))
