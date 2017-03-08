@@ -428,3 +428,114 @@ prompt to 'name>'."
 (add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
 (add-to-list 'auto-mode-alist '(".scss" . web-mode));css-mode
 (add-to-list 'auto-mode-alist '(".sass" . web-mode));css-mode
+
+
+;; begin new features
+
+;; return to previous cursor position (by rotating mark-ring)
+;; from http://stackoverflow.com/a/14539202/324220
+;; tried (set-mark-command -1) but it returned to first recorded location, not last
+(defun unpop-to-mark-command ()
+  "Unpop off mark ring. Does nothing if mark ring is empty."
+  (interactive)
+      (when mark-ring
+        (setq mark-ring (cons (copy-marker (mark-marker)) mark-ring))
+        (set-marker (mark-marker) (car (last mark-ring)) (current-buffer))
+        (when (null (mark t)) (ding))
+        (setq mark-ring (nbutlast mark-ring))
+        (goto-char (marker-position (car (last mark-ring))))))
+; feature - undo cursor position (return to previous position, something like pop-mark or pop-global-mark). maybe C-? (=C-S-/)
+(global-set-key (kbd "C-?") 'unpop-to-mark-command)
+
+(defun sgml-transpose-tags-around-cursor ()
+  ;; transpose tags before and after cursor
+  (interactive)
+  ;; transpose only works when cursor is at first element's beginning
+  (sgml-skip-tag-backward 1)
+  (web-mode-element-transpose))
+(defun sgml-delete-tag-backward ()
+  ;; delete the tag before cursor
+  (interactive)
+  (let ((tag-start (point)))
+    (sgml-skip-tag-backward 1)
+    (kill-region tag-start (point))))
+(defun sgml-delete-tag-forward ()
+  ;; delete the tag before cursor
+  (interactive)
+  (let ((tag-end (point)))
+    (sgml-skip-tag-forward 1)
+    (kill-region tag-end (point))))
+(defun sgml-select-tag-backward ()
+  ;; select tag before cursor (includes any space between current cursor position and closing tag
+  (interactive)
+  (set-mark-command nil)
+  (sgml-skip-tag-backward 1))
+(defun sgml-select-tag-forward ()
+  ;; select tag before cursor (includes any space between current cursor position and opening tag
+  (interactive)
+  (set-mark-command nil)
+  (sgml-skip-tag-forward 1))
+(defun sgml-duplicate-previous-tag ()
+  ;; insert the contents of the tag before cursor at the current cursor position
+  (interactive)
+  ;; remember the current cursor position; we'll paste there
+  (save-excursion
+    ;; jump to the beginning of previous tag, select it, and copy
+    (sgml-skip-tag-backward 1)
+    (set-mark-command nil)
+    (sgml-skip-tag-forward 1)
+    (kill-ring-save (point) (mark)))
+  (open-indented-line)
+  (yank))
+(defun sgml-duplicate-next-tag ()
+  ;; insert the contents of the tag after cursor at the current cursor position
+  (interactive)
+  ;; remember the current cursor position; we'll paste there
+  (save-excursion
+    ;; jump to the beginning of previous tag, select it, and copy
+    (sgml-skip-tag-forward 1)
+    (set-mark-command nil)
+    (sgml-skip-tag-backward 1)
+    (kill-ring-save (point) (mark)))
+  (open-indented-line)
+  (yank))
+
+
+;; TODO find out how d/s/ inserts <div><span>...
+;; TODO: differentiate between web-mode html, css and javascript
+;; TODO: only call ..web-mode-html-.. in html minor mode and -js- in js minor mode
+(add-hook 'web-mode-hook 'add-web-mode-html-bindings)
+
+(defun add-web-mode-html-bindings ()
+  ;; insert new tag
+  (local-set-key (kbd "C-c i") 'web-mode-element-insert)
+  ;; go back one tag
+  (local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward)
+  ;; go forward one tag
+  (local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
+  ;; enter (go inside) tag
+  (local-set-key (kbd "C-c e") 'web-mode-dom-traverse)
+  ;; exit (go outside) current tag
+  (local-set-key (kbd "C-c u") 'web-mode-element-parent)
+  (local-set-key (kbd "C-c C-u") 'web-mode-element-parent)
+  ;; transpose tags before and after cursor
+  (local-set-key (kbd "C-c t") 'sgml-transpose-tags-around-cursor)
+  ;; delete tags before or after the cursor
+  (local-set-key (kbd "C-c DEL") 'sgml-delete-tag-backward)
+  (local-set-key (kbd "C-c h") 'sgml-delete-tag-backward)
+  (local-set-key (kbd "C-c d") 'sgml-delete-tag-forward)
+  ;; close tag (possible addition: prepend newline&indent when start tag is not on the same line and we're closing tag on a non-empty line)
+  (local-set-key (kbd "C-c /") 'sgml-close-tag)
+  ;; select tag before cursor
+  (local-set-key (kbd "C-c b") 'sgml-select-tag-backward)
+  ;; select tag after cursor
+  (local-set-key (kbd "C-c f") 'sgml-select-tag-forward)
+  ;; duplicate (at the cursor position) the tag before cursor
+  (local-set-key (kbd "C-c C-v") 'sgml-duplicate-previous-tag)
+  ;; duplicate (at the cursor position) the tag after cursor
+  (local-set-key (kbd "C-c C-o") 'sgml-duplicate-next-tag)
+  ;; wrap selection/tag in a new parent tag
+  (local-set-key (kbd "C-c w") 'web-mode-element-wrap))
+
+(defun add-web-mode-js-bindings ()
+  (local-set-key (kbd "C-c f") 'open-js-lambda-block))
