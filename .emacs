@@ -504,7 +504,9 @@ prompt to 'name>'."
 ;; TODO find out how d/s/ inserts <div><span>...
 ;; TODO: differentiate between web-mode html, css and javascript
 ;; TODO: only call ..web-mode-html-.. in html minor mode and -js- in js minor mode
+;; DOCS: http://web-mode.org/
 (add-hook 'web-mode-hook 'add-web-mode-html-bindings)
+(add-hook 'html-mode-hook 'add-web-mode-html-bindings)
 
 (defun add-web-mode-html-bindings ()
   ;; insert new tag
