@@ -426,8 +426,8 @@ prompt to 'name>'."
 
 ; open .scss and .sass files in css-mode
 (add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
-(add-to-list 'auto-mode-alist '(".scss" . web-mode));css-mode
-(add-to-list 'auto-mode-alist '(".sass" . web-mode));css-mode
+(add-to-list 'auto-mode-alist '(".scss" . css-mode));css-mode or web-mode
+(add-to-list 'auto-mode-alist '(".sass" . css-mode));css-mode or web-mode
 
 
 ;; begin new features
@@ -541,3 +541,154 @@ prompt to 'name>'."
 
 (defun add-web-mode-js-bindings ()
   (local-set-key (kbd "C-c f") 'open-js-lambda-block))
+
+
+(defun symbol-before-cursor ()
+  "Returns the symbol (word with optional dashes) before the cursor from current buffer"
+  (let ((cursor-at (point)))
+    (save-excursion
+      (backward-sexp 1)
+      (buffer-substring (point) cursor-at))))
+
+(defun insert-semicolon-consider-existing ()
+  "If there's a semicolon after cursor, jump through it instead of adding another"
+  (interactive)
+  (if (equal ";" (buffer-substring (point) (+ (point) 1)))
+      (forward-char 1)
+    (insert ";")))
+
+(defun autocomplete-css-property ()
+  "When user types keyword followed by a colon, autocomplete from predetermined list"
+  (interactive)
+  (let* ((inserters '((bg . "background")
+                      (bc . "background-color")
+                      (bs . "background-size")
+                      (bor . "border")
+                      (b-t . "border-top")
+                      (b-r . "border-right")
+                      (b-b . "border-bottom")
+                      (b-l . "border-left")
+                      (b-r . "border-radius")
+                      (btm . "bottom")
+                      (c . "color")
+                      (d . "display")
+                      (f . "flex")
+                      (f-d . "flex-direction")
+                      (fl . "float")
+                      (f-f . "font-family")
+                      (f-s . "font-size")
+                      (f-st . "font-style")
+                      (f-w . "font-weight")
+                      (h . "height")
+                      (l . "left")
+                      (lh . "line-height")
+                      (m . "margin")
+                      (m-t . "margin-top")
+                      (m-r . "margin-right")
+                      (m-b . "margin-bottom")
+                      (m-l . "margin-left")
+                      (min-w . "min-width")
+                      (min-h . "min-height")
+                      (max-w . "max-width")
+                      (max-h . "max-height")
+                      (o . "opacity")
+                      (ov . "overflow")
+                      (o-x . "overflow-x")
+                      (o-y . "overflow-y")
+                      (p . "padding")
+                      (p-t . "padding-top")
+                      (p-r . "padding-right")
+                      (p-b . "padding-bottom")
+                      (p-l . "padding-left")
+                      (p-e . "pointer-events")
+                      (po . "position")
+                      (r . "right")
+                      (t-a . "text-align")
+                      (t-t . "text-transform")
+                      (t . "top")
+                      (w . "width")
+                      (v-a . "vertical-align")
+                      (z . "z-index")
+                      ))
+         (keyword (symbol-before-cursor))
+         (found-property (cdr (assoc (intern keyword) inserters)))
+         ;;found-property doesn't necessarily start with keyword (e.g. c=color but bc = background-color)
+         (completion (concat found-property ": ")))
+    (if found-property
+        (progn
+          (backward-delete-char (length keyword)); delete typed keyword
+          (insert completion); cursor will be placed after the inserted text
+          (save-excursion ; revert cursor to position before semicolon
+            (insert ";")))
+      (insert ":"))))
+
+(defun autocomplete-css-value ()
+  "When user types a keyword followed by a semicolon, autocomplete common css values"
+  (interactive)
+  (let* ((inserters '((a . "absolute")
+                      (au . "auto")
+                      (bas . "baseline")
+                      (b . "block")
+                      (b . "both")
+                      (b . "bottom")
+                      (b-a . "break-all")
+                      (b-w . "break-word")
+                      (cap . "capitalize")
+                      (c . "center")
+                      (c . "column")
+                      (cov . "cover")
+                      (d . "default")
+                      (f . "fixed")
+                      (f . "flex")
+                      (f-e . "flex-end")
+                      (f-s . "flex-start")
+                      (h . "hidden")
+                      (i . "inherit")
+                      (in . "inline")
+                      (i-b . "inline-block")
+                      (it . "italic")
+                      (l . "left")
+                      (m . "middle")
+                      (n . "none")
+                      (nor . "normal")
+                      (now . "nowrap")
+                      (ptr . "pointer")
+                      (re . "relative")
+                      (ri . "right")
+                      (sc . "scroll")
+                      (sol . "solid")
+                      (s-a . "space-around")
+                      (s-b . "space-between")
+                      (st . "static")
+                      (te . "text")
+                      (t . "top")
+                      (tr . "transparent")
+                      (u . "underline")
+                      (up . "uppercase")
+                      (v . "visible")
+                      ))
+         (is-important (equal "!" (buffer-substring (- (point) 1) (point))))
+         (keyword (if is-important
+                      (substring (symbol-before-cursor) 0 -1)
+                    (symbol-before-cursor)))
+         (found-value (cdr (assoc (intern keyword) inserters)))
+         (important-suffix (if is-important " !important" ""))
+         (completion (concat found-value important-suffix)))
+    (if found-value
+        (progn
+          ;;delete "!" (if present)
+          (if is-important (backward-delete-char 1))
+          ;;delete typed keyword
+          (backward-delete-char (length keyword))
+          ;;cursor will be placed after the inserted text
+          (insert completion)))
+    ;;add the semicolon or jump through if one's already after cursor
+    (insert-semicolon-consider-existing)))
+
+(add-hook 'css-mode-hook
+          (lambda ()
+            (local-set-key (kbd ":") 'autocomplete-css-property)))
+
+(add-hook 'css-mode-hook
+          (lambda ()
+            (local-set-key (kbd ";") 'autocomplete-css-value)))
