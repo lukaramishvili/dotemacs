@@ -550,26 +550,31 @@ prompt to 'name>'."
       (backward-sexp 1)
       (buffer-substring (point) cursor-at))))
 
-(defun insert-semicolon-consider-existing ()
+(defun insert-semicolon-consider-existing (&optional append-space)
   "If there's a semicolon after cursor, jump through it instead of adding another"
   (interactive)
   (if (equal ";" (buffer-substring (point) (+ (point) 1)))
       (forward-char 1)
-    (insert ";")))
+    (insert ";"))
+  (if (equal " " (buffer-substring (point) (+ (point) 1)))
+      (forward-char 1)
+    (insert " ")))
 
 (defun autocomplete-css-property ()
   "When user types keyword followed by a colon, autocomplete from predetermined list"
   (interactive)
-  (let* ((inserters '((bg . "background")
-                      (bc . "background-color")
-                      (bs . "background-size")
+  (let* ((inserters '((a-c . "align-content")
+                      (a-i . "align-items")
+                      (bg . "background")
+                      (b-c . "background-color")
+                      (b-s . "background-size")
                       (bor . "border")
                       (b-t . "border-top")
                       (b-r . "border-right")
                       (b-b . "border-bottom")
                       (b-l . "border-left")
                       (b-r . "border-radius")
-                      (btm . "bottom")
+                      (b . "bottom")
                       (c . "color")
                       (d . "display")
                       (f . "flex")
@@ -580,6 +585,7 @@ prompt to 'name>'."
                       (f-st . "font-style")
                       (f-w . "font-weight")
                       (h . "height")
+                      (j-c . "justify-content")
                       (l . "left")
                       (lh . "line-height")
                       (m . "margin")
@@ -622,7 +628,7 @@ prompt to 'name>'."
             (insert ";")))
       (insert ":"))))
 
-(defun autocomplete-css-value ()
+(defun autocomplete-css-value (&optional append-space)
   "When user types a keyword followed by a semicolon, autocomplete common css values"
   (interactive)
   (let* ((inserters '((a . "absolute")
@@ -635,10 +641,11 @@ prompt to 'name>'."
                       (b-w . "break-word")
                       (cap . "capitalize")
                       (c . "center")
-                      (c . "column")
+                      (co . "column")
+                      (col . "column")
                       (cov . "cover")
                       (d . "default")
-                      (f . "fixed")
+                      (fi . "fixed")
                       (f . "flex")
                       (f-e . "flex-end")
                       (f-s . "flex-start")
@@ -654,7 +661,8 @@ prompt to 'name>'."
                       (now . "nowrap")
                       (ptr . "pointer")
                       (re . "relative")
-                      (ri . "right")
+                      (r . "right")
+                      (ro . "row")
                       (sc . "scroll")
                       (sol . "solid")
                       (s-a . "space-around")
@@ -683,7 +691,7 @@ prompt to 'name>'."
           ;;cursor will be placed after the inserted text
           (insert completion)))
     ;;add the semicolon or jump through if one's already after cursor
-    (insert-semicolon-consider-existing)))
+    (insert-semicolon-consider-existing append-space)))
 
 (add-hook 'css-mode-hook
           (lambda ()
@@ -691,4 +699,12 @@ prompt to 'name>'."
 
 (add-hook 'css-mode-hook
           (lambda ()
-            (local-set-key (kbd ";") 'autocomplete-css-value)))
+            (local-set-key (kbd ";") (lambda ()
+                                       (interactive)
+                                       (autocomplete-css-value t)))))
+
+(add-hook 'css-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-;") (lambda ()
+                                         (interactive)
+                                         (autocomplete-css-value nil)))))
