@@ -66,6 +66,15 @@
 (setq mac-control-modifier 'super)
 ; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
 
+(defun insert-double-quotes ()
+  "Inserts double quotes and places the cursor between them"
+  (interactive)
+  (insert "\"")
+  (save-excursion
+    (insert "\"")))
+
+(global-set-key (kbd "M-\"") 'insert-double-quotes)
+
 (defun previous-window ()
   (interactive)
   (other-window -1))
@@ -86,6 +95,7 @@
 
 ; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
 (global-set-key "\C-h" 'backward-delete-char-untabify)
+(global-set-key (kbd "C-S-d") 'backward-delete-char-untabify)
 ; also use C-h for backspace in regex search
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 (global-set-key [(super h)] 'help-command)
@@ -556,9 +566,10 @@ prompt to 'name>'."
   (if (equal ";" (buffer-substring (point) (+ (point) 1)))
       (forward-char 1)
     (insert ";"))
-  (if (equal " " (buffer-substring (point) (+ (point) 1)))
-      (forward-char 1)
-    (insert " ")))
+  (when append-space
+    (if (equal " " (buffer-substring (point) (+ (point) 1)))
+        (forward-char 1)
+      (insert " "))))
 
 (defun autocomplete-css-property ()
   "When user types keyword followed by a colon, autocomplete from predetermined list"
@@ -587,6 +598,7 @@ prompt to 'name>'."
                       (h . "height")
                       (j-c . "justify-content")
                       (l . "left")
+                      (l-s-t . "list-style-type")
                       (lh . "line-height")
                       (m . "margin")
                       (m-t . "margin-top")
