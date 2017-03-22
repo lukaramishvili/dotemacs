@@ -651,6 +651,7 @@ prompt to 'name>'."
                       (t-d . "text-decoration")
                       (t-t . "text-transform")
                       (t . "top")
+                      (w-s . "white-space")
                       (w . "width")
                       (v-a . "vertical-align")
                       (z . "z-index")
