@@ -211,7 +211,7 @@ This depends on major mode having setup syntax table properly."
 ;; C-S-return is vacant, use it for something
 
 ;; Command-{ opens a {\n cursor will be here \n} block after the end of the line
-;; Command-Alt-{ opens the {\n cursor \n} block at the cursor position
+;; if at-the-end-of-line is nil, opens the {\n cursor \n} block at the cursor position
 (defun open-brackets-block (at-the-end-of-line)
   (interactive)
   (if at-the-end-of-line (move-end-of-line 1))
@@ -221,6 +221,12 @@ This depends on major mode having setup syntax table properly."
   (indent-for-tab-command)
   (previous-line 1)
   (open-indented-line))
+;; Command-Alt-{ inserts "{ <cursor> }"
+(defun open-brackets-block-inline ()
+  (interactive)
+  (insert "{ ")
+  (save-excursion
+    (insert " }")))
 ;; Command-} closes a {} block on a new line (e.g. if or while), cursor will be after }
 ;; Command-M-} closes a {} block right after cursor, cursor will be before }
 (defun close-brackets-block (at-the-end-of-line)
@@ -236,7 +242,8 @@ This depends on major mode having setup syntax table properly."
   (insert "function()")
   (open-brackets-block nil))
 (global-set-key (kbd "C-{") (lambda () (interactive) (open-brackets-block t)))
-(global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
+;(global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
+(global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block-inline)))
 (global-set-key (kbd "C-}") (lambda () (interactive) (close-brackets-block t)))
 (global-set-key (kbd "C-M-}") (lambda () (interactive) (close-brackets-block nil)))
 
@@ -610,6 +617,7 @@ prompt to 'name>'."
                       (b-b-r-r . "border-bottom-right-radius")
                       (b . "bottom")
                       (c . "color")
+                      (co . "content")
                       (cu . "cursor")
                       (cur . "cursor")
                       (d . "display")
@@ -635,7 +643,8 @@ prompt to 'name>'."
                       (min-h . "min-height")
                       (max-w . "max-width")
                       (max-h . "max-height")
-                      (o . "opacity")
+                      (o . "order")
+                      (op . "opacity")
                       (ov . "overflow")
                       (o-x . "overflow-x")
                       (o-y . "overflow-y")
@@ -653,6 +662,7 @@ prompt to 'name>'."
                       (t . "top")
                       (w-s . "white-space")
                       (w . "width")
+                      (v . "visibility")
                       (v-a . "vertical-align")
                       (z . "z-index")
                       ))
@@ -675,8 +685,9 @@ prompt to 'name>'."
                       (au . "auto")
                       (bas . "baseline")
                       (b . "block")
-                      (b . "both")
-                      (b . "bottom")
+                      (bol . "bold")
+                      (bot . "bottom")
+                      (both . "both")
                       (b-a . "break-all")
                       (b-w . "break-word")
                       (cap . "capitalize")
