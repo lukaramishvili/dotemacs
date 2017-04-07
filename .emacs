@@ -556,6 +556,9 @@ prompt to 'name>'."
   ;; (setq emmet-expand-jsx-className? t) ;; default nil
   ;; auto-closing tag format - <br />, <br/> or <br>
   (setq emmet-self-closing-tag-style " /") ;; default "/", can also be " /" and ""
+  ;; jumping between emmet editing points
+  (local-set-key (kbd "C-c <left>")  'emmet-prev-edit-point)
+  (local-set-key (kbd "C-c <right>") 'emmet-next-edit-point)
   ;; set custom keybinding for expanding
   (local-set-key (kbd "C-c x") 'emmet-expand-line)
   ;; reset C-j
