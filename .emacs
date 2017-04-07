@@ -28,6 +28,9 @@
 
 (setq-default indent-tabs-mode nil)
 
+;; always follow symlinks (avoid annoying yes/no question)
+(setq vc-follow-symlinks t)
+
 (defun ask-before-closing ()
   "Ask whether or not to close, and then close if y was pressed"
   (interactive)
@@ -561,8 +564,10 @@ prompt to 'name>'."
   (local-set-key (kbd "C-c <right>") 'emmet-next-edit-point)
   ;; set custom keybinding for expanding
   (local-set-key (kbd "C-c x") 'emmet-expand-line)
-  ;; reset C-j
-  (local-set-key (kbd "C-j") 'newline-and-indent))
+  ;; disable C-j expand keybinding (local-set-key didn't work)
+  (define-key emmet-mode-keymap (kbd "C-j") nil)
+  ;; use M-j instead
+  (define-key emmet-mode-keymap (kbd "M-j") 'emmet-expand-line))
 (add-hook 'emmet-mode-hook 'set-emmet-mode-settings)
 
 ;; TODO find out how d/s/ inserts <div><span>...
