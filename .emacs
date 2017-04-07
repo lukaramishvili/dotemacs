@@ -209,6 +209,7 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "<C-return>") 'open-indented-line)
 (global-set-key (kbd "<C-M-return>") 'newline-and-indent)
 ;; C-S-return is vacant, use it for something
+(electric-indent-mode 1);; auto-indent newlines etc
 
 ;; Command-{ opens a {\n cursor will be here \n} block after the end of the line
 ;; if at-the-end-of-line is nil, opens the {\n cursor \n} block at the cursor position
@@ -346,6 +347,16 @@ This depends on major mode having setup syntax table properly."
 ; C-M-w copies to OS clipboard; C-M-y yanks from OS clipboard
 (global-set-key "\C-\M-w" 'clipboard-kill-ring-save)
 (global-set-key "\C-\M-y" 'clipboard-yank)
+
+;; indented yank
+(defun yank-and-indent ()
+  "Yank and then indent the newly formed region according to mode."
+  (interactive)
+  (yank)
+  (call-interactively 'indent-region))
+;; by default, yank indented, but C-S-y will yank as-is
+(global-set-key (kbd "C-y") 'yank-and-indent)
+(global-set-key (kbd "C-S-y") 'yank)
 
 ; maximize emacs frame on startup (X11-specific but I'm not using anything else)
 (defun x11-maximize-frame ()
@@ -517,6 +528,30 @@ prompt to 'name>'."
   (open-indented-line)
   (yank))
 
+
+
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+
+(defun set-emmet-mode-settings ()
+  ;; turn auto indent off (t for turning on)
+  ;; (setq emmet-indent-after-insert nil)
+  ;; if auto is off, then manual indent
+  ;; (setq emmet-indentation 4)
+  ;; positions the cursor between first empty quotes after expanding
+  (setq emmet-move-cursor-between-quotes t) ;; default nil
+  ;; to disable moving cursor after expanding
+  ;; (setq emmet-move-cursor-after-expanding nil) ;; default t
+  ;; will be useful in react-mode
+  ;; (setq emmet-expand-jsx-className? t) ;; default nil
+  ;; auto-closing tag format - <br />, <br/> or <br>
+  (setq emmet-self-closing-tag-style " /") ;; default "/", can also be " /" and ""
+  ;; set custom keybinding for expanding
+  (local-set-key (kbd "C-c x") 'emmet-expand-line)
+  ;; reset C-j
+  (local-set-key (kbd "C-j") 'newline-and-indent))
+(add-hook 'emmet-mode-hook 'set-emmet-mode-settings)
 
 ;; TODO find out how d/s/ inserts <div><span>...
 ;; TODO: differentiate between web-mode html, css and javascript
