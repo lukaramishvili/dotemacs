@@ -31,6 +31,10 @@
 ;; always follow symlinks (avoid annoying yes/no question)
 (setq vc-follow-symlinks t)
 
+(autoload 'comint-dynamic-complete-filename "comint" nil t)
+(global-set-key (kbd "s-\\") 'toggle-input-method)
+(global-set-key (kbd "C-\\") 'comint-dynamic-complete-filename)
+
 (defun ask-before-closing ()
   "Ask whether or not to close, and then close if y was pressed"
   (interactive)
