@@ -15,7 +15,9 @@
 
 (require 'package)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(require 'use-package)
 
 ; hide annoying GNU ad (I thereby classify it as such)
 (setq inhibit-startup-message t)
@@ -140,6 +142,14 @@ This depends on major mode having setup syntax table properly."
   (interactive)
   (move-beginning-of-line 1)
   (kill-line 1))
+(defun join-with-next-line ()
+  (interactive)
+  (move-end-of-line 1)
+  (forward-char 1)
+  (delete-indentation)
+  ;; sometimes delete-indentation leaves one space, so delete that
+  (if (equal " " (string (char-after (point))))
+      (delete-char 1)))
 (defun kill-current-sexp ()
   (interactive)
   (backward-up-list)
@@ -158,13 +168,31 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "C-4") 'kill-current-line)
 (global-set-key (kbd "C-5") 'kill-current-sexp)
 (global-set-key (kbd "C-S-k") 'kill-and-join-forward)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
+; C-x C-k bindings are used for keymacro definition
+;(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-whitespace)
+(global-set-key (kbd "C-c C-M-k") 'join-with-next-line)
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 ;; make Alt-h and Alt-Ctrl-h the same as Alt-Backspace
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
+
+(require 'hungry-delete)
+
+(defun kill-whitespace-around-cursor ()
+  (interactive)
+  (hungry-delete-backward 0)
+  (hungry-delete-forward 0))
+
+(global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)
+
+;;(use-package hungry-delete
+;;             :bind (("<backspace>" . hungry-delete-backward)
+;;                    ("C-S-d" . hungry-delete-backward)
+;;                    ("C-h" . hungry-delete-backward)
+;;                    ("C-d" . hungry-delete-forward)))
+
 
 (global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C--") 'undo)
