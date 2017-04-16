@@ -77,13 +77,13 @@
 (keyboard-translate ?\[ ?\() 
 (keyboard-translate ?\) ?\]) 
 (keyboard-translate ?\] ?\))
-; Also use Alt-[ as Alt-( and Alt-] as Alt-)
+;; Also use Alt-[ as Alt-( and Alt-] as Alt-)
 (global-set-key (kbd "M-[") 'insert-parentheses)
 (global-set-key (kbd "M-]") 'move-past-close-and-reindent)
 
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
-; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
+;; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
 
 (defun insert-double-quotes ()
   "Inserts double quotes and places the cursor between them"
@@ -114,7 +114,15 @@
 
 ;; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
 (global-set-key "\C-h" 'backward-delete-char-untabify)
-(global-set-key (kbd "C-S-d") 'backward-delete-char-untabify)
+;; commented: use C-S-d as backspace
+;; (global-set-key (kbd "C-S-d") 'backward-delete-char-untabify)
+;; adding Shift to C-h or C-d hungry-deletes (deletes all whitespace it meets)
+(global-set-key (kbd "C-S-h") 'hungry-delete-backward)
+;;C-backspace was backward-kill-word, but I already have C-1,M-h,C-M-h,M-DEL for that
+(global-set-key (kbd "<C-backspace>") 'hungry-delete-backward)
+(global-set-key (kbd "<S-backspace>") 'hungry-delete-backward)
+(global-set-key (kbd "<C-S-backspace>") 'hungry-delete-backward)
+(global-set-key (kbd "C-S-d") 'hungry-delete-forward)
 ;; also use C-h for backspace in regex search
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 (global-set-key [(super h)] 'help-command)
