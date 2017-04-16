@@ -16,6 +16,35 @@
 (defun bool (arg)
   (not (not arg)))
 
+;; hide annoying GNU ad (I thereby classify it as such)
+(setq inhibit-startup-message t)
+;; clear *scratch* default contents
+(setq initial-scratch-message nil)
+
+;;; colors
+;;(set-background-color "#3f3f3f")
+;;(set-foreground-color "white")
+
+;; themes
+(add-to-list 'custom-theme-load-path "~/dotemacs/blackboard-theme")
+(load-theme 'blackboard t)
+
+;;; fonts
+(set-default-font "DejaVu Sans Mono")
+
+;; maximize emacs frame on startup (X11-specific but I'm not using anything else)
+(defun x11-maximize-frame ()
+  "Maximize the current frame (to full screen)"
+  (interactive)
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
+
+;;(x11-maximize-frame)
+
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -27,12 +56,11 @@
 (require 'thingatpt)
 
 (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize))
 
-;; hide annoying GNU ad (I thereby classify it as such)
-(setq inhibit-startup-message t)
-;; clear *scratch* default contents
-(setq initial-scratch-message nil)
+
+(require 'helm-config)
+
 
 ;;(cd "/projects/")
 
@@ -437,18 +465,6 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "C-y") 'yank-and-indent)
 (global-set-key (kbd "C-S-y") 'yank)
 
-; maximize emacs frame on startup (X11-specific but I'm not using anything else)
-(defun x11-maximize-frame ()
-  "Maximize the current frame (to full screen)"
-  (interactive)
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
-
-;(x11-maximize-frame)
-
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
-
 (defun google (query)
   "googles a query"
   (interactive "sQuery: ")
@@ -489,16 +505,6 @@ prompt to 'name>'."
   ;; Optionally, specify the lisp program you are using. Default is "lisp"
   (setq inferior-lisp-program "sbcl"))
 
-;;; colors
-;(set-background-color "#3f3f3f")
-;(set-foreground-color "white")
-
-;; themes
-(add-to-list 'custom-theme-load-path "~/dotemacs/blackboard-theme")
-(load-theme 'blackboard t)
-
-;;; fonts
-(set-default-font "DejaVu Sans Mono")
 
 ;;; plugins
 
