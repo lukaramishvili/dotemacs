@@ -17,7 +17,7 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(require 'use-package)
+;(require 'use-package)
 
 ; hide annoying GNU ad (I thereby classify it as such)
 (setq inhibit-startup-message t)
@@ -178,7 +178,7 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
 
-(require 'hungry-delete)
+;(require 'hungry-delete)
 
 (defun kill-whitespace-around-cursor ()
   (interactive)
