@@ -13,6 +13,9 @@
 ;;;recentf-ext        20130130.... installed  Recentf extensions
 ;;;slime              20140702.... installed  Superior Lisp Interaction Mode for Emacs
 
+(defun bool (arg)
+  (not (not arg)))
+
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -103,16 +106,19 @@
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
 
-;(global-set-key (kbd "M-n") 'new-frame)
-;(global-set-key (kbd "M-S-n") 'new-frame)
+;;(global-set-key (kbd "M-n") 'new-frame)
+;;(global-set-key (kbd "M-S-n") 'new-frame)
 
 
-; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
+;; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
 (global-set-key "\C-h" 'backward-delete-char-untabify)
 (global-set-key (kbd "C-S-d") 'backward-delete-char-untabify)
-; also use C-h for backspace in regex search
+;; also use C-h for backspace in regex search
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 (global-set-key [(super h)] 'help-command)
+;;show free keybindings on s-h s-k
+(require 'free-keys)
+(global-set-key (kbd "s-h s-k") 'free-keys)
 
 (defun inside-string? ()
   "Returns non-nil if inside string, else nil.
@@ -135,7 +141,7 @@ This depends on major mode having setup syntax table properly."
 ; variations on Steve Yegge recommendations
 (defun kill-current-word ()
   (interactive)
-  ;in case cursor was at the end of current word, prevent jumping to next word's end
+  ;;in case cursor was at the end of current word, prevent jumping to next word's end
   (left-word 1)
   (right-word 1)
   (backward-kill-word 1))
@@ -147,9 +153,11 @@ This depends on major mode having setup syntax table properly."
   (interactive)
   (move-beginning-of-line 1)
   (kill-line 1))
-(defun join-with-next-line ()
+(defun join-with-next-line (&optional leave-blank-lines)
   (interactive)
   (move-end-of-line 1)
+  ;; delete blank lines before moving to next line, or an empty line can remain
+  (if (not leave-blank-lines) (delete-blank-lines))
   (forward-char 1)
   (delete-indentation)
   ;; sometimes delete-indentation leaves one space, so delete that
@@ -175,8 +183,8 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "C-S-k") 'kill-and-join-forward)
 ; C-x C-k bindings are used for keymacro definition
 ;(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-whitespace)
-(global-set-key (kbd "C-c C-M-k") 'join-with-next-line)
+(global-set-key "\C-c\C-k" 'join-with-next-line)
+(global-set-key (kbd "C-c C-M-k") '(lambda () (interactive) (join-with-next-line t)))
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 ;; make Alt-h and Alt-Ctrl-h the same as Alt-Backspace
@@ -185,10 +193,22 @@ This depends on major mode having setup syntax table properly."
 
 (require 'hungry-delete)
 
+(defun whitespacep (c)
+  (bool
+   (cond ((characterp c) (or (char-equal c #x9)
+                             (char-equal c #xa)
+                             (char-equal c #x20)))
+         ((stringp c) (or (equal c "\t")
+                          (equal c "\n")
+                          (equal c " ")))
+         (t nil))))
+
 (defun kill-whitespace-around-cursor ()
   (interactive)
-  (hungry-delete-backward 0)
-  (hungry-delete-forward 0))
+  (if (whitespacep (preceding-char))
+      (hungry-delete-backward 0))
+  (if (whitespacep (following-char))
+      (hungry-delete-forward 0)))
 
 (global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)
 
@@ -483,19 +503,19 @@ prompt to 'name>'."
 
 
 
-(when (require 'web-mode nil 'noerror)
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  ;;
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (setq web-mode-engines-alist
-      '(("php"    . "\\.phtml\\'")
-        ("blade"  . "\\.blade\\."))))
+;;(when (require 'web-mode nil 'noerror)
+;;  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+;;  ;;
+;;  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;;  (setq web-mode-engines-alist
+;;      '(("php"    . "\\.phtml\\'")
+;;        ("blade"  . "\\.blade\\."))))
 
 (when (require 'web-mode-edit-element nil 'noerror)
   (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
@@ -619,8 +639,10 @@ prompt to 'name>'."
   (local-set-key (kbd "C-c i") 'web-mode-element-insert)
   ;; go back one tag
   (local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward)
+  (local-set-key (kbd "M-p") 'sgml-skip-tag-backward)
   ;; go forward one tag
   (local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
+  (local-set-key (kbd "M-n") 'sgml-skip-tag-forward)
   ;; enter (go inside) tag
   (local-set-key (kbd "C-c e") 'web-mode-dom-traverse)
   ;; exit (go outside) current tag
