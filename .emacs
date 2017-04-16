@@ -24,6 +24,8 @@
 
 (require 'use-package)
 
+(require 'thingatpt)
+
 (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
 
@@ -441,8 +443,10 @@ This depends on major mode having setup syntax table properly."
 
 (defun google (query)
   "googles a query"
-  (interactive "sQuery:")
+  (interactive "sQuery: ")
   (browse-url (concat "http://www.google.com/search?q=" query)))
+
+(global-set-key (kbd "M-?") '(lambda () (interactive) (google (symbol-name (symbol-at-point)))))
 
 
 ; from Tikhon Jelvis (modified to include bash profile)
