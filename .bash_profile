@@ -33,6 +33,44 @@ alias tinker="rlwrap /Applications/XAMPP/bin/php artisan tinker"
 
 alias "git-status-publish"="git rev-list --count publish/master..master"
 
+# quick commit (cam stands for git commit -a -m )
+cam(){
+    # make wrapping commit message in quotes unnecessary
+    # (WARNING: doesn't work on (parens), only when escaped or, ironically, in quotes)
+    # everything after $ qd ..., including spaces, will be passed
+    # for reference: $@ would wrap each word (separated by space) in separate quotes
+    # ..e.g.: if using $@, qd foo bar => cam "foo" "bar"
+    git commit -a -m "$*"
+}
+# deploy - git push and update to server
+d(){
+    if [ $(pwd) = "/projects/wom" ]
+    then
+        # wom deploy
+        git push publish && wget https://womanizor.com/deploy -O /dev/null
+    else
+        git push
+        # TODO other projects' deploy paths
+    fi
+           
+}
+# quick deploy (commits with text after command, pushes to git and updates server code)
+qd(){
+    # show status for debugging, if something goes wrong
+    git status
+    # no parens without quotes - see comment about $* in cam()
+    cam "$*"
+    if [ $(pwd) = "/projects/wom" ]
+    then
+        git push publish
+        d # deploy project
+        git push # also push to alternate remote
+    else
+        git push
+    fi
+}
+
+alias s="git status"
 alias st="git status"
 alias l="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
 alias c="git commit"
@@ -49,5 +87,6 @@ alias wg="cd /projects/wom && gulp watch"
 alias ws="cd /projects/wom && php artisan serve --host 0.0.0.0 --port 8000 & (i\
 fconfig | grep 192 | perl -pe 's|^.*?(192\.\d+\.\d+\.\d+).*$|http://\1:8000|' |\
  xargs open) && fg"
+# vtb cd to dir & serve
 alias v="cd /projects/vtb/Layout"
 alias vs="cd /projects/vtb/Layout && gulp serve"   
