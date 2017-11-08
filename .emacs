@@ -59,7 +59,11 @@
   (exec-path-from-shell-initialize))
 
 
-(require 'helm-config)
+;;(when (require 'helm-config)
+;;  (global-set-key (kbd "s-x") 'helm-M-x)
+;;  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+;;  ;;(global-set-key (kbd "C-x C-f") #'helm-find-files)
+;;  (helm-mode 1))
 
 
 ;;(cd "/projects/")
@@ -213,7 +217,8 @@ This depends on major mode having setup syntax table properly."
              (backward-char 1)
              (kill-line arg))
     (kill-line arg)))
-(global-set-key (kbd "C-1") 'backward-kill-word)
+;I'm almost always using M-BACKSPACE, so let's use C-1 as yank, which (C-y) is inconvenient
+;(global-set-key (kbd "C-1") 'backward-kill-word)
 (global-set-key (kbd "C-2") 'kill-current-word)
 (global-set-key (kbd "C-3") 'kill-current-symbol)
 (global-set-key (kbd "C-4") 'kill-current-line)
@@ -465,6 +470,10 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "C-y") 'yank-and-indent)
 (global-set-key (kbd "C-S-y") 'yank)
 
+;; by default, yank formatted
+(global-set-key (kbd "C-1") 'yank-and-indent)
+(global-set-key (kbd "C-!") 'yank)
+
 (defun google (query)
   "googles a query"
   (interactive "sQuery: ")
@@ -541,6 +550,7 @@ prompt to 'name>'."
 
 ; open .scss and .sass files in css-mode
 (add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
+(add-to-list 'auto-mode-alist '(".cshtml" . html-mode))
 (add-to-list 'auto-mode-alist '(".scss" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '(".sass" . css-mode));css-mode or web-mode
 
@@ -715,6 +725,8 @@ prompt to 'name>'."
                       (a-s . "align-self")
                       (bg . "background")
                       (b-c . "background-color")
+                      (b-i . "background-image")
+                      (b-p . "background-position")
                       (b-s . "background-size")
                       (bo . "border")
                       (bor . "border")
@@ -722,6 +734,10 @@ prompt to 'name>'."
                       (bor-c . "border-color")
                       (bo-s . "border-style")
                       (bor-s . "border-style")
+                      (bw . "border-width")
+                      (b-w . "border-width")
+                      (bo-w . "border-width")
+                      (bor-w . "border-width")
                       (b-t . "border-top")
                       (b-t-w . "border-top-width")
                       (b-t-s . "border-top-style")
@@ -752,15 +768,19 @@ prompt to 'name>'."
                       (d . "display")
                       (f . "flex")
                       (f-d . "flex-direction")
+                      (f-g . "flex-grow")
                       (fl . "float")
                       (f-f . "font-family")
                       (f-s . "font-size")
                       (f-st . "font-style")
                       (f-w . "font-weight")
+                      (fw . "font-weight")
                       (h . "height")
                       (j-c . "justify-content")
+                      (jc . "justify-content")
                       (l . "left")
                       (l-s-t . "list-style-type")
+                      (lst . "list-style-type")
                       (l-h . "line-height")
                       (lh . "line-height")
                       (m . "margin")
@@ -773,6 +793,7 @@ prompt to 'name>'."
                       (max-w . "max-width")
                       (max-h . "max-height")
                       (o . "order")
+                      (or . "order")
                       (op . "opacity")
                       (ov . "overflow")
                       (o-x . "overflow-x")
@@ -783,19 +804,25 @@ prompt to 'name>'."
                       (p-b . "padding-bottom")
                       (p-l . "padding-left")
                       (p-e . "pointer-events")
+                      (po-e . "pointer-events")
                       (po . "position")
                       (r . "right")
                       (t-a . "text-align")
                       (t-d . "text-decoration")
+                      (t-o . "text-overflow")
                       (t-s . "text-shadow")
                       (t-t . "text-transform")
                       (t . "top")
                       (tr . "transform")
+                      (tr-o . "transform-origin")
                       (w-s . "white-space")
                       (w . "width")
+                      (w-b . "word-break")
                       (v . "visibility")
+                      (vi . "visibility")
                       (v-a . "vertical-align")
                       (z . "z-index")
+                      (z-i . "z-index")
                       ))
          (keyword (symbol-before-cursor))
          (found-property (cdr (assoc (intern keyword) inserters)))
@@ -814,8 +841,10 @@ prompt to 'name>'."
   (interactive)
   (let* ((inserters '((a . "absolute")
                       (au . "auto")
+                      (ba . "baseline")
                       (bas . "baseline")
                       (b . "block")
+                      (bo . "bold")
                       (bol . "bold")
                       (bot . "bottom")
                       (both . "both")
@@ -827,6 +856,9 @@ prompt to 'name>'."
                       (col . "column")
                       (cov . "cover")
                       (d . "default")
+                      (e . "ellipsis")
+                      (el . "ellipsis")
+                      (ell . "ellipsis")
                       (fi . "fixed")
                       (f . "flex")
                       (f-e . "flex-end")
@@ -835,6 +867,7 @@ prompt to 'name>'."
                       (i . "inherit")
                       (in . "inline")
                       (i-b . "inline-block")
+                      (i-f . "inline-flex")
                       (it . "italic")
                       (j . "justify")
                       (l . "left")
@@ -846,6 +879,7 @@ prompt to 'name>'."
                       (re . "relative")
                       (r . "right")
                       (ro . "row")
+                      (s . "stretch")
                       (sc . "scroll")
                       (sol . "solid")
                       (s-a . "space-around")
@@ -892,3 +926,38 @@ prompt to 'name>'."
             (local-set-key (kbd "C-;") (lambda ()
                                          (interactive)
                                          (autocomplete-css-value nil)))))
+
+
+;; end CSS autocomplete
+
+
+
+(defun eshell-here ()
+  "Opens up a new shell in the directory associated with the
+current buffer's file. The eshell is renamed to match that
+directory to make multiple eshell windows easier."
+  (interactive)
+  (let* ((parent (if (buffer-file-name)
+                     (file-name-directory (buffer-file-name))
+                   default-directory))
+         (height (/ (window-total-height) 3))
+         (name   (car (last (split-string parent "/" t)))))
+    (split-window-vertically (- height))
+    (other-window 1)
+    (eshell "new")
+    (rename-buffer (concat "*eshell: " name "*"))
+
+    (insert (concat "ls"))
+    (eshell-send-input)))
+
+;;(global-set-key (kbd "C-!") 'eshell-here)
+
+(defun eshell/x ()
+  (insert "exit")
+  (eshell-send-input)
+  (delete-window))
+
+
+
+
+
