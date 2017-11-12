@@ -7,6 +7,8 @@ export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 
 ssh-add ~/.ssh/multiple_id_rsa
 
+ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa
+
 source ~/wp-completion.bash
 
 # we can divide these into modules; "source ./.bash/.bash_aliases" etc
@@ -14,6 +16,10 @@ source ~/wp-completion.bash
 #both emacs / emacs -nw causes inserting garbled text in the first open buffer
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 alias emacs-osx="/usr/local/bin/emacs"
+
+f(){
+    ag -R "$*" .
+}
 
 alias php="/Applications/XAMPP/bin/php"
 alias head="/usr/bin/head"
@@ -40,6 +46,7 @@ cam(){
     # everything after $ qd ..., including spaces, will be passed
     # for reference: $@ would wrap each word (separated by space) in separate quotes
     # ..e.g.: if using $@, qd foo bar => cam "foo" "bar"
+    git add .
     git commit -a -m "$*"
 }
 # deploy - git push and update to server
@@ -47,7 +54,16 @@ d(){
     if [ $(pwd) = "/projects/wom" ]
     then
         # wom deploy
-        git push publish && wget https://womanizor.com/deploy -O /dev/null
+        git push publish
+        wget https://womanizor.com/deploy -O /dev/null
+    elif [ $(pwd) = "/projects/vtb" ] || [ $(pwd) = "/projects/vtb/Layout" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/vtb/Layout/ && git pull"
+    elif [ $(pwd) = "/projects/vwi" ] || [ $(pwd) = "/projects/vwi/Layout" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/vwi/Layout/ && git pull"
     else
         git push
         # TODO other projects' deploy paths
@@ -56,17 +72,16 @@ d(){
 }
 # quick deploy (commits with text after command, pushes to git and updates server code)
 qd(){
-    # show status for debugging, if something goes wrong
+    # show status for info or debugging, if something goes wrong
     git status
     # no parens without quotes - see comment about $* in cam()
     cam "$*"
     if [ $(pwd) = "/projects/wom" ]
     then
-        git push publish
         d # deploy project
         git push # also push to alternate remote
     else
-        git push
+        d # deploy - will update server code on specific projects; git push otherwise
     fi
 }
 
