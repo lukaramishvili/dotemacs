@@ -79,6 +79,9 @@
 (global-set-key (kbd "s-\\") 'toggle-input-method)
 (global-set-key (kbd "C-\\") 'comint-dynamic-complete-filename)
 
+;; Find file in current directory:
+(global-set-key (kbd "C-M-,") 'find-file-in-current-directory)
+
 (defun ask-before-closing ()
   "Ask whether or not to close, and then close if y was pressed"
   (interactive)
@@ -957,6 +960,11 @@ directory to make multiple eshell windows easier."
   (eshell-send-input)
   (delete-window))
 
+
+;; make two vertical windows; open blade view file in the left, translation file - right
+;; select the text to be translated, execute this macro. then type translation file name
+(fset 'laravel-trans-between-windows
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([23 123 123 33554464 116 114 97 110 115 40 41 32 125 125 2 2 2 2 39 39 2 24 111 39 39 32 61 62 33554464 39 39 44 2 2 25 1 tab 6 25 0 18 39 6 134217848 100 111 119 110 99 97 115 101 45 114 101 103 105 111 110 return 1 tab 6 0 19 39 2 134217848 114 101 112 108 97 99 101 45 115 116 114 105 110 103 return 32 return 95 return 5 return 1 2 1 tab 6 0 19 39 2 134217847 5 6 tab C-left 25 18 39 6 46 2] 0 "%d")) arg)))
 
 
 
