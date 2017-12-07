@@ -60,10 +60,20 @@ d(){
     then
         git push
         ssh root@luka.ge "cd /projects/vtb/Layout/ && git pull"
-    elif [ $(pwd) = "/projects/vwi" ] || [ $(pwd) = "/projects/vwi/Layout" ]
+    elif [ $(pwd) = "/projects/don" ] || [ $(pwd) = "/projects/don/Layout" ]
     then
         git push
-        ssh root@luka.ge "cd /projects/vwi/Layout/ && git pull"
+        ssh root@luka.ge "cd /projects/don/Layout/ && git pull"
+    elif [ $(pwd) = "/projects/avea" ] || [ $(pwd) = "/projects/avea/assets" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/avea && git pull"
+        rsync -avz /projects/avea/wwwroot/*.html root@luka.ge:/projects/avea/wwwroot/
+    elif [ $(pwd) = "/projects/calo" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/calo && git pull"
+        rsync -avz /projects/calo/*.html root@luka.ge:/projects/calo/
     else
         git push
         # TODO other projects' deploy paths
@@ -88,7 +98,7 @@ qd(){
 alias s="git status"
 alias st="git status"
 alias l="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
-alias c="git commit"
+alias gc="git commit"
 alias gw="gulp watch"
 alias gwp="gulp watch --production"
 alias gs="gulp serve"
@@ -103,5 +113,10 @@ alias ws="cd /projects/wom && php artisan serve --host 0.0.0.0 --port 8000 & (i\
 fconfig | grep 192 | perl -pe 's|^.*?(192\.\d+\.\d+\.\d+).*$|http://\1:8000|' |\
  xargs open) && fg"
 # vtb cd to dir & serve
-alias v="cd /projects/vtb/Layout"
-alias vs="cd /projects/vtb/Layout && gulp serve"   
+#alias v="cd /projects/vtb/Layout"
+#alias vs="cd /projects/vtb/Layout && gulp serve"
+# worldvide vision
+alias v="cd /projects/don/Layout"
+alias vs="cd /projects/don/Layout && gulp serve"
+alias c="cd /projects/calo"
+alias cs="cd /projects/calo && gulp serve"
