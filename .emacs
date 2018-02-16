@@ -12,6 +12,8 @@
 ;;;php-mode           20140502.... installed  Major mode for editing PHP code
 ;;;recentf-ext        20130130.... installed  Recentf extensions
 ;;;slime              20140702.... installed  Superior Lisp Interaction Mode for Emacs
+;;;magit - git porcelain
+;;;company - autocompletion
 
 (defun bool (arg)
   (not (not arg)))
@@ -531,6 +533,16 @@ prompt to 'name>'."
   (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
 ;;(global-rainbow-delimiters-mode) ; enable everywhere
 
+
+
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x C-g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(add-hook 'after-save-hook 'magit-after-save-refresh-status)
+
+
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key (kbd "S-SPC") 'company-complete)
 
 
 ;;(when (require 'web-mode nil 'noerror)

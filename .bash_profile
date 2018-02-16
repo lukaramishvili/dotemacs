@@ -33,7 +33,7 @@ alias sshpwnroot="ssh root@188.93.88.26 -p 2232"
 #alias sshw3wom="ssh webing@womanizor.webintelligence.de -p 222"
 #alias sshwomlive="ssh ec2-user@womanizor.com"
 alias sshwomlive="ssh root@womanizor.com"
-alias sshwomcam="ssh root@cam.womanizor.com"
+alias sshwomdev="ssh root@dev.womanizor.com"
 
 alias tinker="rlwrap /Applications/XAMPP/bin/php artisan tinker"
 
@@ -55,7 +55,12 @@ d(){
     then
         # wom deploy
         git push publish
-        wget https://womanizor.com/deploy -O /dev/null
+        # this will ignore html output
+        # wget https://womanizor.com/deploy -O /dev/null
+        # display html output and format newlines correctly ($ is needed for escaped characters to work)
+        # actual newline inserted because macOS/bsd sed doesn't recognize newline characters
+        wget -q -O - https://womanizor.com/deploy | sed $'s/<br>/\
+/g'
     elif [ $(pwd) = "/projects/vtb" ] || [ $(pwd) = "/projects/vtb/Layout" ]
     then
         git push
@@ -120,3 +125,6 @@ alias v="cd /projects/don/Layout"
 alias vs="cd /projects/don/Layout && gulp serve"
 alias c="cd /projects/calo"
 alias cs="cd /projects/calo && gulp serve"
+alias k="cd /www/kalo/web/app/themes/wi-theme"
+alias kr="cd /www/kalo/web"
+alias ks="cd /www/kalo/resources && gulp watch"
