@@ -18,7 +18,9 @@ alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 alias emacs-osx="/usr/local/bin/emacs"
 
 f(){
-    ag -R "$*" .
+    # -U doesn't work (supposed to skip .gitignore/ignore files)
+    # ag respects .gitignore, but only from git root directory, so specifically exclude node_modules (throwing a lot of errors for deep paths)
+    ag -R --ignore node_modules "$*" .
 }
 
 alias php="/Applications/XAMPP/bin/php"
@@ -102,7 +104,7 @@ qd(){
 
 alias s="git status"
 alias st="git status"
-alias l="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
+#alias l="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
 alias gc="git commit"
 alias gw="gulp watch"
 alias gwp="gulp watch --production"
@@ -128,3 +130,7 @@ alias cs="cd /projects/calo && gulp serve"
 alias k="cd /www/kalo/web/app/themes/wi-theme"
 alias kr="cd /www/kalo/web"
 alias ks="cd /www/kalo/resources && gulp watch"
+alias b="cd /projects/bookulus"
+alias bs="cd /projects/bookulus && npm run dev"
+alias lb="cd /projects/lb"
+alias lbs="cd /projects/lb && gulp serve"
