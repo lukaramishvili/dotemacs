@@ -1001,13 +1001,23 @@ directory to make multiple eshell windows easier."
   (interactive)
   (kill-buffer "*Open Recent*")
   (kill-buffer "*Messages*")
-  (switch-to-buffer "*scratch*")
+  ;; if lb-mode has already been called and gulp is running, then stay in current buffer
+  (unless (get-buffer "lb-gulp-serve")
+    (switch-to-buffer "*scratch*"))
   (cd "/projects/lb")
+  ;; (clean-buffer-list) can also be used if it's a long session (closes unused, unmodified buffers)
+  ;; close all windows to avoid nested calls
+  (delete-other-windows)
   ;; this will focus on the right window
   (split-and-switch-window-right)
-  ;; open terminal in the right window
-  (eshell "new")
-  (eshell/exec "gulp serve")
+  ;; open terminal (auto-reload server) in the right window
+  ;; if it's already running, just switch to it
+  (if (get-buffer "lb-gulp-serve")
+      (switch-to-buffer "lb-gulp-serve")
+      (progn
+        (eshell "new")
+        (rename-buffer "lb-gulp-serve")
+        (eshell/exec "gulp serve")))
   ;; this will focus on the bottom window
   (split-and-switch-window-below)
   ;; enlarge bottom window (and shrink the top terminal window)
