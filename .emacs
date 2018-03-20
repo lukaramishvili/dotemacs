@@ -13,7 +13,8 @@
 ;;;recentf-ext        20130130.... installed  Recentf extensions
 ;;;slime              20140702.... installed  Superior Lisp Interaction Mode for Emacs
 ;;;magit - git porcelain
-;;;company - autocompletion
+;;;company - autocompletion (not using, too cumbersome and not at all useful)
+;;;js2-mode - for modern javascript files
 
 (defun bool (arg)
   (not (not arg)))
@@ -56,6 +57,8 @@
 (require 'use-package)
 
 (require 'thingatpt)
+
+(require 'magit)
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
@@ -535,14 +538,15 @@ prompt to 'name>'."
 
 
 
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x C-g") 'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "C-c C-g") 'magit-status)
+(global-set-key (kbd "C-c M-g") 'magit-dispatch-popup)
 (add-hook 'after-save-hook 'magit-after-save-refresh-status)
 
 
-(add-hook 'after-init-hook 'global-company-mode)
-(global-set-key (kbd "S-SPC") 'company-complete)
+;causes massive inconveniences
+;(add-hook 'after-init-hook 'global-company-mode)
+;(global-set-key (kbd "S-SPC") 'company-complete)
 
 
 ;;(when (require 'web-mode nil 'noerror)
@@ -568,7 +572,14 @@ prompt to 'name>'."
 (add-to-list 'auto-mode-alist '(".cshtml" . html-mode))
 (add-to-list 'auto-mode-alist '(".scss" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '(".sass" . css-mode));css-mode or web-mode
+(add-to-list 'auto-mode-alist '(".vue" . web-mode))
 
+; good features but horribly slow
+; (add-to-list 'auto-mode-alist '(".js" . js2-mode))
+
+;; TODO es6 javascript mode - currently this Emacs installation has a bug and...
+;; ... show packages like flycheck (required for this)
+;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 
 ;; begin new features
 
@@ -967,6 +978,10 @@ directory to make multiple eshell windows easier."
 
 ;;(global-set-key (kbd "C-!") 'eshell-here)
 
+(defun eshell/exec (command)
+  (insert command)
+  (eshell-send-input))
+
 (defun eshell/x ()
   (insert "exit")
   (eshell-send-input)
@@ -980,4 +995,25 @@ directory to make multiple eshell windows easier."
 
 
 
+
+;; lb-mode
+(defun lb-mode ()
+  (interactive)
+  (kill-buffer "*Open Recent*")
+  (kill-buffer "*Messages*")
+  (switch-to-buffer "*scratch*")
+  (cd "/projects/lb")
+  ;; this will focus on the right window
+  (split-and-switch-window-right)
+  ;; open terminal in the right window
+  (eshell "new")
+  (eshell/exec "gulp serve")
+  ;; this will focus on the bottom window
+  (split-and-switch-window-below)
+  ;; enlarge bottom window (and shrink the top terminal window)
+  (enlarge-window 20)
+  ;; bring focus to the left window
+  (windmove-left)
+  ;; open find file dialog
+  (call-interactively 'find-file))
 
