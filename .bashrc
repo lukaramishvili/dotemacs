@@ -16,11 +16,14 @@ export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 #PS1="\H:\W \u\$ "
 #export PS1
 
-ssh-add ~/.ssh/multiple_id_rsa
+# 2>/dev/null avoids "Identity added" message for every launch (and M-! output)
+ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 
-ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa
+ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa 2>/dev/null
 
-source ~/wp-completion.bash
+if [ -f ~/wp-completion.bash ]; then
+    source ~/wp-completion.bash
+fi
 
 # we can divide these into modules; "source ./.bash/.bash_aliases" etc
 
@@ -151,6 +154,7 @@ alias kr="cd /www/kalo/web"
 alias ks="cd /www/kalo/resources && gulp watch"
 alias b="cd /projects/bookulus"
 alias bs="cd /projects/bookulus && npm run dev"
+alias bw="cd /www/bookulus.ge/web"
 alias bl="cd /www/bookulus.ge/web && tail -f -n0 wp-content/debug.log"
 alias lb="cd /projects/lb"
 alias lbs="cd /projects/lb && gulp serve"
