@@ -71,14 +71,26 @@
 ;;  (helm-mode 1))
 
 
-;;(cd "/projects/")
+(cd "/projects/")
 
-;;(setq default-directory "/projects/")
+(setq default-directory "/projects/")
 
+;;; settings
+
+;; disable tab indentation
 (setq-default indent-tabs-mode nil)
+
+;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
 
 ;; always follow symlinks (avoid annoying yes/no question)
 (setq vc-follow-symlinks t)
+
+;; enable sourcing .bashrc files in 'shell-command (M-!)
+;; from https://stackoverflow.com/a/12229404/324220
+(setq shell-file-name "bash")
+(setq shell-command-switch "-ic")
 
 (autoload 'comint-dynamic-complete-filename "comint" nil t)
 (global-set-key (kbd "s-\\") 'toggle-input-method)
@@ -539,7 +551,7 @@ prompt to 'name>'."
 
 
 (global-set-key (kbd "C-c g") 'magit-status)
-(global-set-key (kbd "C-c C-g") 'magit-status)
+(global-set-key [(super g)] 'magit-status)
 (global-set-key (kbd "C-c M-g") 'magit-dispatch-popup)
 (add-hook 'after-save-hook 'magit-after-save-refresh-status)
 
