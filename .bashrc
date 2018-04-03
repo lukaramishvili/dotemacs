@@ -45,6 +45,10 @@ alias mysqldump="/Applications/XAMPP/bin/mysqldump"
 alias vu="vagrant up"
 alias vh="vagrant halt"
 
+# shortcuts to set npm registry and avoid remembering the command and links
+alias npm-registry-default="npm set registry \"http://registry.npmjs.org\""
+alias npm-registry-luka.ge="npm set registry \"http://luka.ge:4873\""
+
 alias "gitdiff"="git diff --color | diff-so-fancy"
 
 alias sshpwnuser="ssh pawwwn.com@188.93.88.26 -p 2232"
@@ -158,3 +162,5 @@ alias bw="cd /www/bookulus.ge/web"
 alias bl="cd /www/bookulus.ge/web && tail -f -n0 wp-content/debug.log"
 alias lb="cd /projects/lb"
 alias lbs="cd /projects/lb && gulp serve"
+alias lbang="cd /projects/angular-lb"
+alias lbangs="cd /projects/angular-lb && ng serve --open"
