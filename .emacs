@@ -79,6 +79,14 @@
 
 ;; disable tab indentation
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+(defun my-web-mode-indentation-hook ()
+  "Indentation levels for web-mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 4)
+  (setq web-mode-code-indent-offset 4))
+(add-hook 'web-mode-hook  'my-web-mode-indentation-hook)
 
 ;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
 (put 'upcase-region 'disabled nil)
@@ -585,6 +593,7 @@ prompt to 'name>'."
 (add-to-list 'auto-mode-alist '(".scss" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '(".sass" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '(".vue" . web-mode))
+(add-to-list 'auto-mode-alist '(".ts" . web-mode))
 
 ; good features but horribly slow
 ; (add-to-list 'auto-mode-alist '(".js" . js2-mode))
