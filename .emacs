@@ -1016,35 +1016,55 @@ directory to make multiple eshell windows easier."
 
 
 
+(setq project-configs
+      '((lb . ((dir . "/projects/lb")
+               (serve-cmd . "gulp serve")))
+        (bk . ((dir . "/projects/bookulus")
+               (serve-cmd . "npm run dev")))))
+
+;; project-mode
+(defun project-mode (project-name)
+  (let* ((serve-buffer-name (concat (symbol-name project-name) "-serve"))
+         (project-config (cdr (assoc project-name project-configs)))
+         (project-dir (cdr (assoc 'dir project-config)))
+         (serve-cmd (cdr (assoc 'serve-cmd project-config))))
+    (if (get-buffer "*Open Recent*")
+        (kill-buffer "*Open Recent*"))
+    (if (get-buffer "*Messages*")
+        (kill-buffer "*Messages*"))
+    ;; if project-mode has already been called and gulp/serve cmd is running, then stay in current buffer
+    (unless (get-buffer serve-buffer-name)
+      (switch-to-buffer "*scratch*"))
+    (cd project-dir)
+    ;; (clean-buffer-list) can also be used if it's a long session (closes unused, unmodified buffers)
+    ;; close all windows to avoid nested calls
+    (delete-other-windows)
+    ;; this will focus on the right window
+    (split-and-switch-window-right)
+    ;; open terminal (auto-reload server) in the right window
+    ;; if it's already running, just switch to it
+    (if (get-buffer serve-buffer-name)
+        (switch-to-buffer serve-buffer-name)
+      (progn
+        (eshell "new")
+        (rename-buffer serve-buffer-name)
+        (eshell/exec serve-cmd)))
+    ;; this will focus on the bottom window
+    (split-and-switch-window-below)
+    ;; enlarge bottom window (and shrink the top terminal window)
+    (enlarge-window 20)
+    ;; bring focus to the left window
+    (windmove-left)
+    ;; open find file dialog
+    (call-interactively 'find-file)))
 
 ;; lb-mode
 (defun lb-mode ()
   (interactive)
-  (kill-buffer "*Open Recent*")
-  (kill-buffer "*Messages*")
-  ;; if lb-mode has already been called and gulp is running, then stay in current buffer
-  (unless (get-buffer "lb-gulp-serve")
-    (switch-to-buffer "*scratch*"))
-  (cd "/projects/lb")
-  ;; (clean-buffer-list) can also be used if it's a long session (closes unused, unmodified buffers)
-  ;; close all windows to avoid nested calls
-  (delete-other-windows)
-  ;; this will focus on the right window
-  (split-and-switch-window-right)
-  ;; open terminal (auto-reload server) in the right window
-  ;; if it's already running, just switch to it
-  (if (get-buffer "lb-gulp-serve")
-      (switch-to-buffer "lb-gulp-serve")
-      (progn
-        (eshell "new")
-        (rename-buffer "lb-gulp-serve")
-        (eshell/exec "gulp serve")))
-  ;; this will focus on the bottom window
-  (split-and-switch-window-below)
-  ;; enlarge bottom window (and shrink the top terminal window)
-  (enlarge-window 20)
-  ;; bring focus to the left window
-  (windmove-left)
-  ;; open find file dialog
-  (call-interactively 'find-file))
+  (project-mode 'lb))
 
+
+;; bk-mode
+(defun bk-mode ()
+  (interactive)
+  (project-mode 'bk))
