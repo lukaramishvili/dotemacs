@@ -944,15 +944,17 @@ prompt to 'name>'."
                       ))
          (is-important (equal "!" (buffer-substring (- (point) 1) (point))))
          (keyword (if is-important
-                      (substring (symbol-before-cursor) 0 -1)
+                      (progn
+                        ;;delete "!" so that symbol-before-cursor can find the keyword
+                        ;;otherwise, it would return "!"
+                        (if is-important (backward-delete-char 1))
+                        (symbol-before-cursor))
                     (symbol-before-cursor)))
          (found-value (cdr (assoc (intern keyword) inserters)))
          (important-suffix (if is-important " !important" ""))
          (completion (concat found-value important-suffix)))
     (if found-value
         (progn
-          ;;delete "!" (if present)
-          (if is-important (backward-delete-char 1))
           ;;delete typed keyword
           (backward-delete-char (length keyword))
           ;;cursor will be placed after the inserted text
