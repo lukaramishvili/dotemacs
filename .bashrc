@@ -47,7 +47,8 @@ alias vh="vagrant halt"
 
 # shortcuts to set npm registry and avoid remembering the command and links
 alias npm-registry-default="npm set registry \"http://registry.npmjs.org\""
-alias npm-registry-luka.ge="npm set registry \"http://luka.ge:4873\""
+# alias npm-registry-luka.ge="npm set registry \"http://luka.ge:4873\""
+alias npm-registry-luka.ge="npm set registry \"http://lb-npm.luka.ge\""
 
 alias "gitdiff"="git diff --color | diff-so-fancy"
 
@@ -149,8 +150,8 @@ fconfig | grep 192 | perl -pe 's|^.*?(192\.\d+\.\d+\.\d+).*$|http://\1:8000|' |\
 #alias v="cd /projects/vtb/Layout"
 #alias vs="cd /projects/vtb/Layout && gulp serve"
 # worldvide vision
-alias v="cd /projects/don/Layout"
-alias vs="cd /projects/don/Layout && gulp serve"
+alias p="cd /projects/pawn"
+alias pw="cd /projects/pawn && gulp watch"
 alias c="cd /projects/calo"
 alias cs="cd /projects/calo && gulp serve"
 alias k="cd /www/kalo/web/app/themes/wi-theme"

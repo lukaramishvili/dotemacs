@@ -99,6 +99,8 @@
 ;; from https://stackoverflow.com/a/12229404/324220
 (setq shell-file-name "bash")
 (setq shell-command-switch "-ic")
+;; doesnt work to also enable it in eshell-mode
+;; (add-hook 'eshell-mode-hook  (lambda () (eshell/exec "source ~/dotemacs/.bashrc")))
 
 (autoload 'comint-dynamic-complete-filename "comint" nil t)
 (global-set-key (kbd "s-\\") 'toggle-input-method)
@@ -1048,6 +1050,7 @@ directory to make multiple eshell windows easier."
       (progn
         (eshell "new")
         (rename-buffer serve-buffer-name)
+        ;;(eshell/exec "source ~/.bashrc");doesn't work
         (eshell/exec serve-cmd)))
     ;; this will focus on the bottom window
     (split-and-switch-window-below)
