@@ -63,6 +63,8 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+(require 'editorconfig)
+(editorconfig-mode 1)
 
 ;;(when (require 'helm-config)
 ;;  (global-set-key (kbd "s-x") 'helm-M-x)
@@ -1024,14 +1026,19 @@ directory to make multiple eshell windows easier."
       '((lb . ((dir . "/projects/lb")
                (serve-cmd . "gulp serve")))
         (bk . ((dir . "/projects/bookulus")
-               (serve-cmd . "npm run dev")))))
+               (serve-cmd . "npm run dev")))
+        (kt . ((dir . "/projects/kt/Layout")
+               (serve-cmd . "gulp serve")))
+        (ici . ((dir . "/projects/ici")
+               (serve-cmd . "npm run dev && open http://ici.devv")))))
 
 ;; project-mode
 (defun project-mode (project-name)
   (let* ((serve-buffer-name (concat (symbol-name project-name) "-serve"))
          (project-config (cdr (assoc project-name project-configs)))
          (project-dir (cdr (assoc 'dir project-config)))
-         (serve-cmd (cdr (assoc 'serve-cmd project-config))))
+         (serve-cmd (cdr (assoc 'serve-cmd project-config)))
+         (show-serve-window-p nil))
     (if (get-buffer "*Open Recent*")
         (kill-buffer "*Open Recent*"))
     (if (get-buffer "*Messages*")
@@ -1054,10 +1061,16 @@ directory to make multiple eshell windows easier."
         (rename-buffer serve-buffer-name)
         ;;(eshell/exec "source ~/.bashrc");doesn't work
         (eshell/exec serve-cmd)))
-    ;; this will focus on the bottom window
+    ;; this will open a bottom window (by default, *Open Recent*) focus on it
     (split-and-switch-window-below)
-    ;; enlarge bottom window (and shrink the top terminal window)
-    (enlarge-window 20)
+    (if show-serve-window-p
+        (progn
+          ;; enlarge bottom window (and shrink the top terminal window)
+          (enlarge-window 20))
+      (progn
+        ;; instead, hide the gulp serve - not productive
+        (windmove-up)
+        (delete-window)))
     ;; bring focus to the left window
     (windmove-left)
     ;; open find file dialog
@@ -1073,3 +1086,13 @@ directory to make multiple eshell windows easier."
 (defun bk-mode ()
   (interactive)
   (project-mode 'bk))
+
+;; bk-mode
+(defun kt-mode ()
+  (interactive)
+  (project-mode 'kt))
+
+;; ici-mode
+(defun ici-mode ()
+  (interactive)
+  (project-mode 'ici))

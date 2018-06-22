@@ -20,6 +20,7 @@ export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 
 ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa 2>/dev/null
+ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
 
 if [ -f ~/wp-completion.bash ]; then
     source ~/wp-completion.bash
@@ -37,7 +38,7 @@ f(){
     ag -R --ignore node_modules "$*" .
 }
 
-alias php="/Applications/XAMPP/bin/php"
+#alias php="/Applications/XAMPP/bin/php"
 alias head="/usr/bin/head"
 alias mysql="/Applications/XAMPP/bin/mysql"
 alias mysqldump="/Applications/XAMPP/bin/mysqldump"
@@ -52,12 +53,14 @@ alias npm-registry-luka.ge="npm set registry \"http://lb-npm.luka.ge\""
 
 alias "gitdiff"="git diff --color | diff-so-fancy"
 
-alias sshpwnuser="ssh pawwwn.com@188.93.88.26 -p 2232"
+#alias sshpwnuser="ssh pawwwn.com@188.93.88.26 -p 2232"
 alias sshpwnroot="ssh root@188.93.88.26 -p 2232"
 #alias sshw3wom="ssh webing@womanizor.webintelligence.de -p 222"
 #alias sshwomlive="ssh ec2-user@womanizor.com"
 alias sshwomlive="ssh root@womanizor.com"
 alias sshwomdev="ssh root@dev.womanizor.com"
+#
+alias sshbk="ssh root@bookulus.ge"
 
 alias tinker="rlwrap /Applications/XAMPP/bin/php artisan tinker"
 
@@ -108,6 +111,16 @@ d(){
         git push
         ssh root@luka.ge "cd /projects/lb && git pull"
         #rsync -avz /projects/lb/dist/*.html root@luka.ge:/projects/lb/dist/
+    elif [ $(pwd) = "/www/bookulus.ge" ] || [ $(pwd) = "/www/bookulus.ge/web" ]
+    then
+        git push
+        # on Ubuntu server, use $ git config --global credential.helper store
+        # (from a comment on https://stackoverflow.com/a/5343146/324220)
+        ssh root@bookulus.ge "cd /projects/bookulus.ge && git pull"
+    elif [ $(pwd) = "/projects/kt" ] || [ $(pwd) = "/projects/kt/Layout" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/kt && git pull"
     else
         git push
         # TODO other projects' deploy paths
@@ -137,8 +150,8 @@ alias gw="gulp watch"
 alias gwp="gulp watch --production"
 alias gs="gulp serve"
 
-# wom tinker (reuse tinker alias for rlwrap)
-alias t="cd /projects/wom && tinker"
+# ici tinker (reuse tinker alias for rlwrap)
+alias t="cd /projects/ici && tinker"
 alias w="cd /projects/wom"
 # wom gulp
 alias wg="cd /projects/wom && gulp watch"
@@ -155,13 +168,19 @@ alias pw="cd /projects/pawn && gulp watch"
 alias c="cd /projects/calo"
 alias cs="cd /projects/calo && gulp serve"
 alias k="cd /www/kalo/web/app/themes/wi-theme"
-alias kr="cd /www/kalo/web"
-alias ks="cd /www/kalo/resources && gulp watch"
+# alias kr="cd /www/kalo/web"
+# alias ks="cd /www/kalo/resources && gulp watch"
 alias b="cd /projects/bookulus"
 alias bs="cd /projects/bookulus && npm run dev"
 alias bw="cd /www/bookulus.ge/web"
 alias bl="cd /www/bookulus.ge/web && tail -f -n0 wp-content/debug.log"
+alias k="cd /projects/kt/Layout"
+alias ks="cd /projects/kt/Layout && gulp serve"
 alias lb="cd /projects/lb"
 alias lbs="cd /projects/lb && gulp serve"
 alias lbang="cd /projects/angular-lb"
 alias lbangs="cd /projects/angular-lb && ng serve --open"
+alias ici="cd /projects/ici"
+alias i="cd /projects/ici"
+alias iw="cd /projects/ici/ && npm run watch && open http://ici.devv"
+alias is="cd /projects/ici/ && npm run watch && open http://ici.devv"
