@@ -590,10 +590,15 @@ prompt to 'name>'."
 (when (require 'web-mode-edit-element nil 'noerror)
   (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
 
+;; I added some modifications to html-mode using web-mode functions (inaccessible from direct html-mode, so I first load web-mode (to load its functions) and then switch to html-mode)
+(defun html-mode-with-web-mode-helpers ()
+  (web-mode)
+  (html-mode))
 
 ; open .scss and .sass files in css-mode
 (add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
 (add-to-list 'auto-mode-alist '(".cshtml" . html-mode))
+(add-to-list 'auto-mode-alist '(".html" . html-mode-with-web-mode-helpers))
 (add-to-list 'auto-mode-alist '(".scss" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '(".sass" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '(".vue" . web-mode))
