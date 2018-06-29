@@ -14,7 +14,7 @@
 ;;;slime              20140702.... installed  Superior Lisp Interaction Mode for Emacs
 ;;;magit - git porcelain
 ;;;company - autocompletion (not using, too cumbersome and not at all useful)
-;;;js2-mode - for modern javascript files
+;;;js2-mode - for modern javascript files (painfully slow)
 
 (defun bool (arg)
   (not (not arg)))
@@ -175,6 +175,15 @@
 ;;(global-set-key (kbd "M-n") 'new-frame)
 ;;(global-set-key (kbd "M-S-n") 'new-frame)
 
+(defun backward-kill-line ()
+  (interactive)
+  (set-mark-command nil)
+  (move-beginning-of-line 1)
+  (backward-delete-char-untabify 1))
+;; this is a reverse of C-k (deletes line contents *before* cursor)
+(global-set-key (kbd "<C-S-backspace>") 'backward-kill-line)
+(global-set-key (kbd "C-M-h") 'backward-kill-sexp)
+(global-set-key (kbd "<C-M-backspace>") 'backward-kill-sexp)
 
 ;; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
 (global-set-key "\C-h" 'backward-delete-char-untabify)
@@ -185,7 +194,7 @@
 ;;C-backspace was backward-kill-word, but I already have C-1,M-h,C-M-h,M-DEL for that
 (global-set-key (kbd "<C-backspace>") 'hungry-delete-backward)
 (global-set-key (kbd "<S-backspace>") 'hungry-delete-backward)
-(global-set-key (kbd "<C-S-backspace>") 'hungry-delete-backward)
+;;(global-set-key (kbd "<C-S-backspace>") 'hungry-delete-backward)
 (global-set-key (kbd "C-S-d") 'hungry-delete-forward)
 ;; also use C-h for backspace in regex search
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
@@ -295,6 +304,9 @@ This depends on major mode having setup syntax table properly."
 
 
 (global-set-key (kbd "C-z") 'undo)
+;; these keys are close to and frequently mistyped as the undo sequence, C-/
+(global-set-key (kbd "C-.") 'undo)
+(global-set-key (kbd "C-,") 'undo)
 (global-set-key (kbd "C--") 'undo)
 
 ;; php mode keybindings
@@ -482,7 +494,8 @@ This depends on major mode having setup syntax table properly."
 (global-set-key (kbd "C-x 3") 'split-and-switch-window-right)
 ; quick shortcuts for invoking recent file list
 (global-set-key (kbd "C-x M-f") 'show-recent-file-list)
-(global-set-key (kbd "C-x C-a") 'show-recent-file-list)
+;; was causing error when installing slime - "Key sequence C-x C-a C-l starts with non-prefix key C-x C-a"
+;; (global-set-key (kbd "C-x C-a") 'show-recent-file-list)
 
 ; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 (global-set-key (kbd "<C-M-r>") 'isearch-backward-regexp)
@@ -534,6 +547,17 @@ prompt to 'name>'."
 
 (setq inferior-lisp-program "sbcl")
 
+;; from https://stackoverflow.com/a/15808708/324220
+(defun init-slime-configuration ()
+  ;; causes recursive load error
+  ;;(slime-setup '(slime-fancy slime-fuzzy))
+  (slime-setup)
+  (setq slime-load-failed-fasl 'never)
+  ;;causes symbol definition is void error
+  ;;(define-key slime-repl-mode-map (kbd "<tab>") 'slime-fuzzy-complete-symbol)
+  (define-key slime-mode-map (kbd "<tab>") 'slime-fuzzy-complete-symbol))
+
+(add-hook 'slime-load-hook 'init-slime-configuration)
 
 
 ;setq load-slime-by-hand t in .emacs on computers where you dont want auto slime
