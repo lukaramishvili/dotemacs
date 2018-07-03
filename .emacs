@@ -614,26 +614,36 @@ prompt to 'name>'."
 (when (require 'web-mode-edit-element nil 'noerror)
   (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
 
+
+
 ;; I added some modifications to html-mode using web-mode functions (inaccessible from direct html-mode, so I first load web-mode (to load its functions) and then switch to html-mode)
 (defun html-mode-with-web-mode-helpers ()
   (web-mode)
   (html-mode))
 
-; open .scss and .sass files in css-mode
+;; open .scss and .sass files in css-mode
+(add-to-list 'auto-mode-alist '(".vue" . web-mode))
+(add-to-list 'auto-mode-alist '(".ts" . web-mode))
 (add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
 (add-to-list 'auto-mode-alist '(".cshtml" . html-mode))
 (add-to-list 'auto-mode-alist '(".html" . html-mode-with-web-mode-helpers))
 (add-to-list 'auto-mode-alist '(".scss" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '(".sass" . css-mode));css-mode or web-mode
-(add-to-list 'auto-mode-alist '(".vue" . web-mode))
-(add-to-list 'auto-mode-alist '(".ts" . web-mode))
+;; ###### WARNING: don't put web-mode here in the last items,..
+;; ###### otherwise all other extension=>mode assignments will stop to work
 
-; good features but horribly slow
-; (add-to-list 'auto-mode-alist '(".js" . js2-mode))
+;; good features but horribly slow
+;; (add-to-list 'auto-mode-alist '(".js" . js2-mode))
 
 ;; TODO es6 javascript mode - currently this Emacs installation has a bug and...
 ;; ... show packages like flycheck (required for this)
 ;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
+
+
+;; disable web-mode from every file. other ways didn't work. very annoying.
+;; DIDN'T WORK
+;;(rassq-delete-all 'web-mode auto-mode-alist)
+
 
 ;; begin new features
 
@@ -727,6 +737,10 @@ prompt to 'name>'."
   ;; jumping between emmet editing points
   (local-set-key (kbd "C-c <left>")  'emmet-prev-edit-point)
   (local-set-key (kbd "C-c <right>") 'emmet-next-edit-point)
+  ;; allow navigating to edit points when using the georgian language input
+  ;; TODO needs making C-ც the same as C-c
+  ;;(local-set-key (kbd "C-ც <left>")  'emmet-prev-edit-point)
+  ;;(local-set-key (kbd "C-ც <right>") 'emmet-next-edit-point)
   ;; set custom keybinding for expanding
   (local-set-key (kbd "C-c x") 'emmet-expand-line)
   ;; disable C-j expand keybinding (local-set-key didn't work)
@@ -1125,3 +1139,4 @@ directory to make multiple eshell windows easier."
 (defun ici-mode ()
   (interactive)
   (project-mode 'ici))
+

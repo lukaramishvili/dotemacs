@@ -1,0 +1,44 @@
+
+with-editor        20180213.1019 installed             Use the Emacsclient as $EDITOR
+web-mode           20170211.1516 installed             major mode for editing web templates
+use-package        20170405.1028 installed             A use-package declaration for simplifying your .emacs
+tramp-term         20141104.1345 installed             Automatic setup of directory tracking in ssh sessions.
+smart-hungry-de... 20170412.643  installed             smart hungry deletion of whitespace
+slime              20180628.730  installed             Superior Lisp Interaction Mode for Emacs
+shut-up            20150423.522  installed             Shut up would you!
+seq                2.20          installed             Sequence manipulation functions
+s                  20160928.636  installed             The long lost Emacs string manipulation library.
+recentf-ext        20130130.1350 installed             Recentf extensions
+popup              20160709.729  installed             Visual Popup User Interface
+pkg-info           20150517.443  installed             Information about packages
+php-mode           20140502.1051 installed             Major mode for editing PHP code
+omnisharp          20170601.1329 installed             Omnicompletion (intellisense) and more for C#
+markdown-mode+     20120829.510  installed             extra functions for markdown-mode
+markdown-mode      20151214.2257 installed             Emacs Major mode for Markdown-formatted text files
+magit-popup        20180215.921  installed             Define prefix-infix-suffix command combos
+magit              20180215.1119 installed             A Git porcelain inside Emacs.
+macrostep          20161120.1306 installed             interactive macro expander
+lua-mode           20161101.1340 installed             a major-mode for editing Lua scripts
+let-alist          1.0.5         installed             Easily let-bind values of an assoc-list by their names
+js2-mode           20171224.1833 installed             Improved JavaScript editing mode
+hungry-delete      20170411.1802 installed             hungry delete minor mode
+helm-core          20170414.30   installed             Development files for Helm
+helm               20170414.2248 installed             Helm is an Emacs incremental and narrowing framework
+git-commit         20180202.321  installed             Edit Git commit messages
+ghub               20180201.414  installed             minuscule client library for the Github API
+free-keys          20160726.1350 installed             Show free keybindings for modkeys or prefixes
+flycheck           20170601.608  installed             On-the-fly syntax checking
+exec-path-from-... 20170304.1309 installed             Get environment variables such as $PATH from the shell
+epl                20150517.433  installed             Emacs Package Library
+emmet-mode         20161113.2158 installed             Unofficial Emmet's support for emacs
+editorconfig       20180508.2128 installed             EditorConfig Emacs Plugin
+diminish           20151215.915  installed             Diminished modes are minor modes with no modeline display
+dash               20170207.2056 installed             A modern list library for Emacs
+csharp-mode        20170502.158  installed             C# mode derived mode
+company            20180211.1604 installed             Modular text completion framework
+bind-key           20161218.1520 installed             A simple way to manage personal keybindings
+auto-complete      20170124.1845 installed             Auto Completion for GNU Emacs
+auctex             11.87.7       installed             Integrated environment for *TeX*
+async              20170219.942  installed             Asynchronous processing in Emacs
+ag                 20161228.1641 installed             A front-end for ag ('the silver searcher'), the C ack replacement.
+2048-game          20140704.2330 installed             play 2048 in Emacs
