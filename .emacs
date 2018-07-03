@@ -622,18 +622,18 @@ prompt to 'name>'."
   (html-mode))
 
 ;; open .scss and .sass files in css-mode
-(add-to-list 'auto-mode-alist '(".vue" . web-mode))
-(add-to-list 'auto-mode-alist '(".ts" . web-mode))
-(add-to-list 'auto-mode-alist '(".blade.php" . html-mode))
-(add-to-list 'auto-mode-alist '(".cshtml" . html-mode))
-(add-to-list 'auto-mode-alist '(".html" . html-mode-with-web-mode-helpers))
-(add-to-list 'auto-mode-alist '(".scss" . css-mode));css-mode or web-mode
-(add-to-list 'auto-mode-alist '(".sass" . css-mode));css-mode or web-mode
-;; ###### WARNING: don't put web-mode here in the last items,..
+(add-to-list 'auto-mode-alist '("\\.blade.php\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.cshtml\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode));css-mode or web-mode
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . css-mode));css-mode or web-mode
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+;; ###### WARNING: don't put extensions directly in the form of ".ext",..
 ;; ###### otherwise all other extension=>mode assignments will stop to work
 
 ;; good features but horribly slow
-;; (add-to-list 'auto-mode-alist '(".js" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; TODO es6 javascript mode - currently this Emacs installation has a bug and...
 ;; ... show packages like flycheck (required for this)
