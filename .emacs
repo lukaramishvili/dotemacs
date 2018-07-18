@@ -357,12 +357,21 @@ This depends on major mode having setup syntax table properly."
     (kill-buffer buf)))
 ;; end of php mode keybindings
 
-;; Command-Shift-Enter adds an indented line after current line and moves cursor there
+;; C-return (adds an indented line after current line and moves cursor there) is overridden by emmet-mode 
 (defun open-indented-line ()
   (interactive)
   (move-end-of-line 1)
   (newline-and-indent))
+;; o-i-b / Command-Shift-Enter adds two lines, cursor on first (useful in <div></div>)
+(defun open-indented-block ()
+  (interactive)
+  (newline-and-indent)
+  (newline-and-indent)
+  (previous-line 1)
+  (indent-for-tab-command))
+;; C-return is overridden by emmet-mode
 (global-set-key (kbd "<C-return>") 'open-indented-line)
+(global-set-key (kbd "<C-S-return>") 'open-indented-block)
 (global-set-key (kbd "<C-M-return>") 'newline-and-indent)
 ;; C-S-return is vacant, use it for something
 (electric-indent-mode 1);; auto-indent newlines etc
@@ -737,6 +746,10 @@ prompt to 'name>'."
   ;; jumping between emmet editing points
   (local-set-key (kbd "C-c <left>")  'emmet-prev-edit-point)
   (local-set-key (kbd "C-c <right>") 'emmet-next-edit-point)
+  (local-set-key (kbd "C-S-<left>")  'emmet-prev-edit-point)
+  (local-set-key (kbd "C-S-<right>") 'emmet-next-edit-point)
+  (local-set-key (kbd "C-<")  'emmet-prev-edit-point)
+  (local-set-key (kbd "C->") 'emmet-next-edit-point)
   ;; allow navigating to edit points when using the georgian language input
   ;; TODO needs making C-ც the same as C-c
   ;;(local-set-key (kbd "C-ც <left>")  'emmet-prev-edit-point)
