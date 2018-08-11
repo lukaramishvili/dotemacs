@@ -1085,6 +1085,8 @@ directory to make multiple eshell windows easier."
                (serve-cmd . "npm run dev")))
         (kt . ((dir . "/projects/kt/Layout")
                (serve-cmd . "gulp serve")))
+        (asb . ((dir . "/projects/asb/Layout")
+               (serve-cmd . "gulp serve")))
         (ici . ((dir . "/projects/ici")
                (serve-cmd . "npm run dev && open http://ici.devv")))))
 
@@ -1143,10 +1145,15 @@ directory to make multiple eshell windows easier."
   (interactive)
   (project-mode 'bk))
 
-;; bk-mode
+;; kt-mode
 (defun kt-mode ()
   (interactive)
   (project-mode 'kt))
+
+;; asb-mode
+(defun asb-mode ()
+  (interactive)
+    (project-mode 'asb))    
 
 ;; ici-mode
 (defun ici-mode ()
