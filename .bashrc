@@ -32,6 +32,9 @@ fi
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 alias emacs-osx="/usr/local/bin/emacs"
 
+alias security-on="sudo spctl --master-enable"
+alias security-off="sudo spctl --master-disable"
+
 f(){
     # -U doesn't work (supposed to skip .gitignore/ignore files)
     # ag respects .gitignore, but only from git root directory, so specifically exclude node_modules (throwing a lot of errors for deep paths)
@@ -121,6 +124,10 @@ d(){
     then
         git push
         ssh root@luka.ge "cd /projects/kt && git pull"
+    elif [ $(pwd) = "/projects/asb" ] || [ $(pwd) = "/projects/asb/Layout" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/asb && git pull"
     else
         git push
         # TODO other projects' deploy paths
@@ -165,9 +172,9 @@ fconfig | grep 192 | perl -pe 's|^.*?(192\.\d+\.\d+\.\d+).*$|http://\1:8000|' |\
 # worldvide vision
 alias p="cd /projects/pawn"
 alias pw="cd /projects/pawn && gulp watch"
-alias c="cd /projects/calo"
-alias cs="cd /projects/calo && gulp serve"
-alias k="cd /www/kalo/web/app/themes/wi-theme"
+# alias c="cd /projects/calo"
+# alias cs="cd /projects/calo && gulp serve"
+# alias k="cd /www/kalo/web/app/themes/wi-theme"
 # alias kr="cd /www/kalo/web"
 # alias ks="cd /www/kalo/resources && gulp watch"
 alias b="cd /projects/bookulus"
@@ -176,6 +183,8 @@ alias bw="cd /www/bookulus.ge/web"
 alias bl="cd /www/bookulus.ge/web && tail -f -n0 wp-content/debug.log"
 alias k="cd /projects/kt/Layout"
 alias ks="cd /projects/kt/Layout && gulp serve"
+alias a="cd /projects/asb/Layout"
+alias asbs="cd /projects/asb/Layout && gulp serve"
 alias lb="cd /projects/lb"
 alias lbs="cd /projects/lb && gulp serve"
 alias lbang="cd /projects/angular-lb"
