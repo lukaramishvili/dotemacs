@@ -128,6 +128,16 @@ d(){
     then
         git push
         ssh root@luka.ge "cd /projects/asb && git pull"
+    elif [ $(pwd) = "/projects/ald" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/ald && git pull"
+        #rsync -avz /projects/ald/dist/*.html root@luka.ge:/projects/ald/dist/
+    elif [ $(pwd) = "/projects/bt" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/bt && git pull"
+        #rsync -avz /projects/bt/dist/*.html root@luka.ge:/projects/bt/dist/
     else
         git push
         # TODO other projects' deploy paths
@@ -184,12 +194,19 @@ alias bl="cd /www/bookulus.ge/web && tail -f -n0 wp-content/debug.log"
 alias k="cd /projects/kt/Layout"
 alias ks="cd /projects/kt/Layout && gulp serve"
 alias a="cd /projects/asb/Layout"
+alias asb="cd /projects/asb/Layout"
 alias asbs="cd /projects/asb/Layout && gulp serve"
 alias lb="cd /projects/lb"
 alias lbs="cd /projects/lb && gulp serve"
 alias lbang="cd /projects/angular-lb"
 alias lbangs="cd /projects/angular-lb && ng serve --open"
+alias lw="cd /projects/lw/Layout"
+alias lws="cd /projects/lw/Layout && gulp serve"
 alias ici="cd /projects/ici"
 alias i="cd /projects/ici"
 alias iw="cd /projects/ici/ && npm run watch && open http://ici.devv"
 alias is="cd /projects/ici/ && npm run watch && open http://ici.devv"
+alias ald="cd /projects/ald"
+alias alds="cd /projects/ald && gulp serve"
+alias bt="cd /projects/bt"
+alias bts="cd /projects/bt && gulp serve"
