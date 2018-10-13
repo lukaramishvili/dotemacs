@@ -723,7 +723,23 @@ prompt to 'name>'."
     (kill-ring-save (point) (mark)))
   (open-indented-line)
   (yank))
-
+(defmacro sgml-with-tag-contents-after-cursor (&rest op)
+  `(progn
+     ;; TODO: we need to somehow avoid matching closing tags, which also contain ">"'s.
+     ;; if we simply search for ">", this code will fail when the cursor is inside a closing tag ( e.g. </di|v> )
+     (search-forward ">")
+     (set-mark-command nil)
+     (search-forward "<")
+     (backward-char 1)
+     ,@op))
+(defun sgml-clean-tag-after-cursor ()
+  (interactive)
+  (sgml-with-tag-contents-after-cursor
+   (delete-region (region-beginning) (region-end))))
+(defun sgml-kill-tag-contents-after-cursor ()
+  (interactive)
+  (sgml-with-tag-contents-after-cursor
+   (kill-region (region-beginning) (region-end))))
 
 
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
@@ -802,7 +818,9 @@ prompt to 'name>'."
   ;; wrap selection/tag in a new parent tag
   (local-set-key (kbd "C-c w") 'web-mode-element-wrap)
   (local-set-key (kbd "C-c C-p") 'preview-current-buffer-on-localhost)
-  (local-set-key (kbd "C-S-c") 'switch-to-chrome))
+  (local-set-key (kbd "C-S-c") 'switch-to-chrome)
+  (local-set-key (kbd "C-c c") 'sgml-clean-tag-after-cursor)
+  (local-set-key (kbd "C-c k") 'sgml-kill-tag-contents-after-cursor))
 
 (defun add-web-mode-js-bindings ()
   (local-set-key (kbd "C-c f") 'open-js-lambda-block))
@@ -924,7 +942,8 @@ prompt to 'name>'."
                       (r . "right")
                       (t-a . "text-align")
                       (t-d . "text-decoration")
-                      (t-o . "text-overflow")
+                      (to . "text-overflow")
+                      (t-o . "transform-origin")
                       (t-s . "text-shadow")
                       (t-i . "text-indent")
                       (t-t . "text-transform")
@@ -973,9 +992,9 @@ prompt to 'name>'."
                       (col . "column")
                       (cov . "cover")
                       (d . "default")
-                      (e . "ellipsis")
-                      (el . "ellipsis")
-                      (ell . "ellipsis")
+                      (e . "text-overflow: ellipsis")
+                      (el . "text-overflow: ellipsis")
+                      (ell . "text-overflow: ellipsis")
                       (fi . "fixed")
                       (f . "flex")
                       (f-e . "flex-end")
@@ -1030,6 +1049,8 @@ prompt to 'name>'."
                       (bef . "&:before { }")
                       (af . "&:after { }")
                       (aft . "&:after { }")
+                      (fc . "&:first-child { }")
+                      (lc . "&:last-child { }")
                       (img . "@include img(1)")
                       (imgc . "@include img-contain(1)")
                       (f-a . "@include flex-apart()")
@@ -1055,12 +1076,27 @@ prompt to 'name>'."
                       (pse-ci . "@include pseudo-circle()")
                       (ps-li . "@include pseudo-line(after, $color: )")
                       (ps-li . "@include pseudo-line(after, $color: )")
+                      (rot . "transform: rotate(0deg)")
                       (t-l . "text-align: left")
                       (t-c . "text-align: center")
                       (t-r . "text-align: right")
                       (fw . "font-weight: bold")
                       (fwn . "font-weight: normal")
                       (fwb . "font-weight: bold")
+                      (item . ".item- {
+.item-img {
+
+}
+.item-details {
+
+}
+.item-title {
+
+}
+.item-desc {
+
+}
+}")
                       ))
          (is-important (equal "!" (buffer-substring (- (point) 1) (point))))
          (keyword (if is-important
