@@ -16,100 +16,39 @@
 ;;;company - autocompletion (not using, too cumbersome and not at all useful)
 ;;;js2-mode - for modern javascript files (painfully slow)
 
+;;; functions
+
 (defun bool (arg)
   (not (not arg)))
 
-;; hide annoying GNU ad (I thereby classify it as such)
-(setq inhibit-startup-message t)
-;; clear *scratch* default contents
-(setq initial-scratch-message nil)
-
-;;; colors
-;;(set-background-color "#3f3f3f")
-;;(set-foreground-color "white")
-
-;; themes
-(add-to-list 'custom-theme-load-path "~/dotemacs/blackboard-theme")
-(load-theme 'blackboard t)
-
-;;; fonts
-(set-default-font "DejaVu Sans Mono")
-
-;; maximize emacs frame on startup (X11-specific but I'm not using anything else)
-(defun x11-maximize-frame ()
-  "Maximize the current frame (to full screen)"
+(defun eshell-here ()
+  "Opens up a new shell in the directory associated with the
+current buffer's file. The eshell is renamed to match that
+directory to make multiple eshell windows easier."
   (interactive)
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
+  (let* ((parent (if (buffer-file-name)
+                     (file-name-directory (buffer-file-name))
+                   default-directory))
+         (height (/ (window-total-height) 3))
+         (name   (car (last (split-string parent "/" t)))))
+    (split-window-vertically (- height))
+    (other-window 1)
+    (eshell "new")
+    (rename-buffer (concat "*eshell: " name "*"))
 
-;;(x11-maximize-frame)
+    (insert (concat "ls"))
+    (eshell-send-input)))
 
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
+;;(global-set-key (kbd "C-!") 'eshell-here)
 
+(defun eshell/exec (command)
+  (insert command)
+  (eshell-send-input))
 
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(package-initialize)
-
-(require 'use-package)
-
-(require 'thingatpt)
-
-(require 'magit)
-
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
-(require 'editorconfig)
-(editorconfig-mode 1)
-
-;;(when (require 'helm-config)
-;;  (global-set-key (kbd "s-x") 'helm-M-x)
-;;  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-;;  ;;(global-set-key (kbd "C-x C-f") #'helm-find-files)
-;;  (helm-mode 1))
-
-
-(cd "/projects/")
-
-(setq default-directory "/projects/")
-
-;;; settings
-
-;; disable tab indentation
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-
-(defun my-web-mode-indentation-hook ()
-  "Indentation levels for web-mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 4)
-  (setq web-mode-code-indent-offset 4))
-(add-hook 'web-mode-hook  'my-web-mode-indentation-hook)
-
-;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-
-;; always follow symlinks (avoid annoying yes/no question)
-(setq vc-follow-symlinks t)
-
-;; enable sourcing .bashrc files in 'shell-command (M-!)
-;; from https://stackoverflow.com/a/12229404/324220
-(setq shell-file-name "bash")
-(setq shell-command-switch "-ic")
-;; doesnt work to also enable it in eshell-mode
-;; (add-hook 'eshell-mode-hook  (lambda () (eshell/exec "source ~/dotemacs/.bashrc")))
-
-(autoload 'comint-dynamic-complete-filename "comint" nil t)
-(global-set-key (kbd "s-\\") 'toggle-input-method)
-(global-set-key (kbd "C-\\") 'comint-dynamic-complete-filename)
-
-;; Find file in current directory:
-(global-set-key (kbd "C-M-,") 'find-file-in-current-directory)
+(defun eshell/x ()
+  (insert "exit")
+  (eshell-send-input)
+  (delete-window))
 
 (defun ask-before-closing ()
   "Ask whether or not to close, and then close if y was pressed"
@@ -120,34 +59,13 @@
         (save-buffers-kill-emacs))
     (message "Canceled exit")))
 
-(when window-system
-  (global-set-key (kbd "C-x C-c") 'ask-before-closing)
-  (global-set-key (kbd "s-q") 'ask-before-closing))
-
-; stops selection with a mouse being immediately injected to the kill ring
-(setq mouse-drag-copy-region nil)
-; hide the toolbar (check if available, or signals error in terminal)
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-; hide the menu (no benefits in hiding the menu on osx)
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-; hide the scrollbars, not using them anyway
-; also check if available, or signals error in terminal
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-; show column numbers
-(column-number-mode)
-
-; switch () and []
-(keyboard-translate ?\( ?\[) 
-(keyboard-translate ?\[ ?\() 
-(keyboard-translate ?\) ?\]) 
-(keyboard-translate ?\] ?\))
-;; Also use Alt-[ as Alt-( and Alt-] as Alt-)
-(global-set-key (kbd "M-[") 'insert-parentheses)
-(global-set-key (kbd "M-]") 'move-past-close-and-reindent)
-
-(setq mac-command-modifier 'control)
-(setq mac-control-modifier 'super)
-;; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
+;; maximize emacs frame on startup (X11-specific but I'm not using anything else)
+(defun x11-maximize-frame ()
+  "Maximize the current frame (to full screen)"
+  (interactive)
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
+;;(x11-maximize-frame)
 
 (defun insert-double-quotes ()
   "Inserts double quotes and places the cursor between them"
@@ -156,52 +74,9 @@
   (save-excursion
     (insert "\"")))
 
-(global-set-key (kbd "M-\"") 'insert-double-quotes)
-
 (defun previous-window ()
   (interactive)
   (other-window -1))
-
-;;;navigate between windows using C-*-tab
-(global-set-key (kbd "<C-tab>") 'other-window)
-(global-set-key (kbd "<C-S-tab>") 'previous-window)
-(global-set-key (kbd "<C-S-iso-lefttab>") 'previous-window)
-(global-set-key (kbd "M-±") 'previous-window);; same as M-S-§
-(global-set-key (kbd "M-§") 'other-window)
-
-(global-set-key (kbd "<C-M-tab>") 'next-buffer)
-(global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
-
-;;(global-set-key (kbd "M-n") 'new-frame)
-;;(global-set-key (kbd "M-S-n") 'new-frame)
-
-(defun backward-kill-line ()
-  (interactive)
-  (set-mark-command nil)
-  (move-beginning-of-line 1)
-  (backward-delete-char-untabify 1))
-;; this is a reverse of C-k (deletes line contents *before* cursor)
-(global-set-key (kbd "<C-S-backspace>") 'backward-kill-line)
-(global-set-key (kbd "C-M-h") 'backward-kill-sexp)
-(global-set-key (kbd "<C-M-backspace>") 'backward-kill-sexp)
-
-;; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
-(global-set-key "\C-h" 'backward-delete-char-untabify)
-;; commented: use C-S-d as backspace
-;; (global-set-key (kbd "C-S-d") 'backward-delete-char-untabify)
-;; adding Shift to C-h or C-d hungry-deletes (deletes all whitespace it meets)
-(global-set-key (kbd "C-S-h") 'hungry-delete-backward)
-;;C-backspace was backward-kill-word, but I already have C-1,M-h,C-M-h,M-DEL for that
-(global-set-key (kbd "<C-backspace>") 'hungry-delete-backward)
-(global-set-key (kbd "<S-backspace>") 'hungry-delete-backward)
-;;(global-set-key (kbd "<C-S-backspace>") 'hungry-delete-backward)
-(global-set-key (kbd "C-S-d") 'hungry-delete-forward)
-;; also use C-h for backspace in regex search
-(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
-(global-set-key [(super h)] 'help-command)
-;;show free keybindings on s-h s-k
-(require 'free-keys)
-(global-set-key (kbd "s-h s-k") 'free-keys)
 
 (defun inside-string? ()
   "Returns non-nil if inside string, else nil.
@@ -211,7 +86,6 @@ This depends on major mode having setup syntax table properly."
     (message "%s" result)
     result))
 
-(fset 'original-backward-up-list (symbol-function 'backward-up-list))
 (defun backward-up-list ()
   (interactive)
   (cond
@@ -220,8 +94,9 @@ This depends on major mode having setup syntax table properly."
    ((equal (inside-string?) 39)
     (search-backward "'")))
   (original-backward-up-list))
+(fset 'original-backward-up-list (symbol-function 'backward-up-list))
 
-; variations on Steve Yegge recommendations
+                                        ; variations on Steve Yegge recommendations
 (defun kill-current-word ()
   (interactive)
   ;;in case cursor was at the end of current word, prevent jumping to next word's end
@@ -258,6 +133,302 @@ This depends on major mode having setup syntax table properly."
              (backward-char 1)
              (kill-line arg))
     (kill-line arg)))
+;; this is a reverse of C-k (deletes line contents *before* cursor)
+(defun backward-kill-line ()
+  (interactive)
+  (set-mark-command nil)
+  (move-beginning-of-line 1)
+  (backward-delete-char-untabify 1))
+
+(defun whitespacep (c)
+  (bool
+   (cond ((characterp c) (or (char-equal c #x9)
+                             (char-equal c #xa)
+                             (char-equal c #x20)))
+         ((stringp c) (or (equal c "\t")
+                          (equal c "\n")
+                          (equal c " ")))
+         (t nil))))
+
+(defun kill-whitespace-around-cursor ()
+  (interactive)
+  (if (whitespacep (preceding-char))
+      (hungry-delete-backward 0))
+  (if (whitespacep (following-char))
+      (hungry-delete-forward 0)))
+
+(defun comment-line ()
+  (interactive)
+  (move-beginning-of-line 1)
+  (set-mark-command nil)
+  (move-end-of-line 1)
+  ;;will call comment-region
+  (comment-dwim nil))
+
+;; C-return (adds an indented line after current line and moves cursor there) is overridden by emmet-mode 
+(defun open-indented-line ()
+  (interactive)
+  (move-end-of-line 1)
+  (newline-and-indent))
+;; o-i-b / Command-Shift-Enter adds two lines, cursor on first (useful in <div></div>)
+(defun open-indented-block ()
+  (interactive)
+  (newline-and-indent)
+  (newline-and-indent)
+  (previous-line 1)
+  (indent-for-tab-command))
+;; Command-{ opens a {\n cursor will be here \n} block after the end of the line
+;; if at-the-end-of-line is nil, opens the {\n cursor \n} block at the cursor position
+(defun open-brackets-block (at-the-end-of-line)
+  (interactive)
+  (if at-the-end-of-line (move-end-of-line 1))
+  (insert "{")
+  (newline-and-indent)
+  (insert "}")
+  (indent-for-tab-command)
+  (previous-line 1)
+  (open-indented-line))
+;; Command-Alt-{ inserts "{ <cursor> }"
+(defun open-brackets-block-inline ()
+  (interactive)
+  (insert "{ ")
+  (save-excursion
+    (insert " }")))
+;; Command-} closes a {} block on a new line (e.g. if or while), cursor will be after }
+;; Command-M-} closes a {} block right after cursor, cursor will be before }
+(defun close-brackets-block (at-the-end-of-line)
+  (interactive)
+  (if at-the-end-of-line (move-end-of-line 1))
+  (newline-and-indent)
+  (insert "}")
+  (unless at-the-end-of-line (backward-char 1))
+  (indent-for-tab-command))
+;; inserts anonymous function at cursor
+(defun open-js-lambda-block ()
+  (interactive)
+  (insert "function()")
+  (open-brackets-block nil))
+
+(defun sgml-transpose-tags-around-cursor ()
+  ;; transpose tags before and after cursor
+  (interactive)
+  ;; transpose only works when cursor is at first element's beginning
+  (sgml-skip-tag-backward 1)
+  (web-mode-element-transpose))
+(defun sgml-delete-tag-backward ()
+  ;; delete the tag before cursor
+  (interactive)
+  (let ((tag-start (point)))
+    (sgml-skip-tag-backward 1)
+    (kill-region tag-start (point))))
+(defun sgml-delete-tag-forward ()
+  ;; delete the tag before cursor
+  (interactive)
+  (let ((tag-end (point)))
+    (sgml-skip-tag-forward 1)
+    (kill-region tag-end (point))))
+(defun sgml-select-tag-backward ()
+  ;; select tag before cursor (includes any space between current cursor position and closing tag
+  (interactive)
+  (set-mark-command nil)
+  (sgml-skip-tag-backward 1))
+(defun sgml-select-tag-forward ()
+  ;; select tag before cursor (includes any space between current cursor position and opening tag
+  (interactive)
+  (set-mark-command nil)
+  (sgml-skip-tag-forward 1))
+(defun sgml-duplicate-previous-tag ()
+  ;; insert the contents of the tag before cursor at the current cursor position
+  (interactive)
+  ;; remember the current cursor position; we'll paste there
+  (save-excursion
+    ;; jump to the beginning of previous tag, select it, and copy
+    (sgml-skip-tag-backward 1)
+    (set-mark-command nil)
+    (sgml-skip-tag-forward 1)
+    (kill-ring-save (point) (mark)))
+  (open-indented-line)
+  (yank))
+(defun sgml-duplicate-next-tag ()
+  ;; insert the contents of the tag after cursor at the current cursor position
+  (interactive)
+  ;; remember the current cursor position; we'll paste there
+  (save-excursion
+    ;; jump to the beginning of previous tag, select it, and copy
+    (sgml-skip-tag-forward 1)
+    (set-mark-command nil)
+    (sgml-skip-tag-backward 1)
+    (kill-ring-save (point) (mark)))
+  (open-indented-line)
+  (yank))
+(defmacro sgml-with-tag-contents-after-cursor (&rest op)
+  `(progn
+     ;; TODO: we need to somehow avoid matching closing tags, which also contain ">"'s.
+     ;; if we simply search for ">", this code will fail when the cursor is inside a closing tag or before a tag with children (e.g. </di|v> or <di|v> <div>contents</div> </div>, respectively)
+     (search-forward ">")
+     (set-mark-command nil)
+     (search-forward "<")
+     (backward-char 1)
+     ,@op))
+(defun sgml-clean-tag-after-cursor ()
+  (interactive)
+  (sgml-with-tag-contents-after-cursor
+   (delete-region (region-beginning) (region-end))))
+(defun sgml-kill-tag-contents-after-cursor ()
+  (interactive)
+  (sgml-with-tag-contents-after-cursor
+   (kill-region (region-beginning) (region-end))))
+
+;;; settings
+
+;; hide annoying GNU ad (I thereby classify it as such)
+(setq inhibit-startup-message t)
+;; clear *scratch* default contents
+(setq initial-scratch-message nil)
+
+;;; colors
+;;(set-background-color "#3f3f3f")
+;;(set-foreground-color "white")
+
+;; themes
+(add-to-list 'custom-theme-load-path "~/dotemacs/blackboard-theme")
+(load-theme 'blackboard t)
+
+;;; fonts
+(set-default-font "DejaVu Sans Mono")
+
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
+(cd "/projects/")
+
+(setq default-directory "/projects/")
+
+;; disable tab indentation
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+;; always follow symlinks (avoid annoying yes/no question)
+(setq vc-follow-symlinks t)
+
+;; enable sourcing .bashrc files in 'shell-command (M-!)
+;; from https://stackoverflow.com/a/12229404/324220
+(setq shell-file-name "bash")
+(setq shell-command-switch "-ic")
+;; doesnt work to also enable it in eshell-mode
+;; (add-hook 'eshell-mode-hook  (lambda () (eshell/exec "source ~/dotemacs/.bashrc")))
+
+(autoload 'comint-dynamic-complete-filename "comint" nil t)
+(global-set-key (kbd "s-\\") 'toggle-input-method)
+(global-set-key (kbd "C-\\") 'comint-dynamic-complete-filename)
+
+;; Find file in current directory:
+(global-set-key (kbd "C-M-,") 'find-file-in-current-directory)
+
+(when window-system
+  (global-set-key (kbd "C-x C-c") 'ask-before-closing)
+  (global-set-key (kbd "s-q") 'ask-before-closing))
+
+                                        ; stops selection with a mouse being immediately injected to the kill ring
+(setq mouse-drag-copy-region nil)
+                                        ; hide the toolbar (check if available, or signals error in terminal)
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+                                        ; hide the menu (no benefits in hiding the menu on osx)
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+                                        ; hide the scrollbars, not using them anyway
+                                        ; also check if available, or signals error in terminal
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+                                        ; show column numbers
+(column-number-mode)
+
+                                        ; switch () and []
+(keyboard-translate ?\( ?\[) 
+(keyboard-translate ?\[ ?\() 
+(keyboard-translate ?\) ?\]) 
+(keyboard-translate ?\] ?\))
+;; Also use Alt-[ as Alt-( and Alt-] as Alt-)
+(global-set-key (kbd "M-[") 'insert-parentheses)
+(global-set-key (kbd "M-]") 'move-past-close-and-reindent)
+
+(setq mac-command-modifier 'control)
+(setq mac-control-modifier 'super)
+;; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
+
+(global-set-key (kbd "M-\"") 'insert-double-quotes)
+
+;;;navigate between windows using C-*-tab
+(global-set-key (kbd "<C-tab>") 'other-window)
+(global-set-key (kbd "<C-S-tab>") 'previous-window)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'previous-window)
+(global-set-key (kbd "M-±") 'previous-window);; same as M-S-§
+(global-set-key (kbd "M-§") 'other-window)
+
+(global-set-key (kbd "<C-M-tab>") 'next-buffer)
+(global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
+
+;;(global-set-key (kbd "M-n") 'new-frame)
+;;(global-set-key (kbd "M-S-n") 'new-frame)
+
+(global-set-key (kbd "<C-S-backspace>") 'backward-kill-line)
+(global-set-key (kbd "C-M-h") 'backward-kill-sexp)
+(global-set-key (kbd "<C-M-backspace>") 'backward-kill-sexp)
+
+;; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
+(global-set-key "\C-h" 'backward-delete-char-untabify)
+;; commented: use C-S-d as backspace
+;; (global-set-key (kbd "C-S-d") 'backward-delete-char-untabify)
+;; adding Shift to C-h or C-d hungry-deletes (deletes all whitespace it meets)
+(global-set-key (kbd "C-S-h") 'hungry-delete-backward)
+;;C-backspace was backward-kill-word, but I already have C-1,M-h,C-M-h,M-DEL for that
+(global-set-key (kbd "<C-backspace>") 'hungry-delete-backward)
+(global-set-key (kbd "<S-backspace>") 'hungry-delete-backward)
+;;(global-set-key (kbd "<C-S-backspace>") 'hungry-delete-backward)
+(global-set-key (kbd "C-S-d") 'hungry-delete-forward)
+;; also use C-h for backspace in regex search
+(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
+(global-set-key [(super h)] 'help-command)
+
+;;; packages
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
+
+;; packages to install on a new system:
+;; use-package
+;; magit
+;; editorconfig
+
+
+(require 'use-package)
+
+(require 'thingatpt)
+
+(require 'magit)
+
+(require 'editorconfig)
+(editorconfig-mode 1)
+
+;;show free keybindings on s-h s-k
+(require 'free-keys)
+(global-set-key (kbd "s-h s-k") 'free-keys)
+
+;;(when (require 'helm-config)
+;;  (global-set-key (kbd "s-x") 'helm-M-x)
+;;  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+;;  ;;(global-set-key (kbd "C-x C-f") #'helm-find-files)
+;;  (helm-mode 1))
+
 ;I'm almost always using M-BACKSPACE, so let's use C-1 as yank, which (C-y) is inconvenient
 ;(global-set-key (kbd "C-1") 'backward-kill-word)
 (global-set-key (kbd "C-2") 'kill-current-word)
@@ -277,24 +448,9 @@ This depends on major mode having setup syntax table properly."
 
 (require 'hungry-delete)
 
-(defun whitespacep (c)
-  (bool
-   (cond ((characterp c) (or (char-equal c #x9)
-                             (char-equal c #xa)
-                             (char-equal c #x20)))
-         ((stringp c) (or (equal c "\t")
-                          (equal c "\n")
-                          (equal c " ")))
-         (t nil))))
+(global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)  
 
-(defun kill-whitespace-around-cursor ()
-  (interactive)
-  (if (whitespacep (preceding-char))
-      (hungry-delete-backward 0))
-  (if (whitespacep (following-char))
-      (hungry-delete-forward 0)))
-
-(global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)
+(global-set-key (kbd "C-M-;") 'comment-line)
 
 ;;(use-package hungry-delete
 ;;             :bind (("<backspace>" . hungry-delete-backward)
@@ -357,18 +513,6 @@ This depends on major mode having setup syntax table properly."
     (kill-buffer buf)))
 ;; end of php mode keybindings
 
-;; C-return (adds an indented line after current line and moves cursor there) is overridden by emmet-mode 
-(defun open-indented-line ()
-  (interactive)
-  (move-end-of-line 1)
-  (newline-and-indent))
-;; o-i-b / Command-Shift-Enter adds two lines, cursor on first (useful in <div></div>)
-(defun open-indented-block ()
-  (interactive)
-  (newline-and-indent)
-  (newline-and-indent)
-  (previous-line 1)
-  (indent-for-tab-command))
 ;; C-return is overridden by emmet-mode
 (global-set-key (kbd "<C-return>") 'open-indented-line)
 (global-set-key (kbd "<C-S-return>") 'open-indented-block)
@@ -376,37 +520,6 @@ This depends on major mode having setup syntax table properly."
 ;; C-S-return is vacant, use it for something
 (electric-indent-mode 1);; auto-indent newlines etc
 
-;; Command-{ opens a {\n cursor will be here \n} block after the end of the line
-;; if at-the-end-of-line is nil, opens the {\n cursor \n} block at the cursor position
-(defun open-brackets-block (at-the-end-of-line)
-  (interactive)
-  (if at-the-end-of-line (move-end-of-line 1))
-  (insert "{")
-  (newline-and-indent)
-  (insert "}")
-  (indent-for-tab-command)
-  (previous-line 1)
-  (open-indented-line))
-;; Command-Alt-{ inserts "{ <cursor> }"
-(defun open-brackets-block-inline ()
-  (interactive)
-  (insert "{ ")
-  (save-excursion
-    (insert " }")))
-;; Command-} closes a {} block on a new line (e.g. if or while), cursor will be after }
-;; Command-M-} closes a {} block right after cursor, cursor will be before }
-(defun close-brackets-block (at-the-end-of-line)
-  (interactive)
-  (if at-the-end-of-line (move-end-of-line 1))
-  (newline-and-indent)
-  (insert "}")
-  (unless at-the-end-of-line (backward-char 1))
-  (indent-for-tab-command))
-;; inserts anonymous function at cursor
-(defun open-js-lambda-block ()
-  (interactive)
-  (insert "function()")
-  (open-brackets-block nil))
 (global-set-key (kbd "C-{") (lambda () (interactive) (open-brackets-block t)))
 ;(global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block nil)))
 (global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block-inline)))
@@ -620,6 +733,15 @@ prompt to 'name>'."
 ;;      '(("php"    . "\\.phtml\\'")
 ;;        ("blade"  . "\\.blade\\."))))
 
+
+
+(defun my-web-mode-indentation-hook ()
+  "Indentation levels for web-mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 4)
+  (setq web-mode-code-indent-offset 4))
+(add-hook 'web-mode-hook  'my-web-mode-indentation-hook)
+
 (when (require 'web-mode-edit-element nil 'noerror)
   (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
 
@@ -671,75 +793,6 @@ prompt to 'name>'."
 ; feature - undo cursor position (return to previous position, something like pop-mark or pop-global-mark). maybe C-? (=C-S-/)
 (global-set-key (kbd "C-?") 'unpop-to-mark-command)
 
-(defun sgml-transpose-tags-around-cursor ()
-  ;; transpose tags before and after cursor
-  (interactive)
-  ;; transpose only works when cursor is at first element's beginning
-  (sgml-skip-tag-backward 1)
-  (web-mode-element-transpose))
-(defun sgml-delete-tag-backward ()
-  ;; delete the tag before cursor
-  (interactive)
-  (let ((tag-start (point)))
-    (sgml-skip-tag-backward 1)
-    (kill-region tag-start (point))))
-(defun sgml-delete-tag-forward ()
-  ;; delete the tag before cursor
-  (interactive)
-  (let ((tag-end (point)))
-    (sgml-skip-tag-forward 1)
-    (kill-region tag-end (point))))
-(defun sgml-select-tag-backward ()
-  ;; select tag before cursor (includes any space between current cursor position and closing tag
-  (interactive)
-  (set-mark-command nil)
-  (sgml-skip-tag-backward 1))
-(defun sgml-select-tag-forward ()
-  ;; select tag before cursor (includes any space between current cursor position and opening tag
-  (interactive)
-  (set-mark-command nil)
-  (sgml-skip-tag-forward 1))
-(defun sgml-duplicate-previous-tag ()
-  ;; insert the contents of the tag before cursor at the current cursor position
-  (interactive)
-  ;; remember the current cursor position; we'll paste there
-  (save-excursion
-    ;; jump to the beginning of previous tag, select it, and copy
-    (sgml-skip-tag-backward 1)
-    (set-mark-command nil)
-    (sgml-skip-tag-forward 1)
-    (kill-ring-save (point) (mark)))
-  (open-indented-line)
-  (yank))
-(defun sgml-duplicate-next-tag ()
-  ;; insert the contents of the tag after cursor at the current cursor position
-  (interactive)
-  ;; remember the current cursor position; we'll paste there
-  (save-excursion
-    ;; jump to the beginning of previous tag, select it, and copy
-    (sgml-skip-tag-forward 1)
-    (set-mark-command nil)
-    (sgml-skip-tag-backward 1)
-    (kill-ring-save (point) (mark)))
-  (open-indented-line)
-  (yank))
-(defmacro sgml-with-tag-contents-after-cursor (&rest op)
-  `(progn
-     ;; TODO: we need to somehow avoid matching closing tags, which also contain ">"'s.
-     ;; if we simply search for ">", this code will fail when the cursor is inside a closing tag ( e.g. </di|v> )
-     (search-forward ">")
-     (set-mark-command nil)
-     (search-forward "<")
-     (backward-char 1)
-     ,@op))
-(defun sgml-clean-tag-after-cursor ()
-  (interactive)
-  (sgml-with-tag-contents-after-cursor
-   (delete-region (region-beginning) (region-end))))
-(defun sgml-kill-tag-contents-after-cursor ()
-  (interactive)
-  (sgml-with-tag-contents-after-cursor
-   (kill-region (region-beginning) (region-end))))
 
 
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
@@ -861,6 +914,7 @@ prompt to 'name>'."
                       (bor-c . "border-color")
                       (bo-s . "border-style")
                       (bor-s . "border-style")
+                      (box-s . "box-shadow")
                       (bw . "border-width")
                       (b-w . "border-width")
                       (bo-w . "border-width")
@@ -1028,6 +1082,7 @@ prompt to 'name>'."
                       (un . "underline")
                       (up . "uppercase")
                       (v . "visible")
+                      (vi . "visible")
                       (w . "wrap")
                       (abs . "@include abs(0)")
                       (absr . "@include absr(0)")
@@ -1045,12 +1100,21 @@ prompt to 'name>'."
                       (abscover . "@include abs(0); @include size(100%)")
                       (size . "@include size(100%)")
                       (pse . "content: ''; display: block")
-                      (be . "&:before { }")
-                      (bef . "&:before { }")
                       (af . "&:after { }")
                       (aft . "&:after { }")
+                      (be . "&:before { }")
+                      (bef . "&:before { }")
+                      (bt . "border-top: 1px solid $gray-border")
+                      (br . "border-right: 1px solid $gray-border")
+                      (bb . "border-bottom: 1px solid $gray-border")
+                      (bl . "border-left: 1px solid $gray-border")
                       (fc . "&:first-child { }")
                       (lc . "&:last-child { }")
+                      (nc . "&:nth-child() { }")
+                      (odd . "&:nth-child(odd) { }")
+                      (even . "&:nth-child(even) { }")
+                      (b50 . "border-radius: 50%")
+                      (br50 . "border-radius: 50%")
                       (img . "@include img(1)")
                       (imgc . "@include img-contain(1)")
                       (f-a . "@include flex-apart()")
@@ -1139,41 +1203,6 @@ prompt to 'name>'."
 
 
 
-(defun eshell-here ()
-  "Opens up a new shell in the directory associated with the
-current buffer's file. The eshell is renamed to match that
-directory to make multiple eshell windows easier."
-  (interactive)
-  (let* ((parent (if (buffer-file-name)
-                     (file-name-directory (buffer-file-name))
-                   default-directory))
-         (height (/ (window-total-height) 3))
-         (name   (car (last (split-string parent "/" t)))))
-    (split-window-vertically (- height))
-    (other-window 1)
-    (eshell "new")
-    (rename-buffer (concat "*eshell: " name "*"))
-
-    (insert (concat "ls"))
-    (eshell-send-input)))
-
-;;(global-set-key (kbd "C-!") 'eshell-here)
-
-(defun eshell/exec (command)
-  (insert command)
-  (eshell-send-input))
-
-(defun eshell/x ()
-  (insert "exit")
-  (eshell-send-input)
-  (delete-window))
-
-
-;; make two vertical windows; open blade view file in the left, translation file - right
-;; select the text to be translated, execute this macro. then type translation file name
-(fset 'laravel-trans-between-windows
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([23 123 123 33554464 116 114 97 110 115 40 41 32 125 125 2 2 2 2 39 39 2 24 111 39 39 32 61 62 33554464 39 39 44 2 2 25 1 tab 6 25 0 18 39 6 134217848 100 111 119 110 99 97 115 101 45 114 101 103 105 111 110 return 1 tab 6 0 19 39 2 134217848 114 101 112 108 97 99 101 45 115 116 114 105 110 103 return 32 return 95 return 5 return 1 2 1 tab 6 0 19 39 2 134217847 5 6 tab C-left 25 18 39 6 46 2] 0 "%d")) arg)))
-
 
 (defun preview-file-on-localhost (file)
   (shell-command (concat "open http://localhost:3000/" file)))
@@ -1202,10 +1231,14 @@ directory to make multiple eshell windows easier."
                 (serve-cmd . "npm run dev && open http://ici.devv")))
         (lw . ((dir . "/projects/lw/Layout")
                (serve-cmd . "gulp webserver")))
-        (ald . ((dir . "/projects/ald")
+        ;;(ald . ((dir . "/projects/ald")
+        ;;        (serve-cmd . "gulp serve")))
+        (ald . ((dir . "/projects/ald/layout")
                 (serve-cmd . "gulp serve")))
         (bt . ((dir . "/projects/bt")
-                (serve-cmd . "gulp serve")))))
+               (serve-cmd . "gulp serve")))
+        (cx . ((dir . "/projects/cx/Solution/HelixCore.WebApp")
+               (serve-cmd . "gulp webserver")))))
 
 ;; project-mode
 (defun project-mode (project-name)
@@ -1290,3 +1323,8 @@ directory to make multiple eshell windows easier."
 (defun bt-mode ()
   (interactive)
   (project-mode 'bt))
+
+;; bt-mode
+(defun cx-mode ()
+  (interactive)
+  (project-mode 'cx))

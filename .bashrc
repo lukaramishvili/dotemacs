@@ -35,6 +35,8 @@ alias emacs-osx="/usr/local/bin/emacs"
 alias security-on="sudo spctl --master-enable"
 alias security-off="sudo spctl --master-disable"
 
+alias vbox-start="sudo /Library/Application\ Support/VirtualBox/LaunchDaemons/VirtualBoxStartup.sh restart"
+
 f(){
     # -U doesn't work (supposed to skip .gitignore/ignore files)
     # ag respects .gitignore, but only from git root directory, so specifically exclude node_modules (throwing a lot of errors for deep paths)
@@ -133,6 +135,14 @@ d(){
         git push
         ssh root@luka.ge "cd /projects/ald && git pull"
         #rsync -avz /projects/ald/dist/*.html root@luka.ge:/projects/ald/dist/
+    elif [ $(pwd) = "/projects/cx/Solution/HelixCore.WebApp" ]
+    then
+        git push
+        ssh root@luka.ge "cd /projects/cx && git pull"
+        cd /projects/cx/Solution/HelixCore.WebApp
+        rsync -avz /projects/cx/Solution/HelixCore.WebApp/*.html root@luka.ge:/projects/cx/Solution/HelixCore.WebApp/
+        rsync -avz /projects/cx/Solution/HelixCore.WebApp/m/css/*.css root@luka.ge:/projects/cx/Solution/HelixCore.WebApp/m/css/
+        rsync -avz /projects/cx/Solution/HelixCore.WebApp/m/js/*.min.js root@luka.ge:/projects/cx/Solution/HelixCore.WebApp/m/js/
     elif [ $(pwd) = "/projects/bt" ]
     then
         git push
@@ -180,8 +190,8 @@ fconfig | grep 192 | perl -pe 's|^.*?(192\.\d+\.\d+\.\d+).*$|http://\1:8000|' |\
 #alias v="cd /projects/vtb/Layout"
 #alias vs="cd /projects/vtb/Layout && gulp serve"
 # worldvide vision
-alias p="cd /projects/pawn"
-alias pw="cd /projects/pawn && gulp watch"
+#alias p="cd /projects/pawn"
+#alias pw="cd /projects/pawn && gulp watch"
 # alias c="cd /projects/calo"
 # alias cs="cd /projects/calo && gulp serve"
 # alias k="cd /www/kalo/web/app/themes/wi-theme"
@@ -210,3 +220,6 @@ alias ald="cd /projects/ald"
 alias alds="cd /projects/ald && gulp serve"
 alias bt="cd /projects/bt"
 alias bts="cd /projects/bt && gulp serve"
+alias c="cd /projects/cx/Solution/HelixCore.WebApp"
+alias cx="cd /projects/cx/Solution/HelixCore.WebApp"
+alias cs="cd /projects/cx/Solution/HelixCore.WebApp && gulp webserver"
