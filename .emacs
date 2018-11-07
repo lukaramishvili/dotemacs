@@ -421,6 +421,13 @@ This depends on major mode having setup syntax table properly."
 ;; use-package
 ;; magit
 ;; editorconfig
+;; free-keys
+;; exec-path-from-shell
+;; hungry-delete
+;; 
+;; 
+;; 
+
 
 
 
