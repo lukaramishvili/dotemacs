@@ -4,18 +4,6 @@
 
 ;;; use C-x C-e to reload any s-exp
 
-;;; installed packages (copied from M-x package-list-packages)
-;;;2048-game          20140704.... installed  play 2048 in Emacs
-;;;auctex             11.87.7      installed  Integrated environment for *TeX*
-;;;markdown-mode      20151214.... installed  Emacs Major mode for Markdown-formatted text files
-;;;markdown-mode+     20120829.510 installed  extra functions for markdown-mode
-;;;php-mode           20140502.... installed  Major mode for editing PHP code
-;;;recentf-ext        20130130.... installed  Recentf extensions
-;;;slime              20140702.... installed  Superior Lisp Interaction Mode for Emacs
-;;;magit - git porcelain
-;;;company - autocompletion (not using, too cumbersome and not at all useful)
-;;;js2-mode - for modern javascript files (painfully slow)
-
 ;;; functions
 
 (defun bool (arg)
@@ -417,17 +405,33 @@ This depends on major mode having setup syntax table properly."
 
 (package-initialize)
 
-;; packages to install on a new system:
-;; use-package
-;; magit
-;; editorconfig
-;; free-keys
-;; exec-path-from-shell
-;; hungry-delete
-;; 
-;; 
-;; 
+(setq needed-packages-list
+      '(
+        ;;; required packages to install on a new system:
+        use-package
+         free-keys
+         hungry-delete
+         exec-path-from-shell
+         recentf-ext
+         editorconfig
+         magit
+         ;;; optional packages
+         php-mode
+         slime))
+;; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
 
+;; install the missing packages
+(dolist (package needed-packages-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+
+
+;;; installed packages (copied from M-x package-list-packages)
+;;;company - autocompletion (not using, too cumbersome and not at all useful)
+;;;js2-mode - for modern javascript files (painfully slow)
 
 
 
