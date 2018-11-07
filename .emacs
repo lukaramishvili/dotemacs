@@ -300,10 +300,6 @@ This depends on major mode having setup syntax table properly."
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
-
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
 (cd "/projects/")
 
 (setq default-directory "/projects/")
@@ -337,19 +333,19 @@ This depends on major mode having setup syntax table properly."
   (global-set-key (kbd "C-x C-c") 'ask-before-closing)
   (global-set-key (kbd "s-q") 'ask-before-closing))
 
-                                        ; stops selection with a mouse being immediately injected to the kill ring
+;; stops selection with a mouse being immediately injected to the kill ring
 (setq mouse-drag-copy-region nil)
-                                        ; hide the toolbar (check if available, or signals error in terminal)
+;; hide the toolbar (check if available, or signals error in terminal)
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-                                        ; hide the menu (no benefits in hiding the menu on osx)
+;; hide the menu (no benefits in hiding the menu on osx)
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-                                        ; hide the scrollbars, not using them anyway
-                                        ; also check if available, or signals error in terminal
+;; hide the scrollbars, not using them anyway
+;; also check if available, or signals error in terminal
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-                                        ; show column numbers
+;; show column numbers
 (column-number-mode)
 
-                                        ; switch () and []
+;; switch () and []
 (keyboard-translate ?\( ?\[) 
 (keyboard-translate ?\[ ?\() 
 (keyboard-translate ?\) ?\]) 
@@ -396,6 +392,23 @@ This depends on major mode having setup syntax table properly."
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 (global-set-key [(super h)] 'help-command)
 
+;;I'm almost always using M-BACKSPACE, so let's use C-1 as yank, which (C-y) is inconvenient
+;;(global-set-key (kbd "C-1") 'backward-kill-word)
+(global-set-key (kbd "C-2") 'kill-current-word)
+(global-set-key (kbd "C-3") 'kill-current-symbol)
+(global-set-key (kbd "C-4") 'kill-current-line)
+(global-set-key (kbd "C-5") 'kill-current-sexp)
+(global-set-key (kbd "C-S-k") 'kill-and-join-forward)
+;; C-x C-k bindings are used for keymacro definition
+;(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'join-with-next-line)
+(global-set-key (kbd "C-c C-M-k") '(lambda () (interactive) (join-with-next-line t)))
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+;; make Alt-h and Alt-Ctrl-h the same as Alt-Backspace
+(global-set-key (kbd "M-h") 'backward-kill-word)
+(global-set-key (kbd "C-M-h") 'backward-kill-word)
+
 ;;; packages
 
 (require 'package)
@@ -408,6 +421,7 @@ This depends on major mode having setup syntax table properly."
 ;; use-package
 ;; magit
 ;; editorconfig
+
 
 
 (require 'use-package)
@@ -429,22 +443,10 @@ This depends on major mode having setup syntax table properly."
 ;;  ;;(global-set-key (kbd "C-x C-f") #'helm-find-files)
 ;;  (helm-mode 1))
 
-;I'm almost always using M-BACKSPACE, so let's use C-1 as yank, which (C-y) is inconvenient
-;(global-set-key (kbd "C-1") 'backward-kill-word)
-(global-set-key (kbd "C-2") 'kill-current-word)
-(global-set-key (kbd "C-3") 'kill-current-symbol)
-(global-set-key (kbd "C-4") 'kill-current-line)
-(global-set-key (kbd "C-5") 'kill-current-sexp)
-(global-set-key (kbd "C-S-k") 'kill-and-join-forward)
-; C-x C-k bindings are used for keymacro definition
-;(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'join-with-next-line)
-(global-set-key (kbd "C-c C-M-k") '(lambda () (interactive) (join-with-next-line t)))
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
-;; make Alt-h and Alt-Ctrl-h the same as Alt-Backspace
-(global-set-key (kbd "M-h") 'backward-kill-word)
-(global-set-key (kbd "C-M-h") 'backward-kill-word)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 
 (require 'hungry-delete)
 
