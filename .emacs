@@ -415,6 +415,7 @@ This depends on major mode having setup syntax table properly."
          recentf-ext
          editorconfig
          magit
+         web-mode
          ;;; optional packages
          php-mode
          slime))
