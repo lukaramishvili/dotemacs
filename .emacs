@@ -416,6 +416,7 @@ This depends on major mode having setup syntax table properly."
          editorconfig
          magit
          web-mode
+         emmet-mode
          ;;; optional packages
          php-mode
          slime))
