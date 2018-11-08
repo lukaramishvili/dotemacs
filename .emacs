@@ -834,6 +834,9 @@ prompt to 'name>'."
   (local-set-key (kbd "C-S-<right>") 'emmet-next-edit-point)
   (local-set-key (kbd "C-<")  'emmet-prev-edit-point)
   (local-set-key (kbd "C->") 'emmet-next-edit-point)
+  ;; for home row keys
+  (local-set-key (kbd "C-S-b")  'emmet-prev-edit-point)
+  (local-set-key (kbd "C-S-f") 'emmet-next-edit-point)
   ;; allow navigating to edit points when using the georgian language input
   ;; TODO needs making C-ც the same as C-c
   ;;(local-set-key (kbd "C-ც <left>")  'emmet-prev-edit-point)
