@@ -130,7 +130,7 @@ d(){
     then
         git push
         ssh root@luka.ge "cd /projects/asb && git pull"
-    elif [ $(pwd) = "/projects/ald" ]
+    elif [ $(pwd) = "/projects/ald" ] || [ $(pwd) = "/projects/ald/layout" ]
     then
         git push
         ssh root@luka.ge "cd /projects/ald && git pull"
@@ -171,6 +171,8 @@ qd(){
 
 alias s="git status"
 alias st="git status"
+alias l="git log"
+alias gl="git log"
 #alias l="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
 alias gc="git commit"
 alias gw="gulp watch"
@@ -223,3 +225,7 @@ alias bts="cd /projects/bt && gulp serve"
 alias c="cd /projects/cx/Solution/HelixCore.WebApp"
 alias cx="cd /projects/cx/Solution/HelixCore.WebApp"
 alias cs="cd /projects/cx/Solution/HelixCore.WebApp && gulp webserver"
+alias p="cd /projects/pens"
+alias pn="cd /projects/pens"
+alias pens="cd /projects/pens"
+alias penserve="cd /projects/pens && npm run dev"
