@@ -1,0 +1,17 @@
+@-moz-document domain("soundcloud.com") {
+    @media (max-width: 959px){
+        .l-fluid-fixed .l-sidebar-right { position: static;  }
+        .streamSidebar { position: static;  }
+        .l-fluid-fixed .l-main { margin-right: 0; }
+        .l-container, .l-container.l-fullwidth { box-sizing: border-box; width: 100%; padding: 0 20px; }
+        .l-container.l-fullwidth.header__inner { padding: 0; }
+        .l-container.l-fullwidth.playControls__wrapper { padding: 0; }
+        .header__userNavMessagesButton, .header__userNavActivitiesButton, .header__proUpsell, .header__soundInput, .header__navMenu { display: none; }
+        .selectionPlaylistBanner__artwork { width: 80px; height: 80px; }
+        .selectionPlaylistBanner__listArea { left: 113px; }
+        .sound__coverArt { width: 120px; height: 120px; }
+        .sc-button-startstation { display: none; }
+        .g-tabs-link[href="/djallegro/albums"],.g-tabs-link[href="/djallegro/reposts"]{ display: none; }  
+        .playControls__elements { flex-wrap: wrap; }
+    }
+}
