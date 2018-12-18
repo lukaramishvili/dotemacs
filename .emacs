@@ -578,6 +578,11 @@ This depends on major mode having setup syntax table properly."
     (define-key shell-mode-map (kbd "<C-up>") 'windmove-up)
     (define-key shell-mode-map (kbd "<C-down>") 'windmove-down)
 
+    (local-set-key (kbd "<C-left>") 'windmove-left)
+    (local-set-key (kbd "<C-right>") 'windmove-right)
+    (local-set-key (kbd "<C-up>") 'windmove-up)
+    (local-set-key (kbd "<C-down>") 'windmove-down)
+
     (global-set-key [(super b)] 'windmove-left)
     (global-set-key [(super f)] 'windmove-right)
     (global-set-key [(super p)] 'windmove-up)
@@ -634,9 +639,12 @@ This depends on major mode having setup syntax table properly."
 ;; was causing error when installing slime - "Key sequence C-x C-a C-l starts with non-prefix key C-x C-a"
 ;; (global-set-key (kbd "C-x C-a") 'show-recent-file-list)
 
-; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
-(global-set-key (kbd "<C-M-r>") 'isearch-backward-regexp)
-(global-set-key (kbd "<C-M-s>") 'isearch-forward-regexp)
+;; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
+;; swap regexp search and normal search
+(global-set-key (kbd "<C-M-r>") 'isearch-backward)
+(global-set-key (kbd "<C-M-s>") 'isearch-forward)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
 
 ; C-M-w copies to OS clipboard; C-M-y yanks from OS clipboard
 (global-set-key "\C-\M-w" 'clipboard-kill-ring-save)
@@ -773,7 +781,7 @@ prompt to 'name>'."
 (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode));css-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . css-mode));css-mode or web-mode
-(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . html-mode));html-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
 ;; ###### otherwise all other extension=>mode assignments will stop to work
@@ -1256,7 +1264,9 @@ prompt to 'name>'."
         (bt . ((dir . "/projects/bt")
                (serve-cmd . "gulp serve")))
         (cx . ((dir . "/projects/cx/Solution/HelixCore.WebApp")
-               (serve-cmd . "gulp webserver")))))
+               (serve-cmd . "gulp webserver")))
+        (pn . ((dir . "/projects/pens")
+               (serve-cmd . "open http://localhost:3000 && npm run dev")))))
 
 ;; project-mode
 (defun project-mode (project-name)
@@ -1298,7 +1308,7 @@ prompt to 'name>'."
         (windmove-up)
         (delete-window)))
     ;; bring focus to the left window
-    ;; (windmove-left)
+    (windmove-left)
     ;; open find file dialog
     (call-interactively 'find-file)))
 
@@ -1342,7 +1352,12 @@ prompt to 'name>'."
   (interactive)
   (project-mode 'bt))
 
-;; bt-mode
+;; cx-mode
 (defun cx-mode ()
   (interactive)
   (project-mode 'cx))
+
+;; pn-mode
+(defun pn-mode ()
+  (interactive)
+  (project-mode 'pn))
