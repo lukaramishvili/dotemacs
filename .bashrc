@@ -26,6 +26,27 @@ if [ -f ~/wp-completion.bash ]; then
     source ~/wp-completion.bash
 fi
 
+# ln -s /Users/luka/Library/Mobile\ Documents/ /icloud
+# ln -s /Users/luka/Library/Mobile\ Documents/ ~/icloud
+# cd /icloud
+# ln -s com~apple~ScriptEditor2/Documents scripts
+# ln -s com~apple~CloudDocs docs
+
+transfer() {
+    if [ $# -eq 0 ]; then
+        echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
+        return 1;
+    fi 
+    tmpfile=$( mktemp -t transferXXX );
+    if tty -s; then
+        basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
+        curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
+    else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
+    fi;
+    cat $tmpfile;
+    rm -f $tmpfile;
+} 
+
 # we can divide these into modules; "source ./.bash/.bash_aliases" etc
 
 #both emacs / emacs -nw causes inserting garbled text in the first open buffer
