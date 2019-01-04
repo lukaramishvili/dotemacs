@@ -169,8 +169,8 @@ qd(){
     fi
 }
 
-alias s="git status"
-alias st="git status"
+alias s="git status -s"
+alias st="git status -s"
 alias l="git log"
 alias gl="git log"
 #alias l="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
@@ -210,6 +210,8 @@ alias asb="cd /projects/asb/Layout"
 alias asbs="cd /projects/asb/Layout && gulp serve"
 alias lb="cd /projects/lb"
 alias lbs="cd /projects/lb && gulp serve"
+#created a script with the same name in /usr/local/bin
+#alias lb-emacs="open /Applications/Emacs.app --args --eval=\"(lb-mode)\""
 alias lbang="cd /projects/angular-lb"
 alias lbangs="cd /projects/angular-lb && ng serve --open"
 alias lw="cd /projects/lw/Layout"
