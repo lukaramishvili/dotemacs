@@ -129,7 +129,7 @@
     "BTTTouchBarVisible" : true,
     "BTTTouchBarUseMonoSpacedFont" : true
   },
-  "BTTPresetUUID" : "FE25DEC9-B093-42C3-BC54-7BA7242E5E00",
+  "BTTPresetUUID" : "F01A403A-D7FE-4603-8B1D-2AD5E50AEEB1",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.apple.finder",
