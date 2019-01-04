@@ -183,15 +183,13 @@ d(){
 # quick deploy (commits with text after command, pushes to git and updates server code)
 qd(){
     # show status for info or debugging, if something goes wrong
-    git status
+    vcs-status
     # no parens without quotes - see comment about $* in cam()
-    cam "$*"
-    if [ $(pwd) = "/projects/wom" ]
-    then
-        d # deploy project
+    vcs-commit "$*"
+    d # deploy - will update server code on specific projects; git push otherwise
+    #
+    if [ $(pwd) = "/projects/wom" ]; then
         git push # also push to alternate remote
-    else
-        d # deploy - will update server code on specific projects; git push otherwise
     fi
 }
 
