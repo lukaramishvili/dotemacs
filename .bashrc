@@ -71,19 +71,45 @@ alias tinker="rlwrap /Applications/XAMPP/bin/php artisan tinker"
 
 alias "git-status-publish"="git rev-list --count publish/master..master"
 
-# quick commit (cam stands for git commit -a -m )
-cam(){
+#cannot name it either s or st
+vcs-status(){
+    if [ -d ./.hg ]; then
+        hg status
+    else
+        git status -s
+    fi
+}
+vcs-log(){
+    if [ -d ./.hg ]; then
+        hg log
+    else
+        git log
+    fi
+}
+vcs-commit(){
     # make wrapping commit message in quotes unnecessary
     # (WARNING: doesn't work on (parens), only when escaped or, ironically, in quotes)
     # everything after $ qd ..., including spaces, will be passed
     # for reference: $@ would wrap each word (separated by space) in separate quotes
     # ..e.g.: if using $@, qd foo bar => cam "foo" "bar"
-    git add .
-    git commit -a -m "$*"
+    if [ -d ./.hg ]; then
+        hg add .
+        hg commit -m "$*"
+    else
+        git add .
+        git commit -a -m "$*"
+    fi
+}
+# quick commit (cam stands for git commit -a -m )
+cam(){
+    vcs-commit "$*"
 }
 # deploy - git push and update to server
 d(){
-    if [ $(pwd) = "/projects/wom" ]
+    if [ $(pwd) = "/Users/luka/dotemacs" ]
+    then
+        hg push
+    elif [ $(pwd) = "/projects/wom" ]
     then
         # wom deploy
         git push publish
@@ -169,10 +195,15 @@ qd(){
     fi
 }
 
-alias s="git status -s"
-alias st="git status -s"
-alias l="git log"
-alias gl="git log"
+
+#alias s="git status -s"
+#alias st="git status -s"
+#alias l="git log"
+#alias gl="git log"
+alias s="vcs-status"
+alias st="vcs-status"
+alias l="vcs-log"
+alias gl="vcs-log"
 #alias l="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
 alias gc="git commit"
 alias gw="gulp watch"
