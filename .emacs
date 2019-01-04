@@ -117,13 +117,11 @@ This depends on major mode having setup syntax table properly."
   (backward-up-list)
   (kill-sexp))
 (defun kill-and-join-forward (&optional arg)
+  "If at end of line, join with following; otherwise kill line.
+Deletes whitespace at join."
   (interactive "P")
-  (if (and (eolp) (not (bolp)))
-      (progn (forward-char 1)
-             (just-one-space 0)
-             (backward-char 1)
-             (kill-line arg))
-    (kill-line arg)))
+  (kill-line arg)
+  (hungry-delete-forward 0))
 ;; this is a reverse of C-k (deletes line contents *before* cursor)
 (defun backward-kill-line ()
   (interactive)
