@@ -55,12 +55,15 @@ directory to make multiple eshell windows easier."
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
 ;;(x11-maximize-frame)
 
-(defun insert-double-quotes ()
+(defun insert-double-quotes (&optional arg)
   "Inserts double quotes and places the cursor between them"
-  (interactive)
-  (insert "\"")
-  (save-excursion
-    (insert "\"")))
+  (interactive "P")
+  (insert-pair arg ?\" ?\"))
+ 
+  ;; (insert "\"")
+  ;; (save-excursion
+  ;;   (insert "\"")))
+
 
 (defun previous-window ()
   (interactive)
@@ -74,6 +77,7 @@ This depends on major mode having setup syntax table properly."
     (message "%s" result)
     result))
 
+(fset 'original-backward-up-list (symbol-function 'backward-up-list))
 (defun backward-up-list ()
   (interactive)
   (cond
@@ -82,9 +86,8 @@ This depends on major mode having setup syntax table properly."
    ((equal (inside-string?) 39)
     (search-backward "'")))
   (original-backward-up-list))
-(fset 'original-backward-up-list (symbol-function 'backward-up-list))
 
-                                        ; variations on Steve Yegge recommendations
+;; variations on Steve Yegge recommendations
 (defun kill-current-word ()
   (interactive)
   ;;in case cursor was at the end of current word, prevent jumping to next word's end
@@ -333,14 +336,20 @@ This depends on major mode having setup syntax table properly."
 ;; show column numbers
 (column-number-mode)
 
-;; switch () and []
-(keyboard-translate ?\( ?\[) 
-(keyboard-translate ?\[ ?\() 
-(keyboard-translate ?\) ?\]) 
-(keyboard-translate ?\] ?\))
+(defun insert-square-brackets (&optional arg)
+  (interactive "P")
+  (insert-pair arg ?\[ ?\]))
+
+;; switch () and [] (now system-wide using Karabiner-Elements)
+;;(keyboard-translate ?\( ?\[) 
+;;(keyboard-translate ?\[ ?\() 
+;;(keyboard-translate ?\) ?\]) 
+;;(keyboard-translate ?\] ?\))
 ;; Also use Alt-[ as Alt-( and Alt-] as Alt-)
 (global-set-key (kbd "M-[") 'insert-parentheses)
 (global-set-key (kbd "M-]") 'move-past-close-and-reindent)
+(global-set-key (kbd "M-(") 'insert-square-brackets)
+(global-set-key (kbd "M-)") 'move-past-close-and-reindent)
 
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
@@ -357,6 +366,10 @@ This depends on major mode having setup syntax table properly."
 
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
+
+;; ctrl-tab / ctrl-shift-tab on Mac keyboard
+(global-set-key (kbd "<s-tab>") 'previous-window)
+(global-set-key (kbd "<S-s-tab>") 'other-window)
 
 ;;(global-set-key (kbd "M-n") 'new-frame)
 ;;(global-set-key (kbd "M-S-n") 'new-frame)
@@ -897,9 +910,10 @@ prompt to 'name>'."
   ;; wrap selection/tag in a new parent tag
   (local-set-key (kbd "C-c w") 'web-mode-element-wrap)
   (local-set-key (kbd "C-c C-p") 'preview-current-buffer-on-localhost)
-  (local-set-key (kbd "C-S-c") 'switch-to-chrome)
   (local-set-key (kbd "C-c c") 'sgml-clean-tag-after-cursor)
   (local-set-key (kbd "C-c k") 'sgml-kill-tag-contents-after-cursor))
+
+(global-set-key (kbd "C-S-c") 'inspect-element)
 
 (defun add-web-mode-js-bindings ()
   (local-set-key (kbd "C-c f") 'open-js-lambda-block))
@@ -1011,6 +1025,8 @@ prompt to 'name>'."
                       (ov . "overflow")
                       (o-x . "overflow-x")
                       (o-y . "overflow-y")
+                      (ov-x . "overflow-x")
+                      (ov-y . "overflow-y")
                       (p . "padding")
                       (p-t . "padding-top")
                       (p-r . "padding-right")
@@ -1250,9 +1266,20 @@ prompt to 'name>'."
   (interactive)
   (preview-file-on-localhost (current-buffer-filename)))
 
-(defun switch-to-chrome ()
+(defun switch-to-browser ()
   (interactive)
+  ;; we can ask the OS config too; see AppleScript Inspect script in iCloud
   (shell-command "open /Applications/Google\\ Chrome.app"))
+
+;; /icloud and ~/icloud are symlinks to /Users/luka/Library/Mobile Documents/
+;; /icloud/scripts is a symlink to "com~apple~ScriptEditor2/Documents" in the /icloud directory
+
+;; (do-applescript SCRIPT) only accepts applescript code, not a path to the file
+
+(defun inspect-element ()
+  (interactive)
+  ;; TODO we could detect a buffer with HTML template and do a C-c C-p before inspecting (custom html previewing fn)
+  (shell-command "osascript /icloud/scripts/inspect.scpt"))
 
 (setq project-configs
       '((lb . ((dir . "/projects/lb")
