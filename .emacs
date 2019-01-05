@@ -978,7 +978,7 @@ prompt to 'name>'."
                       (f-g . "flex-grow")
                       (fl . "float")
                       (f-f . "font-family")
-                      (f-s . "font-size")
+                      (f-s . "flex-shrink")
                       (fz . "font-size")
                       (f-st . "font-style")
                       (f-w . "flex-wrap")
