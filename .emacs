@@ -268,12 +268,42 @@ Deletes whitespace at join."
   (sgml-with-tag-contents-after-cursor
    (kill-region (region-beginning) (region-end))))
 
+
+
 ;;; settings
 
 ;; hide annoying GNU ad (I thereby classify it as such)
 (setq inhibit-startup-message t)
 ;; clear *scratch* default contents
 (setq initial-scratch-message nil)
+
+;; for ispell
+(setenv "DICTIONARY" "en_US")
+
+
+(global-set-key (kbd "s-SPC") 'hippie-expand)
+
+(global-set-key (kbd "M-#") 'query-replace)
+
+ (autoload 'zap-up-to-char "misc"
+   "Kill up to, but not including ARGth occurrence of CHAR." t)
+(defun zap-up-to-char-add-newline (arg char)
+  "Kill up to, but not including ARGth occurrence of CHAR.
+Case is ignored if `case-fold-search' is non-nil in the current buffer.
+Goes backward if ARG is negative; error if CHAR not found.
+Ignores CHAR at point, and also ignores."
+  (interactive "p\ncZap up to char, then add newline: ")
+  (zap-up-to-char arg char)
+  (newline-and-indent))
+(global-set-key (kbd "M-S-z") 'zap-up-to-char)
+(global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
+
+;; display project1/samename.js instead of samename.js<project1>
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+;; a better buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;;; colors
 ;;(set-background-color "#3f3f3f")
@@ -786,12 +816,12 @@ prompt to 'name>'."
   (web-mode)
   (html-mode))
 
-;; open .scss and .sass files in css-mode
+;; open .scss and .sass files in scss-mode
 (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode));css-mode or web-mode
-(add-to-list 'auto-mode-alist '("\\.sass\\'" . css-mode));css-mode or web-mode
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode));scss-mode or web-mode
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . html-mode));html-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
@@ -831,7 +861,7 @@ prompt to 'name>'."
 
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'scss-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 (defun set-emmet-mode-settings ()
   ;; turn auto indent off (t for turning on)
@@ -1222,17 +1252,17 @@ prompt to 'name>'."
     ;;add the semicolon or jump through if one's already after cursor
     (insert-semicolon-consider-existing append-space)))
 
-(add-hook 'css-mode-hook
+(add-hook 'scss-mode-hook
           (lambda ()
             (local-set-key (kbd ":") 'autocomplete-css-property)))
 
-(add-hook 'css-mode-hook
+(add-hook 'scss-mode-hook
           (lambda ()
             (local-set-key (kbd ";") (lambda ()
                                        (interactive)
                                        (autocomplete-css-value t)))))
 
-(add-hook 'css-mode-hook
+(add-hook 'scss-mode-hook
           (lambda ()
             (local-set-key (kbd "C-;") (lambda ()
                                          (interactive)
