@@ -620,7 +620,7 @@ Ignores CHAR at point, and also ignores."
   ;; super-n is well used on new-frame, so use super-meta-n
   ;(global-set-key [(super n)] 'windmove-down)
 
-  ;; excess keybindings; now using these for system-wide settings
+  ;; excess keybindings; now using these for system-wide switching
   ;; (global-set-key [(super meta b)] 'windmove-left)
   ;; (global-set-key [(super meta f)] 'windmove-right)
   ;; (global-set-key [(super meta p)] 'windmove-up)
