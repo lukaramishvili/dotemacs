@@ -280,7 +280,7 @@ Deletes whitespace at join."
 ;; for ispell
 (setenv "DICTIONARY" "en_US")
 
-
+;;; from better-defaults
 (global-set-key (kbd "s-SPC") 'hippie-expand)
 
 (global-set-key (kbd "M-#") 'query-replace)
@@ -304,6 +304,24 @@ Ignores CHAR at point, and also ignores."
 
 ;; a better buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(show-paren-mode 1)
+(setq-default indent-tabs-mode nil)
+(setq save-interprogram-paste-before-kill t
+      apropos-do-all t
+      ;;mouse-yank-at-point t
+      require-final-newline t
+      visible-bell t
+      load-prefer-newer t
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      save-place-file (concat user-emacs-directory "places")
+      backup-directory-alist `(("." . ,(concat user-emacs-directory
+                                               "backups"))))
+
+(add-to-list 'load-path "~/.emacs.d/guru-mode")
+(require 'guru-mode)
+(guru-global-mode +1)
+
 
 ;;; colors
 ;;(set-background-color "#3f3f3f")
@@ -602,15 +620,15 @@ Ignores CHAR at point, and also ignores."
   ;; super-n is well used on new-frame, so use super-meta-n
   ;(global-set-key [(super n)] 'windmove-down)
 
-  (global-set-key [(super meta b)] 'windmove-left)
-  (global-set-key [(super meta f)] 'windmove-right)
-  (global-set-key [(super meta p)] 'windmove-up)
-  (global-set-key [(super meta n)] 'windmove-down)
-
-  (global-set-key [(control super b)] 'windmove-left)
-  (global-set-key [(control super f)] 'windmove-right)
-  (global-set-key [(control super p)] 'windmove-up)
-  (global-set-key [(control super n)] 'windmove-down)
+  ;; excess keybindings; now using these for system-wide settings
+  ;; (global-set-key [(super meta b)] 'windmove-left)
+  ;; (global-set-key [(super meta f)] 'windmove-right)
+  ;; (global-set-key [(super meta p)] 'windmove-up)
+  ;; (global-set-key [(super meta n)] 'windmove-down)
+  ;; (global-set-key [(control super b)] 'windmove-left)
+  ;; (global-set-key [(control super f)] 'windmove-right)
+  ;; (global-set-key [(control super p)] 'windmove-up)
+  ;; (global-set-key [(control super n)] 'windmove-down)
   
   (progn
     (require 'shell)
@@ -630,15 +648,15 @@ Ignores CHAR at point, and also ignores."
     ;; super-n is well used on new-frame, so use super-meta-n
     ;(global-set-key [(super n)] 'windmove-down)
 
-    (global-set-key [(super meta b)] 'windmove-left)
-    (global-set-key [(super meta f)] 'windmove-right)
-    (global-set-key [(super meta p)] 'windmove-up)
-    (global-set-key [(super meta n)] 'windmove-down)
-
-    (define-key shell-mode-map [(control super b)] 'windmove-left)
-    (define-key shell-mode-map [(control super f)] 'windmove-right)
-    (define-key shell-mode-map [(control super p)] 'windmove-up)
-    (define-key shell-mode-map [(control super n)] 'windmove-down)))
+    ;; excess keybindings; now using these for system-wide switching
+    ;; (global-set-key [(super meta b)] 'windmove-left)
+    ;; (global-set-key [(super meta f)] 'windmove-right)
+    ;; (global-set-key [(super meta p)] 'windmove-up)
+    ;; (global-set-key [(super meta n)] 'windmove-down)
+    ;; (define-key shell-mode-map [(control super b)] 'windmove-left)
+    ;; (define-key shell-mode-map [(control super f)] 'windmove-right)
+    ;; (define-key shell-mode-map [(control super p)] 'windmove-up)
+    ;; (define-key shell-mode-map [(control super n)] 'windmove-down)))
 
 (set-windmove-keybindings)
 
@@ -682,8 +700,8 @@ Ignores CHAR at point, and also ignores."
 
 ;; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 ;; swap regexp search and normal search
-(global-set-key (kbd "<C-M-r>") 'isearch-backward)
-(global-set-key (kbd "<C-M-s>") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 
