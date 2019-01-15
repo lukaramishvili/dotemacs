@@ -268,12 +268,60 @@ Deletes whitespace at join."
   (sgml-with-tag-contents-after-cursor
    (kill-region (region-beginning) (region-end))))
 
+
+
 ;;; settings
 
 ;; hide annoying GNU ad (I thereby classify it as such)
 (setq inhibit-startup-message t)
 ;; clear *scratch* default contents
 (setq initial-scratch-message nil)
+
+;; for ispell
+(setenv "DICTIONARY" "en_US")
+
+;;; from better-defaults
+(global-set-key (kbd "s-SPC") 'hippie-expand)
+
+(global-set-key (kbd "M-#") 'query-replace)
+
+ (autoload 'zap-up-to-char "misc"
+   "Kill up to, but not including ARGth occurrence of CHAR." t)
+(defun zap-up-to-char-add-newline (arg char)
+  "Kill up to, but not including ARGth occurrence of CHAR.
+Case is ignored if `case-fold-search' is non-nil in the current buffer.
+Goes backward if ARG is negative; error if CHAR not found.
+Ignores CHAR at point, and also ignores."
+  (interactive "p\ncZap up to char, then add newline: ")
+  (zap-up-to-char arg char)
+  (newline-and-indent))
+(global-set-key (kbd "M-S-z") 'zap-up-to-char)
+(global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
+
+;; display project1/samename.js instead of samename.js<project1>
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+;; a better buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(show-paren-mode 1)
+(setq-default indent-tabs-mode nil)
+(setq save-interprogram-paste-before-kill t
+      apropos-do-all t
+      ;;mouse-yank-at-point t
+      require-final-newline t
+      visible-bell t
+      load-prefer-newer t
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      save-place-file (concat user-emacs-directory "places")
+      backup-directory-alist `(("." . ,(concat user-emacs-directory
+                                               "backups"))))
+
+(add-to-list 'load-path "~/.emacs.d/guru-mode")
+(require 'guru-mode)
+(guru-global-mode +1)
+
 
 ;;; colors
 ;;(set-background-color "#3f3f3f")
@@ -572,15 +620,15 @@ Deletes whitespace at join."
   ;; super-n is well used on new-frame, so use super-meta-n
   ;(global-set-key [(super n)] 'windmove-down)
 
-  (global-set-key [(super meta b)] 'windmove-left)
-  (global-set-key [(super meta f)] 'windmove-right)
-  (global-set-key [(super meta p)] 'windmove-up)
-  (global-set-key [(super meta n)] 'windmove-down)
-
-  (global-set-key [(control super b)] 'windmove-left)
-  (global-set-key [(control super f)] 'windmove-right)
-  (global-set-key [(control super p)] 'windmove-up)
-  (global-set-key [(control super n)] 'windmove-down)
+  ;; excess keybindings; now using these for system-wide switching
+  ;; (global-set-key [(super meta b)] 'windmove-left)
+  ;; (global-set-key [(super meta f)] 'windmove-right)
+  ;; (global-set-key [(super meta p)] 'windmove-up)
+  ;; (global-set-key [(super meta n)] 'windmove-down)
+  ;; (global-set-key [(control super b)] 'windmove-left)
+  ;; (global-set-key [(control super f)] 'windmove-right)
+  ;; (global-set-key [(control super p)] 'windmove-up)
+  ;; (global-set-key [(control super n)] 'windmove-down)
   
   (progn
     (require 'shell)
@@ -600,15 +648,15 @@ Deletes whitespace at join."
     ;; super-n is well used on new-frame, so use super-meta-n
     ;(global-set-key [(super n)] 'windmove-down)
 
-    (global-set-key [(super meta b)] 'windmove-left)
-    (global-set-key [(super meta f)] 'windmove-right)
-    (global-set-key [(super meta p)] 'windmove-up)
-    (global-set-key [(super meta n)] 'windmove-down)
-
-    (define-key shell-mode-map [(control super b)] 'windmove-left)
-    (define-key shell-mode-map [(control super f)] 'windmove-right)
-    (define-key shell-mode-map [(control super p)] 'windmove-up)
-    (define-key shell-mode-map [(control super n)] 'windmove-down)))
+    ;; excess keybindings; now using these for system-wide switching
+    ;; (global-set-key [(super meta b)] 'windmove-left)
+    ;; (global-set-key [(super meta f)] 'windmove-right)
+    ;; (global-set-key [(super meta p)] 'windmove-up)
+    ;; (global-set-key [(super meta n)] 'windmove-down)
+    ;; (define-key shell-mode-map [(control super b)] 'windmove-left)
+    ;; (define-key shell-mode-map [(control super f)] 'windmove-right)
+    ;; (define-key shell-mode-map [(control super p)] 'windmove-up)
+    ;; (define-key shell-mode-map [(control super n)] 'windmove-down)))
 
 (set-windmove-keybindings)
 
@@ -652,8 +700,8 @@ Deletes whitespace at join."
 
 ;; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 ;; swap regexp search and normal search
-(global-set-key (kbd "<C-M-r>") 'isearch-backward)
-(global-set-key (kbd "<C-M-s>") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
 
@@ -786,12 +834,12 @@ prompt to 'name>'."
   (web-mode)
   (html-mode))
 
-;; open .scss and .sass files in css-mode
+;; open .scss and .sass files in scss-mode
 (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
-(add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode));css-mode or web-mode
-(add-to-list 'auto-mode-alist '("\\.sass\\'" . css-mode));css-mode or web-mode
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode));scss-mode or web-mode
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . html-mode));html-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
@@ -831,7 +879,7 @@ prompt to 'name>'."
 
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'scss-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 (defun set-emmet-mode-settings ()
   ;; turn auto indent off (t for turning on)
@@ -1222,17 +1270,17 @@ prompt to 'name>'."
     ;;add the semicolon or jump through if one's already after cursor
     (insert-semicolon-consider-existing append-space)))
 
-(add-hook 'css-mode-hook
+(add-hook 'scss-mode-hook
           (lambda ()
             (local-set-key (kbd ":") 'autocomplete-css-property)))
 
-(add-hook 'css-mode-hook
+(add-hook 'scss-mode-hook
           (lambda ()
             (local-set-key (kbd ";") (lambda ()
                                        (interactive)
                                        (autocomplete-css-value t)))))
 
-(add-hook 'css-mode-hook
+(add-hook 'scss-mode-hook
           (lambda ()
             (local-set-key (kbd "C-;") (lambda ()
                                          (interactive)
