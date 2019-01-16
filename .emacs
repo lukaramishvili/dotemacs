@@ -618,7 +618,7 @@ Ignores CHAR at point, and also ignores."
   (global-set-key [(super f)] 'windmove-right)
   (global-set-key [(super p)] 'windmove-up)
   ;; super-n is well used on new-frame, so use super-meta-n
-  ;(global-set-key [(super n)] 'windmove-down)
+                                        ;(global-set-key [(super n)] 'windmove-down)
 
   ;; excess keybindings; now using these for system-wide switching
   ;; (global-set-key [(super meta b)] 'windmove-left)
@@ -646,7 +646,7 @@ Ignores CHAR at point, and also ignores."
     (global-set-key [(super f)] 'windmove-right)
     (global-set-key [(super p)] 'windmove-up)
     ;; super-n is well used on new-frame, so use super-meta-n
-    ;(global-set-key [(super n)] 'windmove-down)
+                                        ;(global-set-key [(super n)] 'windmove-down)
 
     ;; excess keybindings; now using these for system-wide switching
     ;; (global-set-key [(super meta b)] 'windmove-left)
@@ -656,7 +656,9 @@ Ignores CHAR at point, and also ignores."
     ;; (define-key shell-mode-map [(control super b)] 'windmove-left)
     ;; (define-key shell-mode-map [(control super f)] 'windmove-right)
     ;; (define-key shell-mode-map [(control super p)] 'windmove-up)
-    ;; (define-key shell-mode-map [(control super n)] 'windmove-down)))
+    ;; (define-key shell-mode-map [(control super n)] 'windmove-down))
+    ;; don't leave a single paren
+    (progn)))
 
 (set-windmove-keybindings)
 
