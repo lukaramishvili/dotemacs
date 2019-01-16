@@ -136,7 +136,7 @@
     "BTTTouchBarVisible" : true,
     "BTTTouchBarUseMonoSpacedFont" : true
   },
-  "BTTPresetUUID" : "95EDA5B5-640D-4D98-9F14-1B1F0EAEAD9B",
+  "BTTPresetUUID" : "16BBA92F-E50D-4E72-B262-2AD1CC91F6CE",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.apple.finder",
@@ -280,6 +280,24 @@
               "BTTMergeIntoTouchBarGroups" : 0
             }
           ]
+        },
+        {
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "58,51",
+          "BTTAdditionalConfiguration" : "524320",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "0C149877-5205-4AF6-8DFB-B10EA3C10F32",
+          "BTTTriggerOnDown" : 1,
+          "BTTEnabled" : 1,
+          "BTTModifierMode" : 0,
+          "BTTAlternateModifierKeys" : 0,
+          "BTTShortcutKeyCode" : 4,
+          "BTTShortcutModifierKeys" : 524288,
+          "BTTOrder" : 13,
+          "BTTDisplayOrder" : 0,
+          "BTTMergeIntoTouchBarGroups" : 0
         },
         {
           "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -505,6 +523,24 @@
           "BTTShortcutKeyCode" : 3,
           "BTTShortcutModifierKeys" : 1048576,
           "BTTOrder" : 3,
+          "BTTDisplayOrder" : 0,
+          "BTTMergeIntoTouchBarGroups" : 0
+        },
+        {
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "58,51",
+          "BTTAdditionalConfiguration" : "524320",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "51B94851-AD33-4C60-A637-68F8374AF7CC",
+          "BTTTriggerOnDown" : 1,
+          "BTTEnabled" : 1,
+          "BTTModifierMode" : 0,
+          "BTTAlternateModifierKeys" : 0,
+          "BTTShortcutKeyCode" : 4,
+          "BTTShortcutModifierKeys" : 524288,
+          "BTTOrder" : 13,
           "BTTDisplayOrder" : 0,
           "BTTMergeIntoTouchBarGroups" : 0
         },
@@ -2455,6 +2491,24 @@
           "BTTShortcutKeyCode" : 3,
           "BTTShortcutModifierKeys" : 1048576,
           "BTTOrder" : 3,
+          "BTTDisplayOrder" : 0,
+          "BTTMergeIntoTouchBarGroups" : 0
+        },
+        {
+          "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTShortcutToSend" : "58,51",
+          "BTTAdditionalConfiguration" : "524320",
+          "BTTEnabled2" : 1,
+          "BTTUUID" : "AAC5BC80-0B75-428D-9358-2999C2AFF05C",
+          "BTTTriggerOnDown" : 1,
+          "BTTEnabled" : 1,
+          "BTTModifierMode" : 0,
+          "BTTAlternateModifierKeys" : 0,
+          "BTTShortcutKeyCode" : 4,
+          "BTTShortcutModifierKeys" : 524288,
+          "BTTOrder" : 13,
           "BTTDisplayOrder" : 0,
           "BTTMergeIntoTouchBarGroups" : 0
         }

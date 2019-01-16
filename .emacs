@@ -284,6 +284,7 @@ Deletes whitespace at join."
 (global-set-key (kbd "s-SPC") 'hippie-expand)
 
 (global-set-key (kbd "M-#") 'query-replace)
+(global-set-key (kbd "M-%") 'replace-string)
 
  (autoload 'zap-up-to-char "misc"
    "Kill up to, but not including ARGth occurrence of CHAR." t)
