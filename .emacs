@@ -146,6 +146,58 @@ Deletes whitespace at join."
   (if (whitespacep (following-char))
       (hungry-delete-forward 0)))
 
+(defun kill-whitespace-around-line ()
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-whitespace-around-cursor)
+  (just-one-space)
+  (move-end-of-line 1)
+  (kill-whitespace-around-cursor)
+  (just-one-space))
+
+(defun add-whitespace-around-line ()
+  (interactive)
+  (move-beginning-of-line 1)
+  (newline-and-indent)
+  (move-end-of-line 1)
+  (newline-and-indent))
+
+;; M-S-space: useful for just formatting a single-line block with no intention of adding code
+(defun add-whitespace-around-block (&optional add-extra-line-p)
+  (interactive)
+  ;; find enclosing paren or bracket and position cursor right after it
+  (backward-up-list)
+  (down-list)
+  ;; add line before block contents
+  (newline-and-indent)
+  ;; find ending paren (positioning the cursor after ending paren/bracket)
+  (backward-up-list)
+  (forward-list)
+  ;; position cursor right before the ending paren/bracket
+  (backward-char)
+  ;; add newline before ending paren or bracket
+  (newline-and-indent)
+  (when add-extra-line-p
+    ;; add an extra line on which the ending paren will rest, but leave the cursor on the empty line
+    (open-line 1)
+    ;; move to the next line, just before the ending paren/bracket
+    (forward-char)
+    ;; indent the ending paren line
+    (indent-for-tab-command)
+    ;; return to blank line before ending paren/bracket
+    (move-beginning-of-line 1)
+    (backward-char)
+    ;; indent that blank line
+    (indent-for-tab-command))
+  ;; if not adding anything to block contents (only formatting the block),then position the cursor after ending paren
+  (unless add-extra-line-p
+    (forward-char)))
+
+;; M-S-return: useful for expanding a single-line block when intending to append more code to the block content
+(defun add-whitespace-around-block-and-newline ()
+  (interactive)
+  (add-whitespace-around-block t))
+
 (defun comment-line ()
   (interactive)
   (move-beginning-of-line 1)
@@ -319,9 +371,10 @@ Ignores CHAR at point, and also ignores."
       backup-directory-alist `(("." . ,(concat user-emacs-directory
                                                "backups"))))
 
-(add-to-list 'load-path "~/.emacs.d/guru-mode")
-(require 'guru-mode)
-(guru-global-mode +1)
+;; disabled guru mode; doesn't play well with multiple input sources (need arrows with non-english layouts)
+;; (add-to-list 'load-path "~/.emacs.d/guru-mode")
+;; (require 'guru-mode)
+;; (guru-global-mode +1)
 
 
 ;;; colors
@@ -523,7 +576,13 @@ Ignores CHAR at point, and also ignores."
 
 (require 'hungry-delete)
 
-(global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)  
+(global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)
+
+(global-set-key (kbd "C-M-|") 'kill-whitespace-around-line)
+
+(global-set-key (kbd "C-M-S-SPC") 'add-whitespace-around-line)
+(global-set-key (kbd "M-S-SPC") 'add-whitespace-around-block)
+(global-set-key (kbd "<M-S-return>") 'add-whitespace-around-block-and-newline)
 
 (global-set-key (kbd "C-M-;") 'comment-line)
 
