@@ -1370,6 +1370,7 @@ prompt to 'name>'."
 (global-set-key (kbd "<escape> b") 'switch-to-buffer)
 (global-set-key (kbd "<escape> o") 'other-window)
 (global-set-key (kbd "<escape> y") 'yank-and-indent)
+(global-set-key (kbd "<escape> DEL") 'backward-kill-word)
 ;;;  bind ESC-g to triple ESC, otherwise doesn't behave like C-g
 (global-set-key (kbd "<escape> g") 'keyboard-escape-quit)
 (global-set-key (kbd "<escape> x") 'execute-extended-command)
