@@ -1355,6 +1355,8 @@ prompt to 'name>'."
 (global-set-key (kbd "<escape> k") 'kill-buffer)
 (global-set-key (kbd "<escape> n") 'new-frame)
 (global-set-key (kbd "<escape> 0") 'delete-frame)
+(global-set-key (kbd "<escape> q") 'ask-before-closing)
+(global-set-key (kbd "<escape> e") 'eval-last-sexp)
 (global-set-key (kbd "<escape> f") 'find-file)
 (global-set-key (kbd "<escape> w") 'write-file)
 ;;;  bind ESC-g to triple ESC, otherwise doesn't behave like C-g

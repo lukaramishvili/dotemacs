@@ -25,6 +25,7 @@ alias nowtime=now
 alias nowdate='date +"%d-%m-%Y"'
 
 alias dotemacs="cd ~/dotemacs"
+alias de=dotemacs
 
 #alias s="git status -s"
 #alias st="git status -s"
