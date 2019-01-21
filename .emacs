@@ -1354,7 +1354,8 @@ prompt to 'name>'."
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
 (global-set-key (kbd "<escape> k") 'kill-buffer)
 (global-set-key (kbd "<escape> n") 'new-frame)
-(global-set-key (kbd "<escape> 0") 'delete-frame)
+(global-set-key (kbd "<escape> 0") 'delete-window)
+(global-set-key (kbd "<escape> <escape> 0") 'delete-frame)
 (global-set-key (kbd "<escape> q") 'ask-before-closing)
 (global-set-key (kbd "<escape> e") 'eval-last-sexp)
 (global-set-key (kbd "<escape> f") 'find-file)
@@ -1364,6 +1365,7 @@ prompt to 'name>'."
 (global-set-key (kbd "<escape> g") 'keyboard-escape-quit)
 (global-set-key (kbd "<escape> x") 'execute-extended-command)
 (global-set-key (kbd "<escape> 1") 'shell-command)
+(global-set-key (kbd "<escape> /") 'undo)
 ;;; END ESC keybindings
 
 
