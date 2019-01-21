@@ -24,10 +24,11 @@ ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
 
 # from https://github.com/joaomoreno/dotfiles/blob/master/.bashrc
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-    *) return;;
-esac
+# DONT ENABLE THIS - STOPS WORKING FROM APPLESCRIPT ETC
+#case $- in
+#    *i*) ;;
+#    *) return;;
+#esac
 
 # don't put duplicate lines in the history.
 # there's also an option to not put lines starting with space, ignorespace and ignoreboth for ignoring both.
@@ -79,12 +80,7 @@ transfer() {
     fi;
     cat $tmpfile;
     rm -f $tmpfile;
-} 
-
-# separate file for aliases
-if [ -f ~/dotemacs/.bash_aliases ]; then
-    source ~/dotemacs/.bash_aliases
-fi
+}
 
 
 f(){
@@ -228,5 +224,11 @@ qd(){
         git push # also push to alternate remote
     fi
 }
+
+
+# separate file for aliases
+if [ -f ~/dotemacs/.bash_aliases ]; then
+    source ~/dotemacs/.bash_aliases
+fi
 
 
