@@ -1359,6 +1359,7 @@ prompt to 'name>'."
 (global-set-key (kbd "<escape> e") 'eval-last-sexp)
 (global-set-key (kbd "<escape> f") 'find-file)
 (global-set-key (kbd "<escape> w") 'write-file)
+(global-set-key (kbd "<escape> b") 'switch-to-buffer)
 ;;;  bind ESC-g to triple ESC, otherwise doesn't behave like C-g
 (global-set-key (kbd "<escape> g") 'keyboard-escape-quit)
 (global-set-key (kbd "<escape> x") 'execute-extended-command)
