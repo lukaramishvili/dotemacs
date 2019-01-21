@@ -1351,6 +1351,10 @@ prompt to 'name>'."
                                          (interactive)
                                          (autocomplete-css-value nil)))))
 
+;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
+(global-set-key (kbd "<escape> k") 'kill-buffer)
+;;; END ESC keybindings
+
 
 ;; end CSS autocomplete
 
