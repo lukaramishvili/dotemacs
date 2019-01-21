@@ -471,8 +471,11 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "<s-tab>") 'previous-window)
 (global-set-key (kbd "<S-s-tab>") 'other-window)
 
-;;(global-set-key (kbd "M-n") 'new-frame)
+(global-set-key (kbd "M-n") 'new-frame)
+;; in web/html-mode, M-n/M-p navigates between tags, so add another binding
+(global-set-key (kbd "M-s-n") 'new-frame)
 ;;(global-set-key (kbd "M-S-n") 'new-frame)
+(global-set-key (kbd "<s-backspace>") 'delete-window)
 
 (global-set-key (kbd "<C-S-backspace>") 'backward-kill-line)
 (global-set-key (kbd "C-M-h") 'backward-kill-sexp)
@@ -677,8 +680,8 @@ Ignores CHAR at point, and also ignores."
   (global-set-key [(super b)] 'windmove-left)
   (global-set-key [(super f)] 'windmove-right)
   (global-set-key [(super p)] 'windmove-up)
-  ;; super-n is well used on new-frame, so use super-meta-n
-                                        ;(global-set-key [(super n)] 'windmove-down)
+  ;; super-n was well used on new-frame; now using M-n instead
+  (global-set-key [(super n)] 'windmove-down)
 
   ;; excess keybindings; now using these for system-wide switching
   ;; (global-set-key [(super meta b)] 'windmove-left)
