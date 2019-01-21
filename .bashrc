@@ -108,6 +108,13 @@ vcs-log(){
         git log
     fi
 }
+vcs-diff(){
+    if [ -d ./.hg ]; then
+        hg diff
+    else
+        git diff
+    fi
+}
 vcs-pull(){
     if [ -d ./.hg ]; then
         hg pull && hg update
