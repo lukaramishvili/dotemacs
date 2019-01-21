@@ -1353,6 +1353,7 @@ prompt to 'name>'."
 
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
 (global-set-key (kbd "<escape> k") 'kill-buffer)
+(global-set-key (kbd "<escape> f") 'find-file)
 ;;; END ESC keybindings
 
 
