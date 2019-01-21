@@ -676,6 +676,11 @@ Ignores CHAR at point, and also ignores."
   (global-set-key (kbd "<C-right>") 'windmove-right)
   (global-set-key (kbd "<C-up>") 'windmove-up)
   (global-set-key (kbd "<C-down>") 'windmove-down)
+  
+  (global-set-key (kbd "<escape> <left>") 'windmove-left)
+  (global-set-key (kbd "<escape> <right>") 'windmove-right)
+  (global-set-key (kbd "<escape> <up>") 'windmove-up)
+  (global-set-key (kbd "<escape> <down>") 'windmove-down)
 
   (global-set-key [(super b)] 'windmove-left)
   (global-set-key [(super f)] 'windmove-right)
@@ -1352,6 +1357,7 @@ prompt to 'name>'."
                                          (autocomplete-css-value nil)))))
 
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
+;;; also esc-arrows for navigating between split windows is located in #'set-windmove-keybindings
 (global-set-key (kbd "<escape> k") 'kill-buffer)
 (global-set-key (kbd "<escape> n") 'new-frame)
 (global-set-key (kbd "<escape> 0") 'delete-window)
@@ -1360,11 +1366,16 @@ prompt to 'name>'."
 (global-set-key (kbd "<escape> e") 'eval-last-sexp)
 (global-set-key (kbd "<escape> f") 'find-file)
 (global-set-key (kbd "<escape> w") 'write-file)
+(global-set-key (kbd "<escape> s") 'save-buffer)
 (global-set-key (kbd "<escape> b") 'switch-to-buffer)
+(global-set-key (kbd "<escape> o") 'other-window)
+(global-set-key (kbd "<escape> y") 'yank-and-indent)
 ;;;  bind ESC-g to triple ESC, otherwise doesn't behave like C-g
 (global-set-key (kbd "<escape> g") 'keyboard-escape-quit)
 (global-set-key (kbd "<escape> x") 'execute-extended-command)
 (global-set-key (kbd "<escape> 1") 'shell-command)
+(global-set-key (kbd "<escape> 2") 'split-and-switch-window-below)
+(global-set-key (kbd "<escape> 3") 'split-and-switch-window-right)
 (global-set-key (kbd "<escape> /") 'undo)
 ;;; END ESC keybindings
 
