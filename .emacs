@@ -336,7 +336,8 @@ Deletes whitespace at join."
 (global-set-key (kbd "s-SPC") 'hippie-expand)
 
 (global-set-key (kbd "M-#") 'query-replace)
-(global-set-key (kbd "M-%") 'replace-string)
+(global-set-key (kbd "M-$") 'replace-string)
+(global-set-key (kbd "M-%") 'ispell-word)
 
  (autoload 'zap-up-to-char "misc"
    "Kill up to, but not including ARGth occurrence of CHAR." t)
@@ -467,6 +468,13 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
 
+(defun new-temp-buffer ()
+  (interactive)
+  (switch-to-buffer (format "tmp-%s" (random 100))))
+
+;; create a temporary buffer with a random name
+(global-set-key (kbd "C-x t") 'new-temp-buffer)
+
 ;; ctrl-tab / ctrl-shift-tab on Mac keyboard
 (global-set-key (kbd "<s-tab>") 'previous-window)
 (global-set-key (kbd "<S-s-tab>") 'other-window)
@@ -533,6 +541,7 @@ Ignores CHAR at point, and also ignores."
          magit
          web-mode
          emmet-mode
+         diredful
          ;;; optional packages
          php-mode
          slime))
@@ -565,6 +574,9 @@ Ignores CHAR at point, and also ignores."
 ;;show free keybindings on s-h s-k
 (require 'free-keys)
 (global-set-key (kbd "s-h s-k") 'free-keys)
+
+(require 'diredful)
+(diredful-mode 1)
 
 ;;(when (require 'helm-config)
 ;;  (global-set-key (kbd "s-x") 'helm-M-x)
@@ -747,11 +759,12 @@ Ignores CHAR at point, and also ignores."
   (interactive)
   (recentf-mode)
   (recentf-open-files))
-; on load, show recent file list
+;; only useful without project-mode; but when enabled, messes up project-mode.
+;; on load, show recent file list
+;;(add-hook 'window-setup-hook 'show-recent-file-list)
 (defun on-new-window ()
   (other-window 1)
   (show-recent-file-list))
-(add-hook 'window-setup-hook 'show-recent-file-list)
 ; when splitting a window ("tab"), show recent file list
 (defun split-and-switch-window-below ()
   (interactive)
@@ -1411,14 +1424,14 @@ prompt to 'name>'."
   ;; we can ask the OS config too; see AppleScript Inspect script in iCloud
   (shell-command "open /Applications/Google\\ Chrome.app"))
 
-;; /icloud and ~/icloud are symlinks to /Users/luka/Library/Mobile Documents/
-;; /icloud/scripts is a symlink to "com~apple~ScriptEditor2/Documents" in the /icloud directory
+;; /icloud and ~/icloud are symlinks to /Users/luka/Library/Mobile documents/
+;; /icloud/scripts is a symlink to "com~apple~scripteditor2/documents" in the /icloud directory
 
-;; (do-applescript SCRIPT) only accepts applescript code, not a path to the file
+;; (do-applescript script) only accepts applescript code, not a path to the file
 
 (defun inspect-element ()
   (interactive)
-  ;; TODO we could detect a buffer with HTML template and do a C-c C-p before inspecting (custom html previewing fn)
+  ;; todo we could detect a buffer with html template and do a c-c c-p before inspecting (custom html previewing fn)
   (shell-command "osascript /icloud/scripts/inspect.scpt"))
 
 (setq project-configs
@@ -1426,13 +1439,13 @@ prompt to 'name>'."
                (serve-cmd . "gulp serve")))
         (bk . ((dir . "/projects/bookulus")
                (serve-cmd . "npm run dev")))
-        (kt . ((dir . "/projects/kt/Layout")
+        (kt . ((dir . "/projects/kt/layout")
                (serve-cmd . "gulp serve")))
-        (asb . ((dir . "/projects/asb/Layout")
+        (asb . ((dir . "/projects/asb/layout")
                 (serve-cmd . "gulp serve")))
         (ici . ((dir . "/projects/ici")
                 (serve-cmd . "npm run dev && open http://ici.devv")))
-        (lw . ((dir . "/projects/lw/Layout")
+        (lw . ((dir . "/projects/lw/layout")
                (serve-cmd . "gulp webserver")))
         ;;(ald . ((dir . "/projects/ald")
         ;;        (serve-cmd . "gulp serve")))
@@ -1440,7 +1453,7 @@ prompt to 'name>'."
                 (serve-cmd . "gulp serve")))
         (bt . ((dir . "/projects/bt")
                (serve-cmd . "gulp serve")))
-        (cx . ((dir . "/projects/cx/Solution/HelixCore.WebApp")
+        (cx . ((dir . "/projects/cx/solution/helixcore.webapp")
                (serve-cmd . "gulp webserver")))
         (pn . ((dir . "/projects/pens")
                (serve-cmd . "open http://localhost:3000 && npm run dev")))))
@@ -1452,10 +1465,10 @@ prompt to 'name>'."
          (project-dir (cdr (assoc 'dir project-config)))
          (serve-cmd (cdr (assoc 'serve-cmd project-config)))
          (show-serve-window-p nil))
-    (if (get-buffer "*Open Recent*")
-        (kill-buffer "*Open Recent*"))
-    (if (get-buffer "*Messages*")
-        (kill-buffer "*Messages*"))
+    (if (get-buffer "*open recent*")
+        (kill-buffer "*open recent*"))
+    (if (get-buffer "*messages*")
+        (kill-buffer "*messages*"))
     ;; if project-mode has already been called and gulp/serve cmd is running, then stay in current buffer
     (unless (get-buffer serve-buffer-name)
       (switch-to-buffer "*scratch*"))
@@ -1474,7 +1487,7 @@ prompt to 'name>'."
         (rename-buffer serve-buffer-name)
         ;;(eshell/exec "source ~/.bashrc");doesn't work
         (eshell/exec serve-cmd)))
-    ;; this will open a bottom window (by default, *Open Recent*) focus on it
+    ;; this will open a bottom window (by default, *open recent*) focus on it
     (split-and-switch-window-below)
     (if show-serve-window-p
         (progn
@@ -1487,7 +1500,14 @@ prompt to 'name>'."
     ;; bring focus to the left window
     (windmove-left)
     ;; open find file dialog
-    (call-interactively 'find-file)))
+    ;;(call-interactively 'find-file)
+    ;; open scss directory in the left tab
+    (switch-to-buffer (find-file (concat project-dir "/scss")))
+    (windmove-right)
+    ;; open views directory in the right tab
+    (switch-to-buffer (find-file (concat project-dir "/views")))
+    (split-and-switch-window-below)
+    (delete-window)))
 
 ;; lb-mode
 (defun lb-mode ()
@@ -1538,3 +1558,4 @@ prompt to 'name>'."
 (defun pn-mode ()
   (interactive)
   (project-mode 'pn))
+
