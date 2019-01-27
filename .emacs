@@ -146,6 +146,12 @@ Deletes whitespace at join."
   (if (whitespacep (following-char))
       (hungry-delete-forward 0)))
 
+;; kills all whitespace around cursor and leaves only one space
+(defun just-one-whitespace ()
+  (interactive)
+  (kill-whitespace-around-cursor)
+  (insert " "))
+
 (defun kill-whitespace-around-line ()
   (interactive)
   (move-beginning-of-line 1)
@@ -592,6 +598,7 @@ Ignores CHAR at point, and also ignores."
 (require 'hungry-delete)
 
 (global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)
+(global-set-key (kbd "<C-M-SPC>") 'just-one-whitespace)
 
 (global-set-key (kbd "C-M-|") 'kill-whitespace-around-line)
 
