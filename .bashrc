@@ -67,6 +67,13 @@ export CLICOLOR=1
 # ln -s com~apple~ScriptEditor2/Documents scripts
 # ln -s com~apple~CloudDocs docs
 
+# for mercurial keyring extension from https://www.mercurial-scm.org/wiki/KeyringExtension
+# easy_install keyring
+# easy_install mercurial_keyring
+# put the following two lines (already did it in this directory) in .hgrc:
+# [extensions]
+# mercurial_keyring =
+
 transfer() {
     if [ $# -eq 0 ]; then
         echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
@@ -93,7 +100,7 @@ f(){
     ag -R --ignore node_modules "$*" .
 }
 
-#cannot name it either s or st
+#cannot name it either s or st, so named it vcs-status and aliased s and st
 vcs-status(){
     if [ -d ./.hg ]; then
         hg status
