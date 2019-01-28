@@ -262,49 +262,49 @@ Deletes whitespace at join."
   ;; transpose only works when cursor is at first element's beginning
   (sgml-skip-tag-backward 1)
   (web-mode-element-transpose))
-(defun sgml-delete-tag-backward ()
+(defun sgml-delete-tag-backward (arg)
   ;; delete the tag before cursor
-  (interactive)
+  (interactive "p")
   (let ((tag-start (point)))
-    (sgml-skip-tag-backward 1)
+    (sgml-skip-tag-backward arg)
     (kill-region tag-start (point))))
-(defun sgml-delete-tag-forward ()
+(defun sgml-delete-tag-forward (arg)
   ;; delete the tag before cursor
-  (interactive)
+  (interactive "p")
   (let ((tag-end (point)))
-    (sgml-skip-tag-forward 1)
+    (sgml-skip-tag-forward arg)
     (kill-region tag-end (point))))
-(defun sgml-select-tag-backward ()
+(defun sgml-select-tag-backward (arg)
   ;; select tag before cursor (includes any space between current cursor position and closing tag
-  (interactive)
+  (interactive "p")
   (set-mark-command nil)
-  (sgml-skip-tag-backward 1))
-(defun sgml-select-tag-forward ()
+  (sgml-skip-tag-backward arg))
+(defun sgml-select-tag-forward (arg)
   ;; select tag before cursor (includes any space between current cursor position and opening tag
-  (interactive)
+  (interactive "p")
   (set-mark-command nil)
-  (sgml-skip-tag-forward 1))
-(defun sgml-duplicate-previous-tag ()
+  (sgml-skip-tag-forward arg))
+(defun sgml-duplicate-previous-tag (arg)
   ;; insert the contents of the tag before cursor at the current cursor position
-  (interactive)
+  (interactive "p")
   ;; remember the current cursor position; we'll paste there
   (save-excursion
     ;; jump to the beginning of previous tag, select it, and copy
-    (sgml-skip-tag-backward 1)
+    (sgml-skip-tag-backward arg)
     (set-mark-command nil)
-    (sgml-skip-tag-forward 1)
+    (sgml-skip-tag-forward arg)
     (kill-ring-save (point) (mark)))
   (open-indented-line)
   (yank))
-(defun sgml-duplicate-next-tag ()
+(defun sgml-duplicate-next-tag (arg)
   ;; insert the contents of the tag after cursor at the current cursor position
-  (interactive)
+  (interactive "p")
   ;; remember the current cursor position; we'll paste there
   (save-excursion
     ;; jump to the beginning of previous tag, select it, and copy
-    (sgml-skip-tag-forward 1)
+    (sgml-skip-tag-forward arg)
     (set-mark-command nil)
-    (sgml-skip-tag-backward 1)
+    (sgml-skip-tag-backward arg)
     (kill-ring-save (point) (mark)))
   (open-indented-line)
   (yank))
