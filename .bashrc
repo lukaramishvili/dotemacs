@@ -82,6 +82,10 @@ transfer() {
     rm -f $tmpfile;
 }
 
+# a quick way to open websites, e.g. $ web youtube.com; to avoid typing $ open h t t p s : / / etc
+web(){
+    open "https://""$*"
+}
 
 f(){
     # -U doesn't work (supposed to skip .gitignore/ignore files)
