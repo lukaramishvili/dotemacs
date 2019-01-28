@@ -71,6 +71,7 @@ export CLICOLOR=1
 # easy_install keyring
 # easy_install mercurial_keyring
 # put the following two lines (already did it in this directory) in .hgrc:
+# I think it's also needed in PROJECT_DIR/.hg/hgrc
 # [extensions]
 # mercurial_keyring =
 
