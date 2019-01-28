@@ -1388,6 +1388,7 @@ prompt to 'name>'."
 (global-set-key (kbd "<escape> w") 'write-file)
 (global-set-key (kbd "<escape> s") 'save-buffer)
 (global-set-key (kbd "<escape> b") 'switch-to-buffer)
+(global-set-key (kbd "<escape> <escape> b") 'buffer-menu)
 (global-set-key (kbd "<escape> o") 'other-window)
 (global-set-key (kbd "<escape> y") 'yank-and-indent)
 (global-set-key (kbd "<escape> DEL") 'backward-kill-word)
