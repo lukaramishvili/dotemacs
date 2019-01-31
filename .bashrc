@@ -22,6 +22,17 @@ ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa 2>/dev/null
 ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
 
+# macOS VPN deletes VPN password in the Keychain when connecting.
+# even widely used solution of allowing configd access didn't work.
+# use echo -e "PASSWORD\c" > .vpn_pass to avoid adding newline to the password file.
+vpn-lb(){
+    vpn_pass="`cat ~/dotemacs/.vpn_pass`"
+    scutil --nc start "LB VPN"
+    sleep 1
+    osascript -e "tell application \"System Events\" to keystroke \"$vpn_pass\""
+    osascript -e "tell application \"System Events\" to keystroke return"
+}
+
 # from https://github.com/joaomoreno/dotfiles/blob/master/.bashrc
 # If not running interactively, don't do anything
 # DONT ENABLE THIS - STOPS WORKING FROM APPLESCRIPT ETC

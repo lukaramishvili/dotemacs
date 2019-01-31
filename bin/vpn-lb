@@ -1,0 +1,3 @@
+#!/bin/bash
+source ~/dotemacs/.bashrc
+vpn-lb
