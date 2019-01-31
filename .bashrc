@@ -122,28 +122,29 @@ f(){
 #cannot name it either s or st, so named it vcs-status and aliased s and st
 vcs-status(){
     if [ -d ./.hg ]; then
-        hg status
+        hg status 2>/dev/null
     else
         git status -s
     fi
 }
 vcs-log(){
     if [ -d ./.hg ]; then
-        hg log
+        hg log 2>/dev/null
     else
         git log
     fi
 }
 vcs-diff(){
     if [ -d ./.hg ]; then
-        hg diff
+        hg diff 2>/dev/null
     else
         git diff
     fi
 }
 vcs-pull(){
     if [ -d ./.hg ]; then
-        hg pull && hg update
+        hg pull 2>/dev/null
+        hg update 2>/dev/null
     else
         git pull
     fi
@@ -155,11 +156,11 @@ vcs-commit(){
     # for reference: $@ would wrap each word (separated by space) in separate quotes
     # ..e.g.: if using $@, qd foo bar => cam "foo" "bar"
     if [ -d ./.hg ]; then
-        hg add .
-        hg commit -m "$*"
+        hg add . 2>/dev/null
+        hg commit -m "$*" 2>/dev/null
     else
-        git add .
-        git commit -a -m "$*"
+        git add . 2>/dev/null
+        git commit -a -m "$*" 2>/dev/null
     fi
 }
 # quick commit (cam stands for git commit -a -m )
@@ -170,7 +171,7 @@ cam(){
 d(){
     if [ $(pwd) = "/Users/luka/dotemacs" ]
     then
-        hg push
+        hg push 2>/dev/null
     elif [ $(pwd) = "/projects/wom" ]
     then
         # wom deploy
