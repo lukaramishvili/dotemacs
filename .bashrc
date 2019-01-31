@@ -21,6 +21,10 @@ ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 
 ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa 2>/dev/null
 ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
+ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
+
+# quickly copying the ssh key to the server:
+# ssh-copy-id -i ~/Documents/lb/ssh/crmfrontend_id_rsa.pub Luka.Ramishvili@crmfrontend-dev.lb.ge
 
 # macOS VPN deletes VPN password in the Keychain when connecting.
 # even widely used solution of allowing configd access didn't work.
@@ -197,8 +201,11 @@ d(){
         rsync -avz /projects/calo/*.html root@luka.ge:/projects/calo/
     elif [ $(pwd) = "/projects/lb" ]
     then
-        git push
-        ssh root@luka.ge "cd /projects/lb && git pull"
+        git push tfs master
+        ssh Luka.Ramishvili@crmfrontend-dev.lb.ge "cd /projects/lb && git pull"
+        # git push
+        #git push
+        #ssh root@luka.ge "cd /projects/lb && git pull"
         #rsync -avz /projects/lb/dist/*.html root@luka.ge:/projects/lb/dist/
     elif [ $(pwd) = "/www/bookulus.ge" ] || [ $(pwd) = "/www/bookulus.ge/web" ]
     then
