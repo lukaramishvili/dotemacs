@@ -546,6 +546,7 @@ Ignores CHAR at point, and also ignores."
          editorconfig
          magit
          web-mode
+         scss-mode
          emmet-mode
          diredful
          ;;; optional packages
