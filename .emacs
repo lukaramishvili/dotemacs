@@ -418,7 +418,13 @@ Ignores CHAR at point, and also ignores."
 ;; enable sourcing .bashrc files in 'shell-command (M-!)
 ;; from https://stackoverflow.com/a/12229404/324220
 (setq shell-file-name "bash")
-(setq shell-command-switch "-ic")
+;; (setq shell-command-switch "-ic")
+;; after updating to Bash 5, had to disable -i interactive mode, which requires a terminal emulator not available in M-!
+;; if only the "-c" switch was used, that would disable auto-sourcing .bashrc.
+;; so we're using a login shell instead of an interactive shell by specifying "-lc" (this method requires adding "shopt -s expand_aliases" to .bash_profile)
+;; from https://emacs.stackexchange.com/a/5975/15260
+(setq shell-command-switch "-lc")
+
 ;; doesnt work to also enable it in eshell-mode
 ;; (add-hook 'eshell-mode-hook  (lambda () (eshell/exec "source ~/dotemacs/.bashrc")))
 
