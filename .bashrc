@@ -9,6 +9,12 @@
 #     source ~/dotemacs/.bashrc
 # fi
 
+# ensure an appropriate bash version is installed (for associative arrays, etc) -- from https://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/
+# brew install bash
+# Add the new shell to the list of allowed shells
+# sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+# Change to the new shell
+# chsh -s /usr/local/bin/bash 
 
 export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 #export PATH=/Applications/XAMPP/bin:$PATH
@@ -259,6 +265,50 @@ qd(){
     fi
 }
 
+dist-lb(){
+    DEFAULTWORKINGBRANCH=master
+    # since this command jumps between git commits, only proceed when there's no changes in the current directory
+    # $(s) is an alias to compact git status command vcs-status defined above
+    if [ $(s | wc -l) = "0" ]; then
+        # this is for generating multiple dist directories per project, each containing separate commits
+        # declare -A COMMITS_PER_PROJECT=( [master]=master [crm]=master [urms]=master [ufe]=master )
+        # for K in "${!COMMITS_PER_PROJECT[@]}"; do
+        #     echo $K --- ${COMMITS_PER_PROJECT[$K]}
+        # done
+        read -e -p "Enter the project name we're publishing (default crm): " -i "" PROJECTNAME
+        if [ "$PROJECTNAME" == "" ]; then
+            PROJECTNAME=crm
+        fi
+        read -e -p "Enter which commit to publish (defaults to latest commit to $DEFAULTWORKINGBRANCH): " -i "" COMMITNAME
+        if [ "$COMMITNAME" == "" ]; then
+            COMMITNAME=$DEFAULTWORKINGBRANCH # meaning checking out latest commit from the default working branch
+        fi
+        # go to specific branch we want to publish
+        git checkout "$COMMITNAME"
+        DESTDIR="/dist/lb"
+        DESTFILE="$DESTDIR/$PROJECTNAME.zip"
+        # remove last generated distribution archive
+        rm "$DESTFILE"
+        # archive the directory (-X removes annoying MACOSX/.DSStore files)
+        zip -r -X "$DESTFILE" dist
+        # open "$DESTDIR"
+        # open Finder with the generated file preselected
+        osascript -e "tell application \"Finder\"" -e activate -e "reveal POSIX file \"$DESTFILE\"" -e end tell
+        # restore the directory state to latest commit
+        git checkout "$DEFAULTWORKINGBRANCH"
+        echo "OK"
+    else
+        echo "Please commit your changes and try again."
+    fi
+}
+
+dist(){
+    if [ $(pwd) = "/projects/lb" ]; then
+        dist-lb
+    else
+        echo "Please cd to project root dir and try again."
+    fi
+}
 
 # separate file for aliases
 if [ -f ~/dotemacs/.bash_aliases ]; then
