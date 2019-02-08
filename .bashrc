@@ -266,6 +266,7 @@ qd(){
 }
 
 dist-lb(){
+    # a project here means specific internal project which uses a specific commit of this repo when releasing to prod
     DEFAULTWORKINGBRANCH=master
     # since this command jumps between git commits, only proceed when there's no changes in the current directory
     # $(s) is an alias to compact git status command vcs-status defined above
@@ -275,13 +276,27 @@ dist-lb(){
         # for K in "${!COMMITS_PER_PROJECT[@]}"; do
         #     echo $K --- ${COMMITS_PER_PROJECT[$K]}
         # done
-        read -e -p "Enter the project name we're publishing (default crm): " -i "" PROJECTNAME
+        # try reading from command-line arguments (e.g. `dist-lb crm master`)
+        PROJECTNAME=$1
+        COMMITNAME=$2
+        # if no project name was passed, then ask the user
         if [ "$PROJECTNAME" == "" ]; then
+            read -e -p "Enter the project name we're publishing (default crm): " -i "" PROJECTNAME
+        fi
+        # if, when asked, the user didn't specify the project name
+        if [ "$PROJECTNAME" == "" ]; then
+            # PROJECTNAME=${1:crm}
             PROJECTNAME=crm
         fi
-        read -e -p "Enter which commit to publish (defaults to latest commit to $DEFAULTWORKINGBRANCH): " -i "" COMMITNAME
+        # if no commit name (hash) was passed, then ask the user
         if [ "$COMMITNAME" == "" ]; then
-            COMMITNAME=$DEFAULTWORKINGBRANCH # meaning checking out latest commit from the default working branch
+            read -e -p "Enter which commit to publish (defaults to latest commit to $DEFAULTWORKINGBRANCH): " -i "" COMMITNAME
+        fi
+        # if, when asked, the user didn't specify the commit
+        if [ "$COMMITNAME" == "" ]; then
+            # meaning checking out latest commit from the default working branch
+            # COMMITNAME=${2:$DEFAULTWORKINGBRANCH}
+            COMMITNAME=$DEFAULTWORKINGBRANCH
         fi
         # go to specific branch we want to publish
         git checkout "$COMMITNAME"
@@ -290,7 +305,10 @@ dist-lb(){
         # remove last generated distribution archive
         rm "$DESTFILE"
         # archive the directory (-X removes annoying MACOSX/.DSStore files)
-        zip -r -X "$DESTFILE" dist
+        # NB: if we simply used zip ... dist/* without cd'ing, the zip folder would include the parent dist folder
+        cd dist
+        zip -r -X "$DESTFILE" ./*
+        cd ..
         # open "$DESTDIR"
         # open Finder with the generated file preselected
         osascript -e "tell application \"Finder\"" -e activate -e "reveal POSIX file \"$DESTFILE\"" -e end tell
@@ -304,7 +322,7 @@ dist-lb(){
 
 dist(){
     if [ $(pwd) = "/projects/lb" ]; then
-        dist-lb
+        dist-lb $1 $2 # e.g. dist crm master, or dist crm COMMITHASH
     else
         echo "Please cd to project root dir and try again."
     fi
