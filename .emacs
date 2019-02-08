@@ -365,6 +365,8 @@ Ignores CHAR at point, and also ignores."
 ;; a better buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(global-set-key (kbd "C-x C-g") 'goto-line)
+
 (show-paren-mode 1)
 (setq-default indent-tabs-mode nil)
 (setq save-interprogram-paste-before-kill t
