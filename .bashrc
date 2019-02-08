@@ -1,4 +1,6 @@
 
+shopt -s expand_aliases
+
 # ~/.bash_profile
 # if [ -f ~/.bashrc ]; then
 #     . ~/.bashrc
