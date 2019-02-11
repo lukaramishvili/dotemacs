@@ -1047,6 +1047,7 @@ prompt to 'name>'."
   ;; wrap selection/tag in a new parent tag
   (local-set-key (kbd "C-c w") 'web-mode-element-wrap)
   (local-set-key (kbd "C-c C-p") 'preview-current-buffer-on-localhost)
+  (local-set-key (kbd "C-c C-S-p") 'preview-current-buffer-on-crmfrontend)
   (local-set-key (kbd "C-c c") 'sgml-clean-tag-after-cursor)
   (local-set-key (kbd "C-c k") 'sgml-kill-tag-contents-after-cursor))
 
@@ -1421,12 +1422,19 @@ prompt to 'name>'."
 (defun preview-file-on-localhost (file)
   (shell-command (concat "open http://localhost:3000/" file)))
 
+(defun preview-file-on-crmfrontend (file)
+  (shell-command (concat "open http://crmfrontend-dev.lb.ge/" file)))
+
 (defun current-buffer-filename ()
   (file-name-nondirectory (buffer-file-name)))
 
 (defun preview-current-buffer-on-localhost ()
   (interactive)
   (preview-file-on-localhost (current-buffer-filename)))
+
+(defun preview-current-buffer-on-crmfrontend ()
+  (interactive)
+  (preview-file-on-crmfrontend (current-buffer-filename)))
 
 (defun switch-to-browser ()
   (interactive)
