@@ -1,0 +1,17 @@
+
+Modifying Microsoft products is done in the spirit of "Use emacs keybindings, use CTRL instead of CMD for common tasks (Save ^-s, Save as ^-s-s, Find C-s plus ^-f, etc)"
+
+Open "Tools > Customize Keyboard..."
+Find EditSelectAll and replace with Command+Shift+A
+Find InsertAnnotation and remove Command+Option+A keybinding
+Find "FilePrint". remove Command+P/Control+P. producing one printed page needs countless C-p's.
+Find "FileSave", remove Command+S, leave Control+S.
+Replace Command+F in "EditFind" with Command+S.
+In "EditFindPrevious", replace Command+Shift+G with Command+R.
+Replace Command+G with Command+Shift+S in "RepeatFind".
+In "FileSaveAs", replace Command+Shift+S with Control+Shift+S.
+
+
+To copy the resulting "config" file (document template):
+
+$ cp /Users/luka/Library/Group\ Containers/*.Office/User\ Content.localized/Templates.localized/Normal.dotm /Users/luka/dotemacs/bettertouchtool/

@@ -559,7 +559,10 @@ Ignores CHAR at point, and also ignores."
          diredful
          ;;; optional packages
          php-mode
-         slime))
+         slime
+         sclang-extensions
+         ;;; w3m needed for SuperCollider help system
+         w3m))
 ;; fetch the list of packages available 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -690,6 +693,17 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "C-M-{") (lambda () (interactive) (open-brackets-block-inline)))
 (global-set-key (kbd "C-}") (lambda () (interactive) (close-brackets-block t)))
 (global-set-key (kbd "C-M-}") (lambda () (interactive) (close-brackets-block nil)))
+
+;; first, git clone https://github.com/supercollider/scel
+(add-to-list 'load-path "~/dotemacs/scel/el/")
+;; don't forget to `mv scel/el/sclang-vars.el.in scel/el/sclang-vars.el`
+(setf sclang-runtime-directory "/Applications/SuperCollider.app/Contents/Resources")
+(require 'sclang)
+;; w3m is loaded in the custom auto-loader above (see 'needed-packages)
+(require 'w3m)
+;; requires 'sclang-extensions auto-loaded above
+;; IMPORTANT: place SuperCollider.app in /Applications/SuperCollider like this: /Applications/SuperCollider/SuperCollider.app
+(add-hook 'sclang-mode-hook 'sclang-extensions-mode)
 
 (add-hook 'js-mode-hook
 	  (lambda ()
