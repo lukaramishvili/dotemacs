@@ -16,7 +16,10 @@ shopt -s expand_aliases
 # Add the new shell to the list of allowed shells
 # sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
 # Change to the new shell
-# chsh -s /usr/local/bin/bash 
+# chsh -s /usr/local/bin/bash
+
+# for gitdiff
+# brew install diff-so-fancy
 
 export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 #export PATH=/Applications/XAMPP/bin:$PATH
@@ -328,6 +331,12 @@ dist(){
     else
         echo "Please cd to project root dir and try again."
     fi
+}
+
+safari-history(){
+    sqlite3 ~/Library/Safari/History.db 'select visit_time,title from history_visits order by visit_time desc;' \
+        | while read i; do d="${i%%.*}"; echo "$(date -r $((d+978307200))) | ${i#*|}"; done \
+        | head -n 50 | less
 }
 
 # separate file for aliases
