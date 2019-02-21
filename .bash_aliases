@@ -1,4 +1,5 @@
 
+alias ~="cd ~"
 alias ..="cd .."
 ## get rid of command not found ##
 alias cd..='cd ..'
