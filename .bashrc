@@ -21,6 +21,9 @@ shopt -s expand_aliases
 # for gitdiff
 # brew install diff-so-fancy
 
+# don't forget to apply Karabiner-Elements configuration (to be usable before login) - Karabiner Preferences > Misc Tab > System Default Configuration > * Copy the current configuration...
+# in the same tab, disable Show icon in menu bar
+
 export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 #export PATH=/Applications/XAMPP/bin:$PATH
 
@@ -338,6 +341,34 @@ safari-history(){
         | while read i; do d="${i%%.*}"; echo "$(date -r $((d+978307200))) | ${i#*|}"; done \
         | head -n 50 | less
 }
+
+
+# disable auto-updates and auto-started services, even though they are disabled from their respective preferences.
+
+# echo "" > /Users/luka/Library/LaunchAgents/com.valvesoftware.steamclean.plist
+# echo "" > /Users/luka/Library/LaunchAgents/com.google.keystone.agent.plist
+# echo "" > /Users/luka/Library/LaunchAgents/com.adobe.GC.Invoker-1.0.plist
+# echo "" > /Library/LaunchAgents/com.adobe.AdobeCreativeCloud.plist
+# echo "" > /Library/LaunchAgents/com.adobe.GC.AGM.plist
+# echo "" > /Library/LaunchAgents/com.adobe.GC.Invoker-1.0.plist
+# echo "" > /Library/LaunchAgents/com.microsoft.update.agent.plist
+# echo "" > /Library/LaunchDaemons/com.adobe.acc.installer.v2.plist
+# echo "" > /Library/LaunchDaemons/com.adobe.agsservice.plist
+# echo "" > /Library/LaunchDaemons/com.microsoft.autoupdate.helper.plist
+# chmod ugo-rwx /Users/luka/Library/LaunchAgents/com.valvesoftware.steamclean.plist
+# chmod ugo-rwx /Users/luka/Library/LaunchAgents/com.google.keystone.agent.plist
+# chmod ugo-rwx /Users/luka/Library/LaunchAgents/com.adobe.GC.Invoker-1.0.plist
+# chmod ugo-rwx /Library/LaunchAgents/com.adobe.AdobeCreativeCloud.plist
+# chmod ugo-rwx /Library/LaunchAgents/com.adobe.GC.AGM.plist
+# chmod ugo-rwx /Library/LaunchAgents/com.adobe.GC.Invoker-1.0.plist
+# chmod ugo-rwx /Library/LaunchAgents/com.microsoft.update.agent.plist
+# chmod ugo-rwx /Library/LaunchDaemons/com.adobe.acc.installer.v2.plist 
+# chmod ugo-rwx /Library/LaunchDaemons/com.adobe.agsservice.plist
+# chmod ugo-rwx /Library/LaunchDaemons/com.microsoft.autoupdate.helper.plist
+
+
+
+
 
 # separate file for aliases
 if [ -f ~/dotemacs/.bash_aliases ]; then
