@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# CURRENT=$(defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources | egrep -w 'KeyboardLayout Name' | sed -E 's/^.+ = \"?([^\"]+)\"?;$/\1/')
+# the above returns U.S. and Georgian-QWERTY
+CURRENT=$(~/dotemacs/xkbswitch-macosx/bin/xkbswitch -ge)
+
+if [ "$CURRENT" == "Georgian-QWERTY" ]; then
+    ~/dotemacs/xkbswitch-macosx/bin/xkbswitch -se US
+    echo "en"
+else
+    ~/dotemacs/xkbswitch-macosx/bin/xkbswitch -se "Georgian-QWERTY"
+    echo "ge"
+fi

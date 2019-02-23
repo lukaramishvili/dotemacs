@@ -21,6 +21,10 @@ shopt -s expand_aliases
 # for gitdiff
 # brew install diff-so-fancy
 
+# for touchbar/command-line keyboard switcher:
+# git clone https://github.com/myshov/xkbswitch-macosx
+# ln -s /Users/luka/dotemacs/xkbswitch-macosx/bin/xkbswitch /usr/local/bin
+
 # don't forget to apply Karabiner-Elements configuration (to be usable before login) - Karabiner Preferences > Misc Tab > System Default Configuration > * Copy the current configuration...
 # in the same tab, disable Show icon in menu bar
 
