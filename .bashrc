@@ -11,6 +11,17 @@ shopt -s expand_aliases
 #     source ~/dotemacs/.bashrc
 # fi
 
+# Replace utils with GNU versions (more features for e.g. ls, etc)
+# https://stackoverflow.com/a/25455055
+# brew install coreutils
+# utils are prefixed with g*, e.g. sort => gsort
+# Commands also provided by macOS have been installed with the prefix "g".
+# If you need to use these commands with their normal names, you
+# can add a "gnubin" directory to your PATH from your bashrc like:
+# PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
 # ensure an appropriate bash version is installed (for associative arrays, etc) -- from https://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/
 # brew install bash
 # Add the new shell to the list of allowed shells
