@@ -59,7 +59,31 @@ alias wget='wget -c'
 alias open-ports='lsof -Pn -i4 -i6 | grep LISTEN'
 alias ports=open-ports
 
+# https://stackoverflow.com/a/41794118
+# some features (e.g. --block-size) requires GNU coreutils (see .bashrc)
 alias ll="ls -alF"
+# see file sizes in kb/mb
+alias lk="ls -laFS --block-size=K"
+alias lkr="ls -laFSr --block-size=K"
+#alias lm="ls -laFS --block-size=M"
+#alias lmr="ls -laFSr --block-size=M"
+# show and sort by file sizes (biggest at the top)
+alias lz="ls -lhaFS"
+# show and sort by file sizes (biggest at the bottom)
+alias lzr="ls -lhaFSr"
+# show sizes and sort by modified date (more recently modified files first)
+alias lm="ls -hlFt"
+# same (by modified date) but more recently modified at the bottom
+alias lmr="ls -hlFtr"
+# show sizes and sort by accessed date (more recently opened files first)
+alias la="ls -hlFtu"
+# same (by access date) but more recently opened at the bottom
+alias lar="ls -hlFtur"
+# I don't really appreaciate the default ls layout. I prefer more info and tabular, easily manipulated list format.
+# -h is for human readable output, which doesn't round file sizes like --block-size does.
+alias lscustom="ls -lhaF"
+# separated alias to easily switch between default ls modes
+alias ls="lscustom"
 
 #both emacs / emacs -nw causes inserting garbled text in the first open buffer
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
