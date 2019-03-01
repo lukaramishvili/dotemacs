@@ -482,6 +482,16 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
 
+;; BetterTouchTool's "C-f => <right arrow>" lingers when switching to Emacs.
+;; It's too slow to turn off the other app's keybindings and turns C-f into right arrow. This happens for <=1s max.
+;; Luckily, Emacs is an editor and I would be very careful to perform any operation in an editor immediately after switching to it.
+;; Except C-x C-f, which is a non-mutating operation (opening files never hurt nobody), and which, turns out, I use immediately after switching to Emacs, 10 times a minute.
+;; So make an exception for C-x <right> and hope that I don't need any more
+;; * destructive keybindings
+;; * which are bound by BTT and are as essential as C-f
+;; * which I'll need _immediately_ after switching to Emacs.
+(global-set-key (kbd "C-x <right>") 'find-file)
+
 (defun new-temp-buffer ()
   (interactive)
   (switch-to-buffer (format "tmp-%s" (random 100))))
