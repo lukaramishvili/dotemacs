@@ -1220,6 +1220,7 @@ prompt to 'name>'."
                       (w-s . "white-space")
                       (w . "width")
                       (w-b . "word-break")
+                      (w-w . "word-wrap")
                       (v . "visibility")
                       (vi . "visibility")
                       (v-a . "vertical-align")
@@ -1511,7 +1512,11 @@ prompt to 'name>'."
         (cx . ((dir . "/projects/cx/solution/helixcore.webapp")
                (serve-cmd . "gulp webserver")))
         (pn . ((dir . "/projects/pens")
-               (serve-cmd . "open http://localhost:3000 && npm run dev")))))
+               (serve-cmd . "open http://localhost:3000 && npm run dev")))
+        (meo . ((dir . "/projects/meomari")
+                (serve-cmd . "npm start")
+                (left-window-file . "/src/index.js")
+                (right-window-file . "/src/assets")))))
 
 ;; project-mode
 (defun project-mode (project-name)
@@ -1519,6 +1524,8 @@ prompt to 'name>'."
          (project-config (cdr (assoc project-name project-configs)))
          (project-dir (cdr (assoc 'dir project-config)))
          (serve-cmd (cdr (assoc 'serve-cmd project-config)))
+         (left-window-file (or (cdr (assoc 'left-window-file project-config)) "/scss"))
+         (right-window-file (or (cdr (assoc 'right-window-file project-config)) "/views"))
          (show-serve-window-p nil))
     (if (get-buffer "*open recent*")
         (kill-buffer "*open recent*"))
@@ -1557,60 +1564,54 @@ prompt to 'name>'."
     ;; open find file dialog
     ;;(call-interactively 'find-file)
     ;; open scss directory in the left tab
-    (switch-to-buffer (find-file (concat project-dir "/scss")))
+    (switch-to-buffer (find-file (concat project-dir left-window-file)))
     (windmove-right)
     ;; open views directory in the right tab
-    (switch-to-buffer (find-file (concat project-dir "/views")))
+    (switch-to-buffer (find-file (concat project-dir right-window-file)))
     (split-and-switch-window-below)
     (delete-window)))
 
-;; lb-mode
 (defun lb-mode ()
   (interactive)
   (project-mode 'lb))
 
-;; bk-mode
 (defun bk-mode ()
   (interactive)
   (project-mode 'bk))
 
-;; kt-mode
 (defun kt-mode ()
   (interactive)
   (project-mode 'kt))
 
-;; asb-mode
 (defun asb-mode ()
   (interactive)
   (project-mode 'asb))
 
-;; lw-mode
 (defun lw-mode ()
   (interactive)
   (project-mode 'lw))
 
-;; ici-mode
 (defun ici-mode ()
   (interactive)
   (project-mode 'ici))
 
-;; ald-mode
 (defun ald-mode ()
   (interactive)
   (project-mode 'ald))
 
-;; bt-mode
 (defun bt-mode ()
   (interactive)
   (project-mode 'bt))
 
-;; cx-mode
 (defun cx-mode ()
   (interactive)
   (project-mode 'cx))
 
-;; pn-mode
 (defun pn-mode ()
   (interactive)
   (project-mode 'pn))
+
+(defun meo-mode ()
+  (interactive)
+  (project-mode 'meo))
 
