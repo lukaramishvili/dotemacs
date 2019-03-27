@@ -61,7 +61,7 @@ ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
 vpn-lb(){
     vpn_pass="`cat ~/dotemacs/.vpn_pass`"
     scutil --nc start "LB VPN"
-    sleep 1
+    sleep 1.5
     osascript -e "tell application \"System Events\" to keystroke \"$vpn_pass\""
     osascript -e "tell application \"System Events\" to keystroke return"
 }

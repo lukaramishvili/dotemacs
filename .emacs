@@ -343,7 +343,8 @@ Deletes whitespace at join."
 
 (global-set-key (kbd "M-#") 'query-replace)
 (global-set-key (kbd "M-$") 'replace-string)
-(global-set-key (kbd "M-%") 'ispell-word)
+;; (global-set-key (kbd "M-%") 'ispell-word)
+(global-set-key (kbd "M-%") 'replace-regexp)
 
  (autoload 'zap-up-to-char "misc"
    "Kill up to, but not including ARGth occurrence of CHAR." t)
@@ -913,10 +914,21 @@ prompt to 'name>'."
 
 
 
-(global-set-key (kbd "C-c g") 'magit-status)
-(global-set-key [(super g)] 'magit-status)
-(global-set-key (kbd "C-c M-g") 'magit-dispatch-popup)
-(add-hook 'after-save-hook 'magit-after-save-refresh-status)
+
+;; (global-set-key (kbd "C-c g") 'magit-status)
+;; (global-set-key [(super g)] 'magit-status)
+;; (global-set-key (kbd "C-c M-g") 'magit-dispatch-popup)
+;; (add-hook 'after-save-hook 'magit-after-save-refresh-status)
+
+(defun diff-and-format-working-directory ()
+  (interactive)
+  ;; this will open a window with the buffer containing diff output
+  (shell-command "vcs-diff")
+  ;; switch to that buffer
+  (select-window (get-buffer-window "*Shell Command Output*"))
+  (diff-mode))
+
+(global-set-key (kbd "C-x g") 'diff-and-format-working-directory)
 
 
 ;causes massive inconveniences
@@ -1354,7 +1366,7 @@ prompt to 'name>'."
                       (rel0 . "@include rel(0)")
                       (fix . "@include fixed(0)")
                       (fixed . "@include fixed(0)")
-                      (caps . "@extend .caps")
+                      (caps . "@include .caps")
                       (fw . "font-weight: bold")
                       (pse-ci . "@include pseudo-circle()")
                       (ps-li . "@include pseudo-line(after, $color: )")
@@ -1417,12 +1429,16 @@ prompt to 'name>'."
                                          (interactive)
                                          (autocomplete-css-value nil)))))
 
+;; end CSS autocomplete
+
+
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
 ;;; also esc-arrows for navigating between split windows is located in #'set-windmove-keybindings
 (global-set-key (kbd "<escape> k") 'kill-buffer)
 (global-set-key (kbd "<escape> n") 'new-frame)
 (global-set-key (kbd "<escape> 0") 'delete-window)
 (global-set-key (kbd "<escape> <escape> 0") 'delete-frame)
+(global-set-key (kbd "<escape> 5") 'delete-frame)
 (global-set-key (kbd "<escape> q") 'ask-before-closing)
 (global-set-key (kbd "<escape> e") 'eval-last-sexp)
 (global-set-key (kbd "<escape> f") 'find-file)
@@ -1442,8 +1458,6 @@ prompt to 'name>'."
 (global-set-key (kbd "<escape> /") 'undo)
 ;;; END ESC keybindings
 
-
-;; end CSS autocomplete
 
 ;; function camelify(snake){
 ;;     return snake.split('-').map((part, i) => {

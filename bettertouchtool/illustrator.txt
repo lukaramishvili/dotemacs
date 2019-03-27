@@ -1,0 +1,2 @@
+
+cp ~/Library/Preferences/Adobe Illustrator 22 Settings/en_US/custom.kys ~/dotemacs/bettertouchtool/
