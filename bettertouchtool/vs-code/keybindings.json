@@ -129,11 +129,6 @@
         "command": "-workbench.action.showCommands"
     },
     {
-        "key": "alt+cmd+",
-        "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
-        "when": "inFilesPicker && inQuickOpen"
-    },
-    {
         "key": "shift+cmd+p",
         "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
         "when": "inFilesPicker && inQuickOpen"
@@ -611,6 +606,16 @@
         "when": "textInputFocus"
     },
     {
+        "key": "cmd+shift+n",
+        "command": "cursorDownSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "cmd+shift+p",
+        "command": "cursorUpSelect",
+        "when": "textInputFocus"
+    },
+    {
         "key": "ctrl+n",
         "command": "-cursorDown",
         "when": "textInputFocus"
@@ -630,7 +635,19 @@
         "command": "workbench.action.openGlobalKeybindingsFile"
     },
     {
+        "key": "cmd+x i",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "cmd+x cmd+i",
+        "command": "workbench.action.previousEditor"
+    },
+    {
         "key": "cmd+x o",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "cmd+x cmd+o",
         "command": "workbench.action.nextEditor"
     },
     {
@@ -650,15 +667,29 @@
         "command": "-workbench.action.nextEditor"
     },
     {
-        "key": "cmd+x i",
-        "command": "workbench.action.previousEditor"
-    },
-    {
         "key": "alt+cmd+left",
         "command": "-workbench.action.previousEditor"
     },
     {
         "key": "shift+cmd+[",
             "command": "-workbench.action.previousEditor"
+        },
+        {
+            "key": "alt+g alt+g",
+            "command": "workbench.action.gotoLine"
+        },
+        {
+            "key": "ctrl+g",
+            "command": "-workbench.action.gotoLine"
+        },
+        {
+            "key": "alt+.",
+            "command": "editor.action.revealDefinition",
+            "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+        },
+        {
+            "key": "f12",
+            "command": "-editor.action.revealDefinition",
+            "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
         }
     ]

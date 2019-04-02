@@ -65,7 +65,8 @@ directory to make multiple eshell windows easier."
   ;;   (insert "\"")))
 
 
-(defun previous-window ()
+;; previous-mode is already defined. other-window will throw error if you redefine this
+(defun switch-to-previous-window ()
   (interactive)
   (other-window -1))
 
@@ -473,15 +474,36 @@ Ignores CHAR at point, and also ignores."
 
 (global-set-key (kbd "M-\"") 'insert-double-quotes)
 
+(global-set-key (kbd "C-x i") 'switch-to-previous-window)
+(global-set-key (kbd "C-x O") 'switch-to-previous-window)
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "M-O") 'switch-to-previous-window)
 ;;;navigate between windows using C-*-tab
 (global-set-key (kbd "<C-tab>") 'other-window)
-(global-set-key (kbd "<C-S-tab>") 'previous-window)
-(global-set-key (kbd "<C-S-iso-lefttab>") 'previous-window)
-(global-set-key (kbd "M-±") 'previous-window);; same as M-S-§
+(global-set-key (kbd "<C-S-tab>") 'switch-to-previous-window)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'switch-to-previous-window)
+(global-set-key (kbd "M-±") 'switch-to-previous-window);; same as M-S-§
 (global-set-key (kbd "M-§") 'other-window)
 
 (global-set-key (kbd "<C-M-tab>") 'next-buffer)
 (global-set-key (kbd "<C-M-S-tab>") 'previous-buffer)
+
+;; ctrl-tab / ctrl-shift-tab on Mac keyboard
+(global-set-key (kbd "<s-tab>") 'switch-to-previous-window)
+(global-set-key (kbd "<S-s-tab>") 'other-window)
+
+(global-set-key (kbd "M-n") 'new-frame)
+;; in web/html-mode, M-n/M-p navigates between tags, so add another binding
+(global-set-key (kbd "M-s-n") 'new-frame)
+;;(global-set-key (kbd "M-S-n") 'new-frame)
+(global-set-key (kbd "<s-backspace>") 'delete-window)
+
+(defun new-temp-buffer ()
+  (interactive)
+  (switch-to-buffer (format "tmp-%s" (random 100))))
+
+;; create a temporary buffer with a random name
+(global-set-key (kbd "C-x t") 'new-temp-buffer)
 
 ;; BetterTouchTool's "C-f => <right arrow>" lingers when switching to Emacs.
 ;; It's too slow to turn off the other app's keybindings and turns C-f into right arrow. This happens for <=1s max.
@@ -492,23 +514,6 @@ Ignores CHAR at point, and also ignores."
 ;; * which are bound by BTT and are as essential as C-f
 ;; * which I'll need _immediately_ after switching to Emacs.
 (global-set-key (kbd "C-x <right>") 'find-file)
-
-(defun new-temp-buffer ()
-  (interactive)
-  (switch-to-buffer (format "tmp-%s" (random 100))))
-
-;; create a temporary buffer with a random name
-(global-set-key (kbd "C-x t") 'new-temp-buffer)
-
-;; ctrl-tab / ctrl-shift-tab on Mac keyboard
-(global-set-key (kbd "<s-tab>") 'previous-window)
-(global-set-key (kbd "<S-s-tab>") 'other-window)
-
-(global-set-key (kbd "M-n") 'new-frame)
-;; in web/html-mode, M-n/M-p navigates between tags, so add another binding
-(global-set-key (kbd "M-s-n") 'new-frame)
-;;(global-set-key (kbd "M-S-n") 'new-frame)
-(global-set-key (kbd "<s-backspace>") 'delete-window)
 
 (global-set-key (kbd "<C-S-backspace>") 'backward-kill-line)
 (global-set-key (kbd "C-M-h") 'backward-kill-sexp)
@@ -1285,6 +1290,7 @@ prompt to 'name>'."
                       (i-f . "inline-flex")
                       (it . "italic")
                       (j . "justify")
+                      (k-a . "keep-all")
                       (l . "left")
                       (m . "middle")
                       (n . "none")
