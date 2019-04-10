@@ -128,6 +128,10 @@ alias "git-status-publish"="git rev-list --count publish/master..master"
 
 ### project-specific aliases
 
+alias w="cd /projects"
+alias w-command="command w"
+alias p="cd /projects"
+
 # ici tinker (reuse tinker alias for rlwrap)
 #alias t="cd /projects/ici && tinker"
 #alias w="cd /projects/wom"
@@ -176,9 +180,9 @@ alias bts="cd /projects/bt && gulp serve"
 #alias c="cd /projects/cx/Solution/HelixCore.WebApp"
 #alias cx="cd /projects/cx/Solution/HelixCore.WebApp"
 #alias cs="cd /projects/cx/Solution/HelixCore.WebApp && gulp webserver"
-alias p="cd /projects/pens"
-alias pn="cd /projects/pens"
-alias pens="cd /projects/pens"
-alias penserve="cd /projects/pens && npm run dev"
+#alias p="cd /projects/pens"
+#alias pn="cd /projects/pens"
+#alias pens="cd /projects/pens"
+#alias penserve="cd /projects/pens && npm run dev"
 
 

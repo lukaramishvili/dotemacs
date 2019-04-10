@@ -45,6 +45,18 @@ export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 #PS1="\H:\W \u\$ "
 #export PS1
 
+# to enable QuickLook of text files without an extension (e.g. LICENSE, README, Makefile):
+# http://whomwah.github.io/qlstephen/
+# extract this file to /Library/QuickLook/ and run $ qlmanage -r
+
+# to enable QuickLook for all text files:
+# https://gregbrown.co/code/typescript-quicklook
+# 1. brew cask install qlcolorcode
+# 2. find out content type of specific extension:
+# mdls -name kMDItemContentType file-with-extension.lisp
+# 3. add that to LSItemContentTypes array in ~/Library/QuickLook/QLColorCode.qlgenerator/Contents/Info.plist
+
+
 # 2>/dev/null avoids "Identity added" message for every launch (and M-! output)
 ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 
