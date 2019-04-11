@@ -557,8 +557,6 @@ Ignores CHAR at point, and also ignores."
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-;; for SuperCollider, git clone https://github.com/supercollider/scel as ./scel
-
 (package-initialize)
 
 (setq needed-packages-list
@@ -712,6 +710,7 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "C-}") (lambda () (interactive) (close-brackets-block t)))
 (global-set-key (kbd "C-M-}") (lambda () (interactive) (close-brackets-block nil)))
 
+;; for SuperCollider:
 ;; first, git clone https://github.com/supercollider/scel
 (add-to-list 'load-path "~/dotemacs/scel/el/")
 ;; don't forget to `mv scel/el/sclang-vars.el.in scel/el/sclang-vars.el`
