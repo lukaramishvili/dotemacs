@@ -557,6 +557,8 @@ Ignores CHAR at point, and also ignores."
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
+;; for SuperCollider, git clone https://github.com/supercollider/scel as ./scel
+
 (package-initialize)
 
 (setq needed-packages-list
