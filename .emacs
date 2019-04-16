@@ -492,9 +492,9 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "<s-tab>") 'switch-to-previous-window)
 (global-set-key (kbd "<S-s-tab>") 'other-window)
 
-(global-set-key (kbd "M-n") 'new-frame)
-;; in web/html-mode, M-n/M-p navigates between tags, so add another binding
-(global-set-key (kbd "M-s-n") 'new-frame)
+;; OLD: in web/html-mode, M-n/M-p navigates between tags, so add another binding
+;; NEW: new frame should have a consistent keybinding, and I'm not really using M-n/M-p, instead using C-c C-f/b
+;; (global-set-key (kbd "M-s-n") 'new-frame)
 ;;(global-set-key (kbd "M-S-n") 'new-frame)
 (global-set-key (kbd "<s-backspace>") 'delete-window)
 
@@ -577,6 +577,10 @@ Ignores CHAR at point, and also ignores."
          php-mode
          slime
          sclang-extensions
+         flymd
+         markdown-mode
+         markdown-preview-mode
+         adoc-mode
          ;;; w3m needed for SuperCollider help system
          w3m))
 ;; fetch the list of packages available 
@@ -600,7 +604,7 @@ Ignores CHAR at point, and also ignores."
 
 (require 'thingatpt)
 
-(require 'magit)
+;(require 'magit)
 
 (require 'editorconfig)
 (editorconfig-mode 1)
@@ -625,6 +629,51 @@ Ignores CHAR at point, and also ignores."
 
 (require 'hungry-delete)
 
+;;(use-package hungry-delete
+;;             :bind (("<backspace>" . hungry-delete-backward)
+;;                    ("C-S-d" . hungry-delete-backward)
+;;                    ("C-h" . hungry-delete-backward)
+;;                    ("C-d" . hungry-delete-forwa
+
+
+;;; Asciidoc. don't forget `brew install asciidoc`. Docs: https://asciidoctor.org/docs/user-manual/
+;;; To convert to HTML5 (default asciidoc output), use `asciidoc file.adoc` (will output file.html)
+;;; a2x (Asciidoc to *) behaved weirdly, ran xmllint which detected a2x's own errors. `a2x a2x --format=xhtml [same as -f] --no-xmllint [same as -L]`
+;;; pandoc has no Asciidoc reader (so cannot convert *from* Asciidoc).
+
+
+;;; Markdown
+
+(require 'markdown-mode)
+(require 'markdown-preview-mode)
+
+;; open flymd's live-reload in Firefox
+(defun my-flymd-browser-function (url)
+  (let ((process-environment (browse-url-process-environment)))
+    (apply 'start-process
+           (concat "firefox " url)
+           nil
+           "/usr/bin/open"
+           (list "-a" "firefox" url))))
+(setq flymd-browser-open-function 'my-flymd-browser-function)
+
+;; for ruby-based markdown-preview-mode. requires `brew install pandoc`
+(setq markdown-command "/usr/local/bin/pandoc")
+
+(add-hook 'markdown-mode-hook 'markdown-mode-settings)
+
+;;(setq markdown-preview-function 'flymd-flyit)
+(fset 'markdown-preview-function 'markdown-preview-mode)
+(defun markdown-mode-settings ()
+  ;; each call to preview creates new websocket server, so don't auto-preview
+  ;; (markdown-preview-function)
+  (local-set-key (kbd "C-c C-p") (lambda ()
+                                     (interactive)
+                                     (markdown-preview-function))))
+
+
+
+
 (global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)
 (global-set-key (kbd "<C-M-SPC>") 'just-one-whitespace)
 
@@ -635,12 +684,6 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "<M-S-return>") 'add-whitespace-around-block-and-newline)
 
 (global-set-key (kbd "C-M-;") 'comment-line)
-
-;;(use-package hungry-delete
-;;             :bind (("<backspace>" . hungry-delete-backward)
-;;                    ("C-S-d" . hungry-delete-backward)
-;;                    ("C-h" . hungry-delete-backward)
-;;                    ("C-d" . hungry-delete-forward)))
 
 
 (global-set-key (kbd "C-z") 'undo)
@@ -740,6 +783,8 @@ Ignores CHAR at point, and also ignores."
   (global-set-key (kbd "<escape> <right>") 'windmove-right)
   (global-set-key (kbd "<escape> <up>") 'windmove-up)
   (global-set-key (kbd "<escape> <down>") 'windmove-down)
+
+  (global-set-key (kbd "M-n") 'new-frame)
 
   (global-set-key [(super b)] 'windmove-left)
   (global-set-key [(super f)] 'windmove-right)
@@ -1072,7 +1117,9 @@ prompt to 'name>'."
   (local-set-key (kbd "M-p") 'sgml-skip-tag-backward)
   ;; go forward one tag
   (local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
-  (local-set-key (kbd "M-n") 'sgml-skip-tag-forward)
+  ;; (local-set-key (kbd "M-n") 'sgml-skip-tag-forward)
+  ;; see OLD:/NEW: comment above
+  (local-set-key (kbd "M-n") 'new-frame)
   ;; enter (go inside) tag
   (local-set-key (kbd "C-c e") 'web-mode-dom-traverse)
   ;; exit (go outside) current tag
@@ -1344,6 +1391,8 @@ prompt to 'name>'."
                       (fi . "&:first-child { }")
                       (fo . "&:focus { }")
                       (ho . "&:hover { }")
+                      (hov . "&:hover { }")
+                      (hover . "&:hover { }")
                       (la . "&:last-child { }")
                       (lc . "&:last-child { }")
                       (nc . "&:nth-child() { }")
