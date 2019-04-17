@@ -361,7 +361,7 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
 
 
-;; enable debugger (TODO for now)
+;; enable debugger (TODO for now). has support for Javascript in Chrome/Firefox, PHP, Elixir, Go, Python and LLDB for C and C++.
 (dap-mode 1)
 (dap-ui-mode 1)
 
