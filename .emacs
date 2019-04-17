@@ -360,6 +360,13 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-S-z") 'zap-up-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
 
+
+(require 'ng2-mode)
+;; there's ng2-ts-mode and ng2-html-mode
+
+(require 'lsp-mode)
+(add-hook 'ng2-mode #'lsp)
+
 ;; display project1/samename.js instead of samename.js<project1>
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -580,7 +587,15 @@ Ignores CHAR at point, and also ignores."
          flymd
          markdown-mode
          markdown-preview-mode
+         ;;; asciidoc mode
          adoc-mode
+         ;;; Language Server Protocol support
+         lsp-mode
+         lsp-ui ;; flycheck integration and higher level UI modules
+         ;;; Angular
+         ng2-mode ;; will bring typescript-mode
+         tide ;; typescript interactive devenv
+         ts-comint ;; requires `sudo npm i -g tsun`
          ;;; w3m needed for SuperCollider help system
          w3m))
 ;; fetch the list of packages available 
@@ -765,9 +780,11 @@ Ignores CHAR at point, and also ignores."
 ;; IMPORTANT: place SuperCollider.app in /Applications/SuperCollider like this: /Applications/SuperCollider/SuperCollider.app
 (add-hook 'sclang-mode-hook 'sclang-extensions-mode)
 
-(add-hook 'js-mode-hook
-	  (lambda ()
-	    (local-set-key (kbd "C-c f") 'open-js-lambda-block)))
+(defun javascript-mode-settings ()
+	(local-set-key (kbd "C-c f") 'open-js-lambda-block))
+
+(add-hook 'js-mode-hook #'javascript-mode-settings)
+(add-hook 'ng2-ts-mode-hook #'javascript-mode-settings)
 
 (defun set-windmove-keybindings ()
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
@@ -1108,6 +1125,7 @@ prompt to 'name>'."
 ;; DOCS: http://web-mode.org/
 (add-hook 'web-mode-hook 'add-web-mode-html-bindings)
 (add-hook 'html-mode-hook 'add-web-mode-html-bindings)
+(add-hook 'ng2-html-mode-hook 'add-web-mode-html-bindings)
 
 (defun add-web-mode-html-bindings ()
   ;; insert new tag

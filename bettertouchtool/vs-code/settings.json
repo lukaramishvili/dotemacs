@@ -1,0 +1,18 @@
+{
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "update.enableWindowsBackgroundUpdates": false,
+    "update.mode": "manual",
+    "extensions.autoCheckUpdates": false,
+    "extensions.autoUpdate": false,
+    "extensions.showRecommendationsOnlyOnDemand": true,
+    "workbench.enableExperiments": false,
+    "editor.fontFamily": "DejaVu Sans Mono, Monaco, 'Courier New', monospace",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "team.showWelcomeMessage": false,
+    "center-editor-window.threeStateToggle": true
+}
