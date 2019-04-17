@@ -365,7 +365,31 @@ Ignores CHAR at point, and also ignores."
 ;; there's ng2-ts-mode and ng2-html-mode
 
 (require 'lsp-mode)
-(add-hook 'ng2-mode #'lsp)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+;; (use-package company-lsp :commands company-lsp)
+
+;; this will include ng2-mode, etc
+(add-hook 'prog-mode #'lsp)
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+
 
 ;; display project1/samename.js instead of samename.js<project1>
 (require 'uniquify)
@@ -592,10 +616,13 @@ Ignores CHAR at point, and also ignores."
          ;;; Language Server Protocol support
          lsp-mode
          lsp-ui ;; flycheck integration and higher level UI modules
+         ;; company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
          ;;; Angular
          ng2-mode ;; will bring typescript-mode
          tide ;; typescript interactive devenv
-         ts-comint ;; requires `sudo npm i -g tsun`
+         ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
+         ;; React
+         rjsx-mode
          ;;; w3m needed for SuperCollider help system
          w3m))
 ;; fetch the list of packages available 
@@ -704,8 +731,14 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "C-z") 'undo)
 ;; these keys are close to and frequently mistyped as the undo sequence, C-/
 (global-set-key (kbd "C-.") 'undo)
-(global-set-key (kbd "C-,") 'undo)
 (global-set-key (kbd "C--") 'undo)
+
+;; "Preferences", macOS style. I'm editing .emacs almost every day, so I'm making it straightforward.
+(defun preferences ()
+  (interactive)
+  (find-file "~/dotemacs/.emacs"))
+(global-set-key (kbd "C-,") 'preferences)
+(global-set-key (kbd "C-x ,") 'preferences)
 
 ;; php mode keybindings
 (add-hook 'php-mode-hook 'my-php-mode-stuff)
@@ -1044,7 +1077,7 @@ prompt to 'name>'."
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . html-mode));html-mode or web-mode
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . ng2-mode));web-mode
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
 ;; ###### otherwise all other extension=>mode assignments will stop to work
 
