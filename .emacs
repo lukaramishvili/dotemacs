@@ -361,16 +361,32 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
 
 
+;; enable debugger (TODO for now)
+(dap-mode 1)
+(dap-ui-mode 1)
+
+
 (require 'ng2-mode)
-;; there's ng2-ts-mode and ng2-html-mode
+;; there's ng2-ts-mode and ng2-html-mode (activated automatically).
 
 (require 'lsp-mode)
 
 (use-package lsp-ui :commands lsp-ui-mode)
 ;; (use-package company-lsp :commands company-lsp)
 
-;; this will include ng2-mode, etc
-(add-hook 'prog-mode #'lsp)
+(add-hook 'prog-mode #'lsp) ; doesn't do anything in ng2-*-mode or unsupported prog-mode derived modes
+;; (add-hook 'ng2-mode #'lsp) didn't apply to html/ts sub-modes
+;; using tide-mode for ng-* files, so commented below lines
+;; (add-hook 'ng2-ts-mode #'lsp)
+;; (add-hook 'ng2-html-mode #'lsp)
+
+;; To add LSP support for additional modes, see https://github.com/emacs-lsp/lsp-mode#supported-languages
+;; SASS/SCSS/etc: `npm install -g vscode-css-languageserver-bin`
+(add-hook 'scss-mode-hook #'lsp)
+;; HTML: `npm install -g vscode-html-languageserver-bin`
+(add-hook 'html-mode-hook #'lsp)
+;; WARNING: use `npm i -g bash-language-server --unsafe-perm=true --allow-root`, NOT `npm i -g bash-language-server`
+;; there's also support for PHP, C++, Elixir, Ocaml, Python, Haskell, Go and Vue
 
 (defun setup-tide-mode ()
   (interactive)
@@ -382,13 +398,33 @@ Ignores CHAR at point, and also ignores."
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
-  (company-mode +1))
+  ;; if using company-mode, uncomment this
+  ;; (company-mode +1)
+  )
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
+;; format options -- full list at https://github.com/Microsoft/TypeScript/blob/v3.3.1/src/server/protocol.ts#L2858-L2890
+(setq tide-format-options
+      '(:indentSize 2 :tabSize 2
+                    :insertSpaceAfterFunctionKeywordForAnonymousFunctions t
+                    :placeOpenBraceOnNewLineForFunctions nil
+                    :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil
+                    :placeOpenBraceOnNewLineForControlBlocks nil))
 ;; formats the buffer before saving
 (add-hook 'before-save-hook 'tide-format-before-save)
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
+;; Turn on tide-mode in .component.html/.ts files
+;; (add-hook 'ng2-mode-hook #'setup-tide-mode) didn't work
+(add-hook 'ng2-ts-mode-hook #'setup-tide-mode)
+(add-hook 'ng2-html-mode-hook #'setup-tide-mode)
+;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+
+;; M-x compile tsc format
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (ansi-color-apply-on-region compilation-filter-start (point-max)))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 
 ;; display project1/samename.js instead of samename.js<project1>
@@ -613,6 +649,8 @@ Ignores CHAR at point, and also ignores."
          markdown-preview-mode
          ;;; asciidoc mode
          adoc-mode
+         ;;; debugger
+         dap-mode
          ;;; Language Server Protocol support
          lsp-mode
          lsp-ui ;; flycheck integration and higher level UI modules
@@ -1073,11 +1111,14 @@ prompt to 'name>'."
 ;; open .scss and .sass files in scss-mode
 (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
+;(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . html-mode));html-mode or web-mode
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . ng2-mode));web-mode
+;; ng2-ts-mode is automatically activated in *.component.ts and *.service.ts ng2.html-mode is automatically activated in *.component.html
+;; no lookahead/lookbehind in elisp regex, so reset above .html binding
+;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . ng2-mode));web-mode
+(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . ng2-html-mode))
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
 ;; ###### otherwise all other extension=>mode assignments will stop to work
 
