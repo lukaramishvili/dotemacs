@@ -17,6 +17,11 @@
             }
         });
         document.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(function(el){
+            if(/Instagram Results/gi.test(el.innerHTML.toString()) && el.nextElementSibling){
+                el.nextElementSibling.remove();
+            }
+        });
+        document.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(function(el){
             if(/People also ask/gi.test(el.innerHTML.toString()) && el.nextElementSibling){
                 el.nextElementSibling.remove();
                 el.remove();

@@ -106,7 +106,12 @@ www.google.com###rhs
 www.google.com###brs > g-section-with-header
 www.google.com###fbarcnt
 www.google.com##[ping*="https://twitter.com"]
+www.google.com##[ping*="https://www.instagram.com"]
+www.google.com##[ping*="https://www.twitch.tv"]
 www.google.com##.kno-kp
+www.google.com##[id*="vidthumb"]
 www.google.com###topstuff
 www.google.com###botstuff
 www.google.com###imagebox_bigimages
+www.google.com##g-scrolling-carousel
+www.google.com##div[style*=width][style*=height]
