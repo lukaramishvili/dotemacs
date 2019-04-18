@@ -102,13 +102,11 @@ www.techrepublic.com##.large.video.shortcode
 www.reddit.com##._3rY3I9989IzX5QNpC7C9Q3
 
 ! 18/04/2019 https://www.google.com
-www.google.com##div.bkWMgd:nth-of-type(2)
 www.google.com###rhs
-www.google.com##div.bkWMgd:nth-of-type(6) > div > g-section-with-header
 www.google.com###brs > g-section-with-header
 www.google.com###fbarcnt
-www.google.com##div.bkWMgd:nth-of-type(3) > div > g-section-with-header
 www.google.com##[ping*="https://twitter.com"]
 www.google.com##.kno-kp
 www.google.com###topstuff
 www.google.com###botstuff
+www.google.com###imagebox_bigimages
