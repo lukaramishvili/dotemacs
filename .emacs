@@ -1686,7 +1686,8 @@ prompt to 'name>'."
   (let* ((serve-buffer-name (concat (symbol-name project-name) "-serve"))
          (project-config (cdr (assoc project-name project-configs)))
          (project-dir (cdr (assoc 'dir project-config)))
-         (serve-cmd (cdr (assoc 'serve-cmd project-config)))
+         ;; latest .emacs config converted to eshell, so run bash directly
+         (serve-cmd (concat "/bin/bash -c \"" (cdr (assoc 'serve-cmd project-config)) "\""))
          (left-window-file (or (cdr (assoc 'left-window-file project-config)) "/scss"))
          (right-window-file (or (cdr (assoc 'right-window-file project-config)) "/views"))
          (show-serve-window-p nil))
