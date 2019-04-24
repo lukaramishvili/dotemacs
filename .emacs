@@ -1,6 +1,8 @@
-;;;;
+;;;; package --- Summary
 ;;;; Luka Ramishvili's .emacs file
 ;;;;
+
+;;; Commentary:
 
 ;;; use C-x C-e to reload any s-exp
 
@@ -385,6 +387,8 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
 
 
+(require 'company)
+
 ;; enable debugger (TODO for now). has support for Javascript in Chrome/Firefox, PHP, Elixir, Go, Python and native GDB/LLDB for C and C++.
 (dap-mode 1)
 (dap-ui-mode 1)
@@ -396,7 +400,7 @@ Ignores CHAR at point, and also ignores."
 (require 'lsp-mode)
 
 (use-package lsp-ui :commands lsp-ui-mode)
-;; (use-package company-lsp :commands company-lsp)
+(use-package company-lsp :commands company-lsp)
 
 (add-hook 'prog-mode #'lsp) ; doesn't do anything in ng2-*-mode or unsupported prog-mode derived modes
 ;; (add-hook 'ng2-mode #'lsp) didn't apply to html/ts sub-modes
@@ -427,7 +431,7 @@ Ignores CHAR at point, and also ignores."
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
   ;; if using company-mode, uncomment this
-  ;; (company-mode +1)
+  (company-mode +1)
   )
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
@@ -1109,6 +1113,7 @@ prompt to 'name>'."
 ;; (add-hook 'after-save-hook 'magit-after-save-refresh-status)
 
 (defun diff-and-format-working-directory ()
+  "Open a new buffer with nicely formatted git diff of current directory."
   (interactive)
   ;; this will open a window with the buffer containing diff output
   (shell-command "vcs-diff")
@@ -1120,8 +1125,8 @@ prompt to 'name>'."
 
 
 ;causes massive inconveniences
-;(add-hook 'after-init-hook 'global-company-mode)
-;(global-set-key (kbd "S-SPC") 'company-complete)
+;; (add-hook 'after-init-hook 'global-company-mode)
+(global-set-key (kbd "S-SPC") 'company-complete)
 
 
 ;;(when (require 'web-mode nil 'noerror)
@@ -1152,8 +1157,8 @@ prompt to 'name>'."
 
 
 
-;; I added some modifications to html-mode using web-mode functions (inaccessible from direct html-mode, so I first load web-mode (to load its functions) and then switch to html-mode)
 (defun html-mode-with-web-mode-helpers ()
+  "I added some modifications to `html-mode` using `web-mode` functions (inaccessible from direct `html-mode`, so I first load web-mode (to load its functions) and then switch to `html-mode`)."
   (web-mode)
   (html-mode))
 
