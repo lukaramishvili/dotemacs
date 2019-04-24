@@ -4,15 +4,15 @@
 
 ;;; use C-x C-e to reload any s-exp
 
-;;; functions
+;;; Code:
 
 (defun bool (arg)
+  "Convert ARG to boolean value."
   (not (not arg)))
 
 (defun eshell-here ()
-  "Opens up a new shell in the directory associated with the
-current buffer's file. The eshell is renamed to match that
-directory to make multiple eshell windows easier."
+  "Open a new shell in the directory associated with the current buffer's file.
+The directory name is added to window name to make multiple eshell windows easier."
   (interactive)
   (let* ((parent (if (buffer-file-name)
                      (file-name-directory (buffer-file-name))
@@ -30,10 +30,12 @@ directory to make multiple eshell windows easier."
 ;;(global-set-key (kbd "C-!") 'eshell-here)
 
 (defun eshell/exec (command)
+  "Execute command COMMAND in Eshell."
   (insert command)
   (eshell-send-input))
 
 (defun eshell/x ()
+  "Close the eshell window."
   (insert "exit")
   (eshell-send-input)
   (delete-window))
@@ -56,37 +58,45 @@ directory to make multiple eshell windows easier."
 ;;(x11-maximize-frame)
 
 (defun insert-double-quotes (&optional arg)
-  "Inserts double quotes and places the cursor between them."
+  "Wrap following ARG sexps in double quotes.
+If ARG is 0, insert double quotes and place the cursor between them."
   (interactive "P")
   (insert-pair arg ?\" ?\"))
+
+(defun insert-square-brackets (&optional arg)
+  "Wrap following ARG sexps in square brackets.
+If ARG is 0, insert square brackets and place the cursor between them."
+  (interactive "P")
+  (insert-pair arg ?\[ ?\]))
  
   ;; (insert "\"")
   ;; (save-excursion
   ;;   (insert "\"")))
 
 
-;; previous-mode is already defined. other-window will throw error if you redefine this
+;; function 'previous-mode is already defined. other-window will throw error if you redefine this
 (defun switch-to-previous-window ()
+  "Switch to previous window in the current frame."
   (interactive)
   (other-window -1))
 
 (defun inside-string? ()
-  "Returns non-nil if inside string, else nil.
+  "Return non-nil if inside string, else nil.
 This depends on major mode having setup syntax table properly."
   (interactive)
   (let ((result (nth 3 (syntax-ppss))))
     (message "%s" result)
     result))
 
-(fset 'original-backward-up-list (symbol-function 'backward-up-list))
-(defun backward-up-list ()
-  (interactive)
-  (cond
-   ((equal (inside-string?) 34)
-    (search-backward "\"")); get out of "" string
-   ((equal (inside-string?) 39)
-    (search-backward "'")))
-  (original-backward-up-list))
+;; (fset 'original-backward-up-list (symbol-function 'backward-up-list))
+;; (defun backward-up-list (&optional arg escape-strings no-syntax-crossing)
+;;   (interactive)
+;;   (cond
+;;    ((equal (inside-string?) 34)
+;;     (search-backward "\"")); get out of "" string
+;;    ((equal (inside-string?) 39)
+;;     (search-backward "'")))
+;;   (original-backward-up-list))
 
 ;; variations on Steve Yegge recommendations
 (defun kill-current-word ()
@@ -118,19 +128,22 @@ This depends on major mode having setup syntax table properly."
   (backward-up-list)
   (kill-sexp))
 (defun kill-and-join-forward (&optional arg)
-  "If at end of line, join with following; otherwise kill line.
-Deletes whitespace at join."
+  "If cursor's at end of line, join with following line.
+If not, kill ARG lines.
+Also deletes whitespace at join."
   (interactive "P")
   (kill-line arg)
   (hungry-delete-forward 0))
 ;; this is a reverse of C-k (deletes line contents *before* cursor)
 (defun backward-kill-line ()
+  "Kill the current line from start to cursor."
   (interactive)
   (set-mark-command nil)
   (move-beginning-of-line 1)
   (backward-delete-char-untabify 1))
 
 (defun whitespacep (c)
+  "Return true if character C is whitespace."
   (bool
    (cond ((characterp c) (or (char-equal c #x9)
                              (char-equal c #xa)
@@ -141,6 +154,7 @@ Deletes whitespace at join."
          (t nil))))
 
 (defun kill-whitespace-around-cursor ()
+  "Kill all whitespace surrounding cursor, including newlines."
   (interactive)
   (if (whitespacep (preceding-char))
       (hungry-delete-backward 0))
@@ -149,11 +163,13 @@ Deletes whitespace at join."
 
 ;; kills all whitespace around cursor and leaves only one space
 (defun just-one-whitespace ()
+  "Delete all whitespace around cursor, including newlines, and leave exactly one space."
   (interactive)
   (kill-whitespace-around-cursor)
   (insert " "))
 
 (defun kill-whitespace-around-line ()
+  "Place the current line's contents between the non-whitespace characters found on surrounding lines."
   (interactive)
   (move-beginning-of-line 1)
   (kill-whitespace-around-cursor)
@@ -163,6 +179,7 @@ Deletes whitespace at join."
   (just-one-space))
 
 (defun add-whitespace-around-line ()
+  "Add empty lines around the current line."
   (interactive)
   (move-beginning-of-line 1)
   (newline-and-indent)
@@ -171,6 +188,8 @@ Deletes whitespace at join."
 
 ;; M-S-space: useful for just formatting a single-line block with no intention of adding code
 (defun add-whitespace-around-block (&optional add-extra-line-p)
+  "Place { or ( current block contents } or ) on a separate line.
+If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new code."
   (interactive)
   ;; find enclosing paren or bracket and position cursor right after it
   (backward-up-list)
@@ -202,10 +221,12 @@ Deletes whitespace at join."
 
 ;; M-S-return: useful for expanding a single-line block when intending to append more code to the block content
 (defun add-whitespace-around-block-and-newline ()
+  "Place { or ( current block contents } or ) on a separate line and open a new line below for new code."
   (interactive)
   (add-whitespace-around-block t))
 
 (defun comment-line ()
+  "Comment current line entirely."
   (interactive)
   (move-beginning-of-line 1)
   (set-mark-command nil)
@@ -213,7 +234,7 @@ Deletes whitespace at join."
   ;;will call comment-region
   (comment-dwim nil))
 
-;; C-return (adds an indented line after current line and moves cursor there) is overridden by emmet-mode 
+;; C-return (adds an indented line after current line and moves cursor there) is overridden by emmet-mode
 (defun open-indented-line ()
   (interactive)
   (move-end-of-line 1)
@@ -251,42 +272,42 @@ Deletes whitespace at join."
   (insert "}")
   (unless at-the-end-of-line (backward-char 1))
   (indent-for-tab-command))
-;; inserts anonymous function at cursor
 (defun open-js-lambda-block ()
+  "Insert anonymous function at cursor."
   (interactive)
   (insert "function()")
   (open-brackets-block nil))
 
 (defun sgml-transpose-tags-around-cursor ()
-  ;; transpose tags before and after cursor
+  "Transpose tags before and after cursor."
   (interactive)
   ;; transpose only works when cursor is at first element's beginning
   (sgml-skip-tag-backward 1)
   (web-mode-element-transpose))
 (defun sgml-delete-tag-backward (arg)
-  ;; delete the tag before cursor
+  "Delete the tag before cursor."
   (interactive "p")
   (let ((tag-start (point)))
     (sgml-skip-tag-backward arg)
     (kill-region tag-start (point))))
 (defun sgml-delete-tag-forward (arg)
-  ;; delete the tag before cursor
+  "Delete the tag before cursor."
   (interactive "p")
   (let ((tag-end (point)))
     (sgml-skip-tag-forward arg)
     (kill-region tag-end (point))))
 (defun sgml-select-tag-backward (arg)
-  ;; select tag before cursor (includes any space between current cursor position and closing tag
+  "Select ARG tags before cursor (includes any space between current cursor position and closing tag."
   (interactive "p")
   (set-mark-command nil)
   (sgml-skip-tag-backward arg))
 (defun sgml-select-tag-forward (arg)
-  ;; select tag before cursor (includes any space between current cursor position and opening tag
+  "Select ARG tags before cursor (includes any space between current cursor position and opening tag."
   (interactive "p")
   (set-mark-command nil)
   (sgml-skip-tag-forward arg))
 (defun sgml-duplicate-previous-tag (arg)
-  ;; insert the contents of the tag before cursor at the current cursor position
+  "Duplicate ARG tags before cursor and place them at the current cursor position."
   (interactive "p")
   ;; remember the current cursor position; we'll paste there
   (save-excursion
@@ -298,7 +319,7 @@ Deletes whitespace at join."
   (open-indented-line)
   (yank))
 (defun sgml-duplicate-next-tag (arg)
-  ;; insert the contents of the tag after cursor at the current cursor position
+  "Insert the contents of the following ARG tags after cursor at the current cursor position."
   (interactive "p")
   ;; remember the current cursor position; we'll paste there
   (save-excursion
@@ -309,7 +330,8 @@ Deletes whitespace at join."
     (kill-ring-save (point) (mark)))
   (open-indented-line)
   (yank))
-(defmacro sgml-with-tag-contents-after-cursor (&rest op)
+(defmacro sgml-with-tag-contents-after-cursor (&rest body)
+  "Manipulate the contents of the following sgml tag by executing the macro's BODY."
   `(progn
      ;; TODO: we need to somehow avoid matching closing tags, which also contain ">"'s.
      ;; if we simply search for ">", this code will fail when the cursor is inside a closing tag or before a tag with children (e.g. </di|v> or <di|v> <div>contents</div> </div>, respectively)
@@ -317,12 +339,14 @@ Deletes whitespace at join."
      (set-mark-command nil)
      (search-forward "<")
      (backward-char 1)
-     ,@op))
+     ,@body))
 (defun sgml-clean-tag-after-cursor ()
+  "Delete the contents of the following sgml tag."
   (interactive)
   (sgml-with-tag-contents-after-cursor
    (delete-region (region-beginning) (region-end))))
 (defun sgml-kill-tag-contents-after-cursor ()
+  "Kill the contents of the following sgml tag."
   (interactive)
   (sgml-with-tag-contents-after-cursor
    (kill-region (region-beginning) (region-end))))
@@ -392,6 +416,7 @@ Ignores CHAR at point, and also ignores."
 (add-hook 'rjsx-mode-hook #'lsp)
 
 (defun setup-tide-mode ()
+  "Setup Typescript IDE mode."
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
@@ -423,9 +448,10 @@ Ignores CHAR at point, and also ignores."
 ;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 
-;; M-x compile tsc format
+;; M-x `compile tsc format`
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
+  "Colorize the compilation buffer."
   (ansi-color-apply-on-region compilation-filter-start (point-max)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
@@ -523,12 +549,9 @@ Ignores CHAR at point, and also ignores."
 ;; show column numbers
 (column-number-mode)
 
-(defun insert-square-brackets (&optional arg)
-  (interactive "P")
-  (insert-pair arg ?\[ ?\]))
 
 ;; switch () and [] (now system-wide using Karabiner-Elements)
-;;(keyboard-translate ?\( ?\[) 
+;;(keyboard-translate ?\( ?\[)
 ;;(keyboard-translate ?\[ ?\() 
 ;;(keyboard-translate ?\) ?\]) 
 ;;(keyboard-translate ?\] ?\))
@@ -736,6 +759,7 @@ Ignores CHAR at point, and also ignores."
 
 ;; open flymd's live-reload in Firefox
 (defun my-flymd-browser-function (url)
+  "Open flymd's preview URL in Firefox -- Chrome restricts local file access."
   (let ((process-environment (browse-url-process-environment)))
     (apply 'start-process
            (concat "firefox " url)
@@ -752,6 +776,7 @@ Ignores CHAR at point, and also ignores."
 ;;(setq markdown-preview-function 'flymd-flyit)
 (fset 'markdown-preview-function 'markdown-preview-mode)
 (defun markdown-mode-settings ()
+  "Settings for markdown-mode."
   ;; each call to preview creates new websocket server, so don't auto-preview
   ;; (markdown-preview-function)
   (local-set-key (kbd "C-c C-p") (lambda ()
@@ -778,14 +803,15 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "C-.") 'undo)
 (global-set-key (kbd "C--") 'undo)
 
-;; "Preferences", macOS style. I'm editing .emacs almost every day, so I'm making it straightforward.
 (defun preferences ()
+  "\"Preferences\", macOS style. I'm editing .emacs almost every day, so I'm making it straightforward."
   (interactive)
   (find-file "~/dotemacs/.emacs"))
 (global-set-key (kbd "C-,") 'preferences)
 (global-set-key (kbd "C-x ,") 'preferences)
 
 (defun open-referenced-file ()
+  "Open the file whose name is at the cursor."
   (interactive)
   ;; a quick hack: nunjucks includes are enclosed in quotes, making them simple s-exps
   ;; for _scss and other static files, just add _ to the start and.scss to the end
@@ -794,14 +820,16 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-RET") 'open-referenced-file)
 
 ;; php mode keybindings
-(add-hook 'php-mode-hook 'my-php-mode-stuff)
+(add-hook 'php-mode-hook 'setup-php-mode)
 
-(defun my-php-mode-stuff ()
-  (local-set-key (kbd "<f1>") 'my-php-function-lookup)
-  (local-set-key (kbd "C-<f1>") 'my-php-symbol-lookup)
+(defun setup-php-mode ()
+  "Setup PHP mode."
+  (local-set-key (kbd "<f1>") 'lookup-php-function)
+  (local-set-key (kbd "C-<f1>") 'lookup-php-symbol)
   (local-set-key (kbd "C-M-h") 'backward-kill-word))
 
-(defun my-php-symbol-lookup ()
+(defun lookup-php-symbol ()
+  "Look up the PHP symbol at cursor in documentation."
   (interactive)
   (let ((symbol (symbol-at-point)))
     (if (not symbol)
@@ -810,10 +838,11 @@ Ignores CHAR at point, and also ignores."
       (browse-url (concat "http://php.net/manual-lookup.php?pattern="
                           (symbol-name symbol))))))
 
-(defun my-php-function-lookup ()
+(defun lookup-php-function ()
+  "Look up the PHP function at cursor in documentation."
   (interactive)
   (let* ((function (symbol-name (or (symbol-at-point)
-                                    (error "No function at point."))))
+                                    (error "No function at point"))))
          (buf (url-retrieve-synchronously (concat "http://php.net/manual-lookup.php?pattern=" function))))
     (with-current-buffer buf
       (goto-char (point-min))
@@ -866,13 +895,14 @@ Ignores CHAR at point, and also ignores."
 ;; IMPORTANT: place SuperCollider.app in /Applications/SuperCollider like this: /Applications/SuperCollider/SuperCollider.app
 (add-hook 'sclang-mode-hook 'sclang-extensions-mode)
 
-(defun javascript-mode-settings ()
+(defun setup-javascript-mode ()
 	(local-set-key (kbd "C-c f") 'open-js-lambda-block))
 
-(add-hook 'js-mode-hook #'javascript-mode-settings)
-(add-hook 'ng2-ts-mode-hook #'javascript-mode-settings)
+(add-hook 'js-mode-hook #'setup-javascript-mode)
+(add-hook 'ng2-ts-mode-hook #'setup-javascript-mode)
 
 (defun set-windmove-keybindings ()
+  "Configure windmove keybindings.  Useful for overriding mode-specific keybindings."
   (dolist (key '("<C-left>" "<C-right>" "<C-up>" "<C-down>"))
     (global-unset-key (kbd key))
     (local-unset-key (kbd key)))
@@ -951,24 +981,28 @@ Ignores CHAR at point, and also ignores."
 
 
 (defun show-recent-file-list()
+  "Show the recent file list in current buffer."
   (interactive)
   (recentf-mode)
   (recentf-open-files))
 ;; only useful without project-mode; but when enabled, messes up project-mode.
 ;; on load, show recent file list
 ;;(add-hook 'window-setup-hook 'show-recent-file-list)
-(defun on-new-window ()
+(defun recent-files-in-split-window ()
+  "Switch to newly split window and show recent files list in it."
   (other-window 1)
   (show-recent-file-list))
 ; when splitting a window ("tab"), show recent file list
 (defun split-and-switch-window-below ()
+  "Split to a new window below and show recent files list in it."
   (interactive)
   (split-window-below)
-  (on-new-window))
+  (recent-files-in-split-window))
 (defun split-and-switch-window-right ()
+  "Split to a new window on the right and show recent files list in it."
   (interactive)
   (split-window-right)
-  (on-new-window))
+  (recent-files-in-split-window))
 (global-set-key (kbd "C-x 2") 'split-and-switch-window-below)
 (global-set-key (kbd "C-x 3") 'split-and-switch-window-right)
 ; quick shortcuts for invoking recent file list
