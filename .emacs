@@ -138,7 +138,7 @@ Also deletes whitespace at join."
   (hungry-delete-forward 0))
 ;; this is a reverse of C-k (deletes line contents *before* cursor)
 (defun backward-kill-line ()
-  "Kill the current line from start to cursor."
+  "Kill the contents from cursor to start of line."
   (interactive)
   (set-mark-command nil)
   (move-beginning-of-line 1)
@@ -637,7 +637,10 @@ Ignores CHAR at point, and also ignores."
 ;; * which I'll need _immediately_ after switching to Emacs.
 (global-set-key (kbd "C-x <right>") 'find-file)
 
+;; CMD-Shift-backspace
 (global-set-key (kbd "<C-S-backspace>") 'backward-kill-line)
+;; CMD-ctrl-K
+(global-set-key (kbd "C-s-K") 'backward-kill-line)
 (global-set-key (kbd "C-M-h") 'backward-kill-sexp)
 (global-set-key (kbd "<C-M-backspace>") 'backward-kill-sexp)
 
