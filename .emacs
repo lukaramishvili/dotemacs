@@ -1159,7 +1159,9 @@ prompt to 'name>'."
 ;causes massive inconveniences
 ;; (add-hook 'after-init-hook 'global-company-mode)
 (global-set-key (kbd "S-SPC") 'company-complete)
-
+;; navigate suggestions popup using C-n/C-p
+(define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
+(define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
 
 ;;(when (require 'web-mode nil 'noerror)
 ;;  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
