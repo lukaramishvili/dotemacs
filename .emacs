@@ -392,6 +392,22 @@ Ignores CHAR at point, and also ignores."
 ;; needed for tide (Typescript IDE mode)
 (setq company-tooltip-align-annotations t)
 
+;; (require 'prettier-js)
+;; I'm already loading tide-mode with tons of functionality, so just comment and leave prettier-js for later.
+;; (add-hook 'ng2-ts-mode-hook 'prettier-js-mode)
+;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
+
+(defun setup-rjsx-mode ()
+  "Setup rjsx mode, enable LSP, company, TIDE etc."
+  (setq-local indent-line-function 'js-jsx-indent-line)
+  (setq-local js-indent-level 2)
+  (setup-tide-mode)
+  (company-mode)
+  ;; (prettier-js-mode)
+  (emmet-mode))
+(add-hook 'rjsx-mode-hook 'setup-rjsx-mode)
+
+
 (defun setup-tide-mode ()
   "Setup Typescript IDE mode."
   (interactive)
@@ -459,10 +475,6 @@ Ignores CHAR at point, and also ignores."
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'company-mode)
 
-
-(add-hook 'rjsx-mode-hook #'lsp)
-(add-hook 'rjsx-mode-hook #'setup-tide-mode)
-(add-hook 'rjsx-mode-hook #'company-mode)
 
 
 ;; M-x `compile tsc format`
@@ -708,7 +720,7 @@ Ignores CHAR at point, and also ignores."
          ;; flycheck / eslint
          flycheck
          add-node-modules-path
-         prettier-js
+         prettier-js ;; don't forget to `npm i -g prettier`
          ;;; w3m needed for SuperCollider help system
          w3m))
 ;; fetch the list of packages available 
@@ -914,6 +926,7 @@ Ignores CHAR at point, and also ignores."
 (add-hook 'sclang-mode-hook 'sclang-extensions-mode)
 
 (defun setup-javascript-mode ()
+  "Setup javascript mode."
 	(local-set-key (kbd "C-c f") 'open-js-lambda-block))
 
 (add-hook 'js-mode-hook #'setup-javascript-mode)
@@ -1217,7 +1230,6 @@ prompt to 'name>'."
 ;; Enable flycheck globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-(add-hook 'rjsx-mode-hook  'emmet-mode)
 
 ;; to use web-mode instead of rjsx-mode for jsx files:
 ;; https://gist.github.com/CodyReichert/9dbc8bd2a104780b64891d8736682cea
