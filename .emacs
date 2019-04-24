@@ -383,8 +383,9 @@ Ignores CHAR at point, and also ignores."
 ;; To add LSP support for additional modes, see https://github.com/emacs-lsp/lsp-mode#supported-languages
 ;; SASS/SCSS/etc: `npm install -g vscode-css-languageserver-bin`
 (add-hook 'scss-mode-hook #'lsp)
-;; HTML: `npm install -g vscode-html-languageserver-bin`
-(add-hook 'html-mode-hook #'lsp)
+;; HTML LSP server: `npm install -g vscode-html-languageserver-bin`
+;; Uncomment for LSP in html-mode, but didn't really find it useful
+;;(add-hook 'html-mode-hook #'lsp)
 ;; WARNING: use `npm i -g bash-language-server --unsafe-perm=true --allow-root`, NOT `npm i -g bash-language-server`
 ;; there's also support for PHP, C++, Elixir, Ocaml, Python, Haskell, Go and Vue
 
@@ -778,6 +779,14 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "C-,") 'preferences)
 (global-set-key (kbd "C-x ,") 'preferences)
 
+(defun open-referenced-file ()
+  (interactive)
+  ;; a quick hack: nunjucks includes are enclosed in quotes, making them simple s-exps
+  ;; for _scss and other static files, just add _ to the start and.scss to the end
+  (find-file (symbol-name(symbol-at-point))))
+;; Alt-Enter opens included file name at cursor
+(global-set-key (kbd "M-RET") 'open-referenced-file)
+
 ;; php mode keybindings
 (add-hook 'php-mode-hook 'my-php-mode-stuff)
 
@@ -1111,7 +1120,7 @@ prompt to 'name>'."
 ;; open .scss and .sass files in scss-mode
 (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . html-mode))
-;(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode));scss-mode or web-mode
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . html-mode));html-mode or web-mode
@@ -1124,6 +1133,11 @@ prompt to 'name>'."
 
 ;; good features but horribly slow
 ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; open React components in rjsx-mode. use magic-mode-alist to differentiate them from ordinary .js files.
+;; depends on the file containing "import React.." by matching the file's contents to a multiline regex.
+;; an alternative method would require prepending "// -*- mode: rjsx -*-" to each file, which would be unsustainable.
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*React" . rjsx-mode))
 
 ;; TODO es6 javascript mode - currently this Emacs installation has a bug and...
 ;; ... show packages like flycheck (required for this)
