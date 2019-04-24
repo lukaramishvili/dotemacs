@@ -39,7 +39,7 @@ directory to make multiple eshell windows easier."
   (delete-window))
 
 (defun ask-before-closing ()
-  "Ask whether or not to close, and then close if y was pressed"
+  "Ask whether or not to close, and then close if y was pressed."
   (interactive)
   (if (y-or-n-p (format "Are you sure you want to exit Emacs? "))
       (if (< emacs-major-version 22)
@@ -49,14 +49,14 @@ directory to make multiple eshell windows easier."
 
 ;; maximize emacs frame on startup (X11-specific but I'm not using anything else)
 (defun x11-maximize-frame ()
-  "Maximize the current frame (to full screen)"
+  "Maximize the current frame (to full screen)."
   (interactive)
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
 ;;(x11-maximize-frame)
 
 (defun insert-double-quotes (&optional arg)
-  "Inserts double quotes and places the cursor between them"
+  "Inserts double quotes and places the cursor between them."
   (interactive "P")
   (insert-pair arg ?\" ?\"))
  
@@ -389,6 +389,8 @@ Ignores CHAR at point, and also ignores."
 ;; WARNING: use `npm i -g bash-language-server --unsafe-perm=true --allow-root`, NOT `npm i -g bash-language-server`
 ;; there's also support for PHP, C++, Elixir, Ocaml, Python, Haskell, Go and Vue
 
+(add-hook 'rjsx-mode-hook #'lsp)
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -662,6 +664,10 @@ Ignores CHAR at point, and also ignores."
          ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
          ;; React
          rjsx-mode
+         ;; flycheck / eslint
+         flycheck
+         add-node-modules-path
+         prettier-js
          ;;; w3m needed for SuperCollider help system
          w3m))
 ;; fetch the list of packages available 
@@ -1143,11 +1149,25 @@ prompt to 'name>'."
 ;; ... show packages like flycheck (required for this)
 ;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 
+(require 'flycheck)
 
-;; disable web-mode from every file. other ways didn't work. very annoying.
-;; DIDN'T WORK
-;;(rassq-delete-all 'web-mode auto-mode-alist)
+;; Disable the default flycheck jslint (use eslint instead)
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint json-jsonlist)))
 
+(add-hook 'flycheck-mode-hook 'add-node-modules-path)
+
+;; Enable eslint checker for jsx and javascript files
+(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
+(flycheck-add-mode 'javascript-eslint 'javascript-mode)
+;; Enable flycheck globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(add-hook 'rjsx-mode-hook  'emmet-mode)
+
+;; to use web-mode instead of rjsx-mode for jsx files:
+;; https://gist.github.com/CodyReichert/9dbc8bd2a104780b64891d8736682cea
 
 ;; begin new features
 
