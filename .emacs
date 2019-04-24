@@ -848,7 +848,9 @@ Ignores CHAR at point, and also ignores."
   (interactive)
   ;; a quick hack: nunjucks includes are enclosed in quotes, making them simple s-exps
   ;; for _scss and other static files, just add _ to the start and.scss to the end
-  (find-file (symbol-name(symbol-at-point))))
+  (let ((path (symbol-name(symbol-at-point))))
+    (if (file-exists-p path)
+        (find-file path))))
 ;; Alt-Enter opens included file name at cursor
 (global-set-key (kbd "M-RET") 'open-referenced-file)
 
