@@ -388,6 +388,33 @@ Ignores CHAR at point, and also ignores."
 
 
 (require 'company)
+;; aligns annotation to the right hand side
+;; needed for tide (Typescript IDE mode)
+(setq company-tooltip-align-annotations t)
+
+(defun setup-tide-mode ()
+  "Setup Typescript IDE mode."
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  ;; if using company-mode, uncomment this
+  (company-mode +1)
+  )
+;; format options -- full list at https://github.com/Microsoft/TypeScript/blob/v3.3.1/src/server/protocol.ts#L2858-L2890
+(setq tide-format-options
+      '(:indentSize 2 :tabSize 2
+                    :insertSpaceAfterFunctionKeywordForAnonymousFunctions t
+                    :placeOpenBraceOnNewLineForFunctions nil
+                    :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil
+                    :placeOpenBraceOnNewLineForControlBlocks nil))
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
 
 ;; enable debugger (TODO for now). has support for Javascript in Chrome/Firefox, PHP, Elixir, Go, Python and native GDB/LLDB for C and C++.
 (dap-mode 1)
@@ -413,6 +440,7 @@ Ignores CHAR at point, and also ignores."
 ;; (add-hook 'ng2-html-mode #'lsp)
 
 ;; To add LSP support for additional modes, see https://github.com/emacs-lsp/lsp-mode#supported-languages
+
 ;; SASS/SCSS/etc: `npm install -g vscode-css-languageserver-bin`
 (add-hook 'scss-mode-hook #'lsp)
 ;; HTML LSP server: `npm install -g vscode-html-languageserver-bin`
@@ -420,33 +448,6 @@ Ignores CHAR at point, and also ignores."
 ;;(add-hook 'html-mode-hook #'lsp)
 ;; WARNING: use `npm i -g bash-language-server --unsafe-perm=true --allow-root`, NOT `npm i -g bash-language-server`
 ;; there's also support for PHP, C++, Elixir, Ocaml, Python, Haskell, Go and Vue
-
-
-(defun setup-tide-mode ()
-  "Setup Typescript IDE mode."
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  ;; if using company-mode, uncomment this
-  (company-mode +1)
-  )
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
-;; format options -- full list at https://github.com/Microsoft/TypeScript/blob/v3.3.1/src/server/protocol.ts#L2858-L2890
-(setq tide-format-options
-      '(:indentSize 2 :tabSize 2
-                    :insertSpaceAfterFunctionKeywordForAnonymousFunctions t
-                    :placeOpenBraceOnNewLineForFunctions nil
-                    :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil
-                    :placeOpenBraceOnNewLineForControlBlocks nil))
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
 
 ;; Turn on tide-mode in .component.html/.ts files
 ;; (add-hook 'ng2-mode-hook #'setup-tide-mode) didn't work
