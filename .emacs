@@ -402,6 +402,10 @@ Ignores CHAR at point, and also ignores."
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package company-lsp :commands company-lsp)
 
+
+;; Add LSP support for specific major modes: https://github.com/emacs-lsp/lsp-mode#adding-support-for-languages
+
+
 (add-hook 'prog-mode #'lsp) ; doesn't do anything in ng2-*-mode or unsupported prog-mode derived modes
 ;; (add-hook 'ng2-mode #'lsp) didn't apply to html/ts sub-modes
 ;; using tide-mode for ng-* files, so commented below lines
@@ -417,7 +421,6 @@ Ignores CHAR at point, and also ignores."
 ;; WARNING: use `npm i -g bash-language-server --unsafe-perm=true --allow-root`, NOT `npm i -g bash-language-server`
 ;; there's also support for PHP, C++, Elixir, Ocaml, Python, Haskell, Go and Vue
 
-(add-hook 'rjsx-mode-hook #'lsp)
 
 (defun setup-tide-mode ()
   "Setup Typescript IDE mode."
@@ -447,9 +450,18 @@ Ignores CHAR at point, and also ignores."
 
 ;; Turn on tide-mode in .component.html/.ts files
 ;; (add-hook 'ng2-mode-hook #'setup-tide-mode) didn't work
+(add-hook 'ng2-ts-mode-hook #'lsp)
 (add-hook 'ng2-ts-mode-hook #'setup-tide-mode)
 (add-hook 'ng2-html-mode-hook #'setup-tide-mode)
-;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(add-hook 'typescript-mode-hook #'lsp)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'typescript-mode-hook #'company-mode)
+
+
+(add-hook 'rjsx-mode-hook #'lsp)
+(add-hook 'rjsx-mode-hook #'setup-tide-mode)
+(add-hook 'rjsx-mode-hook #'company-mode)
 
 
 ;; M-x `compile tsc format`
@@ -684,7 +696,8 @@ Ignores CHAR at point, and also ignores."
          ;;; Language Server Protocol support
          lsp-mode
          lsp-ui ;; flycheck integration and higher level UI modules
-         ;; company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
+         company
+         company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
          ;;; Angular
          ng2-mode ;; will bring typescript-mode
          tide ;; typescript interactive devenv
