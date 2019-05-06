@@ -108,10 +108,12 @@ This depends on major mode having setup syntax table properly."
   (right-word 1)
   (backward-kill-word 1))
 (defun kill-current-symbol ()
+  "Kill atomic sexp at cursor."
   (interactive)
   (backward-sexp 1)
   (kill-sexp 1))
 (defun kill-current-line ()
+  "Kill current line including the newline at the end."
   (interactive)
   (move-beginning-of-line 1)
   (kill-line 1))
@@ -659,6 +661,25 @@ Ignores CHAR at point, and also ignores."
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 (global-set-key [(super h)] 'help-command)
 
+;; select whole line. stumbled upon a complete solution while looking for how to implement shift-selection.
+;; (source: http://emacs.stackexchange.com/a/22166/93)
+(defun mark-current-line (&optional arg)
+  "Uses shift selection to select the current line.
+When there is an existing shift selection, extends the selection
+in the appropriate direction to include current line."
+  (interactive "p")
+  (let ((oldval (or (cdr-safe transient-mark-mode) transient-mark-mode))
+        (backwards (and mark-active (> (mark) (point))))
+        (beg (and mark-active (mark-marker))))
+    (unless beg
+      (if backwards (end-of-line) (beginning-of-line))
+      (setq beg (point-marker)))
+    (if backwards (end-of-line (- 1 arg)) (beginning-of-line (+ 1 arg)))
+    (unless mark-active
+      (push-mark beg nil t))
+    (setq transient-mark-mode (cons 'only oldval))))
+(global-set-key (kbd "C-S-l") 'mark-current-line)
+
 ;;I'm almost always using M-BACKSPACE, so let's use C-1 as yank, which (C-y) is inconvenient
 ;;(global-set-key (kbd "C-1") 'backward-kill-word)
 (global-set-key (kbd "C-2") 'kill-current-word)
@@ -852,7 +873,7 @@ Ignores CHAR at point, and also ignores."
     (if (file-exists-p path)
         (find-file path))))
 ;; Alt-Enter opens included file name at cursor
-(global-set-key (kbd "M-RET") 'open-referenced-file)
+(global-set-key (kbd "<M-return>") 'open-referenced-file)
 
 ;; php mode keybindings
 (add-hook 'php-mode-hook 'setup-php-mode)
@@ -1081,9 +1102,7 @@ Ignores CHAR at point, and also ignores."
 
 ; from Tikhon Jelvis (modified to include bash profile)
 (defun new-shell (name)
-  "Opens a new shell buffer with the given name in
-asterisks (*name*) in the current directory and changes the
-prompt to 'name>'."
+  "Open a new shell buffer with the given name in asterisks (*NAME*) in the current directory and change the prompt to 'name>'."
   (interactive "sName: ")
   (pop-to-buffer (concat "*" name "*"))
   (unless (eq major-mode 'shell-mode)
@@ -1092,7 +1111,8 @@ prompt to 'name>'."
     (delete-region (point-min) (point-max))
     ;; set prompt name && include user bash profile
     (comint-simple-send (get-buffer-process (current-buffer)) 
-                        (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\" && source ~/.bash_profile"))))
+                        (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\" && source ~/.bash_profile"))
+    (set-windmove-keybindings)))
 (global-set-key "\C-c\ s" 'new-shell)
 
 
@@ -1101,9 +1121,9 @@ prompt to 'name>'."
 
 ;; from https://stackoverflow.com/a/15808708/324220
 (defun init-slime-configuration ()
-  ;; causes recursive load error
-  ;;(slime-setup '(slime-fancy slime-fuzzy))
-  (slime-setup)
+  ;; caused recursive load error but now seems ok
+  (slime-setup '(slime-fancy slime-fuzzy))
+  ;;(slime-setup)
   (setq slime-load-failed-fasl 'never)
   ;;causes symbol definition is void error
   ;;(define-key slime-repl-mode-map (kbd "<tab>") 'slime-fuzzy-complete-symbol)
@@ -1158,7 +1178,7 @@ prompt to 'name>'."
 
 ;causes massive inconveniences
 ;; (add-hook 'after-init-hook 'global-company-mode)
-(global-set-key (kbd "S-SPC") 'company-complete)
+(global-set-key (kbd "C-M-i") 'company-complete);; C-M-i is the same as M-TAB
 ;; navigate suggestions popup using C-n/C-p
 (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
 (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)

@@ -126,6 +126,9 @@ alias tinker="rlwrap /Applications/XAMPP/bin/php artisan tinker"
 alias "git-status-publish"="git rev-list --count publish/master..master"
 
 
+alias fix-spotlight='find . -type d -name "node_modules" -exec touch "{}/.metadata_never_index" \;'
+
+
 ### project-specific aliases
 
 alias w="cd /projects"

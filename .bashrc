@@ -22,6 +22,10 @@ shopt -s expand_aliases
 
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
+# add rabbitmq to PATH
+PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
+
+
 # ensure an appropriate bash version is installed (for associative arrays, etc) -- from https://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/
 # brew install bash
 # Add the new shell to the list of allowed shells
