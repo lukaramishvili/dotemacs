@@ -1093,7 +1093,7 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "C-!") 'yank)
 
 (defun google (query)
-  "googles a query"
+  "Search google for QUERY."
   (interactive "sQuery: ")
   (browse-url (concat "http://www.google.com/search?q=" query)))
 
@@ -1104,7 +1104,8 @@ in the appropriate direction to include current line."
 (defun new-shell (name)
   "Open a new shell buffer with the given name in asterisks (*NAME*) in the current directory and change the prompt to 'name>'."
   (interactive "sName: ")
-  (pop-to-buffer (concat "*" name "*"))
+  ;; pop-to-buffer caused more headaches than I can count, opening the shell in different buffers and messing with window layout. switch-to-buffer opens the shell in the current window, so the problem's gone.
+  (switch-to-buffer (concat "*" name "*"))
   (unless (eq major-mode 'shell-mode)
     (shell (current-buffer))
     (sleep-for 0 200)
@@ -1113,7 +1114,7 @@ in the appropriate direction to include current line."
     (comint-simple-send (get-buffer-process (current-buffer)) 
                         (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\" && source ~/.bash_profile"))
     (set-windmove-keybindings)))
-(global-set-key "\C-c\ s" 'new-shell)
+(global-set-key (kbd "C-c s") 'new-shell)
 
 
 
@@ -1121,6 +1122,7 @@ in the appropriate direction to include current line."
 
 ;; from https://stackoverflow.com/a/15808708/324220
 (defun init-slime-configuration ()
+  "Initialize slime configuration."
   ;; caused recursive load error but now seems ok
   (slime-setup '(slime-fancy slime-fuzzy))
   ;;(slime-setup)
