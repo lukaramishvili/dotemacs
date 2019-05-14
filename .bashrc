@@ -261,6 +261,7 @@ d(){
     elif [ $(pwd) = "/projects/lb-bulk" ]
     then
         git push tfs master
+        npm run build
         perl -i -pe 's|<base href="/" />|<base href="/lb-bulk/" />|g' dist/lb-bulk/index.html
         rsync -r -v -e ssh /projects/lb-bulk/dist root@luka.ge:/projects/lb-bulk/
     elif [ $(pwd) = "/www/bookulus.ge" ] || [ $(pwd) = "/www/bookulus.ge/web" ]
