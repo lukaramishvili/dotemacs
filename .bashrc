@@ -26,6 +26,11 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
 
+# fix non-retina screen subpixel antialiasing on Mojave
+# defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+# enable "Use font smoothing when available" in Preferences > General
+
+
 # ensure an appropriate bash version is installed (for associative arrays, etc) -- from https://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/
 # brew install bash
 # Add the new shell to the list of allowed shells
@@ -253,6 +258,11 @@ d(){
         #git push
         #ssh root@luka.ge "cd /projects/lb && git pull"
         #rsync -avz /projects/lb/dist/*.html root@luka.ge:/projects/lb/dist/
+    elif [ $(pwd) = "/projects/lb-bulk" ]
+    then
+        git push tfs master
+        perl -i -pe 's|<base href="/" />|<base href="/lb-bulk/" />|g' dist/lb-bulk/index.html
+        rsync -r -v -e ssh /projects/lb-bulk/dist root@luka.ge:/projects/lb-bulk/
     elif [ $(pwd) = "/www/bookulus.ge" ] || [ $(pwd) = "/www/bookulus.ge/web" ]
     then
         git push

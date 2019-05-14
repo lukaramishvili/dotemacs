@@ -1228,7 +1228,9 @@ in the appropriate direction to include current line."
 ;; ng2-ts-mode is automatically activated in *.component.ts and *.service.ts ng2.html-mode is automatically activated in *.component.html
 ;; no lookahead/lookbehind in elisp regex, so reset above .html binding
 ;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . ng2-mode));web-mode
-(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . ng2-html-mode))
+;;(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . ng2-html-mode))
+;; ng2-html-mode garbles HTML tags on save  
+(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . html-mode))
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
 ;; ###### otherwise all other extension=>mode assignments will stop to work
 
