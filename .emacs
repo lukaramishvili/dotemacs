@@ -399,6 +399,7 @@ Ignores CHAR at point, and also ignores."
 ;; (add-hook 'ng2-ts-mode-hook 'prettier-js-mode)
 ;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
+
 (defun setup-rjsx-mode ()
   "Setup rjsx mode, enable LSP, company, TIDE etc."
   (setq-local indent-line-function 'js-jsx-indent-line)
@@ -447,6 +448,18 @@ Ignores CHAR at point, and also ignores."
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package company-lsp :commands company-lsp)
 
+(require 'flycheck-flow)
+
+;; will only be enabled for files with a //@flow declaration at the first line and a .flowconfig in project root.
+(add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
+;; 
+(with-eval-after-load 'flycheck
+  (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
+  (flycheck-add-mode 'javascript-eslint 'flow-minor-mode)
+  (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
+(with-eval-after-load 'company
+  (add-to-list 'company-backends 'company-flow))
+
 
 ;; Add LSP support for specific major modes: https://github.com/emacs-lsp/lsp-mode#adding-support-for-languages
 
@@ -485,6 +498,27 @@ Ignores CHAR at point, and also ignores."
   "Colorize the compilation buffer."
   (ansi-color-apply-on-region compilation-filter-start (point-max)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+
+;; no hook for tetris-mode
+;; (defun setup-tetris-mode ()
+;;   "Setup tetris mode Emacs keybindings."
+;;   (local-set-key (kbd "C-f") 'tetris-move-right)
+;;   (local-set-key (kbd "C-b") 'tetris-move-left)
+;;   (local-set-key (kbd "C-p") 'tetris-rotate-next)
+;;   (local-set-key (kbd "C-n") 'tetris-move-bottom))
+;; (add-hook 'tetris-mode-hook 'setup-tetris-mode)
+
+(defvar tetris-mode-map
+  (make-sparse-keymap 'tetris-mode-map))
+
+(define-key tetris-mode-map "f"     'tetris-move-right)
+(define-key tetris-mode-map "b"     'tetris-move-left)
+(define-key tetris-mode-map "p"     'tetris-rotate-next)
+(define-key tetris-mode-map "n"     'tetris-move-down)
+(define-key tetris-mode-map " "     'tetris-move-bottom)
+(define-key tetris-mode-map "v"     'tetris-move-bottom)
+(define-key tetris-mode-map (kbd "RET")     'tetris-move-bottom)
 
 
 ;; display project1/samename.js instead of samename.js<project1>
@@ -741,6 +775,9 @@ in the appropriate direction to include current line."
          ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
          ;; React
          rjsx-mode
+         flow-js2-mode ;; flow support in js2-mode
+         flycheck-flow ;; for flow support in flycheck
+         flow-minor-mode
          ;; flycheck / eslint
          flycheck
          add-node-modules-path
@@ -1146,6 +1183,9 @@ in the appropriate direction to include current line."
 
 
 ;;; plugins
+
+;; cd ~/.emacs.d/ && git clone https://github.com/flowtype/flow-for-emacs.git
+(load-file "~/.emacs.d/flow-for-emacs/flow.el")
 
 ; this is my little haskell plugin I'm writing to ease writing in Haskell
 (load "~/dotemacs/haskellito/haskellito.el")
@@ -1909,3 +1949,6 @@ in the appropriate direction to include current line."
   (interactive)
   (project-mode 'meo))
 
+
+(provide '.emacs)
+;;; .emacs ends here

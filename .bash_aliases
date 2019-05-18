@@ -111,6 +111,7 @@ alias npm-registry-luka.ge="npm set registry \"http://lb-npm.luka.ge\""
 alias "gitdiff"="git diff --color | diff-so-fancy"
 
 alias luka.ge="ssh root@luka.ge"
+alias apps="ssh root@172.104.147.98" # apps.luka.ge
 alias crm="ssh Luka.Ramishvili@crmfrontend-dev.lb.ge"
 
 #alias sshpwnuser="ssh pawwwn.com@188.93.88.26 -p 2232"
