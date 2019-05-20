@@ -777,7 +777,8 @@ in the appropriate direction to include current line."
          rjsx-mode
          flow-js2-mode ;; flow support in js2-mode
          flycheck-flow ;; for flow support in flycheck
-         flow-minor-mode
+         flow-minor-mode ;; for flow support in flycheck
+         company-flow ;; company support for flow
          ;; flycheck / eslint
          flycheck
          add-node-modules-path
