@@ -1,12 +1,12 @@
 
 shopt -s expand_aliases
 
-# ~/.bash_profile
+# add to ~/.bash_profile
 # if [ -f ~/.bashrc ]; then
 #     . ~/.bashrc
 # fi
 
-# ~/.bashrc
+# add to ~/.bashrc
 # if [ -f ~/dotemacs/.bashrc ]; then
 #     source ~/dotemacs/.bashrc
 # fi
@@ -25,6 +25,12 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # add rabbitmq to PATH
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
+# to disable Chromium api keys warning (methods that didn't work: .profile, .bashrc, Chromium.app>Info.plist>LSEnvironment):
+# https://gist.github.com/ezeeyahoo/dc4bdd250c6c6468959e107ddaef53f4
+
+
+# launch Firefox's Profile Manager to enable privacy-conscious profile from ffprofile.com
+# /Applications/Firefox.app/Contents/MacOS/firefox -no-remote -ProfileManager
 
 # fix non-retina screen subpixel antialiasing on Mojave
 # defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO

@@ -450,15 +450,15 @@ Ignores CHAR at point, and also ignores."
 
 (require 'flycheck-flow)
 
-;; will only be enabled for files with a //@flow declaration at the first line and a .flowconfig in project root.
-(add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
-;; 
-(with-eval-after-load 'flycheck
-  (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
-  (flycheck-add-mode 'javascript-eslint 'flow-minor-mode)
-  (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
-(with-eval-after-load 'company
-  (add-to-list 'company-backends 'company-flow))
+;; ;; will only be enabled for files with a //@flow declaration at the first line and a .flowconfig in project root.
+;; (add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
+;; ;; 
+;; (with-eval-after-load 'flycheck
+;;   (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
+;;   (flycheck-add-mode 'javascript-eslint 'flow-minor-mode)
+;;   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
+;; (with-eval-after-load 'company
+;;   (add-to-list 'company-backends 'company-flow))
 
 
 ;; Add LSP support for specific major modes: https://github.com/emacs-lsp/lsp-mode#adding-support-for-languages
@@ -756,6 +756,8 @@ in the appropriate direction to include current line."
          ;;; optional packages
          php-mode
          slime
+         ensime
+         haskell-mode
          sclang-extensions
          flymd
          markdown-mode
@@ -1906,49 +1908,20 @@ in the appropriate direction to include current line."
     (split-and-switch-window-below)
     (delete-window)))
 
-(defun lb-mode ()
-  (interactive)
-  (project-mode 'lb))
+(defun lb-mode ()  "Project lb workspace." (interactive) (project-mode 'lb))
+(defun bk-mode ()  "Project bk workspace." (interactive) (project-mode 'bk))
+(defun kt-mode ()  "Project kt workspace." (interactive) (project-mode 'kt))
+(defun asb-mode () "Project asb workspace." (interactive) (project-mode 'asb))
+(defun lw-mode ()  "Project lw workspace." (interactive) (project-mode 'lw))
+(defun ici-mode () "Project ici workspace." (interactive) (project-mode 'ici))
+(defun ald-mode () "Project ald workspace." (interactive) (project-mode 'ald))
+(defun bt-mode ()  "Project bt workspace." (interactive) (project-mode 'bt))
+(defun cx-mode ()  "Project cx workspace." (interactive) (project-mode 'cx))
+(defun pn-mode ()  "Project pn workspace." (interactive) (project-mode 'pn))
+(defun meo-mode () "Project meo workspace." (interactive) (project-mode 'meo))
 
-(defun bk-mode ()
-  (interactive)
-  (project-mode 'bk))
 
-(defun kt-mode ()
-  (interactive)
-  (project-mode 'kt))
 
-(defun asb-mode ()
-  (interactive)
-  (project-mode 'asb))
-
-(defun lw-mode ()
-  (interactive)
-  (project-mode 'lw))
-
-(defun ici-mode ()
-  (interactive)
-  (project-mode 'ici))
-
-(defun ald-mode ()
-  (interactive)
-  (project-mode 'ald))
-
-(defun bt-mode ()
-  (interactive)
-  (project-mode 'bt))
-
-(defun cx-mode ()
-  (interactive)
-  (project-mode 'cx))
-
-(defun pn-mode ()
-  (interactive)
-  (project-mode 'pn))
-
-(defun meo-mode ()
-  (interactive)
-  (project-mode 'meo))
 
 
 (provide '.emacs)
