@@ -448,8 +448,7 @@ Ignores CHAR at point, and also ignores."
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package company-lsp :commands company-lsp)
 
-(require 'flycheck-flow)
-
+;; (require 'flycheck-flow)
 ;; ;; will only be enabled for files with a //@flow declaration at the first line and a .flowconfig in project root.
 ;; (add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
 ;; ;; 

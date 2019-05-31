@@ -223,6 +223,12 @@ vcs-commit(){
 cam(){
     vcs-commit "$*"
 }
+vcs-checkout-master(){
+    git checkout master
+}
+gcm(){
+    vcs-checkout-master
+}
 # deploy - git push and update to server
 d(){
     if [ $(pwd) = "/Users/luka/dotemacs" ]
