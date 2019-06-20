@@ -139,7 +139,7 @@
     "BTTTouchBarVisible" : true,
     "BTTTouchBarUseMonoSpacedFont" : true
   },
-  "BTTPresetUUID" : "3BE342B6-FA91-48B6-A4CA-A51AED300C4A",
+  "BTTPresetUUID" : "CF706761-B108-4BCB-A2F1-6EE2B03B78FF",
   "BTTPresetContent" : [
     {
       "BTTAppBundleIdentifier" : "com.apple.reminders",
@@ -11989,8 +11989,11 @@
           "BTTTriggerType" : 200,
           "BTTTriggerTypeDescription" : "Pinch With Thumb And 4 Fingers",
           "BTTTriggerClass" : "BTTTriggerTypeTouchpadAll",
-          "BTTPredefinedActionType" : 158,
-          "BTTPredefinedActionName" : "Lock Screen",
+          "BTTPredefinedActionType" : -1,
+          "BTTPredefinedActionName" : "No Action",
+          "BTTLayoutIndependentActionChar" : "q",
+          "BTTAutoAdaptActionToKeyboardLayout" : true,
+          "BTTShortcutToSend" : "55,12",
           "BTTEnabled2" : 1,
           "BTTAlternateModifierKeys" : 0,
           "BTTUUID" : "B797D3E3-72B3-4D90-81CB-EA9836D69E39",
