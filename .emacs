@@ -752,6 +752,7 @@ in the appropriate direction to include current line."
          scss-mode
          emmet-mode
          diredful
+         org
          ;;; optional packages
          php-mode
          slime
@@ -1374,6 +1375,8 @@ in the appropriate direction to include current line."
 (add-hook 'ng2-html-mode-hook 'add-web-mode-html-bindings)
 
 (defun add-web-mode-html-bindings ()
+  ;; with an annoying popup, flycheck reports too many errors in HTML files.
+  (flycheck-mode -1)
   ;; insert new tag
   (local-set-key (kbd "C-c i") 'web-mode-element-insert)
   ;; go back one tag
@@ -1713,6 +1716,11 @@ in the appropriate direction to include current line."
 
 }
 }")
+                      (sem . "@each $semantic-color-name, $semantic-color in $semantic-colors {
+        &.CHANGE-ME-#{$semantic-color-name} {
+            @include CHANGE-ME($semantic-color-name);
+        }
+    }")
                       ))
          (is-important (equal "!" (buffer-substring (- (point) 1) (point))))
          (keyword (if is-important
@@ -1848,10 +1856,18 @@ in the appropriate direction to include current line."
                (serve-cmd . "gulp webserver")))
         (pn . ((dir . "/projects/pens")
                (serve-cmd . "open http://localhost:3000 && npm run dev")))
-        (meo . ((dir . "/projects/meomari")
+        (meo-phaser . ((dir . "/projects/meomari")
+                       (serve-cmd . "npm start")
+                       (left-window-file . "/src/index.js")
+                       (right-window-file . "/src/assets")))
+        (meo . ((dir . "/projects/meo")
                 (serve-cmd . "npm start")
-                (left-window-file . "/src/index.js")
-                (right-window-file . "/src/assets")))))
+                (left-window-file . "/src")
+                (right-window-file . "/src/App.js")))
+        (rx . ((dir . "/projects/timers-app")
+                (serve-cmd . "npm run dev")
+                (left-window-file . "/pages")
+                (right-window-file . "/pages/index.js")))))
 
 ;; project-mode
 (defun project-mode (project-name)
@@ -1918,6 +1934,7 @@ in the appropriate direction to include current line."
 (defun cx-mode ()  "Project cx workspace." (interactive) (project-mode 'cx))
 (defun pn-mode ()  "Project pn workspace." (interactive) (project-mode 'pn))
 (defun meo-mode () "Project meo workspace." (interactive) (project-mode 'meo))
+(defun rx-mode () "Project rx workspace." (interactive) (project-mode 'rx))
 
 
 
