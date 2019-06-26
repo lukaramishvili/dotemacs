@@ -757,10 +757,10 @@ in the appropriate direction to include current line."
          ;;; optional packages
          php-mode
          slime
-         slime-company
-         ;; got CPU to 100 and had to force-quit. don't really need every day.
-         ;; slime-docker
          slime-repl-ansi-color
+         slime-company
+         ;; got CPU to 100 (without any images) and had to force-quit. don't really need every day.
+         ;; slime-docker
          ensime
          haskell-mode
          sclang-extensions
@@ -1168,9 +1168,12 @@ in the appropriate direction to include current line."
 
 ;; WARNING: don't call (slime-setup ...) from inside 'slime-load-hook; will cause recursive load error
 (slime-setup '(slime-fancy
+               slime-repl-ansi-color
                slime-company
                slime-fuzzy
-               slime-repl-ansi-color))
+               slime-tramp))
+
+(setq slime-docker-implementations `((sbcl ("sbcl") :docker-machine "default")))
 
 (define-key slime-repl-mode-map (kbd "C-c ;")
   'slime-insert-balanced-comments)
