@@ -389,6 +389,9 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-S-z") 'zap-up-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
 
+;; use M-< and M-> system-wide; BetterTouchTool has no excludes, so listen for cmd-up/down to maintain M-</> behavior
+(global-set-key (kbd "<C-up>") 'beginning-of-buffer)
+(global-set-key (kbd "<C-down>") 'end-of-buffer)
 
 (require 'company)
 ;; aligns annotation to the right hand side
