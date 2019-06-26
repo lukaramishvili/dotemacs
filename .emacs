@@ -369,6 +369,7 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 
 ;;; from better-defaults
 (global-set-key (kbd "s-SPC") 'hippie-expand)
+(global-set-key (kbd "s-S-SPC") 'ispell-complete-word)
 
 (global-set-key (kbd "M-#") 'query-replace)
 (global-set-key (kbd "M-$") 'replace-string)
@@ -756,6 +757,10 @@ in the appropriate direction to include current line."
          ;;; optional packages
          php-mode
          slime
+         slime-company
+         ;; got CPU to 100 and had to force-quit. don't really need every day.
+         ;; slime-docker
+         slime-repl-ansi-color
          ensime
          haskell-mode
          sclang-extensions
@@ -1157,21 +1162,41 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "C-c s") 'new-shell)
 
 
+;;; SLIME
 
 (setq inferior-lisp-program "sbcl")
+
+;; WARNING: don't call (slime-setup ...) from inside 'slime-load-hook; will cause recursive load error
+(slime-setup '(slime-fancy
+               slime-company
+               slime-fuzzy
+               slime-repl-ansi-color))
+
+(define-key slime-repl-mode-map (kbd "C-c ;")
+  'slime-insert-balanced-comments)
+
+;; (local-set-key [tab] ...) would change only the tab key and not C-i.
+(define-key slime-repl-mode-map (kbd "<tab>") 'company-complete)
+(define-key slime-repl-mode-map (kbd "C-c <tab>") 'slime-fuzzy-complete-symbol)
+
+(define-key company-active-map (kbd "\C-n") 'company-select-next)
+(define-key company-active-map (kbd "\C-p") 'company-select-previous)
+(define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
+(define-key company-active-map (kbd "M-.") 'company-show-location)
 
 ;; from https://stackoverflow.com/a/15808708/324220
 (defun init-slime-configuration ()
   "Initialize slime configuration."
-  ;; caused recursive load error but now seems ok
-  (slime-setup '(slime-fancy slime-fuzzy))
-  ;;(slime-setup)
-  (setq slime-load-failed-fasl 'never)
-  ;;causes symbol definition is void error
-  ;;(define-key slime-repl-mode-map (kbd "<tab>") 'slime-fuzzy-complete-symbol)
-  (define-key slime-mode-map (kbd "<tab>") 'slime-fuzzy-complete-symbol))
+  ;; don't define keybindings here; neither with local-set-key nor with define-key.
+  ;;
+  (setq slime-load-failed-fasl 'never))
+
 
 (add-hook 'slime-load-hook 'init-slime-configuration)
+
+;; slime-mode useful keybindings:
+;; C-d show documentation for company's current suggestion (e.g. a function)
+;; M-. jumps to source of company's current suggestion.
 
 
 ;setq load-slime-by-hand t in .emacs on computers where you dont want auto slime
@@ -1183,6 +1208,9 @@ in the appropriate direction to include current line."
   (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
   ;; Optionally, specify the lisp program you are using. Default is "lisp"
   (setq inferior-lisp-program "sbcl"))
+
+;;; END SLIME
+
 
 
 ;;; plugins
