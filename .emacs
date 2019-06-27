@@ -12,6 +12,20 @@
   "Convert ARG to boolean value."
   (not (not arg)))
 
+(defun os ()
+  "Return the current operating system type – mac, windows or linux."
+  (cond
+   ((string-equal system-type "windows-nt") ; Microsoft Windows
+    'windows)
+   ((string-equal system-type "darwin") ; Mac OS X
+    'mac)
+   ((string-equal system-type "gnu/linux") ; linux
+    'linux)))
+
+(defun os-is (os-asked)
+  "Return true if the current operating system matches OS-ASKED."
+  (eq (os) os-asked))
+
 (defun eshell-here ()
   "Open a new shell in the directory associated with the current buffer's file.
 The directory name is added to window name to make multiple eshell windows easier."
@@ -389,9 +403,11 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-S-z") 'zap-up-to-char)
 (global-set-key (kbd "M-z") 'zap-up-to-char-add-newline)
 
-;; use M-< and M-> system-wide; BetterTouchTool has no excludes, so listen for cmd-up/down to maintain M-</> behavior
-(global-set-key (kbd "<C-up>") 'beginning-of-buffer)
-(global-set-key (kbd "<C-down>") 'end-of-buffer)
+;; NOT WORKING; BTT wouldn't allow any combination of disabling/replacing/retaining/overriding keypress combinations for Emacs, so I opted to add this keybinding to apps one by one. the there's also the possibility to map M-<> to CMD-Page Up/Down which is basically the same as CMD-up/down.
+;; [incorrect] use M-< and M-> system-wide; BetterTouchTool has no excludes, so listen for cmd-up/down to maintain M-</> behavior
+;; [incorrect] BUT, REAL keypresses of C-up/down/arrows are used for navigating between windows, so I've remapped their REAL presses to super-P/super-N in BetterTouchTool.
+;; (global-set-key (kbd "<C-up>") 'beginning-of-buffer)
+;; (global-set-key (kbd "<C-down>") 'end-of-buffer)
 
 (require 'company)
 ;; aligns annotation to the right hand side
@@ -609,8 +625,9 @@ Ignores CHAR at point, and also ignores."
 (setq mouse-drag-copy-region nil)
 ;; hide the toolbar (check if available, or signals error in terminal)
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-;; hide the menu (no benefits in hiding the menu on osx)
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;; hide the menu except on macOS, where the menu doesn't take up space. Not that I use it, though.
+(unless (os-is 'mac)
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1)))
 ;; hide the scrollbars, not using them anyway
 ;; also check if available, or signals error in terminal
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -909,7 +926,7 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "C--") 'undo)
 
 (defun preferences ()
-  "\"Preferences\", macOS style. I'm editing .emacs almost every day, so I'm making it straightforward."
+  "\"Preferences\", macOS style. Editing .emacs should be straightforward – I need it every day."
   (interactive)
   (find-file "~/dotemacs/.emacs"))
 (global-set-key (kbd "C-,") 'preferences)
