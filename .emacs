@@ -681,7 +681,10 @@ Ignores CHAR at point, and also ignores."
 ;; CMD-ctrl-K
 (global-set-key (kbd "C-s-K") 'backward-kill-line)
 (global-set-key (kbd "C-M-h") 'backward-kill-sexp)
+(global-set-key [(meta shift h)] 'backward-kill-sexp);; (kbd "M-S-h") didn't work.
+(global-set-key (kbd "<C-backspace>") 'backward-kill-sexp)
 (global-set-key (kbd "<C-M-backspace>") 'backward-kill-sexp)
+(global-set-key (kbd "<M-S-backspace>") 'backward-kill-sexp)
 
 ;; make C-h backspace, and use super-h for help (ctrl-h on my Mac)
 (global-set-key "\C-h" 'backward-delete-char-untabify)
