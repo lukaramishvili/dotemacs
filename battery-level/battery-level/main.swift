@@ -17,7 +17,15 @@ let snapshot = IOPSCopyPowerSourcesInfo().takeRetainedValue()
 // Pull out a list of power sources
 let sources = IOPSCopyPowerSourcesList(snapshot).takeRetainedValue() as Array
 
-let totalBars:Int = 10
+let totalBars:Int = 5
+
+let barFull = "█"
+let barMedium = "▓"
+let barLight = "▒"// very light: "░"
+
+let lightningSymbol = "⚡"
+
+let space = " "
 
 // For each power source...
 for ps in sources {
@@ -25,19 +33,25 @@ for ps in sources {
     let info = IOPSGetPowerSourceDescription(snapshot, ps).takeUnretainedValue() as! [String: AnyObject]
     
     // Pull out the name and capacity
-    if let name = info[kIOPSNameKey] as? String,
-        let capacity = info[kIOPSCurrentCapacityKey] as? Int,
-        let max = info[kIOPSMaxCapacityKey] as? Int {
+    //if
+       
+        //let max = info[kIOPSMaxCapacityKey] as? Int
+    if let capacity = info[kIOPSCurrentCapacityKey] as? Int {
+        let PowerSource = info[kIOPSPowerSourceStateKey] as! String
+        let isCharging = PowerSource == "AC Power"//or != "Battery Power"
+        let remainingBarWhileCharging:String = isCharging ? barMedium : barFull
         let percent:Float = Float(capacity)//round(Float(capacity)/10)*10
         let remainingFraction = Int(round(percent*Float(totalBars)/100.0))// e.g. 3 for ~60% battery
         let drainedFraction = totalBars - remainingFraction// 2/5 battery bars drained
-        let output:String = String(repeating: "▓", count: remainingFraction) + String(repeating: "░", count: drainedFraction)
-        /*for barRemaining in 0..<remainingFraction {
-         print("█")
-         }
-         for barDrained in 0..<drainedFraction {
-         print("░")
-         }*/
+        let batteryBars = String(repeating: remainingBarWhileCharging, count: remainingFraction) + String(repeating: barLight, count: drainedFraction)
+        let percentString = String(Int(percent)) + "%"
+        let lightningString = (isCharging ? lightningSymbol : "")
+        // e.g. ▓▓▓▒▒ 48% ⚡
+        //let output:String = batteryBars + space + percentString + space + lightningString
+        // only 48% ⚡(to save space)
+        let output: String = percentString + space + lightningString
+        
+        //print(info)
         print(output)
     }
 }

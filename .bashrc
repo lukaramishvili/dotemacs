@@ -25,6 +25,11 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # add rabbitmq to PATH
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
+# add Emscripten to PATH
+# Outputs results when called. Who wrote this?!
+# source /code/emsdk/emsdk_env.sh
+source /code/emsdk/emsdk_env.sh > /dev/null
+
 # to disable Chromium api keys warning (methods that didn't work: .profile, .bashrc, Chromium.app>Info.plist>LSEnvironment):
 # https://gist.github.com/ezeeyahoo/dc4bdd250c6c6468959e107ddaef53f4
 

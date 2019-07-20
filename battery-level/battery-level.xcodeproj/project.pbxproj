@@ -14,12 +14,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		A13CCA1A22E33F6D00DD263D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "battery-level";
+			dstSubfolderSpec = 16;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -79,6 +79,7 @@
 				A13CCA1822E33F6D00DD263D /* Sources */,
 				A13CCA1922E33F6D00DD263D /* Frameworks */,
 				A13CCA1A22E33F6D00DD263D /* CopyFiles */,
+				A11D820C22E359DB00685D00 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -121,6 +122,26 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A11D820C22E359DB00685D00 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp ~/dotemacs/battery-level/Build/battery-level/Build/Products/Release/battery-level ~/dotemacs/bin/battery-level\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A13CCA1822E33F6D00DD263D /* Sources */ = {

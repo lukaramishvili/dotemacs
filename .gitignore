@@ -2,4 +2,6 @@
 .vpn_pass
 scel
 xkbswitch-macosx
-
+*.xcactivitylog
+*.noindex
+battery-level/Build
