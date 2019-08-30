@@ -1242,7 +1242,7 @@ in the appropriate direction to include current line."
 ;;; plugins
 
 ;; cd ~/.emacs.d/ && git clone https://github.com/flowtype/flow-for-emacs.git
-(load-file "~/.emacs.d/flow-for-emacs/flow.el")
+;;(load-file "~/.emacs.d/flow-for-emacs/flow.el")
 
 ; this is my little haskell plugin I'm writing to ease writing in Haskell
 (load "~/dotemacs/haskellito/haskellito.el")
@@ -1775,6 +1775,7 @@ in the appropriate direction to include current line."
             @include CHANGE-ME($semantic-color-name);
         }
     }")
+                      (thin . "@include thin()")
                       ))
          (is-important (equal "!" (buffer-substring (- (point) 1) (point))))
          (keyword (if is-important

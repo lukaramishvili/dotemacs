@@ -37,6 +37,9 @@ source /code/emsdk/emsdk_env.sh > /dev/null
 # launch Firefox's Profile Manager to enable privacy-conscious profile from ffprofile.com
 # /Applications/Firefox.app/Contents/MacOS/firefox -no-remote -ProfileManager
 
+# import .csv passwords to Firefox (after closing Firefox):
+# ffpass import --from PASSWORDSFILE.csv -d ~/Library/Application\ Support/Firefox/Profiles/FF_PROFILE_NAME
+
 # fix non-retina screen subpixel antialiasing on Mojave
 # defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 # enable "Use font smoothing when available" in Preferences > General

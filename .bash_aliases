@@ -18,6 +18,7 @@ alias j='jobs -l'
 alias grep="grep --color=auto"
 
 alias o="open"
+alias opn="open"
 
 # Start calculator with math support
 alias bc='bc -l'

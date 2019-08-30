@@ -3,7 +3,7 @@
     {
         "key": "alt+w",
         "command": "editor.action.clipboardCopyAction",
-        "when": "textInputFocus"
+        "when": "editorTextFocus"
     },
     {
         "key": "cmd+c",
@@ -11,39 +11,9 @@
         "when": "textInputFocus"
     },
     {
-        "key": "alt+w",
-        "command": "editor.action.webvieweditor.copy",
-        "when": "!editorFocus && !inputFocus && activeEditor == 'workbench.editor.htmlPreviewPart'"
-    },
-    {
-        "key": "cmd+c",
-        "command": "-editor.action.webvieweditor.copy",
-        "when": "!editorFocus && !inputFocus && activeEditor == 'workbench.editor.htmlPreviewPart'"
-    },
-    {
-        "key": "alt+w",
-        "command": "editor.action.webvieweditor.copy",
-        "when": "!editorFocus && !inputFocus && activeEditor == 'WebviewEditor'"
-    },
-    {
-        "key": "cmd+c",
-        "command": "-editor.action.webvieweditor.copy",
-        "when": "!editorFocus && !inputFocus && activeEditor == 'WebviewEditor'"
-    },
-    {
-        "key": "alt+w",
-        "command": "filesExplorer.copy",
-        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
-    },
-    {
         "key": "cmd+c",
         "command": "-filesExplorer.copy",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
-    },
-    {
-        "key": "alt+w",
-        "command": "keybindings.editor.copyKeybindingEntry",
-        "when": "inKeybindings && keybindingFocus"
     },
     {
         "key": "cmd+c",
@@ -51,34 +21,9 @@
         "when": "inKeybindings && keybindingFocus"
     },
     {
-        "key": "alt+w",
-        "command": "search.action.copyMatch",
-        "when": "fileMatchOrMatchFocus"
-    },
-    {
         "key": "cmd+c",
         "command": "-search.action.copyMatch",
         "when": "fileMatchOrMatchFocus"
-    },
-    {
-        "key": "alt+w",
-        "command": "problems.action.copy",
-        "when": "problemFocus"
-    },
-    {
-        "key": "cmd+c",
-        "command": "-problems.action.copy",
-        "when": "problemFocus"
-    },
-    {
-        "key": "alt+w",
-        "command": "workbench.action.terminal.copySelection",
-        "when": "terminalFocus && terminalTextSelected"
-    },
-    {
-        "key": "cmd+c",
-        "command": "-workbench.action.terminal.copySelection",
-        "when": "terminalFocus && terminalTextSelected"
     },
     {
         "key": "cmd+v",
@@ -719,16 +664,8 @@
             "when": "textInputFocus"
         },
         {
-            "key": "alt+w",
-            "command": "problems.action.copyMessage"
-        },
-        {
             "key": "shift+cmd+c",
             "command": "problems.action.copyRelatedInformationMessage"
-        },
-        {
-            "key": "alt+w",
-            "command": "keybindings.editor.copyCommandKeybindingEntry"
         },
         {
             "key": "shift+alt+1",
@@ -785,5 +722,71 @@
             "key": "cmd+enter",
             "command": "-debug.openBreakpointToSide",
             "when": "breakpointsFocused"
+        },
+        {
+            "key": "ctrl+shift+l",
+            "command": "editor.action.selectHighlights",
+            "when": "editorFocus"
+        },
+        {
+            "key": "shift+cmd+l",
+            "command": "-editor.action.selectHighlights",
+            "when": "editorFocus"
+        },
+        {
+            "key": "cmd+q cmd+q",
+            "command": "workbench.action.quit"
+        },
+        {
+            "key": "cmd+q",
+            "command": "-workbench.action.quit"
+        },
+        {
+            "key": "alt+cmd+w",
+            "command": "workbench.action.closeFolder"
+        },
+        {
+            "key": "cmd+k f",
+            "command": "-workbench.action.closeFolder"
+        },
+        {
+            "key": "alt+cmd+w",
+            "command": "-toggleSearchWholeWord",
+            "when": "searchViewletFocus && searchViewletVisible"
+        },
+        {
+            "key": "alt+cmd+w",
+            "command": "-toggleFindWholeWord",
+            "when": "editorFocus"
+        },
+        {
+            "key": "alt+cmd+w",
+            "command": "-workbench.action.terminal.toggleFindWholeWord",
+            "when": "terminalFindWidgetFocused"
+        },
+        {
+            "key": "alt+cmd+w",
+            "command": "-workbench.action.terminal.toggleFindWholeWordTerminalFocus",
+            "when": "terminalFocus"
+        },
+        {
+            "key": "alt+cmd+g w",
+            "command": "-gitlens.diffLineWithWorking",
+            "when": "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/"
+        },
+        {
+            "key": "cmd+c w",
+            "command": "extension.htmlTagWrap",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "alt+w",
+            "command": "-extension.htmlTagWrap",
+            "when": "editorTextFocus"
+        },
+        {
+            "key": "alt+w",
+            "command": "-gitlens.diffLineWithWorking",
+            "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/"
         }
     ]
