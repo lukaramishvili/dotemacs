@@ -788,5 +788,29 @@
             "key": "alt+w",
             "command": "-gitlens.diffLineWithWorking",
             "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/"
+        },
+        {
+            "key": "cmd+x 2",
+            "command": "workbench.action.splitEditorUp"
+        },
+        {
+            "key": "cmd+x 3",
+            "command": "workbench.action.splitEditorRight"
+        },
+        {
+            "key": "cmd+x shift+3",
+            "command": "workbench.action.splitEditorLeft"
+        },
+        {
+            "key": "cmd+x shift+2",
+            "command": "workbench.action.splitEditorDown"
+        },
+        {
+            "key": "cmd+x 1",
+            "command": "workbench.action.editorLayoutSingle"
+        },
+        {
+            "key": "shift+cmd+a",
+            "command": "-workbench.view.extension.azure"
         }
     ]
