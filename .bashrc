@@ -22,6 +22,9 @@ shopt -s expand_aliases
 
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
+# add mysql to PATH
+PATH="/usr/local/mysql/bin:$PATH"
+
 # add rabbitmq to PATH
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
@@ -44,6 +47,8 @@ source /code/emsdk/emsdk_env.sh > /dev/null
 # defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 # enable "Use font smoothing when available" in Preferences > General
 
+# fix Preview not remembering open files
+defaults write com.apple.Preview NSQuitAlwaysKeepsWindows -bool true
 
 # ensure an appropriate bash version is installed (for associative arrays, etc) -- from https://clubmate.fi/upgrade-to-bash-4-in-mac-os-x/
 # brew install bash

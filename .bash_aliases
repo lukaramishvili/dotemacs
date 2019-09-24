@@ -37,6 +37,8 @@ alias de=dotemacs
 #alias gl="git log"
 alias s="vcs-status"
 alias st="vcs-status"
+# long version
+alias ss="git status"
 alias l="vcs-log"
 alias gl="vcs-log"
 alias gd="vcs-diff"
@@ -97,9 +99,9 @@ alias security-off="sudo spctl --master-disable"
 alias vbox-start="sudo /Library/Application\ Support/VirtualBox/LaunchDaemons/VirtualBoxStartup.sh restart"
 
 #alias php="/Applications/XAMPP/bin/php"
-alias head="/usr/bin/head"
-alias mysql="/Applications/XAMPP/bin/mysql"
-alias mysqldump="/Applications/XAMPP/bin/mysqldump"
+#alias head="/usr/bin/head"
+#alias mysql="/Applications/XAMPP/bin/mysql"
+#alias mysqldump="/Applications/XAMPP/bin/mysqldump"
 
 alias vu="vagrant up"
 alias vh="vagrant halt"

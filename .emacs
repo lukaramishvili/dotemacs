@@ -814,7 +814,9 @@ in the appropriate direction to include current line."
          add-node-modules-path
          prettier-js ;; don't forget to `npm i -g prettier`
          ;;; w3m needed for SuperCollider help system
-         w3m))
+         w3m
+         ;;
+         omnisharp))
 ;; fetch the list of packages available 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -993,6 +995,49 @@ in the appropriate direction to include current line."
 	  (message "Could not extract function info. Press C-F1 to go the description."))))
     (kill-buffer buf)))
 ;; end of php mode keybindings
+
+
+
+
+
+;; install omnisharp server before using csharp-mode
+;; https://github.com/OmniSharp/omnisharp-emacs/blob/master/doc/server-installation.md
+;; M-x omnisharp-install-server
+
+;; for now, to start a project, cd to the solution directory and run $ dotnet run PROJECTNAME
+
+(eval-after-load
+    'company
+  '(add-to-list 'company-backends #'company-omnisharp))
+
+(defun my-csharp-mode-setup ()
+  (omnisharp-mode)
+  (company-mode)
+  (flycheck-mode)
+
+  (setq indent-tabs-mode nil)
+  (setq c-syntactic-indentation t)
+  (c-set-style "ellemtel")
+  (setq c-basic-offset 4)
+  (setq truncate-lines t)
+  (setq tab-width 4)
+  (setq evil-shift-width 4)
+
+  ;;csharp-mode README.md recommends this too
+  ;;(electric-pair-mode 1)       ;; Emacs 24
+  ;;(electric-pair-local-mode 1) ;; Emacs 25
+
+  (local-set-key (kbd "C-c r r") 'omnisharp-run-code-action-refactoring)
+  (local-set-key (kbd "C-c C-c") 'recompile))
+
+(add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
+
+
+
+
+
+
+
 
 ;; C-return is overridden by emmet-mode
 (global-set-key (kbd "<C-return>") 'open-indented-line)
