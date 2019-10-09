@@ -8,6 +8,9 @@
 
 ;;; Code:
 
+;; Changes all yes/no questions to y/n type
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (defun bool (arg)
   "Convert ARG to boolean value."
   (not (not arg)))
@@ -25,6 +28,16 @@
 (defun os-is (os-asked)
   "Return true if the current operating system matches OS-ASKED."
   (eq (os) os-asked))
+
+;; Sets up exec-path-from shell
+;; https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs
+   '("PATH")))
+
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 (defun eshell-here ()
   "Open a new shell in the directory associated with the current buffer's file.
@@ -252,6 +265,16 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
   ;;will call comment-region
   (comment-dwim nil))
 
+;; this one is basically the same but from emacs-for-clojure-book
+(defun toggle-comment-on-line ()
+  "comment or uncomment current line"
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+
+(global-set-key (kbd "C-M-;") 'comment-line)
+
+(global-set-key (kbd "C-;") 'toggle-comment-on-line)
+
 ;; C-return (adds an indented line after current line and moves cursor there) is overridden by emmet-mode
 (defun open-indented-line ()
   (interactive)
@@ -381,6 +404,18 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;; for ispell
 (setenv "DICTIONARY" "en_US")
 
+;; Key binding to use "hippie expand" for text autocompletion
+;; http://www.emacswiki.org/emacs/HippieExpand
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+;; Lisp-friendly hippie expand
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        try-expand-dabbrev-from-kill
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol))
+
 ;;; from better-defaults
 (global-set-key (kbd "s-SPC") 'hippie-expand)
 (global-set-key (kbd "s-S-SPC") 'ispell-complete-word)
@@ -444,6 +479,8 @@ Ignores CHAR at point, and also ignores."
   ;; `M-x package-install [ret] company`
   ;; if using company-mode, uncomment this
   (company-mode +1)
+  ;; javascript editing is easier with subword mode
+  (subword-mode +1)
   )
 ;; format options -- full list at https://github.com/Microsoft/TypeScript/blob/v3.3.1/src/server/protocol.ts#L2858-L2890
 (setq tide-format-options
@@ -547,6 +584,33 @@ Ignores CHAR at point, and also ignores."
 ;; a better buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; Enhances M-x to allow easier execution of commands. Provides
+;; a filterable list of possible commands in the minibuffer
+;; http://www.emacswiki.org/emacs/Smex
+(setq smex-save-file (concat user-emacs-directory ".smex-items"))
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+
+;; Hyphen on Space
+;; Modify smex so that typing a space will insert a hyphen ‘-’ like in normal M-x.
+(defadvice smex (around space-inserts-hyphen activate compile)
+  (let ((ido-cannot-complete-command 
+         `(lambda ()
+            (interactive)
+            (if (string= " " (this-command-keys))
+                (insert ?-)
+              (funcall ,ido-cannot-complete-command)))))
+    ad-do-it))
+;; Update less often
+(defun smex-update-after-load (unused)
+  (when (boundp 'smex-cache)
+    (smex-update)))
+(add-hook 'after-load-functions 'smex-update-after-load)
+
+
+;; projectile everywhere!
+(projectile-global-mode)
+
 (global-set-key (kbd "C-x C-g") 'goto-line)
 
 (show-paren-mode 1)
@@ -555,32 +619,60 @@ Ignores CHAR at point, and also ignores."
       apropos-do-all t
       ;;mouse-yank-at-point t
       require-final-newline t
-      visible-bell t
+      ;; visible bell is aweful.
+      ;; visible-bell t
       load-prefer-newer t
       ediff-window-setup-function 'ediff-setup-windows-plain
       save-place-file (concat user-emacs-directory "places")
       backup-directory-alist `(("." . ,(concat user-emacs-directory
                                                "backups"))))
 
+(setq ring-bell-function 'ignore)
+
 ;; disabled guru mode; doesn't play well with multiple input sources (need arrows with non-english layouts)
 ;; (add-to-list 'load-path "~/.emacs.d/guru-mode")
 ;; (require 'guru-mode)
 ;; (guru-global-mode +1)
 
+;; line numbers
+(global-linum-mode);; -1 for off
+
+;; Highlight current line
+(global-hl-line-mode 1)
+
+;; turns off cursor blink.
+;; I prefer blinking cursor – easier to find, but highlight-line-mode might solve that.
+(blink-cursor-mode 0)
+
+
+;; increase font size for better readability
+(set-face-attribute 'default nil :height 140)
 
 ;;; colors
 ;;(set-background-color "#3f3f3f")
 ;;(set-foreground-color "white")
 
 ;; themes
-(add-to-list 'custom-theme-load-path "~/dotemacs/blackboard-theme")
-(load-theme 'blackboard t)
+(add-to-list 'custom-theme-load-path "~/dotemacs/themes")
+(add-to-list 'load-path "~/dotemacs/themes")
+;; (load-theme 'blackboard t)
+;; (load-theme 'tomorrow-night-bright t)
+;; (load-theme 'tomorrow-night-blue t)
+;; (load-theme 'tomorrow-night-eighties t)
+;; (load-theme 'tomorrow-night t)
+(load-theme 'zenburn t)
+
+;; Color Themes
+;; Read http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/
+;; for a great explanation of emacs color themes.
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html
+;; for a more technical explanation.
+;; (add-to-list 'custom-theme-load-path "~/dotemacs/themes")
+;; (add-to-list 'load-path "~/dotemacs/themes") ;
+;; (load-theme 'tomorrow-night-bright t)
 
 ;;; fonts
 (set-default-font "DejaVu Sans Mono")
-
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 (cd "/projects/")
 
@@ -589,6 +681,13 @@ Ignores CHAR at point, and also ignores."
 ;; disable tab indentation
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
+
+;; shell scripts
+(setq-default sh-basic-offset 2)
+(setq-default sh-indentation 2)
+
+;; full path in title bar
+(setq-default frame-title-format "%b (%f)")
 
 ;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
 (put 'upcase-region 'disabled nil)
@@ -775,8 +874,9 @@ in the appropriate direction to include current line."
          web-mode
          scss-mode
          emmet-mode
-         diredful
+         ;;diredful
          org
+         paredit
          ;;; optional packages
          php-mode
          slime
@@ -784,6 +884,15 @@ in the appropriate direction to include current line."
          slime-company
          ;; got CPU to 100 (without any images) and had to force-quit. don't really need every day.
          ;; slime-docker
+         clojure-mode
+         clojure-mode-extra-font-locking
+         cider
+         ido-completing-read+
+         smex
+         projectile
+         rainbow-delimiters
+         tagedit
+         ;;
          ensime
          haskell-mode
          sclang-extensions
@@ -847,8 +956,9 @@ in the appropriate direction to include current line."
 (require 'free-keys)
 (global-set-key (kbd "s-h s-k") 'free-keys)
 
-(require 'diredful)
-(diredful-mode 1)
+;; didn't do anything by default and didn't find it useful.
+;;(require 'diredful)
+;;(diredful-mode 1)
 
 ;;(when (require 'helm-config)
 ;;  (global-set-key (kbd "s-x") 'helm-M-x)
@@ -859,6 +969,8 @@ in the appropriate direction to include current line."
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+
 
 
 (require 'hungry-delete)
@@ -907,7 +1019,9 @@ in the appropriate direction to include current line."
                                      (interactive)
                                      (markdown-preview-function))))
 
-
+;; enable ffap. also will autofill C-x C-f and C-x C-d with path from ffap-file-at-point.
+(ffap-bindings)
+(global-set-key (kbd "C-x C-f") 'find-file)
 
 
 (global-set-key (kbd "C-M-\\") 'kill-whitespace-around-cursor)
@@ -918,8 +1032,6 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "C-M-S-SPC") 'add-whitespace-around-line)
 (global-set-key (kbd "M-S-SPC") 'add-whitespace-around-block)
 (global-set-key (kbd "<M-S-return>") 'add-whitespace-around-block-and-newline)
-
-(global-set-key (kbd "C-M-;") 'comment-line)
 
 
 (global-set-key (kbd "C-z") 'undo)
@@ -939,11 +1051,13 @@ in the appropriate direction to include current line."
   (interactive)
   ;; a quick hack: nunjucks includes are enclosed in quotes, making them simple s-exps
   ;; for _scss and other static files, just add _ to the start and.scss to the end
-  (let ((path (symbol-name(symbol-at-point))))
+  ;; old code: symbol-at-point ;;((path (symbol-name(symbol-at-point))))
+  (let ((path (ffap-file-at-point)))
     (if (file-exists-p path)
         (find-file path))))
 ;; Alt-Enter opens included file name at cursor
 (global-set-key (kbd "<M-return>") 'open-referenced-file)
+(global-set-key (kbd "M-j") 'open-referenced-file)
 
 ;; php mode keybindings
 (add-hook 'php-mode-hook 'setup-php-mode)
@@ -1066,7 +1180,9 @@ in the appropriate direction to include current line."
 
 (defun setup-javascript-mode ()
   "Setup javascript mode."
-	(local-set-key (kbd "C-c f") 'open-js-lambda-block))
+	(local-set-key (kbd "C-c f") 'open-js-lambda-block)
+  ;; javascript editing is easier with subword mode
+  (subword-mode +1))
 
 (add-hook 'js-mode-hook #'setup-javascript-mode)
 (add-hook 'ng2-ts-mode-hook #'setup-javascript-mode)
@@ -1179,6 +1295,36 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "C-x M-f") 'show-recent-file-list)
 ;; was causing error when installing slime - "Key sequence C-x C-a C-l starts with non-prefix key C-x C-a"
 ;; (global-set-key (kbd "C-x C-a") 'show-recent-file-list)
+
+(setq recentf-save-file (concat user-emacs-directory ".recentf"))
+(setq recentf-max-menu-items 40)
+
+;; ido-mode allows you to more easily navigate choices. For example,
+;; when you want to switch buffers, ido presents you with a list
+;; of buffers in the the mini-buffer. As you start to type a buffer's
+;; name, ido will narrow down the list of buffers to match the text
+;; you've typed in
+;; http://www.emacswiki.org/emacs/InteractivelyDoThings
+(ido-mode t)
+
+;; This allows partial matches, e.g. "tl" will match "Tyrion Lannister"
+(setq ido-enable-flex-matching t)
+
+;; Turn this behavior off because it's annoying
+(setq ido-use-filename-at-point nil)
+
+;; Don't try to match file across all "work" directories; only match files
+;; in the current directory displayed in the minibuffer
+(setq ido-auto-merge-work-directories-length -1)
+
+;; Includes buffer names of recently open files, even if they're not
+;; open now
+(setq ido-use-virtual-buffers t)
+
+;; This enables ido in all contexts where it could be useful, not just
+;; for selecting buffer and file names
+(ido-ubiquitous-mode t)
+(ido-everywhere t)
 
 ;; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 ;; swap regexp search and normal search
@@ -1353,7 +1499,9 @@ in the appropriate direction to include current line."
 (when (require 'web-mode-edit-element nil 'noerror)
   (add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode))
 
-
+;; try subword-mode in web-mode/html-mode
+(add-hook 'html-mode-hook 'subword-mode)
+(add-hook 'web-mode-hook 'subword-mode)
 
 (defun html-mode-with-web-mode-helpers ()
   "I added some modifications to `html-mode` using `web-mode` functions (inaccessible from direct `html-mode`, so I first load web-mode (to load its functions) and then switch to `html-mode`)."
@@ -1520,343 +1668,27 @@ in the appropriate direction to include current line."
   (local-set-key (kbd "C-c f") 'open-js-lambda-block))
 
 
-(defun symbol-before-cursor ()
-  "Returns the symbol (word with optional dashes) before the cursor from current buffer"
-  (let ((cursor-at (point)))
-    (save-excursion
-      (backward-sexp 1)
-      (buffer-substring (point) cursor-at))))
+;; (defun symbol-before-cursor ()
+;;   "Returns the symbol (word with optional dashes) before the cursor from current buffer"
+;;   (let ((cursor-at (point)))
+;;     (save-excursion
+;;       (backward-sexp 1)
+;;       (buffer-substring (point) cursor-at))))
 
-(defun insert-semicolon-consider-existing (&optional append-space)
-  "If there's a semicolon after cursor, jump through it instead of adding another"
-  (interactive)
-  (if (equal ";" (buffer-substring (point) (+ (point) 1)))
-      (forward-char 1)
-    (insert ";"))
-  (when append-space
-    (if (equal " " (buffer-substring (point) (+ (point) 1)))
-        (forward-char 1)
-      (insert " "))))
 
-(defun autocomplete-css-property ()
-  "When user types keyword followed by a colon, autocomplete from predetermined list"
-  (interactive)
-  (let* ((inserters '((a-c . "align-content")
-                      (a-i . "align-items")
-                      (a-s . "align-self")
-                      (bg . "background")
-                      (b-c . "background-color")
-                      (b-i . "background-image")
-                      (b-p . "background-position")
-                      (b-s . "background-size")
-                      (bo . "border")
-                      (bor . "border")
-                      (bo-c . "border-color")
-                      (bor-c . "border-color")
-                      (bo-s . "border-style")
-                      (bor-s . "border-style")
-                      (box-s . "box-shadow")
-                      (bw . "border-width")
-                      (b-w . "border-width")
-                      (bo-w . "border-width")
-                      (bor-w . "border-width")
-                      (b-t . "border-top")
-                      (b-t-w . "border-top-width")
-                      (b-t-s . "border-top-style")
-                      (b-t-c . "border-top-color")
-                      (b-r . "border-right")
-                      (b-r-w . "border-right-width")
-                      (b-r-s . "border-right-style")
-                      (b-r-c . "border-right-color")
-                      (b-b . "border-bottom")
-                      (b-b-w . "border-bottom-width")
-                      (b-b-s . "border-bottom-style")
-                      (b-b-c . "border-bottom-color")
-                      (b-l . "border-left")
-                      (b-l-w . "border-left-width")
-                      (b-l-s . "border-left-style")
-                      (b-l-c . "border-left-color")
-                      (bo-r . "border-radius")
-                      (bor-r . "border-radius")
-                      (b-t-l-r . "border-top-left-radius")
-                      (b-t-r-r . "border-top-right-radius")
-                      (b-b-l-r . "border-bottom-left-radius")
-                      (b-b-r-r . "border-bottom-right-radius")
-                      (b . "bottom")
-                      (c . "color")
-                      (co . "content")
-                      (cu . "cursor")
-                      (cur . "cursor")
-                      (d . "display")
-                      (f . "flex")
-                      (f-d . "flex-direction")
-                      (f-g . "flex-grow")
-                      (fl . "float")
-                      (f-f . "font-family")
-                      (f-s . "flex-shrink")
-                      (fz . "font-size")
-                      (f-st . "font-style")
-                      (f-w . "flex-wrap")
-                      (fw . "font-weight")
-                      (h . "height")
-                      (j-c . "justify-content")
-                      (jc . "justify-content")
-                      (l . "left")
-                      (l-s . "letter-spacing")
-                      (l-s-t . "list-style-type")
-                      (lst . "list-style-type")
-                      (l-h . "line-height")
-                      (lh . "line-height")
-                      (m . "margin")
-                      (m-t . "margin-top")
-                      (mt . "margin-top")
-                      (m-r . "margin-right")
-                      (mr . "margin-right")
-                      (m-b . "margin-bottom")
-                      (mb . "margin-bottom")
-                      (m-l . "margin-left")
-                      (ml . "margin-left")
-                      (min-w . "min-width")
-                      (min-h . "min-height")
-                      (max-w . "max-width")
-                      (max-h . "max-height")
-                      (o . "order")
-                      (or . "order")
-                      (op . "opacity")
-                      (ov . "overflow")
-                      (o-x . "overflow-x")
-                      (o-y . "overflow-y")
-                      (ov-x . "overflow-x")
-                      (ov-y . "overflow-y")
-                      (p . "padding")
-                      (p-t . "padding-top")
-                      (p-r . "padding-right")
-                      (p-b . "padding-bottom")
-                      (p-l . "padding-left")
-                      (p-e . "pointer-events")
-                      (po-e . "pointer-events")
-                      (po . "position")
-                      (r . "right")
-                      (t-a . "text-align")
-                      (t-d . "text-decoration")
-                      (to . "text-overflow")
-                      (t-o . "transform-origin")
-                      (t-s . "text-shadow")
-                      (t-i . "text-indent")
-                      (t-t . "text-transform")
-                      (t . "top")
-                      (tr . "transform")
-                      (trn . "transition")
-                      (tr-o . "transform-origin")
-                      (w-s . "white-space")
-                      (w . "width")
-                      (w-b . "word-break")
-                      (w-w . "word-wrap")
-                      (v . "visibility")
-                      (vi . "visibility")
-                      (v-a . "vertical-align")
-                      (z . "z-index")
-                      (z-i . "z-index")
-                      ))
-         (keyword (symbol-before-cursor))
-         (found-property (cdr (assoc (intern keyword) inserters)))
-         ;;found-property doesn't necessarily start with keyword (e.g. c=color but bc = background-color)
-         (completion (concat found-property ": ")))
-    (if found-property
-        (progn
-          (backward-delete-char (length keyword)); delete typed keyword
-          (insert completion); cursor will be placed after the inserted text
-          (save-excursion ; revert cursor to position before semicolon
-            (insert ";")))
-      (insert ":"))))
 
-(defun autocomplete-css-value (&optional append-space)
-  "When user types a keyword followed by a semicolon, autocomplete common css values"
-  (interactive)
-  (let* ((inserters '((a . "absolute")
-                      (au . "auto")
-                      (ba . "baseline")
-                      (bas . "baseline")
-                      (b . "block")
-                      (bo . "bold")
-                      (bol . "bold")
-                      (bot . "bottom")
-                      (both . "both")
-                      (b-a . "break-all")
-                      (b-w . "break-word")
-                      (cap . "capitalize")
-                      (c . "center")
-                      (co . "column")
-                      (col . "column")
-                      (cov . "cover")
-                      (d . "default")
-                      (e . "text-overflow: ellipsis")
-                      (el . "text-overflow: ellipsis")
-                      (ell . "text-overflow: ellipsis")
-                      (fi . "fixed")
-                      (f . "flex")
-                      (f-e . "flex-end")
-                      (f-s . "flex-start")
-                      (h . "hidden")
-                      (i . "inherit")
-                      (in . "inline")
-                      (i-b . "inline-block")
-                      (i-f . "inline-flex")
-                      (it . "italic")
-                      (j . "justify")
-                      (k-a . "keep-all")
-                      (l . "left")
-                      (m . "middle")
-                      (n . "none")
-                      (nor . "normal")
-                      (now . "nowrap")
-                      (po . "pointer")
-                      (re . "relative")
-                      (r . "right")
-                      (ro . "row")
-                      (s . "stretch")
-                      (sc . "scroll")
-                      (sol . "solid")
-                      (s-a . "space-around")
-                      (s-b . "space-between")
-                      (st . "static")
-                      (te . "text")
-                      (t . "top")
-                      (tr . "transparent")
-                      (u . "underline")
-                      (un . "underline")
-                      (up . "uppercase")
-                      (v . "visible")
-                      (vi . "visible")
-                      (w . "wrap")
-                      (abs . "@include abs(0)")
-                      (absr . "@include absr(0)")
-                      (absbl . "@include absbl(0)")
-                      (absbr . "@include absbr(0)")
-                      (abs0 . "@include abs(0)")
-                      (abs100 . "@include abs(100%, 0)")
-                      (absl100 . "@include abs(100%, 0)")
-                      (absr100 . "@include absr(100%, 0)")
-                      (abst100 . "@include abs(0, 100%)")
-                      (absb100 . "@include absbl(100%, 0)")
-                      (absbl100 . "@include absbl(100%, 0)")
-                      (absbr100 . "@include absbr(100%, 0)")
-                      (cover . "@include abs(0); @include size(100%)")
-                      (abscover . "@include abs(0); @include size(100%)")
-                      (size . "@include size(100%)")
-                      (pse . "content: ''; display: block")
-                      (af . "&:after { }")
-                      (aft . "&:after { }")
-                      (be . "&:before { }")
-                      (bef . "&:before { }")
-                      (bt . "border-top: 1px solid $gray-border")
-                      (br . "border-right: 1px solid $gray-border")
-                      (bb . "border-bottom: 1px solid $gray-border")
-                      (bl . "border-left: 1px solid $gray-border")
-                      (fc . "&:first-child { }")
-                      (fi . "&:first-child { }")
-                      (fo . "&:focus { }")
-                      (ho . "&:hover { }")
-                      (hov . "&:hover { }")
-                      (hover . "&:hover { }")
-                      (la . "&:last-child { }")
-                      (lc . "&:last-child { }")
-                      (nc . "&:nth-child() { }")
-                      (nt . "&:nth-child() { }")
-                      (nth . "&:nth-child() { }")
-                      (odd . "&:nth-child(odd) { }")
-                      (even . "&:nth-child(even) { }")
-                      (b50 . "border-radius: 50%")
-                      (br50 . "border-radius: 50%")
-                      (img . "@include img(1)")
-                      (imgc . "@include img-contain(1)")
-                      (f-a . "@include flex-apart()")
-                      (f-a-c . "@include flex-apart(center)")
-                      (f-a-s . "@include flex-apart(stretch)")
-                      (f-ce . "@include flex-center()")
-                      (f-center . "@include flex-center()")
-                      (f-c-c . "@include flex-col-center()")
-                      (i-f-c . "@include inline-flex-center()")
-                      (f-r . "@include flex-row()")
-                      (f-c . "@include flex-col()")
-                      (f-col . "@include flex-col()")
-                      (rel . "@include rel(0)")
-                      (relt . "@include relt(0)")
-                      (relr . "@include relr(0)")
-                      (relbl . "@include relbl(0)")
-                      (relbr . "@include relbr(0)")
-                      (rel0 . "@include rel(0)")
-                      (fix . "@include fixed(0)")
-                      (fixed . "@include fixed(0)")
-                      (caps . "@include caps")
-                      (fw . "font-weight: bold")
-                      (icon . "@include icon()")
-                      (pse-ci . "@include pseudo-circle()")
-                      (ps-li . "@include pseudo-line(after, $color: )")
-                      (ps-li . "@include pseudo-line(after, $color: )")
-                      (rot . "transform: rotate(0deg)")
-                      (t-l . "text-align: left")
-                      (t-c . "text-align: center")
-                      (t-r . "text-align: right")
-                      (fw . "font-weight: bold")
-                      (fwn . "font-weight: normal")
-                      (fwb . "font-weight: bold")
-                      (item . ".item- {
-.item-img {
-
-}
-.item-details {
-
-}
-.item-title {
-
-}
-.item-desc {
-
-}
-}")
-                      (sem . "@each $semantic-color-name, $semantic-color in $semantic-colors {
-        &.CHANGE-ME-#{$semantic-color-name} {
-            @include CHANGE-ME($semantic-color-name);
-        }
-    }")
-                      (thin . "@include thin()")
-                      ))
-         (is-important (equal "!" (buffer-substring (- (point) 1) (point))))
-         (keyword (if is-important
-                      (progn
-                        ;;delete "!" so that symbol-before-cursor can find the keyword
-                        ;;otherwise, it would return "!"
-                        (if is-important (backward-delete-char 1))
-                        (symbol-before-cursor))
-                    (symbol-before-cursor)))
-         (found-value (cdr (assoc (intern keyword) inserters)))
-         (important-suffix (if is-important " !important" ""))
-         (completion (concat found-value important-suffix)))
-    (if found-value
-        (progn
-          ;;delete typed keyword
-          (backward-delete-char (length keyword))
-          ;;cursor will be placed after the inserted text
-          (insert completion)))
-    ;;add the semicolon or jump through if one's already after cursor
-    (insert-semicolon-consider-existing append-space)))
+(load "~/dotemacs/css-autocomplete.el")
 
 (add-hook 'scss-mode-hook
           (lambda ()
-            (local-set-key (kbd ":") 'autocomplete-css-property)))
+                  (local-set-key (kbd ":") 'autocomplete-css-property)
+                  (local-set-key (kbd ";") (lambda ()
+                                                   (interactive)
+                                                   (autocomplete-css-value t)))
+                  (local-set-key (kbd "C-;") (lambda ()
+                                                     (interactive)
+                                                     (autocomplete-css-value nil)))))
 
-(add-hook 'scss-mode-hook
-          (lambda ()
-            (local-set-key (kbd ";") (lambda ()
-                                       (interactive)
-                                       (autocomplete-css-value t)))))
-
-(add-hook 'scss-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-;") (lambda ()
-                                         (interactive)
-                                         (autocomplete-css-value nil)))))
 
 ;; end CSS autocomplete
 
@@ -2021,7 +1853,9 @@ in the appropriate direction to include current line."
     ;; open views directory in the right tab
     (switch-to-buffer (find-file (concat project-dir right-window-file)))
     (split-and-switch-window-below)
-    (delete-window)))
+    (delete-window)
+    ;; bring focus back to the left window
+    (windmove-left)))
 
 (defun lb-mode ()  "Project lb workspace." (interactive) (project-mode 'lb))
 (defun bk-mode ()  "Project bk workspace." (interactive) (project-mode 'bk))
@@ -2037,6 +1871,38 @@ in the appropriate direction to include current line."
 (defun rx-mode () "Project rx workspace." (interactive) (project-mode 'rx))
 
 
+
+
+
+
+
+;;; try paredit for a while.
+;;; had to disable almost immediately. Gives `unbalanced parentheses` error on correct parens.
+
+;; ;; Automatically load paredit when editing a lisp file
+;; ;; More at http://www.emacswiki.org/emacs/ParEdit
+;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+;; (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+;; (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+;; (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+;; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+
+;; eldoc-mode shows documentation in the minibuffer when writing code
+;; http://www.emacswiki.org/emacs/ElDoc
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
+
+;;;; Clojure mode with cider
+;; for performance, move to fn; don't load by default
+(defun setup-clojure ()
+  (load "~/dotemacs/setup-clojure.el"))
+
+(defun clojure-repl ()
+  (cider-jack-in))
 
 
 
