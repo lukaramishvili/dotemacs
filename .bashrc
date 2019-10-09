@@ -188,6 +188,33 @@ f(){
     ag -R --ignore node_modules "$*" .
 }
 
+# compile C directly to wasm:
+# https://dassur.ma/things/c-to-webassembly/
+# and run it with this:
+# <!DOCTYPE html>
+
+# <script type="module">
+# async function init() {
+#     const { instance } = await WebAssembly.instantiateStreaming(
+#         fetch("./output.wasm")
+#     );
+#     console.log(instance.exports.add(4, 1));
+# }
+# init();
+# </script>
+# --nostdlib -- Don’t try and link against a standard library
+# -Wl,--no-entry,-Wl,--export-all \ # Flags passed to the linker
+c2wasm(){
+    NAME=`echo "$*" | cut -d'.' -f1`
+    EXTENSION=`echo "$*" | cut -d'.' -f2`
+    clang --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all -o "${NAME}.wasm" "$*"
+}
+
+c2html(){
+    emcc "$*" -s WASM=1 -o "${NAME}.html"    
+}
+
+
 #cannot name it either s or st, so named it vcs-status and aliased s and st
 vcs-status(){
     if [ -d ./.hg ]; then

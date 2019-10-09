@@ -194,3 +194,8 @@ alias bts="cd /projects/bt && gulp serve"
 #alias penserve="cd /projects/pens && npm run dev"
 
 
+alias pas="php artisan serve"
+alias t="php artisan tinker"
+alias pat="php artisan tinker"
+
+alias clojure="rlwrap clojure"
