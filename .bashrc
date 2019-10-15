@@ -33,6 +33,31 @@ PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 # source /code/emsdk/emsdk_env.sh
 source /code/emsdk/emsdk_env.sh > /dev/null
 
+if [ ! -d ~/z.lua ]; then
+  git clone https://github.com/skywind3000/z.lua ~/z.lua
+fi
+
+# easier to remember
+alias clipboard="pbcopy"
+
+# set $_ZL_CMD in .bashrc/.zshrc to change the command (default z).
+# set $_ZL_DATA in .bashrc/.zshrc to change the datafile (default ~/.zlua).
+# set $_ZL_NO_PROMPT_COMMAND if you're handling PROMPT_COMMAND yourself.
+# set $_ZL_EXCLUDE_DIRS to a comma separated list of dirs to exclude.
+# set $_ZL_ADD_ONCE to '1' to update database only if $PWD changed.
+# set $_ZL_MAXAGE to define a aging threshold (default is 5000).
+# set $_ZL_CD to specify your own cd command.
+# set $_ZL_ECHO to 1 to display new directory name after cd.
+# set $_ZL_MATCH_MODE to 1 to enable enhanced matching.
+# set $_ZL_NO_CHECK to 1 to disable path validation, use z --purge to clean
+#
+# some vars won't work without export (e.g. _ZL_DATA)
+#
+export _ZL_CMD="cd" # "d"
+export _ZL_DATA="~/dotemacs/.zlua"
+export _ZL_ECHO=1
+eval "$(lua ~/z.lua/z.lua --init bash enhanced once fzf)"
+
 # to disable Chromium api keys warning (methods that didn't work: .profile, .bashrc, Chromium.app>Info.plist>LSEnvironment):
 # https://gist.github.com/ezeeyahoo/dc4bdd250c6c6468959e107ddaef53f4
 
@@ -270,7 +295,7 @@ gcm(){
     vcs-checkout-master
 }
 # deploy - git push and update to server
-d(){
+deploy(){
     if [ $(pwd) = "/Users/luka/dotemacs" ]
     then
         hg push 2>/dev/null
@@ -360,7 +385,7 @@ qd(){
     vcs-status
     # no parens without quotes - see comment about $* in cam()
     vcs-commit "$*"
-    d # deploy - will update server code on specific projects; git push otherwise
+    deploy # deploy - will update server code on specific projects; git push otherwise
     #
     if [ $(pwd) = "/projects/wom" ]; then
         git push # also push to alternate remote
