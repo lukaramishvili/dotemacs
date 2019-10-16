@@ -37,6 +37,16 @@ if [ ! -d ~/z.lua ]; then
   git clone https://github.com/skywind3000/z.lua ~/z.lua
 fi
 
+
+# download leiningen install script
+if [ ! -e /usr/local/bin/lein ]; then
+  wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein -O /usr/local/bin/lein
+  chmod +x /usr/local/bin/lein
+  # install it
+  lein
+fi
+
+
 # easier to remember
 alias clipboard="pbcopy"
 
@@ -57,6 +67,11 @@ export _ZL_CMD="cd" # "d"
 export _ZL_DATA="~/dotemacs/.zlua"
 export _ZL_ECHO=1
 eval "$(lua ~/z.lua/z.lua --init bash enhanced once fzf)"
+
+# keep original cd
+cdd(){
+  builtin cd "$*"
+}
 
 # to disable Chromium api keys warning (methods that didn't work: .profile, .bashrc, Chromium.app>Info.plist>LSEnvironment):
 # https://gist.github.com/ezeeyahoo/dc4bdd250c6c6468959e107ddaef53f4
