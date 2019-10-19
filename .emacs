@@ -960,11 +960,6 @@ in the appropriate direction to include current line."
 ;;(require 'diredful)
 ;;(diredful-mode 1)
 
-;;(when (require 'helm-config)
-;;  (global-set-key (kbd "s-x") 'helm-M-x)
-;;  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-;;  ;;(global-set-key (kbd "C-x C-f") #'helm-find-files)
-;;  (helm-mode 1))
 
 
 (when (memq window-system '(mac ns x))
@@ -1203,7 +1198,7 @@ in the appropriate direction to include current line."
   (global-set-key (kbd "<escape> <up>") 'windmove-up)
   (global-set-key (kbd "<escape> <down>") 'windmove-down)
 
-  (global-set-key (kbd "M-n") 'new-frame)
+  (global-set-key (kbd "M-S-n") 'new-frame)
 
   (global-set-key [(super b)] 'windmove-left)
   (global-set-key [(super f)] 'windmove-right)
@@ -1305,26 +1300,62 @@ in the appropriate direction to include current line."
 ;; name, ido will narrow down the list of buffers to match the text
 ;; you've typed in
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
+(defun ido-keybindings ()
+  "Keybindings for ido mode."
+  ;; by default, ido-mode uses C-f for reverting to Emacs find-file engine, and C-b for reverting to Emacs switch-buffer engine.
+  ;; C-f/b is easier to use for navigation, so I'm swapping them.
+  ;; for more information, M-. on any 'ido-* function and search for ido-common-completion-map.
+  ;; navigate matches with C-f/C-b.
+  (define-key ido-completion-map (kbd "C-f") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-b") 'ido-prev-match)
+  ;; revert to Emacs engines with C-r when needed (works on both find-file and switch-buffer)
+  (define-key ido-completion-map "\C-r" 'ido-fallback-command)
+  ;; also use up/down for navigating matches.
+  (define-key ido-completion-map [down] 'ido-next-match) 
+  (define-key ido-completion-map [up]   'ido-prev-match)
+  ;; choose first match with TAB (like RETURN)
+  (define-key ido-completion-map "\t"   'ido-exit-minibuffer))
+
+(add-hook 'ido-setup-hook #'ido-keybindings)
+
+;; Enable ido-mode
 (ido-mode t)
 
 ;; This allows partial matches, e.g. "tl" will match "Tyrion Lannister"
 (setq ido-enable-flex-matching t)
 
 ;; Turn this behavior off because it's annoying
-(setq ido-use-filename-at-point nil)
+;;(setq ido-use-filename-at-point nil)
+;; Trying its guessing algorithm for a while.
+(setq ido-use-filename-at-point 'guess)
+(setq ido-use-url-at-point nil)
 
 ;; Don't try to match file across all "work" directories; only match files
 ;; in the current directory displayed in the minibuffer
 (setq ido-auto-merge-work-directories-length -1)
 
-;; Includes buffer names of recently open files, even if they're not
-;; open now
+;; Includes buffer names of recently open files, even if they're not open now
 (setq ido-use-virtual-buffers t)
+
+;; Don't ask permission for new buffers
+(setq ido-create-new-buffer 'always)
+
+;; Emphasize some file extensions over others
+(setq ido-file-extensions-order '(".js" ".ts" ".scss" ".php" ".html" ".blade.php" ".emacs" ".el"))
 
 ;; This enables ido in all contexts where it could be useful, not just
 ;; for selecting buffer and file names
 (ido-ubiquitous-mode t)
 (ido-everywhere t)
+
+;; Helm program model is incompatible with using TAB. Every couple months I try to
+;; revisit Helm and end up disabling it in a minute and a half because of it.
+;; ido-everywhere is incompatible with helm, don't forget to disable when enabling helm.
+;; (when (require 'helm-config)
+;;   (global-set-key (kbd "s-x") 'helm-M-x)
+;;   (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+;;   (global-set-key (kbd "C-x C-f") #'helm-find-files)
+;;   (helm-mode 1))
 
 ;; bind interactive regex search to C-M-r and C-M-s (add alt to search for regex)
 ;; swap regexp search and normal search
@@ -1633,7 +1664,8 @@ in the appropriate direction to include current line."
   (local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
   ;; (local-set-key (kbd "M-n") 'sgml-skip-tag-forward)
   ;; see OLD:/NEW: comment above
-  (local-set-key (kbd "M-n") 'new-frame)
+  ;; ALSO: move to M-S-n -- 'make-frame isn't used often, and M-n/M-p are too useful to waste.
+  (local-set-key (kbd "M-S-n") 'make-frame)
   ;; enter (go inside) tag
   (local-set-key (kbd "C-c e") 'web-mode-dom-traverse)
   ;; exit (go outside) current tag
@@ -1696,7 +1728,7 @@ in the appropriate direction to include current line."
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
 ;;; also esc-arrows for navigating between split windows is located in #'set-windmove-keybindings
 (global-set-key (kbd "<escape> k") 'kill-buffer)
-(global-set-key (kbd "<escape> n") 'new-frame)
+(global-set-key (kbd "<escape> n") 'make-frame)
 (global-set-key (kbd "<escape> 0") 'delete-window)
 (global-set-key (kbd "<escape> <escape> 0") 'delete-frame)
 (global-set-key (kbd "<escape> 5") 'delete-frame)

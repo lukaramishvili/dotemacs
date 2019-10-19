@@ -28,6 +28,15 @@ PATH="/usr/local/mysql/bin:$PATH"
 # add rabbitmq to PATH
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
+
+# autocomplete symlinked directories, add trailing slash, make completion case insensitive
+# If ~/.inputrc doesn't exist yet: First include the original /etc/inputrc
+# so it won't get overriden
+if [ ! -a ~/.inputrc ]; then echo '$include /etc/inputrc
+set completion-ignore-case On
+set mark-symlinked-directories on' > ~/.inputrc; fi
+
+
 # add Emscripten to PATH
 # Outputs results when called. Who wrote this?!
 # source /code/emsdk/emsdk_env.sh
@@ -63,7 +72,7 @@ alias clipboard="pbcopy"
 #
 # some vars won't work without export (e.g. _ZL_DATA)
 #
-export _ZL_CMD="cd" # "d"
+export _ZL_CMD="d" # "cd" breaks things, e.g. ruby gem
 export _ZL_DATA="~/dotemacs/.zlua"
 export _ZL_ECHO=1
 eval "$(lua ~/z.lua/z.lua --init bash enhanced once fzf)"
