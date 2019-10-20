@@ -1314,7 +1314,9 @@ in the appropriate direction to include current line."
   (define-key ido-completion-map [down] 'ido-next-match) 
   (define-key ido-completion-map [up]   'ido-prev-match)
   ;; choose first match with TAB (like RETURN)
-  (define-key ido-completion-map "\t"   'ido-exit-minibuffer))
+  (define-key ido-completion-map "\t"   'ido-exit-minibuffer)
+  (define-key ido-completion-map (kbd "S-<tab>")   'ido-delete-backward-updir)
+  (define-key ido-completion-map (kbd "C-h")   'ido-delete-backward-updir))
 
 (add-hook 'ido-setup-hook #'ido-keybindings)
 
