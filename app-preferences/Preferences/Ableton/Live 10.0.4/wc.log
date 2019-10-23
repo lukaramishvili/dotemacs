@@ -1,0 +1,19 @@
+INFO:2019-01-07 13:06:53,566:abl.webconnector.main:Start
+INFO:2019-01-07 13:06:53,567:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-07 13:06:58,569:abl.webconnector.main:Upload info.
+INFO:2019-01-07 13:06:58,578:abl.webconnector.main:End
+INFO:2019-01-12 14:25:19,847:abl.webconnector.main:Start
+INFO:2019-01-12 14:25:19,849:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-12 14:25:24,853:abl.webconnector.main:Upload info.
+INFO:2019-01-12 14:25:24,865:abl.webconnector.main:End
+INFO:2019-01-13 13:14:49,469:abl.webconnector.main:Start
+INFO:2019-01-13 13:14:49,471:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-13 13:14:54,473:abl.webconnector.main:Upload info.
+INFO:2019-01-13 13:14:54,487:abl.webconnector.main:End
+INFO:2019-01-13 13:18:41,850:abl.webconnector.main:Start
+INFO:2019-01-13 13:18:41,851:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-13 13:18:46,857:abl.webconnector.main:Upload info.
+INFO:2019-01-13 13:18:46,875:abl.webconnector.main:End
+INFO:2019-01-13 13:19:21,870:abl.webconnector.main:Start
+INFO:2019-01-13 13:19:21,871:abl.webconnector.main:No internet connection available, aborting.
+ERROR:2019-01-13 13:19:21,871:abl.webconnector.main:
