@@ -59,6 +59,17 @@ fi
 # easier to remember
 alias clipboard="pbcopy"
 
+
+backup-app-shortcuts(){
+  # WARNING: plutil is DESTRUCTIVE; it MODIFIES the file argument IN PLACE, so copy it first before converting it.
+  cp ~/Library/Preferences/.GlobalPreferences.plist ~/dotemacs/bettertouchtool/.GlobalPreferences.plist
+  cp ~/dotemacs/bettertouchtool/.GlobalPreferences.plist ~/dotemacs/bettertouchtool/.GlobalPreferences.xml
+  plutil -convert xml1 ~/dotemacs/bettertouchtool/.GlobalPreferences.xml
+  # use `plutil -convert binary1 .GlobalPreferences.plist` to convert back to plist
+}
+
+
+
 # set $_ZL_CMD in .bashrc/.zshrc to change the command (default z).
 # set $_ZL_DATA in .bashrc/.zshrc to change the datafile (default ~/.zlua).
 # set $_ZL_NO_PROMPT_COMMAND if you're handling PROMPT_COMMAND yourself.

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>646F6E7A_00000000_00000001_6E7A6361_696D6963</key>
+	<integer>1</integer>
+	<key>ADATA USB Flash Drive</key>
+	<string>1</string>
+	<key>AKAI PROFESSIONAL,LP MPK mini</key>
+	<string>1</string>
+	<key>AKDeviceUnlockState</key>
+	<true/>
+	<key>AKLastCheckInAttemptDate</key>
+	<date>2019-10-22T20:30:32Z</date>
+	<key>AKLastCheckInSuccessDate</key>
+	<date>2019-10-22T20:30:33Z</date>
+	<key>AKLastEmailListRequestDateKey</key>
+	<date>2019-10-18T05:59:56Z</date>
+	<key>AKLastIDMSEnvironment</key>
+	<integer>0</integer>
+	<key>Apple Inc. iBridge</key>
+	<string>1</string>
+	<key>AppleActionOnDoubleClick</key>
+	<string>Maximize</string>
+	<key>AppleAntiAliasingThreshold</key>
+	<integer>4</integer>
+	<key>AppleAquaColorVariant</key>
+	<integer>1</integer>
+	<key>AppleEnableSwipeNavigateWithScrolls</key>
+	<true/>
+	<key>AppleICUForce24HourTime</key>
+	<true/>
+	<key>AppleInterfaceStyle</key>
+	<string>Dark</string>
+	<key>AppleLanguages</key>
+	<array>
+		<string>en-US</string>
+		<string>ka-GE</string>
+	</array>
+	<key>AppleLanguagesDidMigrate</key>
+	<string>10.14.3</string>
+	<key>AppleLocale</key>
+	<string>en_GE</string>
+	<key>AppleMeasurementUnits</key>
+	<string>Centimeters</string>
+	<key>AppleMetricUnits</key>
+	<true/>
+	<key>AppleMiniaturizeOnDoubleClick</key>
+	<false/>
+	<key>AppleShowScrollBars</key>
+	<string>Automatic</string>
+	<key>AppleTemperatureUnit</key>
+	<string>Celsius</string>
+	<key>CGFontRenderingFontSmoothingDisabled</key>
+	<false/>
+	<key>Focusrite A.E. Ltd Launchpad Pro</key>
+	<string>1</string>
+	<key>Identive SCR33xx v2.0 USB SC Reader</key>
+	<string>1</string>
+	<key>InitialKeyRepeat</key>
+	<integer>15</integer>
+	<key>KeyRepeat</key>
+	<integer>2</integer>
+	<key>Logitech USB Receiver</key>
+	<string>1</string>
+	<key>NSAutomaticCapitalizationEnabled</key>
+	<true/>
+	<key>NSAutomaticDashSubstitutionEnabled</key>
+	<true/>
+	<key>NSAutomaticPeriodSubstitutionEnabled</key>
+	<true/>
+	<key>NSAutomaticQuoteSubstitutionEnabled</key>
+	<true/>
+	<key>NSAutomaticSpellingCorrectionEnabled</key>
+	<false/>
+	<key>NSAutomaticTextCompletionEnabled</key>
+	<true/>
+	<key>NSCloseAlwaysConfirmsChanges</key>
+	<true/>
+	<key>NSLinguisticDataAssetsRequestTime</key>
+	<date>2019-10-22T21:13:22Z</date>
+	<key>NSLinguisticDataAssetsRequested</key>
+	<array>
+		<string>en</string>
+		<string>en_FR</string>
+		<string>fr</string>
+		<string>en_GB</string>
+		<string>ka</string>
+		<string>pl</string>
+		<string>ka_FR</string>
+		<string>pt</string>
+		<string>tr</string>
+		<string>it</string>
+		<string>en_GE</string>
+		<string>ka_GE</string>
+		<string>en_US</string>
+		<string>nb</string>
+	</array>
+	<key>NSNavPanelFileLastListModeForOpenModeKey</key>
+	<integer>3</integer>
+	<key>NSNavPanelFileListModeForOpenMode2</key>
+	<integer>3</integer>
+	<key>NSNavRecentPlaces</key>
+	<array>
+		<string>/projects/lb/icons</string>
+		<string>/projects/crm</string>
+		<string>~/Documents/ardi/design mobile</string>
+		<string>~/dotemacs/bettertouchtool</string>
+		<string>~/Google Drive/luka/home/karada</string>
+	</array>
+	<key>NSPersonNameDefaultDisplayNameOrder</key>
+	<integer>0</integer>
+	<key>NSPersonNameDefaultShortNameFormat</key>
+	<integer>0</integer>
+	<key>NSPersonNameDefaultShouldPreferNicknamesPreference</key>
+	<integer>0</integer>
+	<key>NSPreferredWebServices</key>
+	<dict>
+		<key>NSWebServicesProviderWebSearch</key>
+		<dict>
+			<key>NSDefaultDisplayName</key>
+			<string>Google</string>
+			<key>NSProviderIdentifier</key>
+			<string>com.google.www</string>
+		</dict>
+	</dict>
+	<key>NSUserDictionaryReplacementItems</key>
+	<array>
+		<dict>
+			<key>on</key>
+			<integer>1</integer>
+			<key>replace</key>
+			<string>omw</string>
+			<key>with</key>
+			<string>On my way!</string>
+		</dict>
+	</array>
+	<key>NSUserKeyEquivalents</key>
+	<dict>
+		<key>Minimise</key>
+		<string>@~^m</string>
+		<key>Minimise All</key>
+		<string>@~^$m</string>
+		<key>Minimize</key>
+		<string>@~^m</string>
+		<key>Minimize All</key>
+		<string>@~^$m</string>
+	</dict>
+	<key>NXP PTN5002</key>
+	<string>1</string>
+	<key>NavPanelFileListModeForOpenMode</key>
+	<integer>2</integer>
+	<key>Numark MixTrack Pro 3</key>
+	<string>1</string>
+	<key>WebAutomaticSpellingCorrectionEnabled</key>
+	<false/>
+	<key>_HIHideMenuBar</key>
+	<true/>
+	<key>com.apple.finder.SyncExtensions</key>
+	<dict>
+		<key>dirMap</key>
+		<dict>
+			<key>com.adobe.accmac.ACCFinderSync</key>
+			<array/>
+			<key>com.google.GoogleDrive.FinderSyncAPIExtension</key>
+			<array/>
+		</dict>
+	</dict>
+	<key>com.apple.mouse.scaling</key>
+	<real>3</real>
+	<key>com.apple.scrollwheel.scaling</key>
+	<real>0.3125</real>
+	<key>com.apple.sound.beep.flash</key>
+	<integer>0</integer>
+	<key>com.apple.springing.delay</key>
+	<real>0.5</real>
+	<key>com.apple.springing.enabled</key>
+	<true/>
+	<key>com.apple.swipescrolldirection</key>
+	<true/>
+	<key>com.apple.trackpad.forceClick</key>
+	<true/>
+	<key>com.apple.trackpad.scaling</key>
+	<real>3</real>
+	<key>motorola Moto Z (2)</key>
+	<string>1</string>
+</dict>
+</plist>
