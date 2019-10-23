@@ -5,3 +5,5 @@ xkbswitch-macosx
 *.xcactivitylog
 *.noindex
 battery-level/Build
+
+mac-app-preferences/Preferences/Adobe Photoshop CC 2017 Settings
