@@ -71,7 +71,7 @@ backup-app-shortcuts(){
 }
 
 backup-mac-preferences(){
-  cp -R ~/Library/Preferences ~/dotemacs/bettertouchtool/mac-app-preferences/
+  cp -R ~/Library/Preferences ~/dotemacs/mac-app-preferences/
 }
 
 
