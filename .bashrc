@@ -60,18 +60,21 @@ fi
 alias clipboard="pbcopy"
 
 
-backup-app-shortcuts(){
+backup-mac-preferences(){
   # backup the app shortcuts preferences plist
-  cp ~/Library/Preferences/.GlobalPreferences.plist ~/dotemacs/app-shortcuts/.GlobalPreferences.plist
-  # store 
-  cp ~/dotemacs/app-shortcuts/.GlobalPreferences.plist ~/dotemacs/app-shortcuts/.GlobalPreferences.xml
+  cp ~/Library/Preferences/.GlobalPreferences.plist ~/dotemacs/mac-preferences/.GlobalPreferences.plist
+  # store an xml copy for easy inspection
+  cp ~/dotemacs/mac-preferences/.GlobalPreferences.plist ~/dotemacs/mac-preferences/.GlobalPreferences.xml
   # WARNING: plutil is DESTRUCTIVE; it MODIFIES the file argument IN PLACE, that's why we're copying it first before converting it.
-  plutil -convert xml1 ~/dotemacs/app-shortcuts/.GlobalPreferences.xml
-  # use `plutil -convert binary1 .GlobalPreferences.plist` to convert back to plist
+  plutil -convert xml1 ~/dotemacs/mac-preferences/.GlobalPreferences.xml
+  # to convert back to .plist, use `plutil -convert binary1 .GlobalPreferences.plist`
 }
 
-backup-mac-preferences(){
-  cp -R ~/Library/Preferences ~/dotemacs/mac-app-preferences/
+backup-app-preferences(){
+  # backup app preferences, mainly intended for custom App Shortcuts defined in System > Keyboard > App Shortcuts.
+  # each .plist file contains app shortcuts (keybindings) for its corresponding app.
+  # for example, app-preferences/Preferences/org.mozilla.firefox.plist contains custom keyboard shortcuts for Firefox.
+  cp -R ~/Library/Preferences ~/dotemacs/app-preferences/
 }
 
 
