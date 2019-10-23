@@ -89,7 +89,7 @@ backup-mac-preferences(){
 # some vars won't work without export (e.g. _ZL_DATA)
 #
 export _ZL_CMD="d" # "cd" breaks things, e.g. ruby gem
-export _ZL_DATA="~/dotemacs/.zlua"
+export _ZL_DATA="~/.zlua"
 export _ZL_ECHO=1
 eval "$(lua ~/z.lua/z.lua --init bash enhanced once fzf)"
 
