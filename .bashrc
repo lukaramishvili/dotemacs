@@ -61,13 +61,18 @@ alias clipboard="pbcopy"
 
 
 backup-app-shortcuts(){
-  # WARNING: plutil is DESTRUCTIVE; it MODIFIES the file argument IN PLACE, so copy it first before converting it.
-  cp ~/Library/Preferences/.GlobalPreferences.plist ~/dotemacs/bettertouchtool/.GlobalPreferences.plist
-  cp ~/dotemacs/bettertouchtool/.GlobalPreferences.plist ~/dotemacs/bettertouchtool/.GlobalPreferences.xml
-  plutil -convert xml1 ~/dotemacs/bettertouchtool/.GlobalPreferences.xml
+  # backup the app shortcuts preferences plist
+  cp ~/Library/Preferences/.GlobalPreferences.plist ~/dotemacs/app-shortcuts/.GlobalPreferences.plist
+  # store 
+  cp ~/dotemacs/app-shortcuts/.GlobalPreferences.plist ~/dotemacs/app-shortcuts/.GlobalPreferences.xml
+  # WARNING: plutil is DESTRUCTIVE; it MODIFIES the file argument IN PLACE, that's why we're copying it first before converting it.
+  plutil -convert xml1 ~/dotemacs/app-shortcuts/.GlobalPreferences.xml
   # use `plutil -convert binary1 .GlobalPreferences.plist` to convert back to plist
 }
 
+backup-mac-preferences(){
+  cp -R ~/Library/Preferences ~/dotemacs/bettertouchtool/mac-app-preferences/
+}
 
 
 # set $_ZL_CMD in .bashrc/.zshrc to change the command (default z).
