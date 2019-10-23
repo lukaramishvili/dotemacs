@@ -1,0 +1,811 @@
+2018-12-29T20:32:05.545626: info: #######################################
+2018-12-29T20:32:05.545724: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2018-12-29T20:32:05.545739: info: #######################################
+2018-12-29T20:32:05.545765: info: Directories: Application Support: Check
+2018-12-29T20:32:05.545776: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2018-12-29T20:32:05.545787: info: Directories: Documents: Check
+2018-12-29T20:32:05.545797: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2018-12-29T20:32:05.545807: info: Directories: Legal: Check
+2018-12-29T20:32:05.545816: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2018-12-29T20:32:05.545826: info: Directories: OS Desktop: Check
+2018-12-29T20:32:05.545836: info: Directories: OS Desktop: /Users/luka/Desktop/
+2018-12-29T20:32:05.545846: info: Directories: User Home: Check
+2018-12-29T20:32:05.545856: info: Directories: User Home: /Users/luka/
+2018-12-29T20:32:05.545866: info: Directories: Preferences: Check
+2018-12-29T20:32:05.545878: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2018-12-29T20:32:05.545888: info: Exception: 
+2018-12-29T20:32:05.545898: info: Exception: Stack trace format version: 1 (Mac)
+2018-12-29T20:32:05.545908: info: Exception: === Begin stack trace (pc:fn) ===
+2018-12-29T20:32:05.545918: info: Exception: 0x00000001000547e3:0x0000000000000000
+2018-12-29T20:32:05.545928: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2018-12-29T20:32:05.545938: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2018-12-29T20:32:05.545947: info: Exception: 0x00000001000515c4:0x0000000000000000
+2018-12-29T20:32:05.545957: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2018-12-29T20:32:05.545966: info: Exception: 0x000000010005da32:0x0000000000000000
+2018-12-29T20:32:05.545976: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2018-12-29T20:32:05.545985: info: Exception: 0x0000000100075947:0x0000000000000000
+2018-12-29T20:32:05.545994: info: Exception: 0x00000001000580be:0x0000000000000000
+2018-12-29T20:32:05.546004: info: Exception: 0x0000000100018886:0x0000000000000000
+2018-12-29T20:32:05.546014: info: Exception: 0x00007fff5b0e008d:0x0000000000000000
+2018-12-29T20:32:05.546023: info: Exception: 0x0000000000000005:0x0000000000000000
+2018-12-29T20:32:05.546033: info: Exception: === End stack trace ===
+2018-12-29T20:32:05.546042: info: Directories: Python Standard Library: Check
+2018-12-29T20:32:05.546052: info: Directories: Python Standard Library: Not set
+2018-12-29T20:32:05.546061: info: Directories: Python Site Pacakges: Check
+2018-12-29T20:32:05.546071: info: Directories: Python Site Pacakges: Not set
+2018-12-29T20:32:05.546081: info: Directories: Python Library for Live: Check
+2018-12-29T20:32:05.546090: info: Directories: Python Library for Live: Not set
+2018-12-29T20:32:05.546100: info: Directories: Python Remote Scripts: Check
+2018-12-29T20:32:05.546109: info: Directories: Python Remote Scripts: Not set
+2018-12-29T20:32:05.546119: info: Directories: Crashlogs: Check
+2018-12-29T20:32:05.546129: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2018-12-29T20:32:05.546139: info: InMemoryLog: Writing log messages from memory done
+2018-12-29T20:32:05.546297: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2018-12-29T20:32:05.546313: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2018-12-29T20:32:05.546329: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2018-12-29T20:32:05.546342: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2018-12-29T20:32:05.546464: info: Init: OS: 'Mac OS X version 10.14.1, Arch:x86-64'
+2018-12-29T20:32:05.546482: info: Init: BuildType: 'Release'
+2018-12-29T20:32:05.546504: info: Init: Pid: 8764
+2018-12-29T20:32:05.546531: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2018-12-29T20:32:05.546552: info: Init: CPU Count: 8
+2018-12-29T20:32:05.546568: info: Init: Physical RAM: 17179869184 B
+2018-12-29T20:32:05.546588: info: Init: Address Space: -1 B
+2018-12-29T20:32:05.546596: info: Init: 64-bit Edition
+2018-12-29T20:32:05.550024: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2018-12-29T20:32:05.566508: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2018-12-29T20:32:05.574361: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2018-12-29T20:32:05.581893: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2018-12-29T20:32:05.581972: info: Swapper: Start
+2018-12-29T20:32:05.582000: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2018-12-29T20:32:05.582109: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2018-12-29T20:32:05.583647: info: Scanner: Waiting for completion of parent process.
+2018-12-29T20:32:05.583748: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2018-12-29T20:32:05.583841: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2018-12-29T20:32:05.584091: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2018-12-29T20:32:05.584294: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2018-12-29T20:32:09.877383: info: Swapper: Return code: 0
+2018-12-29T20:32:09.877397: info: Swapper: End
+2019-01-14T00:20:07.211402: info: #######################################
+2019-01-14T00:20:07.211893: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-01-14T00:20:07.211918: info: #######################################
+2019-01-14T00:20:07.211955: info: Directories: Application Support: Check
+2019-01-14T00:20:07.211965: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-01-14T00:20:07.211974: info: Directories: Documents: Check
+2019-01-14T00:20:07.211982: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-14T00:20:07.211990: info: Directories: Legal: Check
+2019-01-14T00:20:07.211999: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-14T00:20:07.212009: info: Directories: OS Desktop: Check
+2019-01-14T00:20:07.212028: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-14T00:20:07.212036: info: Directories: User Home: Check
+2019-01-14T00:20:07.212044: info: Directories: User Home: /Users/luka/
+2019-01-14T00:20:07.212053: info: Directories: Preferences: Check
+2019-01-14T00:20:07.212061: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-01-14T00:20:07.212070: info: Exception: 
+2019-01-14T00:20:07.212078: info: Exception: Stack trace format version: 1 (Mac)
+2019-01-14T00:20:07.212086: info: Exception: === Begin stack trace (pc:fn) ===
+2019-01-14T00:20:07.212094: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-01-14T00:20:07.212102: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-01-14T00:20:07.212110: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-01-14T00:20:07.212118: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-01-14T00:20:07.212125: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-01-14T00:20:07.212133: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-01-14T00:20:07.212141: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-01-14T00:20:07.212149: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-01-14T00:20:07.212157: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-01-14T00:20:07.212165: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-01-14T00:20:07.212174: info: Exception: 0x00007fff79649ed9:0x0000000000000000
+2019-01-14T00:20:07.212181: info: Exception: 0x0000000000000005:0x0000000000000000
+2019-01-14T00:20:07.212189: info: Exception: === End stack trace ===
+2019-01-14T00:20:07.212197: info: Directories: Python Standard Library: Check
+2019-01-14T00:20:07.212205: info: Directories: Python Standard Library: Not set
+2019-01-14T00:20:07.212265: info: Directories: Python Site Pacakges: Check
+2019-01-14T00:20:07.212273: info: Directories: Python Site Pacakges: Not set
+2019-01-14T00:20:07.212278: info: Directories: Python Library for Live: Check
+2019-01-14T00:20:07.212284: info: Directories: Python Library for Live: Not set
+2019-01-14T00:20:07.212290: info: Directories: Python Remote Scripts: Check
+2019-01-14T00:20:07.212295: info: Directories: Python Remote Scripts: Not set
+2019-01-14T00:20:07.212300: info: Directories: Crashlogs: Check
+2019-01-14T00:20:07.212306: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-14T00:20:07.212312: info: InMemoryLog: Writing log messages from memory done
+2019-01-14T00:20:07.212478: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-01-14T00:20:07.212490: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-01-14T00:20:07.212502: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-01-14T00:20:07.212510: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-01-14T00:20:07.212639: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-14T00:20:07.212650: info: Init: BuildType: 'Release'
+2019-01-14T00:20:07.212675: info: Init: Pid: 3178
+2019-01-14T00:20:07.212697: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-14T00:20:07.212712: info: Init: CPU Count: 8
+2019-01-14T00:20:07.212723: info: Init: Physical RAM: 17179869184 B
+2019-01-14T00:20:07.212730: info: Init: Address Space: -1 B
+2019-01-14T00:20:07.212736: info: Init: 64-bit Edition
+2019-01-14T00:20:07.218476: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-14T00:20:07.233812: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-01-14T00:20:07.240663: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-14T00:20:07.246759: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-14T00:20:07.246817: info: Swapper: Start
+2019-01-14T00:20:07.246829: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-01-14T00:20:07.246935: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-01-14T00:20:07.248167: info: Scanner: Waiting for completion of parent process.
+2019-01-14T00:20:07.248254: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-01-14T00:20:07.248327: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-01-14T00:20:07.248544: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-01-14T00:20:07.248711: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-01-14T00:20:12.492224: info: Swapper: Return code: 0
+2019-01-14T00:20:12.492245: info: Swapper: End
+2019-01-15T03:00:06.967042: info: #######################################
+2019-01-15T03:00:06.967399: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-01-15T03:00:06.967430: info: #######################################
+2019-01-15T03:00:06.967457: info: Directories: Application Support: Check
+2019-01-15T03:00:06.967466: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-01-15T03:00:06.967474: info: Directories: Documents: Check
+2019-01-15T03:00:06.967482: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-15T03:00:06.967490: info: Directories: Legal: Check
+2019-01-15T03:00:06.967497: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-15T03:00:06.967505: info: Directories: OS Desktop: Check
+2019-01-15T03:00:06.967513: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-15T03:00:06.967520: info: Directories: User Home: Check
+2019-01-15T03:00:06.967528: info: Directories: User Home: /Users/luka/
+2019-01-15T03:00:06.967536: info: Directories: Preferences: Check
+2019-01-15T03:00:06.967544: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-01-15T03:00:06.967564: info: Exception: 
+2019-01-15T03:00:06.967570: info: Exception: Stack trace format version: 1 (Mac)
+2019-01-15T03:00:06.967576: info: Exception: === Begin stack trace (pc:fn) ===
+2019-01-15T03:00:06.967581: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-01-15T03:00:06.967586: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-01-15T03:00:06.967591: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-01-15T03:00:06.967596: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-01-15T03:00:06.967601: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-01-15T03:00:06.967606: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-01-15T03:00:06.967611: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-01-15T03:00:06.967616: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-01-15T03:00:06.967621: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-01-15T03:00:06.967626: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-01-15T03:00:06.967630: info: Exception: 0x00007fff79649ed9:0x0000000000000000
+2019-01-15T03:00:06.967635: info: Exception: 0x0000000000000005:0x0000000000000000
+2019-01-15T03:00:06.967640: info: Exception: === End stack trace ===
+2019-01-15T03:00:06.967645: info: Directories: Python Standard Library: Check
+2019-01-15T03:00:06.967650: info: Directories: Python Standard Library: Not set
+2019-01-15T03:00:06.967655: info: Directories: Python Site Pacakges: Check
+2019-01-15T03:00:06.967661: info: Directories: Python Site Pacakges: Not set
+2019-01-15T03:00:06.967665: info: Directories: Python Library for Live: Check
+2019-01-15T03:00:06.967670: info: Directories: Python Library for Live: Not set
+2019-01-15T03:00:06.967675: info: Directories: Python Remote Scripts: Check
+2019-01-15T03:00:06.967680: info: Directories: Python Remote Scripts: Not set
+2019-01-15T03:00:06.967686: info: Directories: Crashlogs: Check
+2019-01-15T03:00:06.967691: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-15T03:00:06.967696: info: InMemoryLog: Writing log messages from memory done
+2019-01-15T03:00:06.967833: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-01-15T03:00:06.967843: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-01-15T03:00:06.967854: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-01-15T03:00:06.967861: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-01-15T03:00:06.968048: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-15T03:00:06.968064: info: Init: BuildType: 'Release'
+2019-01-15T03:00:06.968083: info: Init: Pid: 22160
+2019-01-15T03:00:06.968119: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-15T03:00:06.968135: info: Init: CPU Count: 8
+2019-01-15T03:00:06.968146: info: Init: Physical RAM: 17179869184 B
+2019-01-15T03:00:06.968152: info: Init: Address Space: -1 B
+2019-01-15T03:00:06.968158: info: Init: 64-bit Edition
+2019-01-15T03:00:06.971878: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-15T03:00:06.987106: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-01-15T03:00:06.993311: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-15T03:00:07.000347: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-15T03:00:07.000394: info: Swapper: Start
+2019-01-15T03:00:07.000407: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-01-15T03:00:07.000486: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-01-15T03:00:07.001761: info: Scanner: Waiting for completion of parent process.
+2019-01-15T03:00:07.001856: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-01-15T03:00:07.001936: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-01-15T03:00:07.002233: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-01-15T03:00:07.002448: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-01-15T03:00:09.693215: info: Swapper: Return code: 0
+2019-01-15T03:00:09.693232: info: Swapper: End
+2019-01-19T02:38:12.718656: info: #######################################
+2019-01-19T02:38:12.718994: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-01-19T02:38:12.719012: info: #######################################
+2019-01-19T02:38:12.719040: info: Directories: Application Support: Check
+2019-01-19T02:38:12.719050: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-01-19T02:38:12.719059: info: Directories: Documents: Check
+2019-01-19T02:38:12.719067: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-19T02:38:12.719075: info: Directories: Legal: Check
+2019-01-19T02:38:12.719083: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-19T02:38:12.719091: info: Directories: OS Desktop: Check
+2019-01-19T02:38:12.719099: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-19T02:38:12.719107: info: Directories: User Home: Check
+2019-01-19T02:38:12.719115: info: Directories: User Home: /Users/luka/
+2019-01-19T02:38:12.719123: info: Directories: Preferences: Check
+2019-01-19T02:38:12.719131: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-01-19T02:38:12.719139: info: Exception: 
+2019-01-19T02:38:12.719147: info: Exception: Stack trace format version: 1 (Mac)
+2019-01-19T02:38:12.719156: info: Exception: === Begin stack trace (pc:fn) ===
+2019-01-19T02:38:12.719164: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-01-19T02:38:12.719172: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-01-19T02:38:12.719180: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-01-19T02:38:12.719188: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-01-19T02:38:12.719196: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-01-19T02:38:12.719204: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-01-19T02:38:12.719211: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-01-19T02:38:12.719219: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-01-19T02:38:12.719227: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-01-19T02:38:12.719235: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-01-19T02:38:12.719243: info: Exception: 0x00007fff79649ed9:0x0000000000000000
+2019-01-19T02:38:12.719250: info: Exception: 0x0000000000000005:0x0000000000000000
+2019-01-19T02:38:12.719258: info: Exception: === End stack trace ===
+2019-01-19T02:38:12.719266: info: Directories: Python Standard Library: Check
+2019-01-19T02:38:12.719274: info: Directories: Python Standard Library: Not set
+2019-01-19T02:38:12.719282: info: Directories: Python Site Pacakges: Check
+2019-01-19T02:38:12.719290: info: Directories: Python Site Pacakges: Not set
+2019-01-19T02:38:12.719298: info: Directories: Python Library for Live: Check
+2019-01-19T02:38:12.719305: info: Directories: Python Library for Live: Not set
+2019-01-19T02:38:12.719313: info: Directories: Python Remote Scripts: Check
+2019-01-19T02:38:12.719321: info: Directories: Python Remote Scripts: Not set
+2019-01-19T02:38:12.719329: info: Directories: Crashlogs: Check
+2019-01-19T02:38:12.719337: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-19T02:38:12.719346: info: InMemoryLog: Writing log messages from memory done
+2019-01-19T02:38:12.719480: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-01-19T02:38:12.719493: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-01-19T02:38:12.719507: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-01-19T02:38:12.719517: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-01-19T02:38:12.719635: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-19T02:38:12.719646: info: Init: BuildType: 'Release'
+2019-01-19T02:38:12.719663: info: Init: Pid: 38430
+2019-01-19T02:38:12.719684: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-19T02:38:12.719700: info: Init: CPU Count: 8
+2019-01-19T02:38:12.719716: info: Init: Physical RAM: 17179869184 B
+2019-01-19T02:38:12.719723: info: Init: Address Space: -1 B
+2019-01-19T02:38:12.719729: info: Init: 64-bit Edition
+2019-01-19T02:38:12.723052: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-19T02:38:12.740886: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-01-19T02:38:12.749575: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-19T02:38:12.755821: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-19T02:38:12.755885: info: Swapper: Start
+2019-01-19T02:38:12.755899: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-01-19T02:38:12.756008: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-01-19T02:38:12.757525: info: Scanner: Waiting for completion of parent process.
+2019-01-19T02:38:12.757727: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-01-19T02:38:12.757906: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-01-19T02:38:12.758756: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-01-19T02:38:12.759040: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-01-19T02:38:17.071205: info: Swapper: Return code: 0
+2019-01-19T02:38:17.071220: info: Swapper: End
+2019-01-26T21:37:52.180006: info: #######################################
+2019-01-26T21:37:52.180321: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-01-26T21:37:52.180339: info: #######################################
+2019-01-26T21:37:52.180364: info: Directories: Application Support: Check
+2019-01-26T21:37:52.180374: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-01-26T21:37:52.180382: info: Directories: Documents: Check
+2019-01-26T21:37:52.180389: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-26T21:37:52.180397: info: Directories: Legal: Check
+2019-01-26T21:37:52.180405: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-26T21:37:52.180413: info: Directories: OS Desktop: Check
+2019-01-26T21:37:52.180420: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-26T21:37:52.180450: info: Directories: User Home: Check
+2019-01-26T21:37:52.180472: info: Directories: User Home: /Users/luka/
+2019-01-26T21:37:52.180493: info: Directories: Preferences: Check
+2019-01-26T21:37:52.180502: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-01-26T21:37:52.180510: info: Exception: 
+2019-01-26T21:37:52.180517: info: Exception: Stack trace format version: 1 (Mac)
+2019-01-26T21:37:52.180525: info: Exception: === Begin stack trace (pc:fn) ===
+2019-01-26T21:37:52.180533: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-01-26T21:37:52.180605: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-01-26T21:37:52.180619: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-01-26T21:37:52.180628: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-01-26T21:37:52.180636: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-01-26T21:37:52.180644: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-01-26T21:37:52.180651: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-01-26T21:37:52.180659: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-01-26T21:37:52.180666: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-01-26T21:37:52.180674: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-01-26T21:37:52.180712: info: Exception: 0x00007fff74a0ded9:0x0000000000000000
+2019-01-26T21:37:52.180719: info: Exception: 0x0000000000000005:0x0000000000000000
+2019-01-26T21:37:52.180724: info: Exception: === End stack trace ===
+2019-01-26T21:37:52.180730: info: Directories: Python Standard Library: Check
+2019-01-26T21:37:52.180735: info: Directories: Python Standard Library: Not set
+2019-01-26T21:37:52.180740: info: Directories: Python Site Pacakges: Check
+2019-01-26T21:37:52.180746: info: Directories: Python Site Pacakges: Not set
+2019-01-26T21:37:52.180751: info: Directories: Python Library for Live: Check
+2019-01-26T21:37:52.180756: info: Directories: Python Library for Live: Not set
+2019-01-26T21:37:52.180761: info: Directories: Python Remote Scripts: Check
+2019-01-26T21:37:52.180766: info: Directories: Python Remote Scripts: Not set
+2019-01-26T21:37:52.180772: info: Directories: Crashlogs: Check
+2019-01-26T21:37:52.180777: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-26T21:37:52.180783: info: InMemoryLog: Writing log messages from memory done
+2019-01-26T21:37:52.180904: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-01-26T21:37:52.180914: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-01-26T21:37:52.180924: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-01-26T21:37:52.180932: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-01-26T21:37:52.181057: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-26T21:37:52.181094: info: Init: BuildType: 'Release'
+2019-01-26T21:37:52.181155: info: Init: Pid: 40907
+2019-01-26T21:37:52.181190: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-26T21:37:52.181227: info: Init: CPU Count: 8
+2019-01-26T21:37:52.181265: info: Init: Physical RAM: 17179869184 B
+2019-01-26T21:37:52.181272: info: Init: Address Space: -1 B
+2019-01-26T21:37:52.181297: info: Init: 64-bit Edition
+2019-01-26T21:37:52.185604: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-26T21:37:52.200745: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-01-26T21:37:52.207501: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-26T21:37:52.213780: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-26T21:37:52.213866: info: Swapper: Start
+2019-01-26T21:37:52.213879: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-01-26T21:37:52.214001: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-01-26T21:37:52.215479: info: Scanner: Waiting for completion of parent process.
+2019-01-26T21:37:52.215584: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-01-26T21:37:52.215661: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-01-26T21:37:52.215986: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-01-26T21:37:52.216526: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-01-26T21:37:55.615403: info: Swapper: Return code: 0
+2019-01-26T21:37:55.615420: info: Swapper: End
+2019-01-27T16:05:38.600937: info: #######################################
+2019-01-27T16:05:38.601255: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-01-27T16:05:38.601279: info: #######################################
+2019-01-27T16:05:38.601308: info: Directories: Application Support: Check
+2019-01-27T16:05:38.601318: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-01-27T16:05:38.601330: info: Directories: Documents: Check
+2019-01-27T16:05:38.601340: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-27T16:05:38.601350: info: Directories: Legal: Check
+2019-01-27T16:05:38.601360: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-01-27T16:05:38.601385: info: Directories: OS Desktop: Check
+2019-01-27T16:05:38.601393: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-27T16:05:38.601400: info: Directories: User Home: Check
+2019-01-27T16:05:38.601406: info: Directories: User Home: /Users/luka/
+2019-01-27T16:05:38.601413: info: Directories: Preferences: Check
+2019-01-27T16:05:38.601419: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-01-27T16:05:38.601426: info: Exception: 
+2019-01-27T16:05:38.601432: info: Exception: Stack trace format version: 1 (Mac)
+2019-01-27T16:05:38.601439: info: Exception: === Begin stack trace (pc:fn) ===
+2019-01-27T16:05:38.601445: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-01-27T16:05:38.601451: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-01-27T16:05:38.601457: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-01-27T16:05:38.601463: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-01-27T16:05:38.601469: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-01-27T16:05:38.601476: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-01-27T16:05:38.601482: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-01-27T16:05:38.601488: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-01-27T16:05:38.601494: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-01-27T16:05:38.601500: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-01-27T16:05:38.601507: info: Exception: 0x00007fff74a0ded9:0x0000000000000000
+2019-01-27T16:05:38.601513: info: Exception: 0x0000000000000005:0x0000000000000000
+2019-01-27T16:05:38.601519: info: Exception: === End stack trace ===
+2019-01-27T16:05:38.601526: info: Directories: Python Standard Library: Check
+2019-01-27T16:05:38.601533: info: Directories: Python Standard Library: Not set
+2019-01-27T16:05:38.601539: info: Directories: Python Site Pacakges: Check
+2019-01-27T16:05:38.601546: info: Directories: Python Site Pacakges: Not set
+2019-01-27T16:05:38.601552: info: Directories: Python Library for Live: Check
+2019-01-27T16:05:38.601558: info: Directories: Python Library for Live: Not set
+2019-01-27T16:05:38.601564: info: Directories: Python Remote Scripts: Check
+2019-01-27T16:05:38.601570: info: Directories: Python Remote Scripts: Not set
+2019-01-27T16:05:38.601576: info: Directories: Crashlogs: Check
+2019-01-27T16:05:38.601582: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-27T16:05:38.601589: info: InMemoryLog: Writing log messages from memory done
+2019-01-27T16:05:38.601721: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-01-27T16:05:38.601733: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-01-27T16:05:38.601744: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-01-27T16:05:38.601753: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-01-27T16:05:38.601854: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-27T16:05:38.601866: info: Init: BuildType: 'Release'
+2019-01-27T16:05:38.601883: info: Init: Pid: 41644
+2019-01-27T16:05:38.601904: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-27T16:05:38.601920: info: Init: CPU Count: 8
+2019-01-27T16:05:38.601931: info: Init: Physical RAM: 17179869184 B
+2019-01-27T16:05:38.601939: info: Init: Address Space: -1 B
+2019-01-27T16:05:38.601946: info: Init: 64-bit Edition
+2019-01-27T16:05:38.605869: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-27T16:05:38.619999: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-01-27T16:05:38.626706: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-27T16:05:38.632731: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-01-27T16:05:38.632775: info: Swapper: Start
+2019-01-27T16:05:38.632787: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-01-27T16:05:38.632865: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-01-27T16:05:38.634302: info: Scanner: Waiting for completion of parent process.
+2019-01-27T16:05:38.634392: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-01-27T16:05:38.634467: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-01-27T16:05:38.634687: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-01-27T16:05:38.634857: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-01-27T16:05:42.638699: info: Swapper: Return code: 0
+2019-01-27T16:05:42.638717: info: Swapper: End
+2019-02-16T13:55:34.613201: info: #######################################
+2019-02-16T13:55:34.613584: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-02-16T13:55:34.613606: info: #######################################
+2019-02-16T13:55:34.613637: info: Directories: Application Support: Check
+2019-02-16T13:55:34.613649: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-02-16T13:55:34.613659: info: Directories: Documents: Check
+2019-02-16T13:55:34.613669: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-16T13:55:34.613678: info: Directories: Legal: Check
+2019-02-16T13:55:34.613688: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-16T13:55:34.613697: info: Directories: OS Desktop: Check
+2019-02-16T13:55:34.613707: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-02-16T13:55:34.613716: info: Directories: User Home: Check
+2019-02-16T13:55:34.613726: info: Directories: User Home: /Users/luka/
+2019-02-16T13:55:34.613735: info: Directories: Preferences: Check
+2019-02-16T13:55:34.613745: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-02-16T13:55:34.613754: info: Exception: 
+2019-02-16T13:55:34.613763: info: Exception: Stack trace format version: 1 (Mac)
+2019-02-16T13:55:34.613773: info: Exception: === Begin stack trace (pc:fn) ===
+2019-02-16T13:55:34.613783: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-02-16T13:55:34.613792: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-02-16T13:55:34.613802: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-02-16T13:55:34.613811: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-02-16T13:55:34.613820: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-02-16T13:55:34.613829: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-02-16T13:55:34.613838: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-02-16T13:55:34.613847: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-02-16T13:55:34.613857: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-02-16T13:55:34.613866: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-02-16T13:55:34.613875: info: Exception: 0x00007fff7247eed9:0x0000000000000000
+2019-02-16T13:55:34.613884: info: Exception: === End stack trace ===
+2019-02-16T13:55:34.613894: info: Directories: Python Standard Library: Check
+2019-02-16T13:55:34.613903: info: Directories: Python Standard Library: Not set
+2019-02-16T13:55:34.613912: info: Directories: Python Site Pacakges: Check
+2019-02-16T13:55:34.613922: info: Directories: Python Site Pacakges: Not set
+2019-02-16T13:55:34.613931: info: Directories: Python Library for Live: Check
+2019-02-16T13:55:34.613940: info: Directories: Python Library for Live: Not set
+2019-02-16T13:55:34.613949: info: Directories: Python Remote Scripts: Check
+2019-02-16T13:55:34.613958: info: Directories: Python Remote Scripts: Not set
+2019-02-16T13:55:34.613968: info: Directories: Crashlogs: Check
+2019-02-16T13:55:34.613977: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-02-16T13:55:34.613987: info: InMemoryLog: Writing log messages from memory done
+2019-02-16T13:55:34.614139: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-02-16T13:55:34.614167: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-02-16T13:55:34.614181: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-02-16T13:55:34.614190: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-02-16T13:55:34.614299: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-02-16T13:55:34.614312: info: Init: BuildType: 'Release'
+2019-02-16T13:55:34.614331: info: Init: Pid: 14158
+2019-02-16T13:55:34.614357: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-02-16T13:55:34.614375: info: Init: CPU Count: 8
+2019-02-16T13:55:34.614387: info: Init: Physical RAM: 17179869184 B
+2019-02-16T13:55:34.614395: info: Init: Address Space: -1 B
+2019-02-16T13:55:34.614402: info: Init: 64-bit Edition
+2019-02-16T13:55:34.618400: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-02-16T13:55:34.634888: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-02-16T13:55:34.642296: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-16T13:55:34.648748: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-16T13:55:34.648784: info: Swapper: Start
+2019-02-16T13:55:34.648796: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-02-16T13:55:34.648860: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-02-16T13:55:34.650195: info: Scanner: Waiting for completion of parent process.
+2019-02-16T13:55:34.650280: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-02-16T13:55:34.650357: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-02-16T13:55:34.650582: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-02-16T13:55:34.650794: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-02-16T13:55:38.485681: info: Swapper: Return code: 0
+2019-02-16T13:55:38.485702: info: Swapper: End
+2019-02-16T14:46:53.797590: info: #######################################
+2019-02-16T14:46:53.797886: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-02-16T14:46:53.797909: info: #######################################
+2019-02-16T14:46:53.797935: info: Directories: Application Support: Check
+2019-02-16T14:46:53.797945: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-02-16T14:46:53.797954: info: Directories: Documents: Check
+2019-02-16T14:46:53.797962: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-16T14:46:53.797971: info: Directories: Legal: Check
+2019-02-16T14:46:53.797993: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-16T14:46:53.798000: info: Directories: OS Desktop: Check
+2019-02-16T14:46:53.798008: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-02-16T14:46:53.798016: info: Directories: User Home: Check
+2019-02-16T14:46:53.798024: info: Directories: User Home: /Users/luka/
+2019-02-16T14:46:53.798031: info: Directories: Preferences: Check
+2019-02-16T14:46:53.798039: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-02-16T14:46:53.798047: info: Exception: 
+2019-02-16T14:46:53.798054: info: Exception: Stack trace format version: 1 (Mac)
+2019-02-16T14:46:53.798062: info: Exception: === Begin stack trace (pc:fn) ===
+2019-02-16T14:46:53.798070: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-02-16T14:46:53.798077: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-02-16T14:46:53.798085: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-02-16T14:46:53.798093: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-02-16T14:46:53.798100: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-02-16T14:46:53.798108: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-02-16T14:46:53.798115: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-02-16T14:46:53.798134: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-02-16T14:46:53.798141: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-02-16T14:46:53.798146: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-02-16T14:46:53.798152: info: Exception: 0x00007fff7247eed9:0x0000000000000000
+2019-02-16T14:46:53.798157: info: Exception: === End stack trace ===
+2019-02-16T14:46:53.798163: info: Directories: Python Standard Library: Check
+2019-02-16T14:46:53.798168: info: Directories: Python Standard Library: Not set
+2019-02-16T14:46:53.798174: info: Directories: Python Site Pacakges: Check
+2019-02-16T14:46:53.798179: info: Directories: Python Site Pacakges: Not set
+2019-02-16T14:46:53.798185: info: Directories: Python Library for Live: Check
+2019-02-16T14:46:53.798190: info: Directories: Python Library for Live: Not set
+2019-02-16T14:46:53.798195: info: Directories: Python Remote Scripts: Check
+2019-02-16T14:46:53.798201: info: Directories: Python Remote Scripts: Not set
+2019-02-16T14:46:53.798206: info: Directories: Crashlogs: Check
+2019-02-16T14:46:53.798212: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-02-16T14:46:53.798218: info: InMemoryLog: Writing log messages from memory done
+2019-02-16T14:46:53.798338: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-02-16T14:46:53.798348: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-02-16T14:46:53.798358: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-02-16T14:46:53.798366: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-02-16T14:46:53.798463: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-02-16T14:46:53.798473: info: Init: BuildType: 'Release'
+2019-02-16T14:46:53.798489: info: Init: Pid: 14495
+2019-02-16T14:46:53.798508: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-02-16T14:46:53.798523: info: Init: CPU Count: 8
+2019-02-16T14:46:53.798533: info: Init: Physical RAM: 17179869184 B
+2019-02-16T14:46:53.798540: info: Init: Address Space: -1 B
+2019-02-16T14:46:53.798546: info: Init: 64-bit Edition
+2019-02-16T14:46:53.801267: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-02-16T14:46:53.815352: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-02-16T14:46:53.822244: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-16T14:46:53.828331: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-16T14:46:53.828371: info: Swapper: Start
+2019-02-16T14:46:53.828383: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-02-16T14:46:53.828457: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-02-16T14:46:53.829707: info: Scanner: Waiting for completion of parent process.
+2019-02-16T14:46:53.829774: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-02-16T14:46:53.830075: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-02-16T14:46:53.830291: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-02-16T14:46:53.830478: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-02-16T14:46:57.137123: info: Swapper: Return code: 0
+2019-02-16T14:46:57.137141: info: Swapper: End
+2019-02-16T19:45:10.268905: info: #######################################
+2019-02-16T19:45:10.269248: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-02-16T19:45:10.269280: info: #######################################
+2019-02-16T19:45:10.269306: info: Directories: Application Support: Check
+2019-02-16T19:45:10.269316: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-02-16T19:45:10.269324: info: Directories: Documents: Check
+2019-02-16T19:45:10.269332: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-16T19:45:10.269360: info: Directories: Legal: Check
+2019-02-16T19:45:10.269367: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-16T19:45:10.269372: info: Directories: OS Desktop: Check
+2019-02-16T19:45:10.269378: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-02-16T19:45:10.269383: info: Directories: User Home: Check
+2019-02-16T19:45:10.269388: info: Directories: User Home: /Users/luka/
+2019-02-16T19:45:10.269394: info: Directories: Preferences: Check
+2019-02-16T19:45:10.269399: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-02-16T19:45:10.269405: info: Exception: 
+2019-02-16T19:45:10.269410: info: Exception: Stack trace format version: 1 (Mac)
+2019-02-16T19:45:10.269416: info: Exception: === Begin stack trace (pc:fn) ===
+2019-02-16T19:45:10.269421: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-02-16T19:45:10.269426: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-02-16T19:45:10.269432: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-02-16T19:45:10.269437: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-02-16T19:45:10.269442: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-02-16T19:45:10.269448: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-02-16T19:45:10.269453: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-02-16T19:45:10.269458: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-02-16T19:45:10.269464: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-02-16T19:45:10.269469: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-02-16T19:45:10.269474: info: Exception: 0x00007fff7247eed9:0x0000000000000000
+2019-02-16T19:45:10.269480: info: Exception: === End stack trace ===
+2019-02-16T19:45:10.269485: info: Directories: Python Standard Library: Check
+2019-02-16T19:45:10.269491: info: Directories: Python Standard Library: Not set
+2019-02-16T19:45:10.269496: info: Directories: Python Site Pacakges: Check
+2019-02-16T19:45:10.269501: info: Directories: Python Site Pacakges: Not set
+2019-02-16T19:45:10.269507: info: Directories: Python Library for Live: Check
+2019-02-16T19:45:10.269512: info: Directories: Python Library for Live: Not set
+2019-02-16T19:45:10.269517: info: Directories: Python Remote Scripts: Check
+2019-02-16T19:45:10.269523: info: Directories: Python Remote Scripts: Not set
+2019-02-16T19:45:10.269528: info: Directories: Crashlogs: Check
+2019-02-16T19:45:10.269534: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-02-16T19:45:10.269540: info: InMemoryLog: Writing log messages from memory done
+2019-02-16T19:45:10.269664: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-02-16T19:45:10.269675: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-02-16T19:45:10.269770: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-02-16T19:45:10.269793: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-02-16T19:45:10.269934: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-02-16T19:45:10.269945: info: Init: BuildType: 'Release'
+2019-02-16T19:45:10.269961: info: Init: Pid: 15078
+2019-02-16T19:45:10.269982: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-02-16T19:45:10.269997: info: Init: CPU Count: 8
+2019-02-16T19:45:10.270008: info: Init: Physical RAM: 17179869184 B
+2019-02-16T19:45:10.270015: info: Init: Address Space: -1 B
+2019-02-16T19:45:10.270021: info: Init: 64-bit Edition
+2019-02-16T19:45:10.273134: info: Init: GraphicsDevice: 'AMD Radeon Pro 455'
+2019-02-16T19:45:10.286854: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-02-16T19:45:10.293513: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-16T19:45:10.299534: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-16T19:45:10.299574: info: Swapper: Start
+2019-02-16T19:45:10.299586: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-02-16T19:45:10.299682: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-02-16T19:45:10.301345: info: Scanner: Waiting for completion of parent process.
+2019-02-16T19:45:10.301436: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-02-16T19:45:10.301519: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-02-16T19:45:10.301798: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-02-16T19:45:10.301980: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-02-16T19:45:13.917359: info: Swapper: Return code: 0
+2019-02-16T19:45:13.917376: info: Swapper: End
+2019-02-26T00:04:32.232271: info: #######################################
+2019-02-26T00:04:32.232639: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-02-26T00:04:32.232658: info: #######################################
+2019-02-26T00:04:32.232699: info: Directories: Application Support: Check
+2019-02-26T00:04:32.232709: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-02-26T00:04:32.232717: info: Directories: Documents: Check
+2019-02-26T00:04:32.232725: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-26T00:04:32.232733: info: Directories: Legal: Check
+2019-02-26T00:04:32.232741: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-02-26T00:04:32.232748: info: Directories: OS Desktop: Check
+2019-02-26T00:04:32.232756: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-02-26T00:04:32.232764: info: Directories: User Home: Check
+2019-02-26T00:04:32.232772: info: Directories: User Home: /Users/luka/
+2019-02-26T00:04:32.232779: info: Directories: Preferences: Check
+2019-02-26T00:04:32.232787: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-02-26T00:04:32.232795: info: Exception: 
+2019-02-26T00:04:32.232803: info: Exception: Stack trace format version: 1 (Mac)
+2019-02-26T00:04:32.232810: info: Exception: === Begin stack trace (pc:fn) ===
+2019-02-26T00:04:32.232818: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-02-26T00:04:32.232826: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-02-26T00:04:32.232834: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-02-26T00:04:32.232841: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-02-26T00:04:32.232849: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-02-26T00:04:32.232856: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-02-26T00:04:32.232864: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-02-26T00:04:32.232871: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-02-26T00:04:32.232879: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-02-26T00:04:32.232886: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-02-26T00:04:32.232894: info: Exception: 0x00007fff6c898ed9:0x0000000000000000
+2019-02-26T00:04:32.232901: info: Exception: === End stack trace ===
+2019-02-26T00:04:32.232909: info: Directories: Python Standard Library: Check
+2019-02-26T00:04:32.232917: info: Directories: Python Standard Library: Not set
+2019-02-26T00:04:32.232924: info: Directories: Python Site Pacakges: Check
+2019-02-26T00:04:32.232932: info: Directories: Python Site Pacakges: Not set
+2019-02-26T00:04:32.232939: info: Directories: Python Library for Live: Check
+2019-02-26T00:04:32.232947: info: Directories: Python Library for Live: Not set
+2019-02-26T00:04:32.232955: info: Directories: Python Remote Scripts: Check
+2019-02-26T00:04:32.232962: info: Directories: Python Remote Scripts: Not set
+2019-02-26T00:04:32.232970: info: Directories: Crashlogs: Check
+2019-02-26T00:04:32.232978: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-02-26T00:04:32.232986: info: InMemoryLog: Writing log messages from memory done
+2019-02-26T00:04:32.233118: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-02-26T00:04:32.233129: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-02-26T00:04:32.233139: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-02-26T00:04:32.233147: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-02-26T00:04:32.233236: info: Init: OS: 'Mac OS X version 10.14.3, Arch:x86-64'
+2019-02-26T00:04:32.233246: info: Init: BuildType: 'Release'
+2019-02-26T00:04:32.233262: info: Init: Pid: 8256
+2019-02-26T00:04:32.233283: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-02-26T00:04:32.233298: info: Init: CPU Count: 8
+2019-02-26T00:04:32.233308: info: Init: Physical RAM: 17179869184 B
+2019-02-26T00:04:32.233314: info: Init: Address Space: -1 B
+2019-02-26T00:04:32.233320: info: Init: 64-bit Edition
+2019-02-26T00:04:32.236718: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-02-26T00:04:32.250774: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-02-26T00:04:32.257533: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-26T00:04:32.263528: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-02-26T00:04:32.263567: info: Swapper: Start
+2019-02-26T00:04:32.263579: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-02-26T00:04:32.263671: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-02-26T00:04:32.264955: info: Scanner: Waiting for completion of parent process.
+2019-02-26T00:04:32.265038: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-02-26T00:04:32.265124: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-02-26T00:04:32.265394: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-02-26T00:04:32.265890: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-02-26T00:04:35.746050: info: Swapper: Return code: 0
+2019-02-26T00:04:35.746073: info: Swapper: End
+2019-06-02T22:32:38.792538: info: #######################################
+2019-06-02T22:32:38.792851: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-06-02T22:32:38.792864: info: #######################################
+2019-06-02T22:32:38.792887: info: Directories: Application Support: Check
+2019-06-02T22:32:38.792897: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-06-02T22:32:38.792908: info: Directories: Documents: Check
+2019-06-02T22:32:38.792916: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-06-02T22:32:38.792926: info: Directories: Legal: Check
+2019-06-02T22:32:38.792935: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-06-02T22:32:38.792944: info: Directories: OS Desktop: Check
+2019-06-02T22:32:38.792954: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-06-02T22:32:38.792964: info: Directories: User Home: Check
+2019-06-02T22:32:38.792974: info: Directories: User Home: /Users/luka/
+2019-06-02T22:32:38.792983: info: Directories: Preferences: Check
+2019-06-02T22:32:38.792994: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-06-02T22:32:38.793002: info: Exception: 
+2019-06-02T22:32:38.793010: info: Exception: Stack trace format version: 1 (Mac)
+2019-06-02T22:32:38.793019: info: Exception: === Begin stack trace (pc:fn) ===
+2019-06-02T22:32:38.793029: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-06-02T22:32:38.793038: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-06-02T22:32:38.793047: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-06-02T22:32:38.793055: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-06-02T22:32:38.793063: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-06-02T22:32:38.793087: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-06-02T22:32:38.793095: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-06-02T22:32:38.793101: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-06-02T22:32:38.793108: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-06-02T22:32:38.793115: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-06-02T22:32:38.793121: info: Exception: 0x00007fff7b79fed9:0x0000000000000000
+2019-06-02T22:32:38.793128: info: Exception: === End stack trace ===
+2019-06-02T22:32:38.793134: info: Directories: Python Standard Library: Check
+2019-06-02T22:32:38.793139: info: Directories: Python Standard Library: Not set
+2019-06-02T22:32:38.793147: info: Directories: Python Site Pacakges: Check
+2019-06-02T22:32:38.793153: info: Directories: Python Site Pacakges: Not set
+2019-06-02T22:32:38.793160: info: Directories: Python Library for Live: Check
+2019-06-02T22:32:38.793166: info: Directories: Python Library for Live: Not set
+2019-06-02T22:32:38.793172: info: Directories: Python Remote Scripts: Check
+2019-06-02T22:32:38.793177: info: Directories: Python Remote Scripts: Not set
+2019-06-02T22:32:38.793183: info: Directories: Crashlogs: Check
+2019-06-02T22:32:38.793189: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-06-02T22:32:38.793195: info: InMemoryLog: Writing log messages from memory done
+2019-06-02T22:32:38.793327: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-06-02T22:32:38.793337: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-06-02T22:32:38.793348: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-06-02T22:32:38.793356: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-06-02T22:32:38.793459: info: Init: OS: 'Mac OS X version 10.14.3, Arch:x86-64'
+2019-06-02T22:32:38.793473: info: Init: BuildType: 'Release'
+2019-06-02T22:32:38.793490: info: Init: Pid: 52674
+2019-06-02T22:32:38.793513: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-06-02T22:32:38.793529: info: Init: CPU Count: 8
+2019-06-02T22:32:38.793540: info: Init: Physical RAM: 17179869184 B
+2019-06-02T22:32:38.793547: info: Init: Address Space: -1 B
+2019-06-02T22:32:38.793554: info: Init: 64-bit Edition
+2019-06-02T22:32:38.797079: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-06-02T22:32:38.811504: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-06-02T22:32:38.818320: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-06-02T22:32:38.824696: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-06-02T22:32:38.824755: info: Swapper: Start
+2019-06-02T22:32:38.824769: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-06-02T22:32:38.824872: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-06-02T22:32:38.826090: info: Scanner: Waiting for completion of parent process.
+2019-06-02T22:32:38.826188: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-06-02T22:32:38.826275: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-06-02T22:32:38.826903: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-06-02T22:32:38.828105: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-06-02T22:32:42.245299: info: Swapper: Return code: 0
+2019-06-02T22:32:42.245318: info: Swapper: End
+2019-06-04T10:24:22.672847: info: #######################################
+2019-06-04T10:24:22.673259: info: Started: Swapper 10.0.1 Build: 2018-01-19_24db47c402
+2019-06-04T10:24:22.673272: info: #######################################
+2019-06-04T10:24:22.673293: info: Directories: Application Support: Check
+2019-06-04T10:24:22.673302: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.1/
+2019-06-04T10:24:22.673325: info: Directories: Documents: Check
+2019-06-04T10:24:22.673331: info: Directories: Documents: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-06-04T10:24:22.673336: info: Directories: Legal: Check
+2019-06-04T10:24:22.673342: info: Directories: Legal: /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/
+2019-06-04T10:24:22.673347: info: Directories: OS Desktop: Check
+2019-06-04T10:24:22.673352: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-06-04T10:24:22.673357: info: Directories: User Home: Check
+2019-06-04T10:24:22.673362: info: Directories: User Home: /Users/luka/
+2019-06-04T10:24:22.673367: info: Directories: Preferences: Check
+2019-06-04T10:24:22.673373: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.1/
+2019-06-04T10:24:22.673378: info: Exception: 
+2019-06-04T10:24:22.673383: info: Exception: Stack trace format version: 1 (Mac)
+2019-06-04T10:24:22.673388: info: Exception: === Begin stack trace (pc:fn) ===
+2019-06-04T10:24:22.673393: info: Exception: 0x00000001000547e3:0x0000000000000000
+2019-06-04T10:24:22.673398: info: Exception: 0x00000001000b6aa0:0x0000000000000000
+2019-06-04T10:24:22.673403: info: Exception: 0x00000001000b7ff7:0x0000000000000000
+2019-06-04T10:24:22.673408: info: Exception: 0x00000001000515c4:0x0000000000000000
+2019-06-04T10:24:22.673413: info: Exception: 0x000000010005d2cf:0x0000000000000000
+2019-06-04T10:24:22.673418: info: Exception: 0x000000010005da32:0x0000000000000000
+2019-06-04T10:24:22.673423: info: Exception: 0x0000000100074c2a:0x0000000000000000
+2019-06-04T10:24:22.673428: info: Exception: 0x0000000100075947:0x0000000000000000
+2019-06-04T10:24:22.673433: info: Exception: 0x00000001000580be:0x0000000000000000
+2019-06-04T10:24:22.673438: info: Exception: 0x0000000100018886:0x0000000000000000
+2019-06-04T10:24:22.673443: info: Exception: 0x00007fff769d9ed9:0x0000000000000000
+2019-06-04T10:24:22.673448: info: Exception: === End stack trace ===
+2019-06-04T10:24:22.673453: info: Directories: Python Standard Library: Check
+2019-06-04T10:24:22.673458: info: Directories: Python Standard Library: Not set
+2019-06-04T10:24:22.673463: info: Directories: Python Site Pacakges: Check
+2019-06-04T10:24:22.673468: info: Directories: Python Site Pacakges: Not set
+2019-06-04T10:24:22.673473: info: Directories: Python Library for Live: Check
+2019-06-04T10:24:22.673478: info: Directories: Python Library for Live: Not set
+2019-06-04T10:24:22.673483: info: Directories: Python Remote Scripts: Check
+2019-06-04T10:24:22.673488: info: Directories: Python Remote Scripts: Not set
+2019-06-04T10:24:22.673493: info: Directories: Crashlogs: Check
+2019-06-04T10:24:22.673498: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-06-04T10:24:22.673504: info: InMemoryLog: Writing log messages from memory done
+2019-06-04T10:24:22.673620: info: : UUID: ABDF09DD-5BB7-35C3-A7F3-29645A4C1E13
+2019-06-04T10:24:22.673629: info: Init: Version: 'Swapper 10.0.1 Build: 2018-01-19_24db47c402' 1048577
+2019-06-04T10:24:22.673640: info: Init: BuildRevisions: 24db47c40277255afc4229905992e7654e23ec0f
+2019-06-04T10:24:22.673647: info: Init: Commit ID: '24db47c40277255afc4229905992e7654e23ec0f'
+2019-06-04T10:24:22.673736: info: Init: OS: 'Mac OS X version 10.14.3, Arch:x86-64'
+2019-06-04T10:24:22.673747: info: Init: BuildType: 'Release'
+2019-06-04T10:24:22.673761: info: Init: Pid: 13462
+2019-06-04T10:24:22.673780: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-06-04T10:24:22.673795: info: Init: CPU Count: 8
+2019-06-04T10:24:22.673804: info: Init: Physical RAM: 17179869184 B
+2019-06-04T10:24:22.673811: info: Init: Address Space: -1 B
+2019-06-04T10:24:22.673816: info: Init: 64-bit Edition
+2019-06-04T10:24:22.676570: info: Init: GraphicsDevice: 'AMD Radeon Pro 455'
+2019-06-04T10:24:22.676586: info: Init: GraphicsDevice: 'AMD Radeon Pro 455'
+2019-06-04T10:24:22.689857: info: Init: Checksum 1: 6f83500dc97ceaf324aff027958e6baf
+2019-06-04T10:24:22.696258: info: Init: Checksum 2: db81b7e53993a670a7bb1a37ee5249b0
+2019-06-04T10:24:22.701991: info: Init: Checksum 3: db81b7e53993a670a7bb1a37ee5249b0
+2019-06-04T10:24:22.702033: info: Swapper: Start
+2019-06-04T10:24:22.702044: info: Swapper: Running as /var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/Ableton Swapper
+2019-06-04T10:24:22.702098: info: Swapper: Working directory: /private/var/folders/sj/jbtpfg5179d5fcdl1jkz9z_00000gp/T/
+2019-06-04T10:24:22.703249: info: Scanner: Waiting for completion of parent process.
+2019-06-04T10:24:22.703335: info: Swapper: Swapping prepared copy at /Applications/.Ableton Live 10 Suite_updated.app to Live installation at /Applications/Ableton Live 10 Suite.app
+2019-06-04T10:24:22.703407: info: Swapper: Renaming Ableton Live 10 Suite.app to Ableton Live 10 Suite.app.Old
+2019-06-04T10:24:22.703599: info: Swapper: Renaming .Ableton Live 10 Suite_updated.app to Ableton Live 10 Suite.app
+2019-06-04T10:24:22.703812: info: Swapper: Deleting Ableton Live 10 Suite.app.Old
+2019-06-04T10:24:25.539372: info: Swapper: Return code: 0
+2019-06-04T10:24:25.539387: info: Swapper: End

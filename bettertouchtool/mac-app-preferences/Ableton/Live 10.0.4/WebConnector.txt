@@ -1,0 +1,210 @@
+2019-01-07T13:06:53.243092: info: #######################################
+2019-01-07T13:06:53.243289: info: Started: WebConnector 10.0.4 Build: 2018-10-05_1922243a5a
+2019-01-07T13:06:53.243301: info: #######################################
+2019-01-07T13:06:53.243320: info: Directories: Application Support: Check
+2019-01-07T13:06:53.243330: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.4/
+2019-01-07T13:06:53.243338: info: Directories: Documents: Check
+2019-01-07T13:06:53.243348: info: Directories: Documents: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-07T13:06:53.243356: info: Directories: Legal: Check
+2019-01-07T13:06:53.243364: info: Directories: Legal: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-07T13:06:53.243372: info: Directories: OS Desktop: Check
+2019-01-07T13:06:53.243380: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-07T13:06:53.243388: info: Directories: User Home: Check
+2019-01-07T13:06:53.243395: info: Directories: User Home: /Users/luka/
+2019-01-07T13:06:53.243403: info: Directories: Preferences: Check
+2019-01-07T13:06:53.243411: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.4/
+2019-01-07T13:06:53.243418: info: Directories: Python Standard Library: Check
+2019-01-07T13:06:53.243426: info: Directories: Python Standard Library: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/lib/
+2019-01-07T13:06:53.243434: info: Directories: Python Site Pacakges: Check
+2019-01-07T13:06:53.243441: info: Directories: Python Site Pacakges: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/site-packages/
+2019-01-07T13:06:53.243449: info: Directories: Python Library for Live: Check
+2019-01-07T13:06:53.243459: info: Directories: Python Library for Live: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.live/
+2019-01-07T13:06:53.243467: info: Directories: Python Remote Scripts: Check
+2019-01-07T13:06:53.243474: info: Directories: Python Remote Scripts: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/MIDI Remote Scripts/
+2019-01-07T13:06:53.243482: info: Directories: Crashlogs: Check
+2019-01-07T13:06:53.243490: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-07T13:06:53.243498: info: InMemoryLog: Writing log messages from memory done
+2019-01-07T13:06:53.243558: info: : UUID: 046C4D2D-3D8F-3A94-9843-647CB821D294
+2019-01-07T13:06:53.243570: info: Init: Version: 'WebConnector 10.0.4 Build: 2018-10-05_1922243a5a' 1048580
+2019-01-07T13:06:53.243582: info: Init: BuildRevisions: 1922243a5a00c4566607e21183ba7acad4632272
+2019-01-07T13:06:53.243591: info: Init: Commit ID: '1922243a5a00c4566607e21183ba7acad4632272'
+2019-01-07T13:06:53.243712: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-07T13:06:53.243725: info: Init: BuildType: 'Release'
+2019-01-07T13:06:53.243743: info: Init: Pid: 13072
+2019-01-07T13:06:53.243768: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-07T13:06:53.243785: info: Init: CPU Count: 8
+2019-01-07T13:06:53.243798: info: Init: Physical RAM: 17179869184 B
+2019-01-07T13:06:53.243807: info: Init: Address Space: 18446744073709551615 B
+2019-01-07T13:06:53.243815: info: Init: 64-bit Edition
+2019-01-07T13:06:53.263456: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-07T13:06:53.298314: info: Init: Checksum 1: 7c2ad38acf6ef0cec858092881a082a1
+2019-01-07T13:06:53.314623: info: Init: Checksum 2: e62a684bd1e0f074956a41518e7353cc
+2019-01-07T13:06:53.328904: info: Init: Checksum 3: e62a684bd1e0f074956a41518e7353cc
+2019-01-12T14:25:19.515136: info: #######################################
+2019-01-12T14:25:19.515453: info: Started: WebConnector 10.0.4 Build: 2018-10-05_1922243a5a
+2019-01-12T14:25:19.515468: info: #######################################
+2019-01-12T14:25:19.515492: info: Directories: Application Support: Check
+2019-01-12T14:25:19.515509: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.4/
+2019-01-12T14:25:19.515531: info: Directories: Documents: Check
+2019-01-12T14:25:19.515538: info: Directories: Documents: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-12T14:25:19.515544: info: Directories: Legal: Check
+2019-01-12T14:25:19.515550: info: Directories: Legal: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-12T14:25:19.515555: info: Directories: OS Desktop: Check
+2019-01-12T14:25:19.515561: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-12T14:25:19.515567: info: Directories: User Home: Check
+2019-01-12T14:25:19.515572: info: Directories: User Home: /Users/luka/
+2019-01-12T14:25:19.515578: info: Directories: Preferences: Check
+2019-01-12T14:25:19.515584: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.4/
+2019-01-12T14:25:19.515590: info: Directories: Python Standard Library: Check
+2019-01-12T14:25:19.515595: info: Directories: Python Standard Library: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/lib/
+2019-01-12T14:25:19.515601: info: Directories: Python Site Pacakges: Check
+2019-01-12T14:25:19.515607: info: Directories: Python Site Pacakges: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/site-packages/
+2019-01-12T14:25:19.515613: info: Directories: Python Library for Live: Check
+2019-01-12T14:25:19.515618: info: Directories: Python Library for Live: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.live/
+2019-01-12T14:25:19.515624: info: Directories: Python Remote Scripts: Check
+2019-01-12T14:25:19.515630: info: Directories: Python Remote Scripts: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/MIDI Remote Scripts/
+2019-01-12T14:25:19.515635: info: Directories: Crashlogs: Check
+2019-01-12T14:25:19.515641: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-12T14:25:19.515647: info: InMemoryLog: Writing log messages from memory done
+2019-01-12T14:25:19.515731: info: : UUID: 046C4D2D-3D8F-3A94-9843-647CB821D294
+2019-01-12T14:25:19.515744: info: Init: Version: 'WebConnector 10.0.4 Build: 2018-10-05_1922243a5a' 1048580
+2019-01-12T14:25:19.515755: info: Init: BuildRevisions: 1922243a5a00c4566607e21183ba7acad4632272
+2019-01-12T14:25:19.515764: info: Init: Commit ID: '1922243a5a00c4566607e21183ba7acad4632272'
+2019-01-12T14:25:19.515893: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-12T14:25:19.515904: info: Init: BuildType: 'Release'
+2019-01-12T14:25:19.515920: info: Init: Pid: 964
+2019-01-12T14:25:19.515964: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-12T14:25:19.515981: info: Init: CPU Count: 8
+2019-01-12T14:25:19.515992: info: Init: Physical RAM: 17179869184 B
+2019-01-12T14:25:19.515999: info: Init: Address Space: 18446744073709551615 B
+2019-01-12T14:25:19.516006: info: Init: 64-bit Edition
+2019-01-12T14:25:19.538497: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-12T14:25:19.574830: info: Init: Checksum 1: 7c2ad38acf6ef0cec858092881a082a1
+2019-01-12T14:25:19.591364: info: Init: Checksum 2: e62a684bd1e0f074956a41518e7353cc
+2019-01-12T14:25:19.606004: info: Init: Checksum 3: e62a684bd1e0f074956a41518e7353cc
+2019-01-13T13:14:49.155521: info: #######################################
+2019-01-13T13:14:49.155879: info: Started: WebConnector 10.0.4 Build: 2018-10-05_1922243a5a
+2019-01-13T13:14:49.155899: info: #######################################
+2019-01-13T13:14:49.155923: info: Directories: Application Support: Check
+2019-01-13T13:14:49.155933: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.4/
+2019-01-13T13:14:49.155942: info: Directories: Documents: Check
+2019-01-13T13:14:49.155950: info: Directories: Documents: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-13T13:14:49.155958: info: Directories: Legal: Check
+2019-01-13T13:14:49.155966: info: Directories: Legal: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-13T13:14:49.155988: info: Directories: OS Desktop: Check
+2019-01-13T13:14:49.155994: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-13T13:14:49.156000: info: Directories: User Home: Check
+2019-01-13T13:14:49.156006: info: Directories: User Home: /Users/luka/
+2019-01-13T13:14:49.156011: info: Directories: Preferences: Check
+2019-01-13T13:14:49.156017: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.4/
+2019-01-13T13:14:49.156022: info: Directories: Python Standard Library: Check
+2019-01-13T13:14:49.156028: info: Directories: Python Standard Library: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/lib/
+2019-01-13T13:14:49.156033: info: Directories: Python Site Pacakges: Check
+2019-01-13T13:14:49.156039: info: Directories: Python Site Pacakges: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/site-packages/
+2019-01-13T13:14:49.156044: info: Directories: Python Library for Live: Check
+2019-01-13T13:14:49.156050: info: Directories: Python Library for Live: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.live/
+2019-01-13T13:14:49.156055: info: Directories: Python Remote Scripts: Check
+2019-01-13T13:14:49.156061: info: Directories: Python Remote Scripts: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/MIDI Remote Scripts/
+2019-01-13T13:14:49.156066: info: Directories: Crashlogs: Check
+2019-01-13T13:14:49.156072: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-13T13:14:49.156078: info: InMemoryLog: Writing log messages from memory done
+2019-01-13T13:14:49.156141: info: : UUID: 046C4D2D-3D8F-3A94-9843-647CB821D294
+2019-01-13T13:14:49.156151: info: Init: Version: 'WebConnector 10.0.4 Build: 2018-10-05_1922243a5a' 1048580
+2019-01-13T13:14:49.156161: info: Init: BuildRevisions: 1922243a5a00c4566607e21183ba7acad4632272
+2019-01-13T13:14:49.156169: info: Init: Commit ID: '1922243a5a00c4566607e21183ba7acad4632272'
+2019-01-13T13:14:49.156295: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-13T13:14:49.156306: info: Init: BuildType: 'Release'
+2019-01-13T13:14:49.156322: info: Init: Pid: 2317
+2019-01-13T13:14:49.156345: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-13T13:14:49.156360: info: Init: CPU Count: 8
+2019-01-13T13:14:49.156371: info: Init: Physical RAM: 17179869184 B
+2019-01-13T13:14:49.156378: info: Init: Address Space: 18446744073709551615 B
+2019-01-13T13:14:49.156384: info: Init: 64-bit Edition
+2019-01-13T13:14:49.175922: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-13T13:14:49.214450: info: Init: Checksum 1: 7c2ad38acf6ef0cec858092881a082a1
+2019-01-13T13:14:49.230476: info: Init: Checksum 2: e62a684bd1e0f074956a41518e7353cc
+2019-01-13T13:14:49.244443: info: Init: Checksum 3: e62a684bd1e0f074956a41518e7353cc
+2019-01-13T13:18:41.506814: info: #######################################
+2019-01-13T13:18:41.506889: info: Started: WebConnector 10.0.4 Build: 2018-10-05_1922243a5a
+2019-01-13T13:18:41.506903: info: #######################################
+2019-01-13T13:18:41.506926: info: Directories: Application Support: Check
+2019-01-13T13:18:41.506937: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.4/
+2019-01-13T13:18:41.506947: info: Directories: Documents: Check
+2019-01-13T13:18:41.506957: info: Directories: Documents: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-13T13:18:41.506967: info: Directories: Legal: Check
+2019-01-13T13:18:41.506977: info: Directories: Legal: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-13T13:18:41.506986: info: Directories: OS Desktop: Check
+2019-01-13T13:18:41.506996: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-13T13:18:41.507005: info: Directories: User Home: Check
+2019-01-13T13:18:41.507015: info: Directories: User Home: /Users/luka/
+2019-01-13T13:18:41.507024: info: Directories: Preferences: Check
+2019-01-13T13:18:41.507057: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.4/
+2019-01-13T13:18:41.507065: info: Directories: Python Standard Library: Check
+2019-01-13T13:18:41.507072: info: Directories: Python Standard Library: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/lib/
+2019-01-13T13:18:41.507078: info: Directories: Python Site Pacakges: Check
+2019-01-13T13:18:41.507085: info: Directories: Python Site Pacakges: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/site-packages/
+2019-01-13T13:18:41.507092: info: Directories: Python Library for Live: Check
+2019-01-13T13:18:41.507098: info: Directories: Python Library for Live: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.live/
+2019-01-13T13:18:41.507105: info: Directories: Python Remote Scripts: Check
+2019-01-13T13:18:41.507111: info: Directories: Python Remote Scripts: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/MIDI Remote Scripts/
+2019-01-13T13:18:41.507118: info: Directories: Crashlogs: Check
+2019-01-13T13:18:41.507124: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-13T13:18:41.507133: info: InMemoryLog: Writing log messages from memory done
+2019-01-13T13:18:41.507195: info: : UUID: 046C4D2D-3D8F-3A94-9843-647CB821D294
+2019-01-13T13:18:41.507206: info: Init: Version: 'WebConnector 10.0.4 Build: 2018-10-05_1922243a5a' 1048580
+2019-01-13T13:18:41.507218: info: Init: BuildRevisions: 1922243a5a00c4566607e21183ba7acad4632272
+2019-01-13T13:18:41.507227: info: Init: Commit ID: '1922243a5a00c4566607e21183ba7acad4632272'
+2019-01-13T13:18:41.507507: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-13T13:18:41.507525: info: Init: BuildType: 'Release'
+2019-01-13T13:18:41.507547: info: Init: Pid: 2359
+2019-01-13T13:18:41.507578: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-13T13:18:41.507597: info: Init: CPU Count: 8
+2019-01-13T13:18:41.507610: info: Init: Physical RAM: 17179869184 B
+2019-01-13T13:18:41.507619: info: Init: Address Space: 18446744073709551615 B
+2019-01-13T13:18:41.507626: info: Init: 64-bit Edition
+2019-01-13T13:18:41.533139: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-13T13:18:41.573031: info: Init: Checksum 1: 7c2ad38acf6ef0cec858092881a082a1
+2019-01-13T13:18:41.591246: info: Init: Checksum 2: e62a684bd1e0f074956a41518e7353cc
+2019-01-13T13:18:41.607353: info: Init: Checksum 3: e62a684bd1e0f074956a41518e7353cc
+2019-01-13T13:19:21.548793: info: #######################################
+2019-01-13T13:19:21.548872: info: Started: WebConnector 10.0.4 Build: 2018-10-05_1922243a5a
+2019-01-13T13:19:21.548886: info: #######################################
+2019-01-13T13:19:21.548910: info: Directories: Application Support: Check
+2019-01-13T13:19:21.548921: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.4/
+2019-01-13T13:19:21.548931: info: Directories: Documents: Check
+2019-01-13T13:19:21.548941: info: Directories: Documents: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-13T13:19:21.548951: info: Directories: Legal: Check
+2019-01-13T13:19:21.548961: info: Directories: Legal: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-13T13:19:21.548971: info: Directories: OS Desktop: Check
+2019-01-13T13:19:21.548981: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-13T13:19:21.548991: info: Directories: User Home: Check
+2019-01-13T13:19:21.549000: info: Directories: User Home: /Users/luka/
+2019-01-13T13:19:21.549010: info: Directories: Preferences: Check
+2019-01-13T13:19:21.549020: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.4/
+2019-01-13T13:19:21.549030: info: Directories: Python Standard Library: Check
+2019-01-13T13:19:21.549039: info: Directories: Python Standard Library: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/lib/
+2019-01-13T13:19:21.549049: info: Directories: Python Site Pacakges: Check
+2019-01-13T13:19:21.549074: info: Directories: Python Site Pacakges: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/site-packages/
+2019-01-13T13:19:21.549081: info: Directories: Python Library for Live: Check
+2019-01-13T13:19:21.549088: info: Directories: Python Library for Live: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.live/
+2019-01-13T13:19:21.549095: info: Directories: Python Remote Scripts: Check
+2019-01-13T13:19:21.549102: info: Directories: Python Remote Scripts: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/MIDI Remote Scripts/
+2019-01-13T13:19:21.549108: info: Directories: Crashlogs: Check
+2019-01-13T13:19:21.549116: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-13T13:19:21.549123: info: InMemoryLog: Writing log messages from memory done
+2019-01-13T13:19:21.549193: info: : UUID: 046C4D2D-3D8F-3A94-9843-647CB821D294
+2019-01-13T13:19:21.549205: info: Init: Version: 'WebConnector 10.0.4 Build: 2018-10-05_1922243a5a' 1048580
+2019-01-13T13:19:21.549217: info: Init: BuildRevisions: 1922243a5a00c4566607e21183ba7acad4632272
+2019-01-13T13:19:21.549227: info: Init: Commit ID: '1922243a5a00c4566607e21183ba7acad4632272'
+2019-01-13T13:19:21.549388: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-13T13:19:21.549401: info: Init: BuildType: 'Release'
+2019-01-13T13:19:21.549420: info: Init: Pid: 2387
+2019-01-13T13:19:21.549448: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-13T13:19:21.549466: info: Init: CPU Count: 8
+2019-01-13T13:19:21.549479: info: Init: Physical RAM: 17179869184 B
+2019-01-13T13:19:21.549488: info: Init: Address Space: 18446744073709551615 B
+2019-01-13T13:19:21.549496: info: Init: 64-bit Edition
+2019-01-13T13:19:21.572356: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-13T13:19:21.610842: info: Init: Checksum 1: 7c2ad38acf6ef0cec858092881a082a1
+2019-01-13T13:19:21.628525: info: Init: Checksum 2: e62a684bd1e0f074956a41518e7353cc
+2019-01-13T13:19:21.644918: info: Init: Checksum 3: e62a684bd1e0f074956a41518e7353cc

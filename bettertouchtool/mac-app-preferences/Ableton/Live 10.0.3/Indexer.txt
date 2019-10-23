@@ -1,0 +1,132 @@
+2019-01-01T17:35:04.953584: info: #######################################
+2019-01-01T17:35:04.953665: info: Started: Index 10.0.3 Build: 2018-08-16_5ae7d49389
+2019-01-01T17:35:04.953679: info: #######################################
+2019-01-01T17:35:04.953701: info: Directories: Application Support: Check
+2019-01-01T17:35:04.953712: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.3/
+2019-01-01T17:35:04.953723: info: Directories: Documents: Check
+2019-01-01T17:35:04.953734: info: Directories: Documents: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-01T17:35:04.953744: info: Directories: Legal: Check
+2019-01-01T17:35:04.953754: info: Directories: Legal: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-01-01T17:35:04.953764: info: Directories: OS Desktop: Check
+2019-01-01T17:35:04.953774: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-01-01T17:35:04.953783: info: Directories: User Home: Check
+2019-01-01T17:35:04.953793: info: Directories: User Home: /Users/luka/
+2019-01-01T17:35:04.953803: info: Directories: Preferences: Check
+2019-01-01T17:35:04.953813: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.3/
+2019-01-01T17:35:04.953823: info: Directories: Python Standard Library: Check
+2019-01-01T17:35:04.953833: info: Directories: Python Standard Library: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/lib/
+2019-01-01T17:35:04.953844: info: Directories: Python Site Pacakges: Check
+2019-01-01T17:35:04.953853: info: Directories: Python Site Pacakges: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/site-packages/
+2019-01-01T17:35:04.953863: info: Directories: Python Library for Live: Check
+2019-01-01T17:35:04.953873: info: Directories: Python Library for Live: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.live/
+2019-01-01T17:35:04.953883: info: Directories: Python Remote Scripts: Check
+2019-01-01T17:35:04.953892: info: Directories: Python Remote Scripts: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/MIDI Remote Scripts/
+2019-01-01T17:35:04.953902: info: Directories: Crashlogs: Check
+2019-01-01T17:35:04.953912: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-01-01T17:35:04.953920: info: InMemoryLog: Writing log messages from memory done
+2019-01-01T17:35:04.953978: info: : UUID: 667F6B6D-76E7-3FE1-965F-2CA848A8E4B7
+2019-01-01T17:35:04.953990: info: Init: Version: 'Index 10.0.3 Build: 2018-08-16_5ae7d49389' 1048579
+2019-01-01T17:35:04.954002: info: Init: BuildRevisions: 5ae7d4938908194888f90ed5411dc3def59687f2
+2019-01-01T17:35:04.954012: info: Init: Commit ID: '5ae7d4938908194888f90ed5411dc3def59687f2'
+2019-01-01T17:35:04.954129: info: Init: OS: 'Mac OS X version 10.14.2, Arch:x86-64'
+2019-01-01T17:35:04.954143: info: Init: BuildType: 'Release'
+2019-01-01T17:35:04.954164: info: Init: Pid: 3160
+2019-01-01T17:35:04.954189: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-01-01T17:35:04.954209: info: Init: CPU Count: 8
+2019-01-01T17:35:04.954224: info: Init: Physical RAM: 17179869184 B
+2019-01-01T17:35:04.954235: info: Init: Address Space: 18446744073709551615 B
+2019-01-01T17:35:04.954292: info: Init: 64-bit Edition
+2019-01-01T17:35:04.975452: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-01-01T17:35:05.027567: info: Init: Checksum 1: 28f5cd91bb1a134c689f37c108689eea
+2019-01-01T17:35:05.048750: info: Init: Checksum 2: 1e40e1933fb74042250e0dca0e08f402
+2019-01-01T17:35:05.069967: info: Init: Checksum 3: 1e40e1933fb74042250e0dca0e08f402
+2019-01-01T17:35:05.070240: info: Licensing: [Variant=Beta, InstallationMedium=Download]
+2019-01-01T17:35:05.077395: info: Net: Setting up connection framework
+2019-01-01T17:35:05.077436: info: Metadata: Initialize XMP system
+2019-01-01T17:35:05.103586: info: App resources: "/Applications/Ableton Live 10 Suite.app/Contents/App-Resources"
+2019-01-01T17:35:05.103835: info: Database: Open file: '/Users/luka/Library/Application Support/Ableton/Live Database/Live-files-34.db'
+2019-01-01T17:35:46.596881: info: Configure: FactoryPacks: '/Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Core Library/'
+2019-01-01T17:35:46.596980: info: Configure: UserFolders: 
+2019-01-01T17:35:46.597006: info: Configure: ManagedFolders: 
+2019-01-01T17:35:46.597019: info: Configure: LegacyFactoryPacks: 
+2019-01-01T17:35:46.597031: info: Configure: UserLibrary: /Users/luka/Music/Ableton/User Library/
+2019-01-01T17:35:46.597042: info: Configure: CurrentProject: /Users/luka/Music/Ableton/Live Recordings/Temp Project/
+2019-01-01T17:35:46.615187: info: LibraryFolders: Could not update files for place_id 4871
+2019-01-01T17:35:46.616859: info: Configuring places: Time elapsed: 17
+2019-01-01T17:35:46.633739: info: DatabaseGC: Marking unused files. Time: 15
+2019-01-01T17:35:46.635019: info: DatabaseStats: Live files: 4707
+2019-01-01T17:35:46.635032: info: DatabaseStats: Dead files: 0
+2019-01-01T17:35:46.635040: info: DatabaseStats: Ancestors count: 42228
+2019-01-01T17:35:46.635049: info: DatabaseStats: Number of metadata-file relations: 8199
+2019-01-01T17:35:46.635057: info: DatabaseStats: Number of metadata values: 453
+2019-01-01T17:35:46.635065: info: DatabaseStats: Places count: 3
+2019-01-01T17:35:46.895179: info: Starting scan, Reason: Live, Event ID: 1, All Folders?: 1
+2019-01-01T17:35:47.483936: info: Start extraction, Event ID: 1
+2019-01-01T17:58:54.011684: info: Starting scan, Reason: Live, Event ID: 2, All Folders?: 1
+2019-01-01T17:59:23.083340: info: Database: Cleanup metadata: 6 ms
+2019-01-01T17:59:23.088146: info: Database: Cleanup search aggregation: 5 ms
+2019-02-25T21:08:50.068580: info: #######################################
+2019-02-25T21:08:50.068938: info: Started: Index 10.0.3 Build: 2018-08-16_5ae7d49389
+2019-02-25T21:08:50.068963: info: #######################################
+2019-02-25T21:08:50.068987: info: Directories: Application Support: Check
+2019-02-25T21:08:50.068997: info: Directories: Application Support: /Users/luka/Library/Application Support/Ableton/Live 10.0.3/
+2019-02-25T21:08:50.069006: info: Directories: Documents: Check
+2019-02-25T21:08:50.069014: info: Directories: Documents: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-02-25T21:08:50.069022: info: Directories: Legal: Check
+2019-02-25T21:08:50.069030: info: Directories: Legal: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Extensions/
+2019-02-25T21:08:50.069038: info: Directories: OS Desktop: Check
+2019-02-25T21:08:50.069046: info: Directories: OS Desktop: /Users/luka/Desktop/
+2019-02-25T21:08:50.069054: info: Directories: User Home: Check
+2019-02-25T21:08:50.069062: info: Directories: User Home: /Users/luka/
+2019-02-25T21:08:50.069070: info: Directories: Preferences: Check
+2019-02-25T21:08:50.069077: info: Directories: Preferences: /Users/luka/Library/Preferences/Ableton/Live 10.0.3/
+2019-02-25T21:08:50.069085: info: Directories: Python Standard Library: Check
+2019-02-25T21:08:50.069093: info: Directories: Python Standard Library: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/lib/
+2019-02-25T21:08:50.069102: info: Directories: Python Site Pacakges: Check
+2019-02-25T21:08:50.069110: info: Directories: Python Site Pacakges: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/site-packages/
+2019-02-25T21:08:50.069118: info: Directories: Python Library for Live: Check
+2019-02-25T21:08:50.069126: info: Directories: Python Library for Live: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.live/
+2019-02-25T21:08:50.069134: info: Directories: Python Remote Scripts: Check
+2019-02-25T21:08:50.069141: info: Directories: Python Remote Scripts: /Applications/Ableton Live 10 Suite.app/Contents/App-Resources/MIDI Remote Scripts/
+2019-02-25T21:08:50.069149: info: Directories: Crashlogs: Check
+2019-02-25T21:08:50.069157: info: Directories: Crashlogs: /Users/luka/Library/Logs/DiagnosticReports/
+2019-02-25T21:08:50.069165: info: InMemoryLog: Writing log messages from memory done
+2019-02-25T21:08:50.069246: info: : UUID: 667F6B6D-76E7-3FE1-965F-2CA848A8E4B7
+2019-02-25T21:08:50.069256: info: Init: Version: 'Index 10.0.3 Build: 2018-08-16_5ae7d49389' 1048579
+2019-02-25T21:08:50.069266: info: Init: BuildRevisions: 5ae7d4938908194888f90ed5411dc3def59687f2
+2019-02-25T21:08:50.069274: info: Init: Commit ID: '5ae7d4938908194888f90ed5411dc3def59687f2'
+2019-02-25T21:08:50.069399: info: Init: OS: 'Mac OS X version 10.14.3, Arch:x86-64'
+2019-02-25T21:08:50.069410: info: Init: BuildType: 'Release'
+2019-02-25T21:08:50.069427: info: Init: Pid: 6889
+2019-02-25T21:08:50.069447: info: Init: CPU Brand String: 'Intel(R) Core(TM) i7-6820HQ CPU @ 2.70GHz'
+2019-02-25T21:08:50.069462: info: Init: CPU Count: 8
+2019-02-25T21:08:50.069473: info: Init: Physical RAM: 17179869184 B
+2019-02-25T21:08:50.069480: info: Init: Address Space: 18446744073709551615 B
+2019-02-25T21:08:50.069487: info: Init: 64-bit Edition
+2019-02-25T21:08:50.086889: info: Init: GraphicsDevice: 'Intel HD Graphics 530'
+2019-02-25T21:08:50.140402: info: Init: Checksum 1: 28f5cd91bb1a134c689f37c108689eea
+2019-02-25T21:08:50.161991: info: Init: Checksum 2: 1e40e1933fb74042250e0dca0e08f402
+2019-02-25T21:08:50.180678: info: Init: Checksum 3: 1e40e1933fb74042250e0dca0e08f402
+2019-02-25T21:08:50.180981: info: Licensing: [Variant=Beta, InstallationMedium=Download]
+2019-02-25T21:08:50.188753: info: Net: Setting up connection framework
+2019-02-25T21:08:50.188788: info: Metadata: Initialize XMP system
+2019-02-25T21:08:50.210170: info: App resources: "/Applications/Ableton Live 10 Suite.app/Contents/App-Resources"
+2019-02-25T21:08:50.210382: info: Database: Open file: '/Users/luka/Library/Application Support/Ableton/Live Database/Live-files-34.db'
+2019-02-25T21:09:05.052997: info: Configure: FactoryPacks: '/Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Core Library/'
+2019-02-25T21:09:05.053040: info: Configure: UserFolders: 
+2019-02-25T21:09:05.053056: info: Configure: ManagedFolders: 
+2019-02-25T21:09:05.053069: info: Configure: LegacyFactoryPacks: 
+2019-02-25T21:09:05.053082: info: Configure: UserLibrary: /Users/luka/Music/Ableton/User Library/
+2019-02-25T21:09:05.053094: info: Configure: CurrentProject: /Users/luka/Music/Ableton/Live Recordings/Temp Project/
+2019-02-25T21:09:05.084588: info: Configuring places: Time elapsed: 28
+2019-02-25T21:09:05.101215: info: DatabaseGC: Marking unused files. Time: 15
+2019-02-25T21:09:05.113046: info: DatabaseStats: Live files: 4721
+2019-02-25T21:09:05.113062: info: DatabaseStats: Dead files: 0
+2019-02-25T21:09:05.113071: info: DatabaseStats: Ancestors count: 42342
+2019-02-25T21:09:05.113080: info: DatabaseStats: Number of metadata-file relations: 8144
+2019-02-25T21:09:05.113089: info: DatabaseStats: Number of metadata values: 453
+2019-02-25T21:09:05.113097: info: DatabaseStats: Places count: 3
+2019-02-25T21:09:05.113288: info: Starting scan, Reason: Live, Event ID: 1, All Folders?: 1
+2019-02-25T21:09:06.078375: info: Start extraction, Event ID: 1
+2019-02-25T21:09:08.605030: info: Database: Cleanup metadata: 5 ms
+2019-02-25T21:09:08.649068: info: Database: Cleanup search aggregation: 44 ms

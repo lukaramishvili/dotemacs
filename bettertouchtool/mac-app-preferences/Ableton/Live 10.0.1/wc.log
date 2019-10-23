@@ -1,0 +1,317 @@
+INFO:2018-11-18 11:29:36,360:abl.webconnector.main:Start
+INFO:2018-11-18 11:29:36,361:abl.webconnector.main:Cleanup event logs.
+INFO:2018-11-18 11:29:41,367:abl.webconnector.main:Upload info.
+INFO:2018-11-18 11:29:41,369:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2018-11-18 11:29:42,683:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2018-11-18 11:29:42,685:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+ERROR:2018-11-18 11:33:57,272:abl.webconnector.main:Exception in worker thread
+Traceback (most recent call last):
+  File "/Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.webconnector/abl/webconnector/main.py", line 54, in target
+    action()
+  File "/Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.webconnector/abl/webconnector/main.py", line 237, in check_for_auto_updates
+    task.perform(usage_reporter)
+  File "/Applications/Ableton Live 10 Suite.app/Contents/App-Resources/Python/abl.webconnector/abl/webconnector/tasks.py", line 30, in perform
+    raise WrongChecksum
+WrongChecksum
+ERROR:2018-11-18 11:34:01,566:abl.webconnector.main:
+INFO:2018-11-18 11:36:44,827:abl.webconnector.main:Start
+INFO:2018-11-18 11:36:44,829:abl.webconnector.main:Cleanup event logs.
+INFO:2018-11-18 11:36:49,832:abl.webconnector.main:Upload info.
+INFO:2018-11-18 11:36:49,835:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2018-11-18 11:36:50,988:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2018-11-18 11:36:50,989:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2018-11-18 11:37:09,848:abl.webconnector.main:Check for Updates interrupted by early Live termination
+INFO:2018-11-18 11:37:09,848:abl.webconnector.main:End
+INFO:2018-12-29 20:23:02,081:abl.webconnector.main:Start
+INFO:2018-12-29 20:23:02,082:abl.webconnector.main:Cleanup event logs.
+INFO:2018-12-29 20:23:07,083:abl.webconnector.main:Upload info.
+INFO:2018-12-29 20:23:07,088:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2018-12-29 20:23:08,373:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2018-12-29 20:23:08,381:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2018-12-29 20:30:51,738:abl.webconnector.tasks:Delta retrieved, elapsed time: 463357ms
+INFO:2018-12-29 20:30:51,738:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2018-12-29 20:30:51,744:abl.webconnector.connector:Copy installation
+INFO:2018-12-29 20:31:44,484:abl.webconnector.connector:Copy installation completed (52739 ms)
+INFO:2018-12-29 20:31:44,484:abl.webconnector.connector:Update cloned installation
+INFO:2018-12-29 20:31:58,166:abl.webconnector.connector:Update cloned installation completed (13681 ms)
+INFO:2018-12-29 20:32:02,462:abl.webconnector.main:Waiting for Live to terminate
+INFO:2018-12-29 20:32:05,477:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2018-12-29 20:32:05,518:abl.webconnector.main:End
+INFO:2019-01-13 13:29:14,925:abl.webconnector.main:Start
+INFO:2019-01-13 13:29:14,927:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-13 13:29:19,929:abl.webconnector.main:Upload info.
+INFO:2019-01-13 13:29:19,947:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-13 13:29:21,397:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-13 13:29:21,399:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-13 13:29:29,953:abl.webconnector.main:Check for Updates interrupted by early Live termination
+INFO:2019-01-13 13:29:29,953:abl.webconnector.main:End
+INFO:2019-01-13 13:29:57,646:abl.webconnector.main:Start
+INFO:2019-01-13 13:29:57,648:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-13 13:30:02,653:abl.webconnector.main:Upload info.
+INFO:2019-01-13 13:30:02,673:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-13 13:30:03,896:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-13 13:30:03,898:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-13 13:41:51,261:abl.webconnector.tasks:Delta retrieved, elapsed time: 707363ms
+INFO:2019-01-13 13:41:51,267:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-01-13 13:41:51,270:abl.webconnector.connector:Copy installation
+INFO:2019-01-13 13:42:35,556:abl.webconnector.connector:Copy installation completed (44285 ms)
+INFO:2019-01-13 13:42:35,562:abl.webconnector.connector:Update cloned installation
+INFO:2019-01-13 13:42:50,797:abl.webconnector.connector:Update cloned installation completed (15234 ms)
+INFO:2019-01-13 13:42:53,200:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-01-14 00:20:07,139:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-01-14 00:20:07,181:abl.webconnector.main:End
+INFO:2019-01-15 02:19:48,797:abl.webconnector.main:Start
+INFO:2019-01-15 02:19:48,799:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-15 02:19:53,804:abl.webconnector.main:Upload info.
+INFO:2019-01-15 02:19:53,836:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-15 02:19:54,585:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-15 02:19:54,586:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-15 02:21:23,026:abl.webconnector.tasks:Delta retrieved, elapsed time: 88439ms
+INFO:2019-01-15 02:21:23,032:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-01-15 02:21:23,035:abl.webconnector.connector:Copy installation
+INFO:2019-01-15 02:22:20,500:abl.webconnector.connector:Copy installation completed (57464 ms)
+INFO:2019-01-15 02:22:20,506:abl.webconnector.connector:Update cloned installation
+INFO:2019-01-15 02:22:36,283:abl.webconnector.connector:Update cloned installation completed (15776 ms)
+INFO:2019-01-15 02:22:38,923:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-01-15 03:00:06,911:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-01-15 03:00:06,942:abl.webconnector.main:End
+INFO:2019-01-15 09:58:38,099:abl.webconnector.main:Start
+INFO:2019-01-15 09:58:38,101:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-15 09:58:43,106:abl.webconnector.main:Upload info.
+INFO:2019-01-15 09:58:43,137:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-15 09:58:44,369:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-15 09:58:44,372:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-15 09:59:43,168:abl.webconnector.main:Check for Updates interrupted by early Live termination
+INFO:2019-01-15 09:59:43,169:abl.webconnector.main:End
+INFO:2019-01-15 10:00:08,925:abl.webconnector.main:Start
+INFO:2019-01-15 10:00:08,927:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-15 10:00:13,932:abl.webconnector.main:Upload info.
+INFO:2019-01-15 10:00:13,961:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-15 10:00:15,311:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-15 10:00:15,313:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-15 11:22:12,312:abl.webconnector.main:Check for Updates interrupted by early Live termination
+INFO:2019-01-15 11:22:12,313:abl.webconnector.main:End
+INFO:2019-01-18 21:22:13,716:abl.webconnector.main:Start
+INFO:2019-01-18 21:22:13,718:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-18 21:22:18,721:abl.webconnector.main:Upload info.
+INFO:2019-01-18 21:22:18,770:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-18 21:22:21,838:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-18 21:22:21,843:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-18 21:29:58,166:abl.webconnector.tasks:Delta retrieved, elapsed time: 456322ms
+INFO:2019-01-18 21:29:58,169:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-01-18 21:29:58,172:abl.webconnector.connector:Copy installation
+INFO:2019-01-18 21:31:17,353:abl.webconnector.connector:Copy installation completed (79180 ms)
+INFO:2019-01-18 21:31:17,359:abl.webconnector.connector:Update cloned installation
+INFO:2019-01-18 21:31:43,517:abl.webconnector.connector:Update cloned installation completed (26157 ms)
+INFO:2019-01-18 21:31:44,097:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-01-19 02:38:12,631:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-01-19 02:38:12,678:abl.webconnector.main:End
+INFO:2019-01-26 17:43:58,822:abl.webconnector.main:Start
+INFO:2019-01-26 17:43:58,824:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-26 17:44:03,827:abl.webconnector.main:Upload info.
+INFO:2019-01-26 17:44:03,859:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-26 17:44:04,366:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-26 17:44:04,368:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-26 17:50:23,771:abl.webconnector.tasks:Delta retrieved, elapsed time: 379402ms
+INFO:2019-01-26 17:50:23,771:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-01-26 17:50:23,779:abl.webconnector.connector:Copy installation
+INFO:2019-01-26 17:51:18,487:abl.webconnector.connector:Copy installation completed (54707 ms)
+INFO:2019-01-26 17:51:18,493:abl.webconnector.connector:Update cloned installation
+INFO:2019-01-26 17:51:34,052:abl.webconnector.connector:Update cloned installation completed (15558 ms)
+INFO:2019-01-26 17:51:34,148:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-01-26 21:37:52,113:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-01-26 21:37:52,149:abl.webconnector.main:End
+INFO:2019-01-27 14:00:29,099:abl.webconnector.main:Start
+INFO:2019-01-27 14:00:29,100:abl.webconnector.main:Cleanup event logs.
+INFO:2019-01-27 14:00:34,104:abl.webconnector.main:Upload info.
+INFO:2019-01-27 14:00:34,142:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-01-27 14:00:34,680:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-01-27 14:00:34,682:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-01-27 14:06:59,526:abl.webconnector.tasks:Delta retrieved, elapsed time: 384843ms
+INFO:2019-01-27 14:06:59,526:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-01-27 14:06:59,532:abl.webconnector.connector:Copy installation
+INFO:2019-01-27 14:07:52,011:abl.webconnector.connector:Copy installation completed (52478 ms)
+INFO:2019-01-27 14:07:52,017:abl.webconnector.connector:Update cloned installation
+INFO:2019-01-27 14:08:07,188:abl.webconnector.connector:Update cloned installation completed (15170 ms)
+INFO:2019-01-27 14:08:09,393:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-01-27 16:05:38,554:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-01-27 16:05:38,575:abl.webconnector.main:End
+INFO:2019-02-16 12:33:20,379:abl.webconnector.main:Start
+INFO:2019-02-16 12:33:20,380:abl.webconnector.main:Cleanup event logs.
+INFO:2019-02-16 12:33:25,385:abl.webconnector.main:Upload info.
+INFO:2019-02-16 12:33:25,422:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-02-16 12:33:25,893:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-02-16 12:33:25,895:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-02-16 12:40:20,799:abl.webconnector.tasks:Delta retrieved, elapsed time: 414904ms
+INFO:2019-02-16 12:40:20,807:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-02-16 12:40:20,811:abl.webconnector.connector:Copy installation
+INFO:2019-02-16 12:41:00,115:abl.webconnector.connector:Copy installation completed (39303 ms)
+INFO:2019-02-16 12:41:00,122:abl.webconnector.connector:Update cloned installation
+INFO:2019-02-16 12:41:16,216:abl.webconnector.connector:Update cloned installation completed (16093 ms)
+INFO:2019-02-16 12:41:20,710:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-02-16 13:55:34,545:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-02-16 13:55:34,584:abl.webconnector.main:End
+INFO:2019-02-16 14:17:54,575:abl.webconnector.main:Start
+INFO:2019-02-16 14:17:54,576:abl.webconnector.main:Cleanup event logs.
+INFO:2019-02-16 14:17:59,579:abl.webconnector.main:Upload info.
+INFO:2019-02-16 14:17:59,619:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-02-16 14:18:00,062:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-02-16 14:18:00,064:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-02-16 14:24:59,840:abl.webconnector.tasks:Delta retrieved, elapsed time: 419775ms
+INFO:2019-02-16 14:24:59,840:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-02-16 14:24:59,848:abl.webconnector.connector:Copy installation
+INFO:2019-02-16 14:25:51,948:abl.webconnector.connector:Copy installation completed (52100 ms)
+INFO:2019-02-16 14:25:51,954:abl.webconnector.connector:Update cloned installation
+INFO:2019-02-16 14:26:07,103:abl.webconnector.connector:Update cloned installation completed (15148 ms)
+INFO:2019-02-16 14:26:09,905:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-02-16 14:46:53,743:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-02-16 14:46:53,771:abl.webconnector.main:End
+INFO:2019-02-16 18:45:28,994:abl.webconnector.main:Start
+INFO:2019-02-16 18:45:28,996:abl.webconnector.main:Cleanup event logs.
+INFO:2019-02-16 18:45:33,997:abl.webconnector.main:Upload info.
+INFO:2019-02-16 18:45:34,037:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-02-16 18:45:36,390:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-02-16 18:45:36,392:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-02-16 18:51:55,654:abl.webconnector.tasks:Delta retrieved, elapsed time: 379261ms
+INFO:2019-02-16 18:51:55,654:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-02-16 18:51:55,660:abl.webconnector.connector:Copy installation
+INFO:2019-02-16 18:52:50,403:abl.webconnector.connector:Copy installation completed (54742 ms)
+INFO:2019-02-16 18:52:50,409:abl.webconnector.connector:Update cloned installation
+INFO:2019-02-16 18:53:03,565:abl.webconnector.connector:Update cloned installation completed (13155 ms)
+INFO:2019-02-16 18:53:04,328:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-02-16 19:45:10,215:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-02-16 19:45:10,244:abl.webconnector.main:End
+INFO:2019-02-25 21:10:30,675:abl.webconnector.main:Start
+INFO:2019-02-25 21:10:30,676:abl.webconnector.main:Cleanup event logs.
+INFO:2019-02-25 21:10:35,679:abl.webconnector.main:Upload info.
+INFO:2019-02-25 21:10:35,750:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-02-25 21:10:36,340:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-02-25 21:10:36,342:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-02-25 21:14:10,271:abl.webconnector.tasks:Delta retrieved, elapsed time: 213928ms
+INFO:2019-02-25 21:14:10,271:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-02-25 21:14:10,278:abl.webconnector.connector:Copy installation
+INFO:2019-02-25 21:15:05,564:abl.webconnector.connector:Copy installation completed (55285 ms)
+INFO:2019-02-25 21:15:05,575:abl.webconnector.connector:Update cloned installation
+INFO:2019-02-25 21:15:21,216:abl.webconnector.connector:Update cloned installation completed (15640 ms)
+INFO:2019-02-25 21:15:25,912:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-02-26 00:04:32,167:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-02-26 00:04:32,208:abl.webconnector.main:End
+INFO:2019-06-02 12:48:13,806:abl.webconnector.main:Start
+INFO:2019-06-02 12:48:13,807:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-02 12:48:18,810:abl.webconnector.main:Upload info.
+INFO:2019-06-02 12:48:18,871:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-06-02 12:48:19,900:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-06-02 12:48:19,902:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-06-02 13:04:20,655:abl.webconnector.tasks:Delta retrieved, elapsed time: 960753ms
+INFO:2019-06-02 13:04:20,659:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-06-02 13:04:20,661:abl.webconnector.connector:Copy installation
+INFO:2019-06-02 13:05:15,595:abl.webconnector.connector:Copy installation completed (54933 ms)
+INFO:2019-06-02 13:05:15,597:abl.webconnector.connector:Update cloned installation
+INFO:2019-06-02 13:05:32,928:abl.webconnector.connector:Update cloned installation completed (17331 ms)
+INFO:2019-06-02 13:05:34,593:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-06-02 22:32:38,720:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-06-02 22:32:38,765:abl.webconnector.main:End
+INFO:2019-06-04 10:19:05,244:abl.webconnector.main:Start
+INFO:2019-06-04 10:19:05,245:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:19:10,247:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:19:10,307:abl.webconnector.auto_updates:Checking for auto updates from 10.0.1
+INFO:2019-06-04 10:19:10,844:abl.webconnector.auto_updates:Found update to 10.0.2
+INFO:2019-06-04 10:19:10,845:abl.webconnector.tasks:Retrieving delta ableton_live_suite_10.0.2_from_10.0.1_osx_64.asu
+INFO:2019-06-04 10:22:30,321:abl.webconnector.tasks:Delta retrieved, elapsed time: 199475ms
+INFO:2019-06-04 10:22:30,325:abl.webconnector.tasks:Preparing auto-update tasks
+INFO:2019-06-04 10:22:30,327:abl.webconnector.connector:Copy installation
+INFO:2019-06-04 10:23:20,995:abl.webconnector.connector:Copy installation completed (50667 ms)
+INFO:2019-06-04 10:23:20,997:abl.webconnector.connector:Update cloned installation
+INFO:2019-06-04 10:23:33,736:abl.webconnector.connector:Update cloned installation completed (12739 ms)
+INFO:2019-06-04 10:23:35,461:abl.webconnector.main:Waiting for Live to terminate
+INFO:2019-06-04 10:24:22,615:abl.webconnector.connector:Invoking swapper to apply update
+INFO:2019-06-04 10:24:22,647:abl.webconnector.main:End
+INFO:2019-06-04 10:27:02,239:abl.webconnector.main:Start
+INFO:2019-06-04 10:27:02,241:abl.webconnector.main:No internet connection available, aborting.
+ERROR:2019-06-04 10:27:02,241:abl.webconnector.main:
+INFO:2019-06-04 10:27:12,759:abl.webconnector.main:Start
+INFO:2019-06-04 10:27:12,760:abl.webconnector.main:No internet connection available, aborting.
+ERROR:2019-06-04 10:27:12,760:abl.webconnector.main:
+INFO:2019-06-04 10:28:03,475:abl.webconnector.main:Start
+INFO:2019-06-04 10:28:03,477:abl.webconnector.main:No internet connection available, aborting.
+ERROR:2019-06-04 10:28:03,477:abl.webconnector.main:
+INFO:2019-06-04 10:33:40,193:abl.webconnector.main:Start
+INFO:2019-06-04 10:33:40,195:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:33:45,199:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:33:45,270:abl.webconnector.main:End
+INFO:2019-06-04 10:36:13,689:abl.webconnector.main:Start
+INFO:2019-06-04 10:36:13,691:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:36:18,695:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:36:18,765:abl.webconnector.main:End
+INFO:2019-06-04 10:36:25,127:abl.webconnector.main:Start
+INFO:2019-06-04 10:36:25,128:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:36:30,132:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:36:30,203:abl.webconnector.main:End
+INFO:2019-06-04 10:38:43,188:abl.webconnector.main:Start
+INFO:2019-06-04 10:38:43,190:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:38:48,195:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:38:48,267:abl.webconnector.main:End
+INFO:2019-06-04 10:40:05,584:abl.webconnector.main:Start
+INFO:2019-06-04 10:40:05,585:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:40:10,589:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:40:10,669:abl.webconnector.main:End
+INFO:2019-06-04 10:40:14,708:abl.webconnector.main:Start
+INFO:2019-06-04 10:40:14,710:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:40:19,715:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:40:19,789:abl.webconnector.main:End
+INFO:2019-06-04 10:40:44,763:abl.webconnector.main:Start
+INFO:2019-06-04 10:40:44,764:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:40:49,770:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:40:49,852:abl.webconnector.main:End
+INFO:2019-06-04 10:41:33,085:abl.webconnector.main:Start
+INFO:2019-06-04 10:41:33,086:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 10:41:38,091:abl.webconnector.main:Upload info.
+INFO:2019-06-04 10:41:38,168:abl.webconnector.main:End
+INFO:2019-06-04 13:00:46,550:abl.webconnector.main:Start
+INFO:2019-06-04 13:00:46,552:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 13:00:51,556:abl.webconnector.main:Upload info.
+INFO:2019-06-04 13:00:51,634:abl.webconnector.main:End
+INFO:2019-06-04 13:02:30,152:abl.webconnector.main:Start
+INFO:2019-06-04 13:02:30,153:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 13:02:35,154:abl.webconnector.main:Upload info.
+INFO:2019-06-04 13:02:35,231:abl.webconnector.main:End
+INFO:2019-06-04 13:02:39,850:abl.webconnector.main:Start
+INFO:2019-06-04 13:02:39,852:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 13:02:44,856:abl.webconnector.main:Upload info.
+INFO:2019-06-04 13:02:44,932:abl.webconnector.main:End
+INFO:2019-06-04 13:03:02,316:abl.webconnector.main:Start
+INFO:2019-06-04 13:03:02,318:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-04 13:03:07,321:abl.webconnector.main:Upload info.
+INFO:2019-06-04 13:03:07,399:abl.webconnector.main:End
+INFO:2019-06-23 16:42:43,941:abl.webconnector.main:Start
+INFO:2019-06-23 16:42:43,943:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-23 16:42:48,946:abl.webconnector.main:Upload info.
+INFO:2019-06-23 16:42:49,033:abl.webconnector.main:End
+INFO:2019-06-23 16:58:51,462:abl.webconnector.main:Start
+INFO:2019-06-23 16:58:51,463:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-23 16:58:56,468:abl.webconnector.main:Upload info.
+INFO:2019-06-23 16:58:56,557:abl.webconnector.main:End
+INFO:2019-06-23 17:42:50,202:abl.webconnector.main:Start
+INFO:2019-06-23 17:42:50,204:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-23 17:42:55,207:abl.webconnector.main:Upload info.
+INFO:2019-06-23 17:42:55,300:abl.webconnector.main:End
+INFO:2019-06-23 18:31:08,969:abl.webconnector.main:Start
+INFO:2019-06-23 18:31:08,972:abl.webconnector.main:Cleanup event logs.
+INFO:2019-06-23 18:31:13,979:abl.webconnector.main:Upload info.
+INFO:2019-06-23 18:31:14,110:abl.webconnector.main:End
+INFO:2019-10-01 22:27:53,554:abl.webconnector.main:Start
+INFO:2019-10-01 22:27:53,555:abl.webconnector.main:Cleanup event logs.
+INFO:2019-10-01 22:27:58,560:abl.webconnector.main:Upload info.
+INFO:2019-10-01 22:27:58,650:abl.webconnector.main:End
+INFO:2019-10-01 22:45:36,522:abl.webconnector.main:Start
+INFO:2019-10-01 22:45:36,524:abl.webconnector.main:Cleanup event logs.
+INFO:2019-10-01 22:45:41,529:abl.webconnector.main:Upload info.
+INFO:2019-10-01 22:45:41,619:abl.webconnector.main:End
+INFO:2019-10-01 23:20:29,061:abl.webconnector.main:Start
+INFO:2019-10-01 23:20:29,063:abl.webconnector.main:Cleanup event logs.
+INFO:2019-10-01 23:20:34,068:abl.webconnector.main:Upload info.
+INFO:2019-10-01 23:20:34,163:abl.webconnector.main:End
+INFO:2019-10-02 12:08:49,902:abl.webconnector.main:Start
+INFO:2019-10-02 12:08:49,903:abl.webconnector.main:Cleanup event logs.
+INFO:2019-10-02 12:08:54,908:abl.webconnector.main:Upload info.
+INFO:2019-10-02 12:08:55,002:abl.webconnector.main:End
