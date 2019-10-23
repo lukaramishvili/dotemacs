@@ -1310,6 +1310,8 @@ in the appropriate direction to include current line."
   (define-key ido-completion-map (kbd "C-b") 'ido-prev-match)
   ;; revert to Emacs engines with C-r when needed (works on both find-file and switch-buffer)
   (define-key ido-completion-map "\C-r" 'ido-fallback-command)
+  ;; also use C-g for fallback, since it feels intuitive
+  (define-key ido-completion-map "\C-g" 'ido-fallback-command)
   ;; also use up/down for navigating matches.
   (define-key ido-completion-map [down] 'ido-next-match) 
   (define-key ido-completion-map [up]   'ido-prev-match)
