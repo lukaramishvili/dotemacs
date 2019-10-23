@@ -1,3 +1,0 @@
-DevKit
-com.intellij.uiDesigner
-org.jetbrains.android

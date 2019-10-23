@@ -1,2 +1,0 @@
-CodeProfiler_AutoStart	false	false
-CodeProfiler_InitialVolume	5	5
