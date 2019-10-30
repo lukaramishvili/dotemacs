@@ -101,6 +101,11 @@ cdd(){
   builtin cd "$*"
 }
 
+# just output the nth column of tabular data. e.g. `ls -l | nth 3` only leaves the owner column.
+nth(){
+  awk "{ print \$$1 }"
+}
+
 # to disable Chromium api keys warning (methods that didn't work: .profile, .bashrc, Chromium.app>Info.plist>LSEnvironment):
 # https://gist.github.com/ezeeyahoo/dc4bdd250c6c6468959e107ddaef53f4
 
