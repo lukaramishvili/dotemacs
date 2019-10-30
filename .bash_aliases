@@ -142,9 +142,6 @@ alias p="cd /projects"
 
 # ici tinker (reuse tinker alias for rlwrap)
 #alias t="cd /projects/ici && tinker"
-#alias w="cd /projects/wom"
-# wom gulp
-#alias wg="cd /projects/wom && gulp watch"
 # wom serve, then open served url and bring dev server process to front
 #alias ws="cd /projects/wom && php artisan serve --host 0.0.0.0 --port 8000 & (i\
 #fconfig | grep 192 | perl -pe 's|^.*?(192\.\d+\.\d+\.\d+).*$|http://\1:8000|' |\
