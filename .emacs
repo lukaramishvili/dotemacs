@@ -1643,9 +1643,9 @@ in the appropriate direction to include current line."
   ;; set custom keybinding for expanding
   (local-set-key (kbd "C-c x") 'emmet-expand-line)
   ;; disable C-j expand keybinding (local-set-key didn't work)
-  (define-key emmet-mode-keymap (kbd "C-j") nil)
+  (define-key emmet-mode-keymap (kbd "C-j") nil))
   ;; use M-j instead
-  (define-key emmet-mode-keymap (kbd "M-j") 'emmet-expand-line))
+;;(define-key emmet-mode-keymap (kbd "M-j") 'emmet-expand-line))
 (add-hook 'emmet-mode-hook 'set-emmet-mode-settings)
 
 ;; TODO find out how d/s/ inserts <div><span>...
