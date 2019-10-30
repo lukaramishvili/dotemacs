@@ -560,6 +560,7 @@ Ignores CHAR at point, and also ignores."
 ;; (load "~/dotemacs/javascript.el")
 (defun setup-javascript ()
   "Setup and configure javascript packages, keybindings, etc."
+  (interactive)
   (load "~/dotemacs/javascript.el"))
 
 
@@ -1831,9 +1832,12 @@ in the appropriate direction to include current line."
 ;;;; Clojure mode with cider
 ;; for performance, move to fn; don't load by default
 (defun setup-clojure ()
+  (interactive)
+  "Setup and configure cloju packages, cider, etc."
   (load "~/dotemacs/setup-clojure.el"))
 
 (defun clojure-repl ()
+  (interactive)
   (cider-jack-in))
 
 
