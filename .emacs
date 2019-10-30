@@ -8,6 +8,10 @@
 
 ;;; Code:
 
+(cd "/projects/")
+
+(setq default-directory "/projects/")
+
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -35,6 +39,9 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs
    '("PATH")))
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
@@ -68,6 +75,24 @@ The directory name is added to window name to make multiple eshell windows easie
   (insert "exit")
   (eshell-send-input)
   (delete-window))
+
+
+;; from Tikhon Jelvis (modified to include bash profile)
+(defun new-shell (name)
+  "Open a new shell buffer with the given name in asterisks (*NAME*) in the current directory and change the prompt to 'name>'."
+  (interactive "sName: ")
+  ;; pop-to-buffer caused more headaches than I can count, opening the shell in different buffers and messing with window layout. switch-to-buffer opens the shell in the current window, so the problem's gone.
+  (switch-to-buffer (concat "*" name "*"))
+  (unless (eq major-mode 'shell-mode)
+    (shell (current-buffer))
+    (sleep-for 0 200)
+    (delete-region (point-min) (point-max))
+    ;; set prompt name && include user bash profile
+    (comint-simple-send (get-buffer-process (current-buffer)) 
+                        (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\" && source ~/.bash_profile"))
+    (set-windmove-keybindings)))
+(global-set-key (kbd "C-c s") 'new-shell)
+
 
 (defun ask-before-closing ()
   "Ask whether or not to close, and then close if y was pressed."
@@ -126,6 +151,17 @@ This depends on major mode having setup syntax table properly."
 ;;    ((equal (inside-string?) 39)
 ;;     (search-backward "'")))
 ;;   (original-backward-up-list))
+
+
+
+(require 'hungry-delete)
+
+;;(use-package hungry-delete
+;;             :bind (("<backspace>" . hungry-delete-backward)
+;;                    ("C-S-d" . hungry-delete-backward)
+;;                    ("C-h" . hungry-delete-backward)
+;;                    ("C-d" . hungry-delete-forward)))
+
 
 ;; variations on Steve Yegge recommendations
 (defun kill-current-word ()
@@ -404,6 +440,72 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;; for ispell
 (setenv "DICTIONARY" "en_US")
 
+
+(setq ring-bell-function 'ignore)
+
+;; disabled guru mode; doesn't play well with multiple input sources (need arrows with non-english layouts)
+;; (add-to-list 'load-path "~/.emacs.d/guru-mode")
+;; (require 'guru-mode)
+;; (guru-global-mode +1)
+
+;; line numbers
+(global-linum-mode);; -1 for off
+
+;; Highlight current line
+(global-hl-line-mode 1)
+
+;; turns off cursor blink.
+;; I prefer blinking cursor – easier to find, but highlight-line-mode might solve that.
+(blink-cursor-mode 0)
+
+
+;; increase font size for better readability
+(set-face-attribute 'default nil :height 140)
+
+;;; colors
+;;(set-background-color "#3f3f3f")
+;;(set-foreground-color "white")
+
+;; themes
+(add-to-list 'custom-theme-load-path "~/dotemacs/themes")
+(add-to-list 'load-path "~/dotemacs/themes")
+;; (load-theme 'blackboard t)
+;; (load-theme 'tomorrow-night-bright t)
+;; (load-theme 'tomorrow-night-blue t)
+;; (load-theme 'tomorrow-night-eighties t)
+;; (load-theme 'tomorrow-night t)
+(load-theme 'zenburn t)
+
+;; Color Themes
+;; Read http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/
+;; for a great explanation of emacs color themes.
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html
+;; for a more technical explanation.
+;; (add-to-list 'custom-theme-load-path "~/dotemacs/themes")
+;; (add-to-list 'load-path "~/dotemacs/themes") ;
+;; (load-theme 'tomorrow-night-bright t)
+
+;;; fonts
+(set-default-font "DejaVu Sans Mono")
+
+;; disable tab indentation
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+;; shell scripts
+(setq-default sh-basic-offset 2)
+(setq-default sh-indentation 2)
+
+;; full path in title bar
+(setq-default frame-title-format "%b (%f)")
+
+;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+;; always follow symlinks (avoid annoying yes/no question)
+(setq vc-follow-symlinks t)
+
 ;; Key binding to use "hippie expand" for text autocompletion
 ;; http://www.emacswiki.org/emacs/HippieExpand
 (global-set-key (kbd "M-/") 'hippie-expand)
@@ -455,97 +557,7 @@ Ignores CHAR at point, and also ignores."
 ;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
 
-(defun setup-rjsx-mode ()
-  "Setup rjsx mode, enable LSP, company, TIDE etc."
-  (setq-local indent-line-function 'js-jsx-indent-line)
-  (setq-local js-indent-level 2)
-  (setup-tide-mode)
-  (company-mode)
-  ;; (prettier-js-mode)
-  (emmet-mode))
-(add-hook 'rjsx-mode-hook 'setup-rjsx-mode)
-
-
-(defun setup-tide-mode ()
-  "Setup Typescript IDE mode."
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  ;; if using company-mode, uncomment this
-  (company-mode +1)
-  ;; javascript editing is easier with subword mode
-  (subword-mode +1)
-  )
-;; format options -- full list at https://github.com/Microsoft/TypeScript/blob/v3.3.1/src/server/protocol.ts#L2858-L2890
-(setq tide-format-options
-      '(:indentSize 2 :tabSize 2
-                    :insertSpaceAfterFunctionKeywordForAnonymousFunctions t
-                    :placeOpenBraceOnNewLineForFunctions nil
-                    :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil
-                    :placeOpenBraceOnNewLineForControlBlocks nil))
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
-
-;; enable debugger (TODO for now). has support for Javascript in Chrome/Firefox, PHP, Elixir, Go, Python and native GDB/LLDB for C and C++.
-(dap-mode 1)
-(dap-ui-mode 1)
-
-
-(require 'ng2-mode)
-;; there's ng2-ts-mode and ng2-html-mode (activated automatically).
-
-(require 'lsp-mode)
-
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package company-lsp :commands company-lsp)
-
-;; (require 'flycheck-flow)
-;; ;; will only be enabled for files with a //@flow declaration at the first line and a .flowconfig in project root.
-;; (add-hook 'js2-mode-hook 'flow-minor-enable-automatically)
-;; ;; 
-;; (with-eval-after-load 'flycheck
-;;   (flycheck-add-mode 'javascript-flow 'flow-minor-mode)
-;;   (flycheck-add-mode 'javascript-eslint 'flow-minor-mode)
-;;   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint))
-;; (with-eval-after-load 'company
-;;   (add-to-list 'company-backends 'company-flow))
-
-
-;; Add LSP support for specific major modes: https://github.com/emacs-lsp/lsp-mode#adding-support-for-languages
-
-
-(add-hook 'prog-mode #'lsp) ; doesn't do anything in ng2-*-mode or unsupported prog-mode derived modes
-;; (add-hook 'ng2-mode #'lsp) didn't apply to html/ts sub-modes
-;; using tide-mode for ng-* files, so commented below lines
-;; (add-hook 'ng2-ts-mode #'lsp)
-;; (add-hook 'ng2-html-mode #'lsp)
-
-;; To add LSP support for additional modes, see https://github.com/emacs-lsp/lsp-mode#supported-languages
-
-;; SASS/SCSS/etc: `npm install -g vscode-css-languageserver-bin`
-(add-hook 'scss-mode-hook #'lsp)
-;; HTML LSP server: `npm install -g vscode-html-languageserver-bin`
-;; Uncomment for LSP in html-mode, but didn't really find it useful
-;;(add-hook 'html-mode-hook #'lsp)
-;; WARNING: use `npm i -g bash-language-server --unsafe-perm=true --allow-root`, NOT `npm i -g bash-language-server`
-;; there's also support for PHP, C++, Elixir, Ocaml, Python, Haskell, Go and Vue
-
-;; Turn on tide-mode in .component.html/.ts files
-;; (add-hook 'ng2-mode-hook #'setup-tide-mode) didn't work
-(add-hook 'ng2-ts-mode-hook #'lsp)
-(add-hook 'ng2-ts-mode-hook #'setup-tide-mode)
-(add-hook 'ng2-html-mode-hook #'setup-tide-mode)
-
-(add-hook 'typescript-mode-hook #'lsp)
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
-(add-hook 'typescript-mode-hook #'company-mode)
-
+(load "~/dotemacs/javascript.el")
 
 
 ;; M-x `compile tsc format`
@@ -627,74 +639,6 @@ Ignores CHAR at point, and also ignores."
       backup-directory-alist `(("." . ,(concat user-emacs-directory
                                                "backups"))))
 
-(setq ring-bell-function 'ignore)
-
-;; disabled guru mode; doesn't play well with multiple input sources (need arrows with non-english layouts)
-;; (add-to-list 'load-path "~/.emacs.d/guru-mode")
-;; (require 'guru-mode)
-;; (guru-global-mode +1)
-
-;; line numbers
-(global-linum-mode);; -1 for off
-
-;; Highlight current line
-(global-hl-line-mode 1)
-
-;; turns off cursor blink.
-;; I prefer blinking cursor – easier to find, but highlight-line-mode might solve that.
-(blink-cursor-mode 0)
-
-
-;; increase font size for better readability
-(set-face-attribute 'default nil :height 140)
-
-;;; colors
-;;(set-background-color "#3f3f3f")
-;;(set-foreground-color "white")
-
-;; themes
-(add-to-list 'custom-theme-load-path "~/dotemacs/themes")
-(add-to-list 'load-path "~/dotemacs/themes")
-;; (load-theme 'blackboard t)
-;; (load-theme 'tomorrow-night-bright t)
-;; (load-theme 'tomorrow-night-blue t)
-;; (load-theme 'tomorrow-night-eighties t)
-;; (load-theme 'tomorrow-night t)
-(load-theme 'zenburn t)
-
-;; Color Themes
-;; Read http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/
-;; for a great explanation of emacs color themes.
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html
-;; for a more technical explanation.
-;; (add-to-list 'custom-theme-load-path "~/dotemacs/themes")
-;; (add-to-list 'load-path "~/dotemacs/themes") ;
-;; (load-theme 'tomorrow-night-bright t)
-
-;;; fonts
-(set-default-font "DejaVu Sans Mono")
-
-(cd "/projects/")
-
-(setq default-directory "/projects/")
-
-;; disable tab indentation
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-
-;; shell scripts
-(setq-default sh-basic-offset 2)
-(setq-default sh-indentation 2)
-
-;; full path in title bar
-(setq-default frame-title-format "%b (%f)")
-
-;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-
-;; always follow symlinks (avoid annoying yes/no question)
-(setq vc-follow-symlinks t)
 
 ;; enable sourcing .bashrc files in 'shell-command (M-!)
 ;; from https://stackoverflow.com/a/12229404/324220
@@ -962,19 +906,6 @@ in the appropriate direction to include current line."
 
 
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
-
-
-
-(require 'hungry-delete)
-
-;;(use-package hungry-delete
-;;             :bind (("<backspace>" . hungry-delete-backward)
-;;                    ("C-S-d" . hungry-delete-backward)
-;;                    ("C-h" . hungry-delete-backward)
-;;                    ("C-d" . hungry-delete-forwa
 
 
 ;;; Asciidoc. don't forget `brew install asciidoc`. Docs: https://asciidoctor.org/docs/user-manual/
@@ -1173,11 +1104,6 @@ in the appropriate direction to include current line."
 ;; IMPORTANT: place SuperCollider.app in /Applications/SuperCollider like this: /Applications/SuperCollider/SuperCollider.app
 (add-hook 'sclang-mode-hook 'sclang-extensions-mode)
 
-(defun setup-javascript-mode ()
-  "Setup javascript mode."
-	(local-set-key (kbd "C-c f") 'open-js-lambda-block)
-  ;; javascript editing is easier with subword mode
-  (subword-mode +1))
 
 (add-hook 'js-mode-hook #'setup-javascript-mode)
 (add-hook 'ng2-ts-mode-hook #'setup-javascript-mode)
@@ -1394,21 +1320,6 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "M-?") '(lambda () (interactive) (google (symbol-name (symbol-at-point)))))
 
 
-; from Tikhon Jelvis (modified to include bash profile)
-(defun new-shell (name)
-  "Open a new shell buffer with the given name in asterisks (*NAME*) in the current directory and change the prompt to 'name>'."
-  (interactive "sName: ")
-  ;; pop-to-buffer caused more headaches than I can count, opening the shell in different buffers and messing with window layout. switch-to-buffer opens the shell in the current window, so the problem's gone.
-  (switch-to-buffer (concat "*" name "*"))
-  (unless (eq major-mode 'shell-mode)
-    (shell (current-buffer))
-    (sleep-for 0 200)
-    (delete-region (point-min) (point-max))
-    ;; set prompt name && include user bash profile
-    (comint-simple-send (get-buffer-process (current-buffer)) 
-                        (concat "export PS1=\"\033[33m" name "\033[0m:\033[35m\\W\033[0m>\" && source ~/.bash_profile"))
-    (set-windmove-keybindings)))
-(global-set-key (kbd "C-c s") 'new-shell)
 
 
 ;;; SLIME
@@ -1806,24 +1717,6 @@ in the appropriate direction to include current line."
                (serve-cmd . "gulp serve")))
         (bk . ((dir . "/projects/bookulus")
                (serve-cmd . "npm run dev")))
-        (kt . ((dir . "/projects/kt/layout")
-               (serve-cmd . "gulp serve")))
-        (asb . ((dir . "/projects/asb/layout")
-                (serve-cmd . "gulp serve")))
-        (ici . ((dir . "/projects/ici")
-                (serve-cmd . "npm run dev && open http://ici.devv")))
-        (lw . ((dir . "/projects/lw/layout")
-               (serve-cmd . "gulp webserver")))
-        ;;(ald . ((dir . "/projects/ald")
-        ;;        (serve-cmd . "gulp serve")))
-        (ald . ((dir . "/projects/ald/layout")
-                (serve-cmd . "gulp serve")))
-        (bt . ((dir . "/projects/bt")
-               (serve-cmd . "gulp serve")))
-        (cx . ((dir . "/projects/cx/solution/helixcore.webapp")
-               (serve-cmd . "gulp webserver")))
-        (pn . ((dir . "/projects/pens")
-               (serve-cmd . "open http://localhost:3000 && npm run dev")))
         (meo-phaser . ((dir . "/projects/meomari")
                        (serve-cmd . "npm start")
                        (left-window-file . "/src/index.js")
