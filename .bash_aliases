@@ -90,7 +90,8 @@ alias lscustom="ls -lhaF"
 alias ls="lscustom"
 
 #both emacs / emacs -nw causes inserting garbled text in the first open buffer
-alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
+# for speed in terminal, -q skips init file, default.el and package-initialize
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw -q"
 alias emacs-osx="/usr/local/bin/emacs"
 
 alias security-on="sudo spctl --master-enable"

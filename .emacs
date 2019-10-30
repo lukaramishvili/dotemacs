@@ -557,7 +557,10 @@ Ignores CHAR at point, and also ignores."
 ;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
 
-(load "~/dotemacs/javascript.el")
+;; (load "~/dotemacs/javascript.el")
+(defun setup-javascript ()
+  "Setup and configure javascript packages, keybindings, etc."
+  (load "~/dotemacs/javascript.el"))
 
 
 ;; M-x `compile tsc format`
