@@ -459,12 +459,16 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 (blink-cursor-mode 0)
 
 
-;; increase font size for better readability
-(set-face-attribute 'default nil :height 140)
-
 ;;; colors
 ;;(set-background-color "#3f3f3f")
 ;;(set-foreground-color "white")
+
+
+(defun load-eink-theme ()
+  (load-theme 'eink t)
+  (global-hl-line-mode -1)
+  ;; goes well with eink theme
+  (set-default-font "Iosevka-16"))
 
 ;; themes
 (add-to-list 'custom-theme-load-path "~/dotemacs/themes")
@@ -475,6 +479,38 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;; (load-theme 'tomorrow-night-eighties t)
 ;; (load-theme 'tomorrow-night t)
 (load-theme 'zenburn t)
+;;(load-eink-theme)
+
+;; TODO try multiple fonts for code and strings:
+;; https://bastibe.de/2017-09-19-multi-font-themes.html
+
+;; increase font size for better readability
+(set-face-attribute 'default nil :height 140)
+
+(defun font-installed-p (font)
+  "Return true if the font is installed."
+  (bool (x-list-fonts font)))
+
+;;; fonts
+(if (font-installed-p "DejaVu Sans Mono")
+    (set-default-font "DejaVu Sans Mono-14"))
+
+;; tried out and immediately turned off.
+;; (if (font-installed-p "Input Mono Narrow")
+;;     (set-default-font "Input Mono Narrow"))
+
+;; (if (font-installed-p "SF Mono")
+;;      (set-default-font "SF Mono-16"))
+
+;; a very beautiful font.
+;; (if (font-installed-p "Iosevka")
+;;     (set-default-font "Iosevka-16"))
+
+;; a great 90's style font for long hours spent staring at the monitor
+(if (font-installed-p "Terminus (TTF)")
+  (set-default-font "Terminus (TTF)-18"))
+
+;; https://bastibe.de/2017-09-19-multi-font-themes.html
 
 ;; Color Themes
 ;; Read http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/
@@ -484,9 +520,6 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;; (add-to-list 'custom-theme-load-path "~/dotemacs/themes")
 ;; (add-to-list 'load-path "~/dotemacs/themes") ;
 ;; (load-theme 'tomorrow-night-bright t)
-
-;;; fonts
-(set-default-font "DejaVu Sans Mono")
 
 ;; disable tab indentation
 (setq-default indent-tabs-mode nil)
@@ -498,6 +531,9 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
+
+;; when autocompleting directories, you really want to autocomplete Http when typing h.
+(setq completion-ignore-case  t)
 
 ;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
 (put 'upcase-region 'disabled nil)
@@ -825,6 +861,8 @@ in the appropriate direction to include current line."
          ;;diredful
          org
          paredit
+         ;; dims parens visually, very useful in lisp code
+         paren-face
          ;;; optional packages
          php-mode
          slime
@@ -1259,9 +1297,9 @@ in the appropriate direction to include current line."
 (setq ido-enable-flex-matching t)
 
 ;; Turn this behavior off because it's annoying
-;;(setq ido-use-filename-at-point nil)
-;; Trying its guessing algorithm for a while.
-(setq ido-use-filename-at-point 'guess)
+(setq ido-use-filename-at-point nil)
+;; Tried its guessing algorithm below for a while. Not pleased.
+;;(setq ido-use-filename-at-point 'guess)
 (setq ido-use-url-at-point nil)
 
 ;; Don't try to match file across all "work" directories; only match files
@@ -1388,15 +1426,23 @@ in the appropriate direction to include current line."
 ; this is my little haskell plugin I'm writing to ease writing in Haskell
 (load "~/dotemacs/haskellito/haskellito.el")
 
-;; rainbow delimiters colors every delimiter pair with different color
-;; with lame color theme, it's useless, but looks great nevertheless
-(add-to-list 'load-path "~/.emacs.d/rainbow-delimiters/")
-(when (require 'rainbow-delimiters nil 'noerror) 
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
-;;(global-rainbow-delimiters-mode) ; enable everywhere
 
+(defun enable-rainbow-delimiters ()
+  ;; rainbow delimiters colors every delimiter pair with different color
+  ;; with lame color theme, it's useless, but looks great nevertheless (actually found quite useful)
+  (add-to-list 'load-path "~/.emacs.d/rainbow-delimiters/")
+  ;;(global-rainbow-delimiters-mode) ; enable everywhere
+  (when (require 'rainbow-delimiters nil 'noerror) 
+    (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+    (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)))
 
+;; control rainbow-delimiters vs paren-face (two incompatible paren decorators) with this variable
+(setq color-parens-instead-of-dimming nil)
+
+(if color-parens-instead-of-dimming
+    (enable-rainbow-delimiters)
+  ;; dims parentheses visually.
+  (global-paren-face-mode))
 
 
 ;; (global-set-key (kbd "C-c g") 'magit-status)
@@ -1451,7 +1497,9 @@ in the appropriate direction to include current line."
 
 ;; try subword-mode in web-mode/html-mode
 (add-hook 'html-mode-hook 'subword-mode)
+(add-hook 'js-mode-hook 'subword-mode)
 (add-hook 'web-mode-hook 'subword-mode)
+(add-hook 'php-mode-hook 'subword-mode)
 
 (defun html-mode-with-web-mode-helpers ()
   "I added some modifications to `html-mode` using `web-mode` functions (inaccessible from direct `html-mode`, so I first load web-mode (to load its functions) and then switch to `html-mode`)."
@@ -1732,7 +1780,15 @@ in the appropriate direction to include current line."
         (rx . ((dir . "/projects/timers-app")
                 (serve-cmd . "npm run dev")
                 (left-window-file . "/pages")
-                (right-window-file . "/pages/index.js")))))
+                (right-window-file . "/pages/index.js")))
+        (cr . ((dir . "/projects/carrent")
+               (serve-cmd . "npm run watch")
+               (left-window-file . "/app")
+               (right-window-file . "/app/Http/Controllers")))
+        (bl . ((dir . "/projects/bloom")
+               (serve-cmd . "npm run dev")
+               (left-window-file . "/scss")
+               (right-window-file . "/views")))))
 
 ;; project-mode
 (defun project-mode (project-name)
@@ -1791,18 +1847,10 @@ in the appropriate direction to include current line."
     (windmove-left)))
 
 (defun lb-mode ()  "Project lb workspace." (interactive) (project-mode 'lb))
-(defun bk-mode ()  "Project bk workspace." (interactive) (project-mode 'bk))
-(defun kt-mode ()  "Project kt workspace." (interactive) (project-mode 'kt))
-(defun asb-mode () "Project asb workspace." (interactive) (project-mode 'asb))
-(defun lw-mode ()  "Project lw workspace." (interactive) (project-mode 'lw))
-(defun ici-mode () "Project ici workspace." (interactive) (project-mode 'ici))
-(defun ald-mode () "Project ald workspace." (interactive) (project-mode 'ald))
-(defun bt-mode ()  "Project bt workspace." (interactive) (project-mode 'bt))
-(defun cx-mode ()  "Project cx workspace." (interactive) (project-mode 'cx))
-(defun pn-mode ()  "Project pn workspace." (interactive) (project-mode 'pn))
 (defun meo-mode () "Project meo workspace." (interactive) (project-mode 'meo))
 (defun rx-mode () "Project rx workspace." (interactive) (project-mode 'rx))
-
+(defun cr-mode () "Project cr workspace." (interactive) (project-mode 'cr))
+(defun bl-mode () "Project bl workspace." (interactive) (project-mode 'bl))
 
 
 

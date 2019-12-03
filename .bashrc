@@ -23,7 +23,14 @@ shopt -s expand_aliases
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 # add mysql to PATH
-PATH="/usr/local/mysql/bin:$PATH"
+#PATH="/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
+export PKG_CONFIG_PATH="/usr/local/opt/mysql@5.7/lib/pkgconfig"
+
+# add dotfiles to PATH
+PATH="~/dotemacs/bin:$PATH"
 
 # add rabbitmq to PATH
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
@@ -381,7 +388,7 @@ deploy(){
     elif [ $(pwd) = "/projects/lb" ]
     then
         git push tfs master
-        ssh Luka.Ramishvili@crmfrontend-dev.lb.ge "cd /projects/lb && git pull"
+        ssh -o 'PasswordAuthentication no' Luka.Ramishvili@crmfrontend-dev.lb.ge "cd /projects/lb && git pull"
         # git push
         #git push
         #ssh root@luka.ge "cd /projects/lb && git pull"

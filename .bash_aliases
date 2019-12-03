@@ -118,16 +118,11 @@ alias luka.ge="ssh root@luka.ge"
 alias apps="ssh root@172.104.147.98" # apps.luka.ge
 alias crm="ssh Luka.Ramishvili@crmfrontend-dev.lb.ge"
 
-#alias sshpwnuser="ssh pawwwn.com@188.93.88.26 -p 2232"
-alias sshpwnroot="ssh root@188.93.88.26 -p 2232"
-#alias sshw3wom="ssh webing@womanizor.webintelligence.de -p 222"
-#alias sshwomlive="ssh ec2-user@womanizor.com"
-#alias sshwomlive="ssh root@womanizor.com"
-#alias sshwomdev="ssh root@dev.womanizor.com"
 #
 alias sshbk="ssh root@bookulus.ge"
 
 alias tinker="rlwrap /Applications/XAMPP/bin/php artisan tinker"
+alias t="cd /projects/carrent && php artisan tinker"
 
 alias "git-status-publish"="git rev-list --count publish/master..master"
 
@@ -141,60 +136,28 @@ alias w="cd /projects"
 alias w-command="command w"
 alias p="cd /projects"
 
-# ici tinker (reuse tinker alias for rlwrap)
-#alias t="cd /projects/ici && tinker"
 # wom serve, then open served url and bring dev server process to front
 #alias ws="cd /projects/wom && php artisan serve --host 0.0.0.0 --port 8000 & (i\
 #fconfig | grep 192 | perl -pe 's|^.*?(192\.\d+\.\d+\.\d+).*$|http://\1:8000|' |\
 # xargs open) && fg"
-# vtb cd to dir & serve
-#alias v="cd /projects/vtb/Layout"
-#alias vs="cd /projects/vtb/Layout && gulp serve"
-# worldvide vision
-#alias p="cd /projects/pawn"
-#alias pw="cd /projects/pawn && gulp watch"
-# alias c="cd /projects/calo"
-# alias cs="cd /projects/calo && gulp serve"
-# alias k="cd /www/kalo/web/app/themes/wi-theme"
-# alias kr="cd /www/kalo/web"
-# alias ks="cd /www/kalo/resources && gulp watch"
-alias b="cd /projects/bookulus"
-alias bs="cd /projects/bookulus && npm run dev"
-alias bw="cd /www/bookulus.ge/web"
-alias bl="cd /www/bookulus.ge/web && tail -f -n0 wp-content/debug.log"
-#alias k="cd /projects/kt/Layout"
-#alias ks="cd /projects/kt/Layout && gulp serve"
-#alias a="cd /projects/asb/Layout"
-#alias asb="cd /projects/asb/Layout"
-#alias asbs="cd /projects/asb/Layout && gulp serve"
+#alias b="cd /projects/bookulus"
+#alias bs="cd /projects/bookulus && npm run dev"
+#alias bw="cd /www/bookulus.ge/web"
+#alias bl="cd /www/bookulus.ge/web && tail -f -n0 wp-content/debug.log"
 alias lb="cd /projects/lb"
 alias lbs="cd /projects/lb && gulp serve"
 #created a script with the same name in /usr/local/bin
 #alias lb-emacs="open /Applications/Emacs.app --args --eval=\"(lb-mode)\""
 alias lbang="cd /projects/angular-lb"
 alias lbangs="cd /projects/angular-lb && ng serve --open"
-alias lw="cd /projects/lw/Layout"
-alias lws="cd /projects/lw/Layout && gulp serve"
-#alias ici="cd /projects/ici"
-#alias i="cd /projects/ici"
-#alias iw="cd /projects/ici/ && npm run watch && open http://ici.devv"
-#alias is="cd /projects/ici/ && npm run watch && open http://ici.devv"
-alias ald="cd /projects/ald/layout"
-alias alds="cd /projects/ald/layout && gulp serve"
-alias bt="cd /projects/bt"
-alias bts="cd /projects/bt && gulp serve"
-#alias c="cd /projects/cx/Solution/HelixCore.WebApp"
-#alias cx="cd /projects/cx/Solution/HelixCore.WebApp"
-#alias cs="cd /projects/cx/Solution/HelixCore.WebApp && gulp webserver"
-#alias p="cd /projects/pens"
-#alias pn="cd /projects/pens"
-#alias pens="cd /projects/pens"
-#alias penserve="cd /projects/pens && npm run dev"
 
+alias cr="cd /projects/carrent"
+alias bl="cd /projects/bloom"
 
 alias pa="php artisan"
 alias pas="php artisan serve"
-alias t="php artisan tinker"
+#alias t="php artisan tinker"
 alias pat="php artisan tinker"
 
 alias clojure="rlwrap clojure"
+
