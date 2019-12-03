@@ -121,8 +121,8 @@ alias crm="ssh Luka.Ramishvili@crmfrontend-dev.lb.ge"
 #
 alias sshbk="ssh root@bookulus.ge"
 
-alias tinker="rlwrap /Applications/XAMPP/bin/php artisan tinker"
-alias t="cd /projects/carrent && php artisan tinker"
+alias tinker="php artisan tinker"
+alias t="php artisan tinker"
 
 alias "git-status-publish"="git rev-list --count publish/master..master"
 
@@ -152,6 +152,7 @@ alias lbang="cd /projects/angular-lb"
 alias lbangs="cd /projects/angular-lb && ng serve --open"
 
 alias cr="cd /projects/carrent"
+alias tt="cd /projects/transit"
 alias bl="cd /projects/bloom"
 
 alias pa="php artisan"
