@@ -1,6 +1,9 @@
 
 shopt -s expand_aliases
 
+LC_ALL=en_US.UTF-8
+LC_CTYPE=en_US.UTF-8
+
 # add to ~/.bash_profile
 # if [ -f ~/.bashrc ]; then
 #     . ~/.bashrc
@@ -108,10 +111,6 @@ cdd(){
   builtin cd "$*"
 }
 
-# just output the nth column of tabular data. e.g. `ls -l | nth 3` only leaves the owner column.
-nth(){
-  awk "{ print \$$1 }"
-}
 
 # to disable Chromium api keys warning (methods that didn't work: .profile, .bashrc, Chromium.app>Info.plist>LSEnvironment):
 # https://gist.github.com/ezeeyahoo/dc4bdd250c6c6468959e107ddaef53f4
@@ -270,6 +269,25 @@ f(){
     # ag respects .gitignore, but only from git root directory, so specifically exclude node_modules (throwing a lot of errors for deep paths)
     ag -R --ignore node_modules "$*" .
 }
+
+skip(){
+  # -U doesn't work (supposed to skip .gitignore/ignore files)
+  # ag respects .gitignore, but only from git root directory, so specifically exclude node_modules (throwing a lot of errors for deep paths)
+  grep -v "$*"
+}
+
+# just output the nth column of tabular data. e.g. `ls -l | nth 3` only leaves the owner column.
+nth(){
+  awk "{ print \$$1 }"
+}
+
+# has non-greedy matching
+alias re="perl -pe"
+
+# TODO. it will be an escaping hell so leave it to future me.
+# rx(){
+#   sed 's/'$1'/'$2'/g'
+# }
 
 # compile C directly to wasm:
 # https://dassur.ma/things/c-to-webassembly/

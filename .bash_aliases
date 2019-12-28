@@ -31,6 +31,8 @@ alias nowdate='date +"%d-%m-%Y"'
 alias dotemacs="cd ~/dotemacs"
 alias de=dotemacs
 
+alias bincat="hexdump -C"
+
 #alias s="git status -s"
 #alias st="git status -s"
 #alias l="git log"
@@ -123,6 +125,7 @@ alias sshbk="ssh root@bookulus.ge"
 
 alias tinker="php artisan tinker"
 alias t="php artisan tinker"
+alias padb="php artisan backup:database"
 
 alias "git-status-publish"="git rev-list --count publish/master..master"
 
