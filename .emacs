@@ -12,8 +12,119 @@
 
 (setq default-directory "/projects/")
 
+(setq mac-command-modifier 'control)
+(setq mac-control-modifier 'super)
+;; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
+(global-set-key [(super h)] 'help-command)
+
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
+
+
+;;; packages
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
+
+(setq needed-packages-list
+      '(
+        ;;; required packages to install on a new system:
+        use-package
+         free-keys
+         hungry-delete
+         exec-path-from-shell
+         recentf-ext
+         editorconfig
+         magit
+         web-mode
+         scss-mode
+         emmet-mode
+         ;;diredful
+         org
+         paredit
+         ;; dims parens visually, very useful in lisp code
+         ;;27decdisableforperf;;paren-face
+         ;;; optional packages
+         php-mode
+         slime
+         slime-repl-ansi-color
+         slime-company
+         ;; got CPU to 100 (without any images) and had to force-quit. don't really need every day.
+         ;; slime-docker
+         clojure-mode
+         clojure-mode-extra-font-locking
+         cider
+         ido-completing-read+
+         smex
+         projectile
+         ;;27decdisableforperf;;rainbow-delimiters
+         tagedit
+         ;;
+         ensime
+         haskell-mode
+         sclang-extensions
+         ;;27decdisableforperf;;flymd
+         ;;27decdisableforperf;;markdown-mode
+         ;;27decdisableforperf;;markdown-preview-mode
+         ;;; asciidoc mode
+         adoc-mode
+         ;;; debugger
+         ;;27decdisableforperf;;dap-mode
+         ;;; Language Server Protocol support
+         ;;27decdisableforperf;;lsp-mode
+         ;;27decdisableforperf;;lsp-ui ;; flycheck integration and higher level UI modules
+         ;;27decdisableforperf;;company
+         ;;27decdisableforperf;;company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
+         ;;; Angular
+         ;;27decdisableforperf;;ng2-mode ;; will bring typescript-mode
+         ;;27decdisableforperf;;tide ;; typescript interactive devenv
+         ;;27decdisableforperf;;ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
+         ;; React
+         ;;27decdisableforperf;;rjsx-mode
+         ;;27decdisableforperf;;flow-js2-mode ;; flow support in js2-mode
+         ;;27decdisableforperf;;flycheck-flow ;; for flow support in flycheck
+         ;;27decdisableforperf;;flow-minor-mode ;; for flow support in flycheck
+         ;;27decdisableforperf;;company-flow ;; company support for flow
+         ;; flycheck / eslint
+         ;;27decdisableforperf;;flycheck
+         ;;27decdisableforperf;;add-node-modules-path
+         ;;27decdisableforperf;;prettier-js ;; don't forget to `npm i -g prettier`
+         ;;; w3m needed for SuperCollider help system
+         w3m
+         ;;
+         omnisharp))
+;; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; install the missing packages
+(dolist (package needed-packages-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+
+
+;;; installed packages (copied from M-x package-list-packages)
+;;;company - autocompletion (not using, too cumbersome and not at all useful)
+;;;js2-mode - for modern javascript files (painfully slow)
+
+
+
+(require 'use-package)
+
+(require 'thingatpt)
+
+;(require 'magit)
+
+(require 'editorconfig)
+(editorconfig-mode 1)
+
+
+
+
 
 (defun bool (arg)
   "Convert ARG to boolean value."
@@ -708,6 +819,17 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "s-\\") 'toggle-input-method)
 (global-set-key (kbd "C-\\") 'comint-dynamic-complete-filename)
 
+
+;;show free keybindings on s-h s-k
+(require 'free-keys)
+(global-set-key (kbd "s-h s-k") 'free-keys)
+
+;; didn't do anything by default and didn't find it useful.
+;;(require 'diredful)
+;;(diredful-mode 1)
+
+
+
 ;; Find file in current directory:
 (global-set-key (kbd "C-M-,") 'find-file-in-current-directory)
 
@@ -740,9 +862,6 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-(") 'insert-square-brackets)
 (global-set-key (kbd "M-)") 'move-past-close-and-reindent)
 
-(setq mac-command-modifier 'control)
-(setq mac-control-modifier 'super)
-;; there's also 'control (C-), 'meta (M-), 'super (S-) and 'hyper (H-)
 
 (global-set-key (kbd "M-\"") 'insert-double-quotes)
 
@@ -810,7 +929,7 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "C-S-d") 'hungry-delete-forward)
 ;; also use C-h for backspace in regex search
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
-(global-set-key [(super h)] 'help-command)
+
 
 ;; select whole line. stumbled upon a complete solution while looking for how to implement shift-selection.
 ;; (source: http://emacs.stackexchange.com/a/22166/93)
@@ -848,115 +967,6 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
 
-;;; packages
-
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(package-initialize)
-
-(setq needed-packages-list
-      '(
-        ;;; required packages to install on a new system:
-        use-package
-         free-keys
-         hungry-delete
-         exec-path-from-shell
-         recentf-ext
-         editorconfig
-         magit
-         web-mode
-         scss-mode
-         emmet-mode
-         ;;diredful
-         org
-         paredit
-         ;; dims parens visually, very useful in lisp code
-         ;;27decdisableforperf;;paren-face
-         ;;; optional packages
-         php-mode
-         slime
-         slime-repl-ansi-color
-         slime-company
-         ;; got CPU to 100 (without any images) and had to force-quit. don't really need every day.
-         ;; slime-docker
-         clojure-mode
-         clojure-mode-extra-font-locking
-         cider
-         ido-completing-read+
-         smex
-         projectile
-         ;;27decdisableforperf;;rainbow-delimiters
-         tagedit
-         ;;
-         ensime
-         haskell-mode
-         sclang-extensions
-         ;;27decdisableforperf;;flymd
-         ;;27decdisableforperf;;markdown-mode
-         ;;27decdisableforperf;;markdown-preview-mode
-         ;;; asciidoc mode
-         adoc-mode
-         ;;; debugger
-         ;;27decdisableforperf;;dap-mode
-         ;;; Language Server Protocol support
-         ;;27decdisableforperf;;lsp-mode
-         ;;27decdisableforperf;;lsp-ui ;; flycheck integration and higher level UI modules
-         ;;27decdisableforperf;;company
-         ;;27decdisableforperf;;company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
-         ;;; Angular
-         ;;27decdisableforperf;;ng2-mode ;; will bring typescript-mode
-         ;;27decdisableforperf;;tide ;; typescript interactive devenv
-         ;;27decdisableforperf;;ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
-         ;; React
-         ;;27decdisableforperf;;rjsx-mode
-         ;;27decdisableforperf;;flow-js2-mode ;; flow support in js2-mode
-         ;;27decdisableforperf;;flycheck-flow ;; for flow support in flycheck
-         ;;27decdisableforperf;;flow-minor-mode ;; for flow support in flycheck
-         ;;27decdisableforperf;;company-flow ;; company support for flow
-         ;; flycheck / eslint
-         ;;27decdisableforperf;;flycheck
-         ;;27decdisableforperf;;add-node-modules-path
-         ;;27decdisableforperf;;prettier-js ;; don't forget to `npm i -g prettier`
-         ;;; w3m needed for SuperCollider help system
-         w3m
-         ;;
-         omnisharp))
-;; fetch the list of packages available 
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; install the missing packages
-(dolist (package needed-packages-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
-
-
-;;; installed packages (copied from M-x package-list-packages)
-;;;company - autocompletion (not using, too cumbersome and not at all useful)
-;;;js2-mode - for modern javascript files (painfully slow)
-
-
-
-(require 'use-package)
-
-(require 'thingatpt)
-
-;(require 'magit)
-
-(require 'editorconfig)
-(editorconfig-mode 1)
-
-;;show free keybindings on s-h s-k
-(require 'free-keys)
-(global-set-key (kbd "s-h s-k") 'free-keys)
-
-;; didn't do anything by default and didn't find it useful.
-;;(require 'diredful)
-;;(diredful-mode 1)
-
 
 
 
@@ -969,8 +979,8 @@ in the appropriate direction to include current line."
 
 ;;; Markdown
 
-(require 'markdown-mode)
-(require 'markdown-preview-mode)
+;;27decdisableforperf;;(require 'markdown-mode)
+;;27decdisableforperf;;(require 'markdown-preview-mode)
 
 ;; open flymd's live-reload in Firefox
 (defun my-flymd-browser-function (url)
@@ -1454,7 +1464,8 @@ in the appropriate direction to include current line."
 (if color-parens-instead-of-dimming
     (enable-rainbow-delimiters)
   ;; dims parentheses visually.
-  (global-paren-face-mode))
+  (if (fboundp 'global-paren-face-mode)
+      (global-paren-face-mode)))
 
 
 ;; (global-set-key (kbd "C-c g") 'magit-status)
@@ -1559,7 +1570,7 @@ in the appropriate direction to include current line."
 (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
 (flycheck-add-mode 'javascript-eslint 'javascript-mode)
 ;; Enable flycheck globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;;27decdisableforperf;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;; to use web-mode instead of rjsx-mode for jsx files:
