@@ -558,6 +558,10 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 (global-set-key (kbd "s-SPC") 'hippie-expand)
 (global-set-key (kbd "s-S-SPC") 'ispell-complete-word)
 
+(global-set-key (kbd "M-!") 'shell-command)
+(global-set-key (kbd "M-&") 'async-shell-command)
+(global-set-key (kbd "s-!") 'async-shell-command);; don't use C-!, it's used to yank without formatting.
+
 (global-set-key (kbd "M-#") 'query-replace)
 (global-set-key (kbd "M-$") 'replace-string)
 ;; (global-set-key (kbd "M-%") 'ispell-word)
@@ -599,6 +603,9 @@ Ignores CHAR at point, and also ignores."
   (interactive)
   (load "~/dotemacs/javascript.el"))
 
+(defun setup-javascript-mode ()
+  (setup-javascript))
+
 
 ;; M-x `compile tsc format`
 (require 'ansi-color)
@@ -635,6 +642,10 @@ Ignores CHAR at point, and also ignores."
 
 ;; a better buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; kill buffer immediately on C-x k.
+;; thought may revert this because I also have ESC-k, but the reason I reverted immediately is, turns out, C-x k RET is already tatooed in muscle memory (did it after closing). Thanks, timid guy who added a confirmation buffer.
+;;(global-set-key (kbd "C-x k") 'kill-current-buffer)
 
 ;; Enhances M-x to allow easier execution of commands. Provides
 ;; a filterable list of possible commands in the minibuffer
@@ -862,7 +873,7 @@ in the appropriate direction to include current line."
          org
          paredit
          ;; dims parens visually, very useful in lisp code
-         paren-face
+         ;;27decdisableforperf;;paren-face
          ;;; optional packages
          php-mode
          slime
@@ -876,38 +887,38 @@ in the appropriate direction to include current line."
          ido-completing-read+
          smex
          projectile
-         rainbow-delimiters
+         ;;27decdisableforperf;;rainbow-delimiters
          tagedit
          ;;
          ensime
          haskell-mode
          sclang-extensions
-         flymd
-         markdown-mode
-         markdown-preview-mode
+         ;;27decdisableforperf;;flymd
+         ;;27decdisableforperf;;markdown-mode
+         ;;27decdisableforperf;;markdown-preview-mode
          ;;; asciidoc mode
          adoc-mode
          ;;; debugger
-         dap-mode
+         ;;27decdisableforperf;;dap-mode
          ;;; Language Server Protocol support
-         lsp-mode
-         lsp-ui ;; flycheck integration and higher level UI modules
-         company
-         company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
+         ;;27decdisableforperf;;lsp-mode
+         ;;27decdisableforperf;;lsp-ui ;; flycheck integration and higher level UI modules
+         ;;27decdisableforperf;;company
+         ;;27decdisableforperf;;company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
          ;;; Angular
-         ng2-mode ;; will bring typescript-mode
-         tide ;; typescript interactive devenv
-         ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
+         ;;27decdisableforperf;;ng2-mode ;; will bring typescript-mode
+         ;;27decdisableforperf;;tide ;; typescript interactive devenv
+         ;;27decdisableforperf;;ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
          ;; React
-         rjsx-mode
-         flow-js2-mode ;; flow support in js2-mode
-         flycheck-flow ;; for flow support in flycheck
-         flow-minor-mode ;; for flow support in flycheck
-         company-flow ;; company support for flow
+         ;;27decdisableforperf;;rjsx-mode
+         ;;27decdisableforperf;;flow-js2-mode ;; flow support in js2-mode
+         ;;27decdisableforperf;;flycheck-flow ;; for flow support in flycheck
+         ;;27decdisableforperf;;flow-minor-mode ;; for flow support in flycheck
+         ;;27decdisableforperf;;company-flow ;; company support for flow
          ;; flycheck / eslint
-         flycheck
-         add-node-modules-path
-         prettier-js ;; don't forget to `npm i -g prettier`
+         ;;27decdisableforperf;;flycheck
+         ;;27decdisableforperf;;add-node-modules-path
+         ;;27decdisableforperf;;prettier-js ;; don't forget to `npm i -g prettier`
          ;;; w3m needed for SuperCollider help system
          w3m
          ;;
@@ -1352,6 +1363,7 @@ in the appropriate direction to include current line."
 
 ;; by default, yank formatted
 (global-set-key (kbd "C-1") 'yank-and-indent)
+;; [reverted] [now using C-! as async-shell-command]
 (global-set-key (kbd "C-!") 'yank)
 
 (defun google (query)
@@ -1694,7 +1706,9 @@ in the appropriate direction to include current line."
 
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
 ;;; also esc-arrows for navigating between split windows is located in #'set-windmove-keybindings
-(global-set-key (kbd "<escape> k") 'kill-buffer)
+;;(global-set-key (kbd "<escape> k") 'kill-buffer)
+;; I prefer the immediacy of kill-current-buffer, without confirmation.
+(global-set-key (kbd "<escape> k") 'kill-current-buffer)
 (global-set-key (kbd "<escape> n") 'make-frame)
 (global-set-key (kbd "<escape> 0") 'delete-window)
 (global-set-key (kbd "<escape> <escape> 0") 'delete-frame)
@@ -1705,6 +1719,7 @@ in the appropriate direction to include current line."
 (global-set-key (kbd "<escape> w") 'write-file)
 (global-set-key (kbd "<escape> s") 'save-buffer)
 (global-set-key (kbd "<escape> b") 'switch-to-buffer)
+(global-set-key (kbd "<escape> l") 'buffer-menu)
 (global-set-key (kbd "<escape> <escape> b") 'buffer-menu)
 (global-set-key (kbd "<escape> o") 'other-window)
 (global-set-key (kbd "<escape> y") 'yank-and-indent)
