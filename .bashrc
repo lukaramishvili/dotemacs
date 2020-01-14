@@ -449,6 +449,18 @@ deploy(){
         git push
         ssh root@luka.ge "cd /projects/bt && git pull"
         #rsync -avz /projects/bt/dist/*.html root@luka.ge:/projects/bt/dist/
+    elif [ $(pwd) = "/projects/transit" ]
+    then
+      git push
+      ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/transit && git pull"
+    elif [ $(pwd) = "/projects/carrent" ]
+    then
+      git push
+      ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/carrent && git pull"
+    elif [ $(pwd) = "/projects/wvi" ] || [ $(pwd) = "/projects/wvi/Layout" ] || [ $(pwd) = "/projects/wvi/Solution" ]
+    then
+      git push
+      ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/wvi && git pull"
     else
         git push
         # TODO other projects' deploy paths
@@ -462,10 +474,6 @@ qd(){
     # no parens without quotes - see comment about $* in cam()
     vcs-commit "$*"
     deploy # deploy - will update server code on specific projects; git push otherwise
-    #
-    if [ $(pwd) = "/projects/wom" ]; then
-        git push # also push to alternate remote
-    fi
 }
 
 dist-lb(){
