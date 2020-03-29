@@ -28,6 +28,12 @@ alias now='date +"%T"'
 alias nowtime=now
 alias nowdate='date +"%d-%m-%Y"'
 
+# allow using aliases with xargs, e.g. `cat ... | xargs unescape` (unescape is an alias)
+# https://stackoverflow.com/a/59842439/324220
+alias xargs='xargs ' # create an xargs alias with trailing space.
+
+alias unescape="printf '%b\n'"
+
 alias dotemacs="cd ~/dotemacs"
 alias de=dotemacs
 
@@ -158,10 +164,18 @@ alias cr="cd /projects/carrent"
 alias tt="cd /projects/transit"
 alias bl="cd /projects/bloom"
 
+alias bt="cd /projects/blacktomato.ge"
+
 alias pa="php artisan"
 alias pas="php artisan serve"
 #alias t="php artisan tinker"
 alias pat="php artisan tinker"
 
 alias clojure="rlwrap clojure"
+alias lf="lein figwheel"
 
+alias rnra="react-native run-android"
+alias rnri="react-native run-ios"
+alias rnrisim="react-native run-ios --simulator=\"iPhone 11 Pro Max\""
+
+alias ns="npm start"

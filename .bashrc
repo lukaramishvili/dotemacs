@@ -25,6 +25,15 @@ LC_CTYPE=en_US.UTF-8
 
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
+
+# hide login banner in new shell windows
+# touch ~/.hushlogin
+
+
+PATH="/Users/luka/Library/Android/sdk/platform-tools:$PATH"
+
+ANDROID_SDK_ROOT="/Users/luka/Library/Android/sdk"
+
 # add mysql to PATH
 #PATH="/usr/local/mysql/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
@@ -141,6 +150,20 @@ defaults write com.apple.dock slow-motion-allowed -bool true
 
 # for gitdiff
 # brew install diff-so-fancy
+# git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+#
+## The default Git colors are not optimal. The colors used for the diff-so-fancy screenshot:
+# git config --global color.diff-highlight.oldNormal    "red bold"
+# git config --global color.diff-highlight.oldHighlight "red bold 52"
+# git config --global color.diff-highlight.newNormal    "green bold"
+# git config --global color.diff-highlight.newHighlight "green bold 22"
+
+# git config --global color.diff.meta       "11"
+# git config --global color.diff.frag       "magenta bold"
+# git config --global color.diff.commit     "yellow bold"
+# git config --global color.diff.old        "red bold"
+# git config --global color.diff.new        "green bold"
+# git config --global color.diff.whitespace "red reverse"
 
 # for touchbar/command-line keyboard switcher:
 # git clone https://github.com/myshov/xkbswitch-macosx
@@ -173,6 +196,8 @@ ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa 2>/dev/null
 ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
 ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
+
+ssh-add ~/Documents/webiz/ssh/webiz_id_rsa 2>/dev/null
 
 # quickly copying the ssh key to the server:
 # ssh-copy-id -i ~/Documents/lb/ssh/crmfrontend_id_rsa.pub Luka.Ramishvili@crmfrontend-dev.lb.ge
@@ -279,6 +304,10 @@ skip(){
 # just output the nth column of tabular data. e.g. `ls -l | nth 3` only leaves the owner column.
 nth(){
   awk "{ print \$$1 }"
+}
+
+line(){
+  head -n $1 | tail -n 1
 }
 
 # has non-greedy matching
@@ -461,6 +490,18 @@ deploy(){
     then
       git push
       ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/wvi && git pull"
+    elif [ $(pwd) = "/projects/agro" ]
+    then
+      git push
+      ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/agro && git pull"
+    elif [ $(pwd) = "/projects/bloom" ]
+    then
+      git push
+      ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/bloom-flora && git pull"
+    elif [ $(pwd) = "/projects/blacktomato.ge" ]
+    then
+      git push
+      ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/blacktomato && git pull"
     else
         git push
         # TODO other projects' deploy paths

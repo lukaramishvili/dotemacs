@@ -15,7 +15,7 @@ else
   items=$(ag -l --nocolor "$find_this" "$@")
 fi
 
-if [ -z $find_this ] || [ -z $replace_with ] || [ "$#" -eq 0 ]; then
+if [ -z "$find_this" ] || [ -z "$replace_with" ] || [ "$#" -eq 0 ]; then
     echo "Please specify pattern, replacement and files in which to replace."
     exit
 fi

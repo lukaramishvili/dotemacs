@@ -72,26 +72,26 @@
          ;;; asciidoc mode
          adoc-mode
          ;;; debugger
-         ;;27decdisableforperf;;dap-mode
+         dap-mode
          ;;; Language Server Protocol support
-         ;;27decdisableforperf;;lsp-mode
-         ;;27decdisableforperf;;lsp-ui ;; flycheck integration and higher level UI modules
-         ;;27decdisableforperf;;company
-         ;;27decdisableforperf;;company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
+         lsp-mode
+         lsp-ui ;; flycheck integration and higher level UI modules
+         company
+         company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
          ;;; Angular
-         ;;27decdisableforperf;;ng2-mode ;; will bring typescript-mode
-         ;;27decdisableforperf;;tide ;; typescript interactive devenv
-         ;;27decdisableforperf;;ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
+         ng2-mode ;; will bring typescript-mode
+         tide ;; typescript interactive devenv
+         ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
          ;; React
-         ;;27decdisableforperf;;rjsx-mode
+         rjsx-mode
          ;;27decdisableforperf;;flow-js2-mode ;; flow support in js2-mode
          ;;27decdisableforperf;;flycheck-flow ;; for flow support in flycheck
          ;;27decdisableforperf;;flow-minor-mode ;; for flow support in flycheck
          ;;27decdisableforperf;;company-flow ;; company support for flow
          ;; flycheck / eslint
-         ;;27decdisableforperf;;flycheck
-         ;;27decdisableforperf;;add-node-modules-path
-         ;;27decdisableforperf;;prettier-js ;; don't forget to `npm i -g prettier`
+         flycheck
+         add-node-modules-path
+         prettier-js ;; don't forget to `npm i -g prettier`
          ;;; w3m needed for SuperCollider help system
          w3m
          ;;
@@ -589,8 +589,10 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;; (load-theme 'tomorrow-night-blue t)
 ;; (load-theme 'tomorrow-night-eighties t)
 ;; (load-theme 'tomorrow-night t)
-(load-theme 'zenburn t)
+;;
+;;(load-theme 'zenburn t)
 ;;(load-eink-theme)
+(load-theme 'tomorrow-night-bright t)
 
 ;; TODO try multiple fonts for code and strings:
 ;; https://bastibe.de/2017-09-19-multi-font-themes.html
@@ -618,8 +620,8 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;;     (set-default-font "Iosevka-16"))
 
 ;; a great 90's style font for long hours spent staring at the monitor
-(if (font-installed-p "Terminus (TTF)")
-  (set-default-font "Terminus (TTF)-18"))
+;; (if (font-installed-p "Terminus (TTF)")
+;;  (set-default-font "Terminus (TTF)-18"))
 
 ;; https://bastibe.de/2017-09-19-multi-font-themes.html
 
@@ -708,7 +710,7 @@ Ignores CHAR at point, and also ignores."
 ;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
 
-;; (load "~/dotemacs/javascript.el")
+(load "~/dotemacs/javascript.el")
 (defun setup-javascript ()
   "Setup and configure javascript packages, keybindings, etc."
   (interactive)
@@ -783,7 +785,7 @@ Ignores CHAR at point, and also ignores."
 
 
 ;; projectile everywhere!
-(projectile-global-mode)
+;;(projectile-global-mode)
 
 (global-set-key (kbd "C-x C-g") 'goto-line)
 
@@ -1169,6 +1171,7 @@ in the appropriate direction to include current line."
 
 
 (add-hook 'js-mode-hook #'setup-javascript-mode)
+(add-hook 'rjsx-mode-hook #'setup-javascript-mode)
 (add-hook 'ng2-ts-mode-hook #'setup-javascript-mode)
 
 (defun set-windmove-keybindings ()
@@ -1521,6 +1524,7 @@ in the appropriate direction to include current line."
 ;; try subword-mode in web-mode/html-mode
 (add-hook 'html-mode-hook 'subword-mode)
 (add-hook 'js-mode-hook 'subword-mode)
+(add-hook 'rjsx-mode-hook 'subword-mode)
 (add-hook 'web-mode-hook 'subword-mode)
 (add-hook 'php-mode-hook 'subword-mode)
 
@@ -1539,7 +1543,7 @@ in the appropriate direction to include current line."
 ;; ng2-ts-mode is automatically activated in *.component.ts and *.service.ts ng2.html-mode is automatically activated in *.component.html
 ;; no lookahead/lookbehind in elisp regex, so reset above .html binding
 ;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . ng2-mode));web-mode
-;;(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . ng2-html-mode))
+(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . ng2-html-mode))
 ;; ng2-html-mode garbles HTML tags on save  
 (add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . html-mode))
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
@@ -1557,18 +1561,18 @@ in the appropriate direction to include current line."
 ;; ... show packages like flycheck (required for this)
 ;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 
-(require 'flycheck)
+;;27decdisableforperf;;(require 'flycheck)
 
 ;; Disable the default flycheck jslint (use eslint instead)
-(setq-default flycheck-disabled-checkers
-              (append flycheck-disabled-checkers
-                      '(javascript-jshint json-jsonlist)))
+;;27decdisableforperf;;(setq-default flycheck-disabled-checkers
+;;27decdisableforperf;;              (append flycheck-disabled-checkers
+;;27decdisableforperf;;                      '(javascript-jshint json-jsonlist)))
 
-(add-hook 'flycheck-mode-hook 'add-node-modules-path)
+;;27decdisableforperf;;(add-hook 'flycheck-mode-hook 'add-node-modules-path)
 
 ;; Enable eslint checker for jsx and javascript files
-(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
-(flycheck-add-mode 'javascript-eslint 'javascript-mode)
+;;27decdisableforperf;;(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
+;;27decdisableforperf;;(flycheck-add-mode 'javascript-eslint 'javascript-mode)
 ;; Enable flycheck globally
 ;;27decdisableforperf;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
@@ -1641,6 +1645,7 @@ in the appropriate direction to include current line."
 (add-hook 'web-mode-hook 'add-web-mode-html-bindings)
 (add-hook 'html-mode-hook 'add-web-mode-html-bindings)
 (add-hook 'ng2-html-mode-hook 'add-web-mode-html-bindings)
+(add-hook 'rjsx-mode-hook 'add-web-mode-html-bindings)
 
 (defun add-web-mode-html-bindings ()
   ;; with an annoying popup, flycheck reports too many errors in HTML files.
@@ -1714,6 +1719,7 @@ in the appropriate direction to include current line."
 
 ;; end CSS autocomplete
 
+(desktop-save-mode 1)
 
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
 ;;; also esc-arrows for navigating between split windows is located in #'set-windmove-keybindings
@@ -1793,6 +1799,10 @@ in the appropriate direction to include current line."
 (setq project-configs
       '((lb . ((dir . "/projects/lb")
                (serve-cmd . "gulp serve")))
+        (ardi . ((dir . "/projects/ardi/app")
+               (serve-cmd . "npm run dev")
+               (left-window-file . "/")
+               (right-window-file . "/src")))
         (bk . ((dir . "/projects/bookulus")
                (serve-cmd . "npm run dev")))
         (meo-phaser . ((dir . "/projects/meomari")
@@ -1814,7 +1824,13 @@ in the appropriate direction to include current line."
         (bl . ((dir . "/projects/bloom")
                (serve-cmd . "npm run dev")
                (left-window-file . "/scss")
-               (right-window-file . "/views")))))
+               (right-window-file . "/views")))
+        (rame . ((dir . "/projects/ramomiva.ge")
+                 (serve-mode :cider)
+                 (serve-cmd . "lein figwheel") ; cider-jack-in will connect to it
+                 (left-window-file . "/src/ramomiva/ge/core.cljs")
+                 ;;(right-window-file . "/src/ramomiva/ge/core.cljs")
+                 ))))
 
 ;; project-mode
 (defun project-mode (project-name)
@@ -1822,61 +1838,69 @@ in the appropriate direction to include current line."
          (project-config (cdr (assoc project-name project-configs)))
          (project-dir (cdr (assoc 'dir project-config)))
          ;; latest .emacs config converted to eshell, so run bash directly
+         (serve-mode (cadr (assoc 'serve-mode project-config)))
          (serve-cmd (concat "/bin/bash -c \"" (cdr (assoc 'serve-cmd project-config)) "\""))
          (left-window-file (or (cdr (assoc 'left-window-file project-config)) "/scss"))
-         (right-window-file (or (cdr (assoc 'right-window-file project-config)) "/views"))
+         ;; was "/views" instead of nil
+         (right-window-file (or (cdr (assoc 'right-window-file project-config)) nil))
          (show-serve-window-p nil))
-    (if (get-buffer "*open recent*")
-        (kill-buffer "*open recent*"))
-    (if (get-buffer "*messages*")
-        (kill-buffer "*messages*"))
-    ;; if project-mode has already been called and gulp/serve cmd is running, then stay in current buffer
-    (unless (get-buffer serve-buffer-name)
-      (switch-to-buffer "*scratch*"))
-    (cd project-dir)
-    ;; (clean-buffer-list) can also be used if it's a long session (closes unused, unmodified buffers)
-    ;; close all windows to avoid nested calls
-    (delete-other-windows)
-    ;; this will focus on the right window
-    (split-and-switch-window-right)
-    ;; open terminal (auto-reload server) in the right window
-    ;; if it's already running, just switch to it
-    (if (get-buffer serve-buffer-name)
-        (switch-to-buffer serve-buffer-name)
-      (progn
-        (eshell "new")
-        (rename-buffer serve-buffer-name)
-        ;;(eshell/exec "source ~/.bashrc");doesn't work
-        (eshell/exec serve-cmd)))
-    ;; this will open a bottom window (by default, *open recent*) focus on it
-    (split-and-switch-window-below)
-    (if show-serve-window-p
+    (progn
+      (if (get-buffer "*open recent*")
+          (kill-buffer "*open recent*"))
+      (if (get-buffer "*messages*")
+          (kill-buffer "*messages*"))
+      ;; if project-mode has already been called and gulp/serve cmd is running, then stay in current buffer
+      (unless (get-buffer serve-buffer-name)
+        (switch-to-buffer "*scratch*"))
+      (cd project-dir)
+      ;; (clean-buffer-list) can also be used if it's a long session (closes unused, unmodified buffers)
+      ;; close all windows to avoid nested calls
+      (delete-other-windows)
+      ;; this will focus on the right window
+      (split-and-switch-window-right)
+      ;; open terminal (auto-reload server) in the right window (or silent, depending on show-serve-window-p)
+      ;; if it's already running, just switch to it
+      (if (get-buffer serve-buffer-name)
+          (switch-to-buffer serve-buffer-name)
         (progn
-          ;; enlarge bottom window (and shrink the top terminal window)
-          (enlarge-window 20))
-      (progn
-        ;; instead, hide the gulp serve - not productive
-        (windmove-up)
-        (delete-window)))
-    ;; bring focus to the left window
-    (windmove-left)
-    ;; open find file dialog
-    ;;(call-interactively 'find-file)
-    ;; open scss directory in the left tab
-    (switch-to-buffer (find-file (concat project-dir left-window-file)))
-    (windmove-right)
-    ;; open views directory in the right tab
-    (switch-to-buffer (find-file (concat project-dir right-window-file)))
-    (split-and-switch-window-below)
-    (delete-window)
-    ;; bring focus back to the left window
-    (windmove-left)))
+          (eshell "new")
+          (rename-buffer serve-buffer-name)
+          ;;(eshell/exec "source ~/.bashrc");doesn't work
+          (eshell/exec serve-cmd)))
+      (if (eq serve-mode :cider)
+          (cider-jack-in `(project-dir ,project-dir)))
+      ;; this will open a bottom window (by default, *open recent*) focus on it
+      (split-and-switch-window-below)
+      (if show-serve-window-p
+          (progn
+            ;; enlarge bottom window (and shrink the top terminal window)
+            (enlarge-window 20))
+        (progn
+          ;; instead, hide the gulp serve - not productive
+          (windmove-up)
+          (delete-window)))
+      ;; bring focus to the left window
+      (windmove-left)
+      ;; open find file dialog
+      ;;(call-interactively 'find-file)
+      ;; open scss directory in the left tab
+      (switch-to-buffer (find-file (concat project-dir left-window-file)))
+      (windmove-right)
+      ;; open views directory in the right tab
+      (if right-window-file
+          (switch-to-buffer (find-file (concat project-dir right-window-file))))
+      (split-and-switch-window-below)
+      (delete-window)
+      ;; bring focus back to the left window
+      (windmove-left))))
 
 (defun lb-mode ()  "Project lb workspace." (interactive) (project-mode 'lb))
+(defun ardi-mode ()  "Project lb workspace." (interactive) (project-mode 'ardi))
 (defun meo-mode () "Project meo workspace." (interactive) (project-mode 'meo))
 (defun rx-mode () "Project rx workspace." (interactive) (project-mode 'rx))
 (defun cr-mode () "Project cr workspace." (interactive) (project-mode 'cr))
 (defun bl-mode () "Project bl workspace." (interactive) (project-mode 'bl))
+(defun rame-mode () "Project rame workspace." (interactive) (project-mode 'rame))
 
 
 
