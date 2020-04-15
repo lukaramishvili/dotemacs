@@ -161,7 +161,7 @@ alias lbang="cd /projects/angular-lb"
 alias lbangs="cd /projects/angular-lb && ng serve --open"
 
 alias cr="cd /projects/carrent"
-alias tt="cd /projects/transit"
+#alias tt="cd /projects/transit"
 alias bl="cd /projects/bloom"
 
 alias bt="cd /projects/blacktomato.ge"

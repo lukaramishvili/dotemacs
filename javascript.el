@@ -6,6 +6,7 @@
   (setup-tide-mode)
   (company-mode)
   ;; (prettier-js-mode)
+  (add-web-mode-html-bindings)
   (emmet-mode))
 (add-hook 'rjsx-mode-hook 'setup-rjsx-mode)
 

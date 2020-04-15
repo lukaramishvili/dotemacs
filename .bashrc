@@ -75,6 +75,24 @@ if [ ! -e /usr/local/bin/lein ]; then
 fi
 
 
+# Usage: mv oldfilename
+# If you call mv without the second parameter it will prompt you to edit the filename on command line.
+# Original mv is called when it's called with more than one argument.
+# It's useful when you want to change just a few letters in a long name.
+function mv() {
+  if [ "$#" -ne 1 ]; then
+    command mv "$@"
+    return
+  fi
+  if [ ! -f "$1" ]; then
+    command file "$@"
+    return
+  fi
+  read -ei "$1" newfilename
+  mv -v "$1" "$newfilename"
+} 
+
+
 # easier to remember
 alias clipboard="pbcopy"
 
@@ -198,6 +216,8 @@ ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
 ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
 
 ssh-add ~/Documents/webiz/ssh/webiz_id_rsa 2>/dev/null
+
+ssh-add ~/Documents/webiz/plugins/ssh/productify.pem 2>/dev/null
 
 # quickly copying the ssh key to the server:
 # ssh-copy-id -i ~/Documents/lb/ssh/crmfrontend_id_rsa.pub Luka.Ramishvili@crmfrontend-dev.lb.ge
@@ -502,6 +522,16 @@ deploy(){
     then
       git push
       ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/blacktomato && git pull"
+    elif [ $(pwd) = "/projects/ardi/mobile" ]
+    then
+      git push
+      ssh root@213.131.38.12 "cd /var/www/html/mobile && git pull"
+    elif [ $(pwd) = "/projects/webiz/productify" ] || [ $(pwd) = "/projects/webiz/productify/src" ]
+    then
+      git push
+      # on Ubuntu server, use $ git config --global credential.helper store
+      # (from a comment on https://stackoverflow.com/a/5343146/324220)
+      ssh centos@18.185.56.4 "cd /projects/productify && sudo git pull"
     else
         git push
         # TODO other projects' deploy paths

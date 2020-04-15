@@ -1171,6 +1171,7 @@ in the appropriate direction to include current line."
 
 
 (add-hook 'js-mode-hook #'setup-javascript-mode)
+(add-hook 'javascript-mode-hook #'setup-javascript-mode)
 (add-hook 'rjsx-mode-hook #'setup-javascript-mode)
 (add-hook 'ng2-ts-mode-hook #'setup-javascript-mode)
 
@@ -1553,9 +1554,10 @@ in the appropriate direction to include current line."
 ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; open React components in rjsx-mode. use magic-mode-alist to differentiate them from ordinary .js files.
-;; depends on the file containing "import React.." by matching the file's contents to a multiline regex.
+;; depends on the file containing "import .. from 'react'" by matching the file's contents to a multiline regex.
 ;; an alternative method would require prepending "// -*- mode: rjsx -*-" to each file, which would be unsustainable.
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*React" . rjsx-mode))
+;; also
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*import.*react" . rjsx-mode))
 
 ;; TODO es6 javascript mode - currently this Emacs installation has a bug and...
 ;; ... show packages like flycheck (required for this)
