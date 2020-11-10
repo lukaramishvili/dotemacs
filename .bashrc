@@ -14,6 +14,12 @@ LC_CTYPE=en_US.UTF-8
 #     source ~/dotemacs/.bashrc
 # fi
 
+export PATH="/usr/local/sbin:$PATH"
+
+if [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /Users/luka/.nix-profile/etc/profile.d/nix.sh
+fi
+
 # Replace utils with GNU versions (more features for e.g. ls, etc)
 # https://stackoverflow.com/a/25455055
 # brew install coreutils
@@ -26,11 +32,16 @@ LC_CTYPE=en_US.UTF-8
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 
+eval "$(direnv hook bash)"
+
+
 # hide login banner in new shell windows
 # touch ~/.hushlogin
 
 
 PATH="/Users/luka/Library/Android/sdk/platform-tools:$PATH"
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 ANDROID_SDK_ROOT="/Users/luka/Library/Android/sdk"
 
@@ -47,6 +58,11 @@ PATH="~/dotemacs/bin:$PATH"
 # add rabbitmq to PATH
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
+# Download a youtube playlist
+# --download-archive keeps a list of downloaded files to avoid re-downloading when re-running the script
+# -k would also keep the video file, but for hundreds of songs, takes a huge amount of space
+# youtube-dl --download-archive downloaded.txt --no-post-overwrites --extract-audio --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata --metadata-from-title "%(artist)s - %(title)s" -i -o "%(title)s.%(ext)s" https://www.youtube.com/playlist?list=FLH-M2Z5bOm3uyfQuKQbqTaA
+
 
 # autocomplete symlinked directories, add trailing slash, make completion case insensitive
 # If ~/.inputrc doesn't exist yet: First include the original /etc/inputrc
@@ -59,7 +75,8 @@ set mark-symlinked-directories on' > ~/.inputrc; fi
 # add Emscripten to PATH
 # Outputs results when called. Who wrote this?!
 # source /code/emsdk/emsdk_env.sh
-source /code/emsdk/emsdk_env.sh > /dev/null
+# this was the correct one but commented
+# source /code/emsdk/emsdk_env.sh > /dev/null
 
 if [ ! -d ~/z.lua ]; then
   git clone https://github.com/skywind3000/z.lua ~/z.lua
@@ -209,15 +226,14 @@ export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 
 
 # 2>/dev/null avoids "Identity added" message for every launch (and M-! output)
-ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
+#ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 
 ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa 2>/dev/null
-ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
-ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
+ssh-add ~/Documents/ardi/ssh/ardi_id_rsa 2>/dev/null
+#ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
+#ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
 
-ssh-add ~/Documents/webiz/ssh/webiz_id_rsa 2>/dev/null
-
-ssh-add ~/Documents/webiz/plugins/ssh/productify.pem 2>/dev/null
+ssh-add ~/Documents/alpha/ssh-key/alpha_id_rsa
 
 # quickly copying the ssh key to the server:
 # ssh-copy-id -i ~/Documents/lb/ssh/crmfrontend_id_rsa.pub Luka.Ramishvili@crmfrontend-dev.lb.ge
@@ -314,6 +330,10 @@ f(){
     # ag respects .gitignore, but only from git root directory, so specifically exclude node_modules (throwing a lot of errors for deep paths)
     ag -R --ignore node_modules "$*" .
 }
+ff(){
+    clear
+    f "$*"
+}
 
 skip(){
   # -U doesn't work (supposed to skip .gitignore/ignore files)
@@ -402,7 +422,8 @@ vcs-commit(){
     # for reference: $@ would wrap each word (separated by space) in separate quotes
     # ..e.g.: if using $@, qd foo bar => cam "foo" "bar"
     if [ -d ./.hg ]; then
-        hg add . 2>/dev/null
+	# COMMENTED; don't auto-add everything
+        # hg add . 2>/dev/null
         hg commit -m "$*" 2>/dev/null
     else
         git add . 2>/dev/null
@@ -418,6 +439,15 @@ vcs-checkout-master(){
 }
 gcm(){
     vcs-checkout-master
+}
+gc.(){
+  read -p "Checkout ALL files in current directory? " -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+     git checkout .
+  fi
+}
+gcd(){
+  git checkout develop
 }
 # deploy - git push and update to server
 deploy(){
@@ -526,12 +556,10 @@ deploy(){
     then
       git push
       ssh root@213.131.38.12 "cd /var/www/html/mobile && git pull"
-    elif [ $(pwd) = "/projects/webiz/productify" ] || [ $(pwd) = "/projects/webiz/productify/src" ]
+    elif [ $(pwd) = "/projects/alpha/web" ]
     then
       git push
-      # on Ubuntu server, use $ git config --global credential.helper store
-      # (from a comment on https://stackoverflow.com/a/5343146/324220)
-      ssh centos@18.185.56.4 "cd /projects/productify && sudo git pull"
+      ssh root@app.alpha.ge "cd /var/www/alpha.ge && git pull"
     else
         git push
         # TODO other projects' deploy paths
@@ -614,6 +642,31 @@ safari-history(){
     sqlite3 ~/Library/Safari/History.db 'select visit_time,title from history_visits order by visit_time desc;' \
         | while read i; do d="${i%%.*}"; echo "$(date -r $((d+978307200))) | ${i#*|}"; done \
         | head -n 50 | less
+}
+
+aws-login(){
+  ## we assume you:
+  ## * have done `aws configure`
+  ## * added the original access/secret key ids to ~/.aws/credentials
+  ## * saved your arn inside ~/.aws/iam-user-arn
+  ## * git init && git committed the original access/secret key values in ~/.aws
+  OTP=$(echo "$*" | tr -d '\n\r\t ')
+  IAM_USER_ARN="`cat ~/.aws/iam-user-arn | tr -d '\n'`"
+  $(cd ~/.aws/ && git checkout credentials)
+  AWS_SESSION=$(aws sts get-session-token --serial-number $IAM_USER_ARN --duration-seconds 129600 --token-code $OTP)
+  AWS_ACCESS_KEY_ID=$(echo $AWS_SESSION | jq '.Credentials.AccessKeyId' | sed 's/"//g')
+  AWS_SECRET_ACCESS_KEY=$(echo $AWS_SESSION | jq '.Credentials.SecretAccessKey' | sed 's/"//g')
+  AWS_SESSION_TOKEN=$(echo $AWS_SESSION | jq '.Credentials.SessionToken' | sed 's/"//g')
+  if grep "\[" -i ~/.aws/credentials | tr -d '\r\t ' | grep -v "\[default\]" | grep -E '.'; then 
+    echo "only [default] aws profile is supported; couldn't find a reliable ini parser without thousands of dependencies. PR if you can."
+    echo "AWS_SESSION=$AWS_SESSION"
+    ( set -o posix ; set ) | grep "^AWS_" | grep -v "AWS_SESSION="
+  else
+    echo "[default]
+AWS_ACCESS_KEY_ID = $AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = $AWS_SECRET_ACCESS_KEY
+AWS_SESSION_TOKEN = $AWS_SESSION_TOKEN" > ~/.aws/credentials
+  fi
 }
 
 

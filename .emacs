@@ -24,9 +24,10 @@
 ;;; packages
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (setq needed-packages-list
@@ -44,7 +45,7 @@
          emmet-mode
          ;;diredful
          org
-         paredit
+         ;; paredit
          ;; dims parens visually, very useful in lisp code
          ;;27decdisableforperf;;paren-face
          ;;; optional packages
@@ -635,8 +636,9 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;; (load-theme 'tomorrow-night-bright t)
 
 ;; disable tab indentation
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil
+              tab-width 2
+              tab-stop-list (number-sequence 2 200 2))
 
 ;; shell scripts
 (setq-default sh-basic-offset 2)
@@ -646,7 +648,7 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 (setq-default frame-title-format "%b (%f)")
 
 ;; when autocompleting directories, you really want to autocomplete Http when typing h.
-(setq completion-ignore-case  t)
+(setq completion-ignore-case t)
 
 ;; enable C-x C-u and C-x C-l (for upcasing/downcasing selection/region)
 (put 'upcase-region 'disabled nil)
@@ -671,7 +673,19 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 (global-set-key (kbd "s-SPC") 'hippie-expand)
 (global-set-key (kbd "s-S-SPC") 'ispell-complete-word)
 
+(defmacro make-inserter-after-cursor (character)
+  `(lambda ()
+    (interactive)
+    (insert ,character)
+    (backward-char)))
+
+;; add a space character after cursor (disabled; S-SPC was very unwieldy)
+;; (global-set-key (kbd "S-SPC")
+;;                 (make-inserter-after-cursor " "))
+
+
 (global-set-key (kbd "M-!") 'shell-command)
+(global-set-key (kbd "<f2>") 'shell-command)
 (global-set-key (kbd "M-&") 'async-shell-command)
 (global-set-key (kbd "s-!") 'async-shell-command);; don't use C-!, it's used to yank without formatting.
 
@@ -704,10 +718,31 @@ Ignores CHAR at point, and also ignores."
 ;; needed for tide (Typescript IDE mode)
 (setq company-tooltip-align-annotations t)
 
-;; (require 'prettier-js)
+(require 'prettier-js)
 ;; I'm already loading tide-mode with tons of functionality, so just comment and leave prettier-js for later.
-;; (add-hook 'ng2-ts-mode-hook 'prettier-js-mode)
-;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
+(add-hook 'ng2-ts-mode-hook 'prettier-js-mode)
+(add-hook 'typescript-mode-hook 'prettier-js-mode)
+
+;; (use-package prettier
+;;   :after typescript-mode
+;;   :config (global-prettier-mode))
+
+(setq prettier-js-args '(
+                         "--trailing-comma" "es5"
+                         "--bracket-spacing" "true"
+                         "--use-tabs" "false"
+                         "--tab-width" "2"
+                         "--prose-wrap" "preserve"
+                         ;;"--single-quote" "false"
+                         "--end-of-line" "lf"
+                         ))
+
+(use-package typescript-mode
+  :mode "\\.tsx?$"
+  :hook
+  (typescript-mode . lsp)
+  :custom
+  (typescript-indent-level 2))
 
 
 (load "~/dotemacs/javascript.el")
@@ -864,8 +899,13 @@ Ignores CHAR at point, and also ignores."
 (global-set-key (kbd "M-(") 'insert-square-brackets)
 (global-set-key (kbd "M-)") 'move-past-close-and-reindent)
 
+;; (global-set-key (kbd "M-}")
+;;                 (make-inserter-after-cursor ?\}))
 
 (global-set-key (kbd "M-\"") 'insert-double-quotes)
+
+;; M-S--, insert long dash
+(global-set-key (kbd "M-_") (lambda () (interactive (insert "–"))))
 
 (global-set-key (kbd "C-x i") 'switch-to-previous-window)
 (global-set-key (kbd "C-x O") 'switch-to-previous-window)
@@ -887,8 +927,10 @@ Ignores CHAR at point, and also ignores."
 
 ;; OLD: in web/html-mode, M-n/M-p navigates between tags, so add another binding
 ;; NEW: new frame should have a consistent keybinding, and I'm not really using M-n/M-p, instead using C-c C-f/b
-;; (global-set-key (kbd "M-s-n") 'new-frame)
-;;(global-set-key (kbd "M-S-n") 'new-frame)
+;;(global-set-key (kbd "M-s-n") 'make-frame)
+;;(global-set-key (kbd "M-S-n") 'make-frame)
+;; NEWEST: just shoot the damn thing.
+(global-set-key (kbd "M-n") 'make-frame)
 (global-set-key (kbd "<s-backspace>") 'delete-window)
 
 (defun new-temp-buffer ()
@@ -1008,7 +1050,9 @@ in the appropriate direction to include current line."
   ;; (markdown-preview-function)
   (local-set-key (kbd "C-c C-p") (lambda ()
                                      (interactive)
-                                     (markdown-preview-function))))
+                                     (markdown-preview-function)))
+  ;; override markdown-mode's binding
+  (local-set-key (kbd "M-n") 'make-frame))
 
 ;; enable ffap. also will autofill C-x C-f and C-x C-d with path from ffap-file-at-point.
 (ffap-bindings)
@@ -1056,7 +1100,8 @@ in the appropriate direction to include current line."
 (defun setup-php-mode ()
   "Setup PHP mode."
   (local-set-key (kbd "<f1>") 'lookup-php-function)
-  (local-set-key (kbd "C-<f1>") 'lookup-php-symbol)
+  ;;(local-set-key (kbd "C-<f1>") 'lookup-php-symbol)
+  (local-set-key (kbd "M-`") 'lookup-php-symbol)
   (local-set-key (kbd "C-M-h") 'backward-kill-word))
 
 (defun lookup-php-symbol ()
@@ -1191,12 +1236,12 @@ in the appropriate direction to include current line."
   (global-set-key (kbd "<escape> <up>") 'windmove-up)
   (global-set-key (kbd "<escape> <down>") 'windmove-down)
 
-  (global-set-key (kbd "M-S-n") 'new-frame)
+  (global-set-key (kbd "M-S-n") 'make-frame)
 
   (global-set-key [(super b)] 'windmove-left)
   (global-set-key [(super f)] 'windmove-right)
   (global-set-key [(super p)] 'windmove-up)
-  ;; super-n was well used on new-frame; now using M-n instead
+  ;; super-n was well used on make-frame; now using M-n instead
   (global-set-key [(super n)] 'windmove-down)
 
   ;; excess keybindings; now using these for system-wide switching
@@ -1224,7 +1269,7 @@ in the appropriate direction to include current line."
     (global-set-key [(super b)] 'windmove-left)
     (global-set-key [(super f)] 'windmove-right)
     (global-set-key [(super p)] 'windmove-up)
-    ;; super-n is well used on new-frame, so use super-meta-n
+    ;; super-n is well used on make-frame, so use super-meta-n
                                         ;(global-set-key [(super n)] 'windmove-down)
 
     ;; excess keybindings; now using these for system-wide switching
@@ -1249,7 +1294,12 @@ in the appropriate direction to include current line."
 ;;so I can't use s-`. also, "§" key is above the "Tab" key where ` should be
 ;; pass -1 to other-frame to switch frames in the order they were opened
 (global-set-key (kbd "C-§") '(lambda() (interactive) (other-frame -1)))
-(global-set-key (kbd "C-±") 'other-frame)
+;; for the wireless keyboard when F1 changes language:
+(global-set-key (kbd "C-`") '(lambda() (interactive) (other-frame -1)))
+(global-set-key (kbd "C-~") 'other-frame)
+;; for the wireless keyboard when F1 changes language AND the `~ key and F1 have switched places with Karabiner-Elements:
+(global-set-key (kbd "<C-f1>") '(lambda() (interactive) (other-frame -1)))
+(global-set-key (kbd "<C-S-f1>") 'other-frame)
 ;;on the external keyboard, there's no § key, just a normal `
 ;;(global-set-key (kbd "C-`") 'other-frame)
 
@@ -1563,20 +1613,20 @@ in the appropriate direction to include current line."
 ;; ... show packages like flycheck (required for this)
 ;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 
-;;27decdisableforperf;;(require 'flycheck)
+(require 'flycheck)
 
 ;; Disable the default flycheck jslint (use eslint instead)
-;;27decdisableforperf;;(setq-default flycheck-disabled-checkers
-;;27decdisableforperf;;              (append flycheck-disabled-checkers
-;;27decdisableforperf;;                      '(javascript-jshint json-jsonlist)))
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint json-jsonlist)))
 
-;;27decdisableforperf;;(add-hook 'flycheck-mode-hook 'add-node-modules-path)
+(add-hook 'flycheck-mode-hook 'add-node-modules-path)
 
 ;; Enable eslint checker for jsx and javascript files
-;;27decdisableforperf;;(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
-;;27decdisableforperf;;(flycheck-add-mode 'javascript-eslint 'javascript-mode)
+(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
+(flycheck-add-mode 'javascript-eslint 'javascript-mode)
 ;; Enable flycheck globally
-;;27decdisableforperf;;(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;; to use web-mode instead of rjsx-mode for jsx files:
@@ -1928,6 +1978,7 @@ in the appropriate direction to include current line."
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
+(add-to-list 'load-path "~/dotemacs/re-jump.el")
 
 ;;;; Clojure mode with cider
 ;; for performance, move to fn; don't load by default
@@ -1935,10 +1986,16 @@ in the appropriate direction to include current line."
   (interactive)
   "Setup and configure cloju packages, cider, etc."
   (load "~/dotemacs/setup-clojure.el"))
+;; IMPORTANT:
+;; * hack ~/.emacs.d/elpa/cider../cider-mode.el L@496 L@497 (swap C-x C-e and C-c C-c bindings
+;; * run (byte-recompile-directory package-user-dir nil 'force)
+;; * restart Emacs
 
 (defun clojure-repl ()
   (interactive)
   (cider-jack-in))
+
+(setup-clojure)
 
 
 

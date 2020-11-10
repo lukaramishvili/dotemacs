@@ -47,6 +47,8 @@ alias s="vcs-status"
 alias st="vcs-status"
 # long version
 alias ss="git status"
+alias sb="git status | grep 'On branch' | sed 's/^On branch //'"
+alias sbc="git status | grep 'On branch' | sed 's/^On branch //' | pbcopy"
 alias l="vcs-log"
 alias gl="vcs-log"
 alias gd="vcs-diff"
@@ -56,6 +58,8 @@ alias pull="vcs-pull"
 #alias wl="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
 alias gc="git commit"
 alias gca="git commit --amend"
+alias gpfl="git push --force-with-lease"
+
 alias gw="gulp watch"
 alias gwp="gulp watch --production"
 alias gs="gulp serve"
@@ -121,10 +125,13 @@ alias npm-registry-default="npm set registry \"http://registry.npmjs.org\""
 alias npm-registry-luka.ge="npm set registry \"http://lb-npm.luka.ge\""
 
 alias "gitdiff"="git diff --color | diff-so-fancy"
+alias "gbl"="git branch --list"
+alias "bl"="git branch --list"
 
 alias luka.ge="ssh root@luka.ge"
 alias apps="ssh root@172.104.147.98" # apps.luka.ge
-alias crm="ssh Luka.Ramishvili@crmfrontend-dev.lb.ge"
+# alias crm="ssh Luka.Ramishvili@crmfrontend-dev.lb.ge"
+alias crm="cd /projects/flow/flow-crm"
 
 #
 alias sshbk="ssh root@bookulus.ge"
@@ -162,7 +169,7 @@ alias lbangs="cd /projects/angular-lb && ng serve --open"
 
 alias cr="cd /projects/carrent"
 #alias tt="cd /projects/transit"
-alias bl="cd /projects/bloom"
+#alias bl="cd /projects/bloom"
 
 alias bt="cd /projects/blacktomato.ge"
 
@@ -176,6 +183,11 @@ alias lf="lein figwheel"
 
 alias rnra="react-native run-android"
 alias rnri="react-native run-ios"
+alias rnrid="react-native run-ios --device"
 alias rnrisim="react-native run-ios --simulator=\"iPhone 11 Pro Max\""
+
+alias yri="yarn run ios"
+alias yrs="yarn run storybook"
+alias yra="yarn run android"
 
 alias ns="npm start"

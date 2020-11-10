@@ -3,9 +3,10 @@
   "Setup rjsx mode, enable LSP, company, TIDE etc."
   (setq-local indent-line-function 'js-jsx-indent-line)
   (setq-local js-indent-level 2)
-  (setup-tide-mode)
+  (setq js-indent-level 2)
+  ;;(setup-tide-mode)
   (company-mode)
-  ;; (prettier-js-mode)
+  (prettier-js-mode)
   (add-web-mode-html-bindings)
   (emmet-mode))
 (add-hook 'rjsx-mode-hook 'setup-rjsx-mode)
@@ -26,7 +27,11 @@
   (company-mode +1)
   ;; javascript editing is easier with subword mode
   (subword-mode +1)
-  )
+  (setq-local js-indent-level 2)
+  (setq js-indent-level 2)
+  ;; we don't want lsp-signature next, we want our consistency
+  (global-set-key (kbd "M-n") 'new-frame)
+  (local-set-key (kbd "M-n") 'new-frame))
 ;; format options -- full list at https://github.com/Microsoft/TypeScript/blob/v3.3.1/src/server/protocol.ts#L2858-L2890
 (setq tide-format-options
       '(:indentSize 2 :tabSize 2

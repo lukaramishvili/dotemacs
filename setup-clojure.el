@@ -3,7 +3,7 @@
 ;;;;
 
 ;; Enable paredit for Clojure
-(add-hook 'clojure-mode-hook 'enable-paredit-mode)
+;;(add-hook 'clojure-mode-hook 'enable-paredit-mode)
 
 ;; This is useful for working with camel-case tokens, like names of
 ;; Java classes (e.g. JavaClassName)
@@ -22,9 +22,11 @@
                 (1 font-lock-keyword-face))
                ("(\\(background?\\)"
                 (1 font-lock-keyword-face))))
+            ;; (local-set-key (kbd "C-x C-e") 'cider-eval-defun-at-point);; like elisp
+            ;; (local-set-key (kbd "C-c C-c") 'cider-eval-last-sexp);; like slime
             (define-clojure-indent (fact 1))
-            (define-clojure-indent (facts 1))
-            (rainbow-delimiters-mode)))
+            (define-clojure-indent (facts 1))))
+                                        ;(rainbow-delimiters-mode)))
 
 ;;;;
 ;; Cider
@@ -47,7 +49,7 @@
 (setq cider-repl-wrap-history t)
 
 ;; enable paredit in your REPL
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
+;; (add-hook 'cider-repl-mode-hook 'paredit-mode)
 
 ;; Use clojure mode for other extensions
 (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
@@ -80,4 +82,10 @@
      (define-key clojure-mode-map (kbd "C-c C-v") 'cider-start-http-server)
      (define-key clojure-mode-map (kbd "C-M-r") 'cider-refresh)
      (define-key clojure-mode-map (kbd "C-c u") 'cider-user-ns)
-     (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns)))
+     (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns)
+     ;; didn't work; ALSO DIDNT WORK WHEN I hacked ~/.emacs.d/elpa/cider../cider-repl.el L@1604 L@1619 and ran (byte-recompile-directory package-user-dir nil 'force) and restarted
+     ;; worked when I hacked ~/.emacs.d/elpa/cider../cider-mode.el L@496 L@497 and ran (byte-recompile-directory package-user-dir nil 'force) and restarted
+     ;; like elisp
+     (define-key clojure-mode-map (kbd "C-x C-e") 'cider-eval-defun-at-point)
+     ;; like slime
+     (define-key clojure-mode-map (kbd "C-c C-c") 'cider-eval-last-sexp)))
