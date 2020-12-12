@@ -191,3 +191,7 @@ alias yrs="yarn run storybook"
 alias yra="yarn run android"
 
 alias ns="npm start"
+
+alias arm="ssh manjaro@manjaro.arm"
+alias manjaro="ssh manjaro@manjaro.arm"
+

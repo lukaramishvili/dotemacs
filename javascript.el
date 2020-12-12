@@ -1,4 +1,7 @@
 
+(setq-local js-indent-level 2)
+(setq js-indent-level 2)
+
 (defun setup-rjsx-mode ()
   "Setup rjsx mode, enable LSP, company, TIDE etc."
   (setq-local indent-line-function 'js-jsx-indent-line)

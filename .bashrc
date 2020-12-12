@@ -233,7 +233,7 @@ ssh-add ~/Documents/ardi/ssh/ardi_id_rsa 2>/dev/null
 #ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
 #ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
 
-ssh-add ~/Documents/alpha/ssh-key/alpha_id_rsa
+ssh-add ~/Documents/alpha/ssh-key/alpha_id_rsa 2>/dev/null
 
 # quickly copying the ssh key to the server:
 # ssh-copy-id -i ~/Documents/lb/ssh/crmfrontend_id_rsa.pub Luka.Ramishvili@crmfrontend-dev.lb.ge
@@ -653,10 +653,10 @@ aws-login(){
   OTP=$(echo "$*" | tr -d '\n\r\t ')
   IAM_USER_ARN="`cat ~/.aws/iam-user-arn | tr -d '\n'`"
   $(cd ~/.aws/ && git checkout credentials)
-  AWS_SESSION=$(aws sts get-session-token --serial-number $IAM_USER_ARN --duration-seconds 129600 --token-code $OTP)
-  AWS_ACCESS_KEY_ID=$(echo $AWS_SESSION | jq '.Credentials.AccessKeyId' | sed 's/"//g')
-  AWS_SECRET_ACCESS_KEY=$(echo $AWS_SESSION | jq '.Credentials.SecretAccessKey' | sed 's/"//g')
-  AWS_SESSION_TOKEN=$(echo $AWS_SESSION | jq '.Credentials.SessionToken' | sed 's/"//g')
+  export AWS_SESSION=$(aws sts get-session-token --serial-number $IAM_USER_ARN --duration-seconds 129600 --token-code $OTP)
+  export AWS_ACCESS_KEY_ID=$(echo $AWS_SESSION | jq '.Credentials.AccessKeyId' | sed 's/"//g')
+  export AWS_SECRET_ACCESS_KEY=$(echo $AWS_SESSION | jq '.Credentials.SecretAccessKey' | sed 's/"//g')
+  export AWS_SESSION_TOKEN=$(echo $AWS_SESSION | jq '.Credentials.SessionToken' | sed 's/"//g')
   if grep "\[" -i ~/.aws/credentials | tr -d '\r\t ' | grep -v "\[default\]" | grep -E '.'; then 
     echo "only [default] aws profile is supported; couldn't find a reliable ini parser without thousands of dependencies. PR if you can."
     echo "AWS_SESSION=$AWS_SESSION"
