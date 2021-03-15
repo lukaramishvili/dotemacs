@@ -32,9 +32,9 @@
   (subword-mode +1)
   (setq-local js-indent-level 2)
   (setq js-indent-level 2)
-  ;; we don't want lsp-signature next, we want our consistency
-  (global-set-key (kbd "M-n") 'new-frame)
-  (local-set-key (kbd "M-n") 'new-frame))
+  ;; we don't want lsp-signature-next, we want our consistency
+  (global-set-key (kbd "M-n") 'make-frame)
+  (local-set-key (kbd "M-n") 'make-frame))
 ;; format options -- full list at https://github.com/Microsoft/TypeScript/blob/v3.3.1/src/server/protocol.ts#L2858-L2890
 (setq tide-format-options
       '(:indentSize 2 :tabSize 2
@@ -46,8 +46,8 @@
 (add-hook 'before-save-hook 'tide-format-before-save)
 
 ;; enable debugger (TODO for now). has support for Javascript in Chrome/Firefox, PHP, Elixir, Go, Python and native GDB/LLDB for C and C++.
-(dap-mode 1)
-(dap-ui-mode 1)
+;(dap-mode 1)
+;(dap-ui-mode 1)
 
 
 (require 'ng2-mode)

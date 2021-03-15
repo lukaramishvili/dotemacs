@@ -16,6 +16,11 @@ LC_CTYPE=en_US.UTF-8
 
 export PATH="/usr/local/sbin:$PATH"
 
+if [ -d /usr/local/graalvm ]; then
+  export GRAALVM_HOME=/usr/local/graalvm
+  export PATH=$GRAALVM_HOME/bin:$PATH
+fi
+
 if [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then
     . /Users/luka/.nix-profile/etc/profile.d/nix.sh
 fi
@@ -234,6 +239,7 @@ ssh-add ~/Documents/ardi/ssh/ardi_id_rsa 2>/dev/null
 #ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
 
 ssh-add ~/Documents/alpha/ssh-key/alpha_id_rsa 2>/dev/null
+ssh-add ~/Documents/alpha/ssh-key/live/alpha_live_id_rsa 2>/dev/null
 
 # quickly copying the ssh key to the server:
 # ssh-copy-id -i ~/Documents/lb/ssh/crmfrontend_id_rsa.pub Luka.Ramishvili@crmfrontend-dev.lb.ge
@@ -422,16 +428,18 @@ vcs-commit(){
     # for reference: $@ would wrap each word (separated by space) in separate quotes
     # ..e.g.: if using $@, qd foo bar => cam "foo" "bar"
     if [ -d ./.hg ]; then
-	# COMMENTED; don't auto-add everything
-        # hg add . 2>/dev/null
+	    # COMMENTED; don't auto-add everything
+      # hg add . 2>/dev/null
         hg commit -m "$*" 2>/dev/null
     else
-        git add . 2>/dev/null
+	    # COMMENTED; don't auto-add everything
+      # git add . 2>/dev/null
         git commit -a -m "$*" 2>/dev/null
     fi
 }
 # quick commit (cam stands for git commit -a -m )
 cam(){
+    git add . 2>/dev/null
     vcs-commit "$*"
 }
 vcs-checkout-master(){
@@ -440,6 +448,9 @@ vcs-checkout-master(){
 gcm(){
     vcs-checkout-master
 }
+ga.(){
+  git add .
+}
 gc.(){
   read -p "Checkout ALL files in current directory? " -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -447,7 +458,15 @@ gc.(){
   fi
 }
 gcd(){
-  git checkout develop
+  if [ $(pwd) = "/Users/luka/Development/Flow/flow-services" ] \
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-react-native" ] \
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm" ] \
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm/app" ];
+    then
+        git checkout develop
+    else
+        git checkout dev
+   fi
 }
 # deploy - git push and update to server
 deploy(){
@@ -556,10 +575,14 @@ deploy(){
     then
       git push
       ssh root@213.131.38.12 "cd /var/www/html/mobile && git pull"
-    elif [ $(pwd) = "/projects/alpha/web" ]
+    elif [ $(pwd) = "/projects/alpha/alpha-web" ]
     then
       git push
       ssh root@app.alpha.ge "cd /var/www/alpha.ge && git pull"
+    elif [ $(pwd) = "/projects/zero-gravity-website" ]
+    then
+      git push
+      ssh root@apps.luka.ge "cd /usr/share/nginx/html/zerogravity.ge && git pull"
     else
         git push
         # TODO other projects' deploy paths

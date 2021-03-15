@@ -28,7 +28,7 @@
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)
+;;(package-initialize)
 
 (setq needed-packages-list
       '(
@@ -95,6 +95,8 @@
          prettier-js ;; don't forget to `npm i -g prettier`
          ;;; w3m needed for SuperCollider help system
          w3m
+         ;;
+         direnv
          ;;
          omnisharp))
 ;; fetch the list of packages available 
@@ -580,7 +582,7 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
   (load-theme 'eink t)
   (global-hl-line-mode -1)
   ;; goes well with eink theme
-  (set-default-font "Iosevka-16"))
+  (set-frame-font "Iosevka-16"))
 
 ;; themes
 (add-to-list 'custom-theme-load-path "~/dotemacs/themes")
@@ -607,22 +609,22 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 
 ;;; fonts
 (if (font-installed-p "DejaVu Sans Mono")
-    (set-default-font "DejaVu Sans Mono-14"))
+    (set-frame-font "DejaVu Sans Mono-14"))
 
 ;; tried out and immediately turned off.
 ;; (if (font-installed-p "Input Mono Narrow")
-;;     (set-default-font "Input Mono Narrow"))
+;;     (set-frame-font "Input Mono Narrow"))
 
 ;; (if (font-installed-p "SF Mono")
-;;      (set-default-font "SF Mono-16"))
+;;      (set-frame-font "SF Mono-16"))
 
 ;; a very beautiful font.
 ;; (if (font-installed-p "Iosevka")
-;;     (set-default-font "Iosevka-16"))
+;;     (set-frame-font "Iosevka-16"))
 
 ;; a great 90's style font for long hours spent staring at the monitor
 ;; (if (font-installed-p "Terminus (TTF)")
-;;  (set-default-font "Terminus (TTF)-18"))
+;;  (set-frame-font "Terminus (TTF)-18"))
 
 ;; https://bastibe.de/2017-09-19-multi-font-themes.html
 
@@ -721,7 +723,9 @@ Ignores CHAR at point, and also ignores."
 (require 'prettier-js)
 ;; I'm already loading tide-mode with tons of functionality, so just comment and leave prettier-js for later.
 (add-hook 'ng2-ts-mode-hook 'prettier-js-mode)
-(add-hook 'typescript-mode-hook 'prettier-js-mode)
+;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
+;; will work for both js and ts
+(add-hook 'javascript-mode-hook 'prettier-js-mode)
 
 ;; (use-package prettier
 ;;   :after typescript-mode
@@ -855,6 +859,12 @@ Ignores CHAR at point, and also ignores."
 (autoload 'comint-dynamic-complete-filename "comint" nil t)
 (global-set-key (kbd "s-\\") 'toggle-input-method)
 (global-set-key (kbd "C-\\") 'comint-dynamic-complete-filename)
+
+;; leave this after shell-file-name etc
+;; slowest thing I've seen in a while
+;; (use-package direnv
+;;  :config
+;;  (direnv-mode))
 
 
 ;;show free keybindings on s-h s-k

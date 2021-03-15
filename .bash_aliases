@@ -56,9 +56,29 @@ alias pl="vcs-pull"
 alias pl-command="command pl"
 alias pull="vcs-pull"
 #alias wl="cd /projects/wom && tail -f -n0 storage/logs/* | grep '#0'"
+
 alias gc="git commit"
 alias gca="git commit --amend"
 alias gpfl="git push --force-with-lease"
+alias gdc="git diff --cached"
+grd(){
+  if [ $(pwd) = "/Users/luka/Development/Flow/flow-services" ] \
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-react-native" ] \
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm" ] \
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm/app" ];
+    then
+        git rebase develop
+    else
+        git rebase dev
+   fi
+}
+alias grm="git rebase master"
+alias gmm="git merge master"
+alias gmd="git merge dev"
+alias gr="git rebase"
+alias grc="git rebase --continue"
+alias gra="git rebase --abort"
+
 
 alias gw="gulp watch"
 alias gwp="gulp watch --production"
@@ -195,3 +215,4 @@ alias ns="npm start"
 alias arm="ssh manjaro@manjaro.arm"
 alias manjaro="ssh manjaro@manjaro.arm"
 
+alias jhbuild="PATH=.new_local/bin:$PATH jhbuild"
