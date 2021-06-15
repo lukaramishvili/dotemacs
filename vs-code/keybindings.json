@@ -11,6 +11,11 @@
         "when": "textInputFocus"
     },
     {
+        "key": "cmd+c cmd+c",
+        "command": "editor.action.clipboardCopyAction",
+        "when": "textInputFocus"
+    },
+    {
         "key": "cmd+c",
         "command": "-filesExplorer.copy",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
@@ -108,6 +113,11 @@
     },
     {
         "key": "cmd+w",
+        "command": "editor.action.clipboardCutAction",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+x cmd+x",
         "command": "editor.action.clipboardCutAction",
         "when": "textInputFocus && !editorReadonly"
     },
@@ -812,5 +822,9 @@
         {
             "key": "shift+cmd+a",
             "command": "-workbench.view.extension.azure"
+        },
+        {
+            "key": "ctrl+cmd+f",
+            "command": "-workbench.action.toggleFullScreen"
         }
     ]
