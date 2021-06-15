@@ -20,6 +20,8 @@
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; auto-reload buffers changed on disk
+(global-auto-revert-mode t)
 
 ;;; packages
 
@@ -58,6 +60,9 @@
          clojure-mode
          clojure-mode-extra-font-locking
          cider
+         ;;
+         clj-refactor
+         ;;
          ido-completing-read+
          smex
          projectile
@@ -92,7 +97,7 @@
          ;; flycheck / eslint
          flycheck
          add-node-modules-path
-         prettier-js ;; don't forget to `npm i -g prettier`
+         ;; prettier-js ;; don't forget to `npm i -g prettier`
          ;;; w3m needed for SuperCollider help system
          w3m
          ;;
@@ -582,20 +587,21 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
   (load-theme 'eink t)
   (global-hl-line-mode -1)
   ;; goes well with eink theme
-  (set-frame-font "Iosevka-16"))
+  (if (font-installed-p "Iosevka")
+      (set-frame-font "Iosevka-16")))
 
 ;; themes
 (add-to-list 'custom-theme-load-path "~/dotemacs/themes")
 (add-to-list 'load-path "~/dotemacs/themes")
 ;; (load-theme 'blackboard t)
-;; (load-theme 'tomorrow-night-bright t)
+(load-theme 'tomorrow-night-bright t)
 ;; (load-theme 'tomorrow-night-blue t)
 ;; (load-theme 'tomorrow-night-eighties t)
-;; (load-theme 'tomorrow-night t)
+;;(load-theme 'tomorrow-night t)
 ;;
 ;;(load-theme 'zenburn t)
 ;;(load-eink-theme)
-(load-theme 'tomorrow-night-bright t)
+;;(load-theme 'tomorrow-night-bright t)
 
 ;; TODO try multiple fonts for code and strings:
 ;; https://bastibe.de/2017-09-19-multi-font-themes.html
@@ -608,8 +614,11 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
   (bool (x-list-fonts font)))
 
 ;;; fonts
-(if (font-installed-p "DejaVu Sans Mono")
-    (set-frame-font "DejaVu Sans Mono-14"))
+;; (if (font-installed-p "DejaVu Sans Mono")
+;;     (set-frame-font "DejaVu Sans Mono-14"))
+
+(if (font-installed-p "IBM Plex Mono Medium")
+    (set-frame-font "IBM Plex Mono Medium"))
 
 ;; tried out and immediately turned off.
 ;; (if (font-installed-p "Input Mono Narrow")
@@ -619,7 +628,7 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;;      (set-frame-font "SF Mono-16"))
 
 ;; a very beautiful font.
-;; (if (font-installed-p "Iosevka")
+;;(if (font-installed-p "Iosevka")
 ;;     (set-frame-font "Iosevka-16"))
 
 ;; a great 90's style font for long hours spent staring at the monitor
@@ -722,10 +731,10 @@ Ignores CHAR at point, and also ignores."
 
 (require 'prettier-js)
 ;; I'm already loading tide-mode with tons of functionality, so just comment and leave prettier-js for later.
-(add-hook 'ng2-ts-mode-hook 'prettier-js-mode)
-;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
-;; will work for both js and ts
-(add-hook 'javascript-mode-hook 'prettier-js-mode)
+;; (add-hook 'ng2-ts-mode-hook 'prettier-js-mode)
+;; ;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
+;; ;; will work for both js and ts
+;; (add-hook 'javascript-mode-hook 'prettier-js-mode)
 
 ;; (use-package prettier
 ;;   :after typescript-mode
@@ -1781,7 +1790,28 @@ in the appropriate direction to include current line."
 
 ;; end CSS autocomplete
 
+;; enable desktop mode and override stale locks below
 (desktop-save-mode 1)
+
+;;; desktop-override-stale-locks.el begins here
+(defun emacs-process-p (pid)
+  "If pid is the process ID of an emacs process, return t, else nil.
+Also returns nil if pid is nil."
+  (when pid
+    (let* ((cmdline-file (concat "/proc/" (int-to-string pid) "/cmdline")))
+      (when (file-exists-p cmdline-file)
+        (with-temp-buffer
+          (insert-file-contents-literally cmdline-file)
+          (goto-char (point-min))
+          (search-forward "emacs" nil t)
+          pid)))))
+
+(defadvice desktop-owner (after pry-from-cold-dead-hands activate)
+  "Don't allow dead emacsen to own the desktop file."
+  (when (not (emacs-process-p ad-return-value))
+    (setq ad-return-value nil)))
+;;; desktop-override-stale-locks.el ends here
+
 
 ;;; BEGIN ESC keybindings (quick to use, intended to replace longer C-x keystrokes)
 ;;; also esc-arrows for navigating between split windows is located in #'set-windmove-keybindings

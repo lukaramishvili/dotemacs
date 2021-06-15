@@ -216,3 +216,5 @@ alias arm="ssh manjaro@manjaro.arm"
 alias manjaro="ssh manjaro@manjaro.arm"
 
 alias jhbuild="PATH=.new_local/bin:$PATH jhbuild"
+
+alias noderepl="ts-node -O '{\"module\": \"commonjs\"}'"

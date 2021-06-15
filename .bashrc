@@ -451,6 +451,9 @@ gcm(){
 ga.(){
   git add .
 }
+gr.(){
+  git reset .
+}
 gc.(){
   read -p "Checkout ALL files in current directory? " -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -550,7 +553,7 @@ deploy(){
     elif [ $(pwd) = "/projects/transit" ]
     then
       git push
-      ssh root@apps.luka.ge "cd /var/lib/jenkins/workspace/transit && git pull"
+      ssh root@carload.ge "cd /projects/carload && git pull"
     elif [ $(pwd) = "/projects/carrent" ]
     then
       git push
@@ -578,7 +581,7 @@ deploy(){
     elif [ $(pwd) = "/projects/alpha/alpha-web" ]
     then
       git push
-      ssh root@app.alpha.ge "cd /var/www/alpha.ge && git pull"
+      ssh zerogravity@pay.alpha.ge "cd /projects/alpha && git pull"
     elif [ $(pwd) = "/projects/zero-gravity-website" ]
     then
       git push
