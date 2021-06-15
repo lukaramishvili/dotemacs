@@ -11,13 +11,15 @@
 	<key>AKDeviceUnlockState</key>
 	<true/>
 	<key>AKLastCheckInAttemptDate</key>
-	<date>2019-10-22T20:30:32Z</date>
+	<date>2021-06-15T06:31:53Z</date>
 	<key>AKLastCheckInSuccessDate</key>
-	<date>2019-10-22T20:30:33Z</date>
+	<date>2021-06-15T06:31:58Z</date>
 	<key>AKLastEmailListRequestDateKey</key>
-	<date>2019-10-18T05:59:56Z</date>
+	<date>2021-05-30T13:58:44Z</date>
 	<key>AKLastIDMSEnvironment</key>
 	<integer>0</integer>
+	<key>Apacer Portable HDD</key>
+	<string>1</string>
 	<key>Apple Inc. iBridge</key>
 	<string>1</string>
 	<key>AppleActionOnDoubleClick</key>
@@ -28,17 +30,21 @@
 	<integer>1</integer>
 	<key>AppleEnableSwipeNavigateWithScrolls</key>
 	<true/>
+	<key>AppleFontSmoothing</key>
+	<integer>1</integer>
 	<key>AppleICUForce24HourTime</key>
 	<true/>
 	<key>AppleInterfaceStyle</key>
 	<string>Dark</string>
+	<key>AppleKeyboardUIMode</key>
+	<integer>3</integer>
 	<key>AppleLanguages</key>
 	<array>
 		<string>en-US</string>
 		<string>ka-GE</string>
 	</array>
 	<key>AppleLanguagesDidMigrate</key>
-	<string>10.14.3</string>
+	<string>10.14.4</string>
 	<key>AppleLocale</key>
 	<string>en_GE</string>
 	<key>AppleMeasurementUnits</key>
@@ -53,7 +59,25 @@
 	<string>Celsius</string>
 	<key>CGFontRenderingFontSmoothingDisabled</key>
 	<false/>
+	<key>Canon MF230 Series</key>
+	<string>1</string>
 	<key>Focusrite A.E. Ltd Launchpad Pro</key>
+	<string>1</string>
+	<key>Focusrite Scarlett 2i4 USB</key>
+	<string>1</string>
+	<key>Generic Mass Storage</key>
+	<string>1</string>
+	<key>Generic Realtek Audio USB</key>
+	<string>1</string>
+	<key>HMD Global SDM429-QRD _SN:1784E124</key>
+	<string>1</string>
+	<key>HP LaserJet MFP M227-M231</key>
+	<string>1</string>
+	<key>Hewlett Packard MFP M426dw</key>
+	<string>1</string>
+	<key>Hewlett Packard MFP M477fnw</key>
+	<string>1</string>
+	<key>Hewlett Packard Pro MFP M225dn</key>
 	<string>1</string>
 	<key>Identive SCR33xx v2.0 USB SC Reader</key>
 	<string>1</string>
@@ -61,7 +85,15 @@
 	<integer>15</integer>
 	<key>KeyRepeat</key>
 	<integer>2</integer>
+	<key>Kingston DataTraveler 2.0</key>
+	<string>1</string>
+	<key>Leap Motion Controller</key>
+	<string>1</string>
 	<key>Logitech USB Receiver</key>
+	<string>1</string>
+	<key>MediaTek MT65xx Android Phone</key>
+	<string>1</string>
+	<key>MediaTek MT65xx Preloader</key>
 	<string>1</string>
 	<key>NSAutomaticCapitalizationEnabled</key>
 	<true/>
@@ -78,7 +110,7 @@
 	<key>NSCloseAlwaysConfirmsChanges</key>
 	<true/>
 	<key>NSLinguisticDataAssetsRequestTime</key>
-	<date>2019-10-22T21:13:22Z</date>
+	<date>2021-06-14T14:57:12Z</date>
 	<key>NSLinguisticDataAssetsRequested</key>
 	<array>
 		<string>en</string>
@@ -95,18 +127,26 @@
 		<string>ka_GE</string>
 		<string>en_US</string>
 		<string>nb</string>
+		<string>nl</string>
+		<string>da</string>
+		<string>fi</string>
+		<string>ru</string>
 	</array>
 	<key>NSNavPanelFileLastListModeForOpenModeKey</key>
-	<integer>3</integer>
+	<integer>2</integer>
+	<key>NSNavPanelFileLastListModeForSaveModeKey</key>
+	<integer>1</integer>
 	<key>NSNavPanelFileListModeForOpenMode2</key>
-	<integer>3</integer>
+	<integer>2</integer>
+	<key>NSNavPanelFileListModeForSaveMode2</key>
+	<integer>1</integer>
 	<key>NSNavRecentPlaces</key>
 	<array>
-		<string>/projects/lb/icons</string>
-		<string>/projects/crm</string>
-		<string>~/Documents/ardi/design mobile</string>
-		<string>~/dotemacs/bettertouchtool</string>
-		<string>~/Google Drive/luka/home/karada</string>
+		<string>~/Documents/transit/6) 2021 jun changes</string>
+		<string>~/Google Drive/zero gravity llc/2021/helix</string>
+		<string>~/Documents/alpha/design</string>
+		<string>~/Documents/ardi/არდის ტესტირება/11) 27.06 9 testers</string>
+		<string>/projects/alpha/alpha-web/public/images</string>
 	</array>
 	<key>NSPersonNameDefaultDisplayNameOrder</key>
 	<integer>0</integer>
@@ -124,6 +164,10 @@
 			<string>com.google.www</string>
 		</dict>
 	</dict>
+	<key>NSQuitAlwaysKeepsWindows</key>
+	<true/>
+	<key>NSUseAnimatedFocusRing</key>
+	<false/>
 	<key>NSUserDictionaryReplacementItems</key>
 	<array>
 		<dict>
@@ -150,7 +194,19 @@
 	<string>1</string>
 	<key>NavPanelFileListModeForOpenMode</key>
 	<integer>2</integer>
+	<key>NavPanelFileListModeForSaveMode</key>
+	<integer>1</integer>
 	<key>Numark MixTrack Pro 3</key>
+	<string>1</string>
+	<key>Pantum M6600NW series</key>
+	<string>1</string>
+	<key>SAMSUNG SAMSUNG_Android</key>
+	<string>1</string>
+	<key>SMI Corporation USB DISK</key>
+	<string>1</string>
+	<key>SanDisk Ultra Fit</key>
+	<string>1</string>
+	<key>Seagate BUP Slim BK</key>
 	<string>1</string>
 	<key>WebAutomaticSpellingCorrectionEnabled</key>
 	<false/>
@@ -159,19 +215,22 @@
 	<key>com.apple.finder.SyncExtensions</key>
 	<dict>
 		<key>dirMap</key>
-		<dict>
-			<key>com.adobe.accmac.ACCFinderSync</key>
-			<array/>
-			<key>com.google.GoogleDrive.FinderSyncAPIExtension</key>
-			<array/>
-		</dict>
+		<dict/>
 	</dict>
+	<key>com.apple.keyboard.fnState</key>
+	<true/>
 	<key>com.apple.mouse.scaling</key>
 	<real>3</real>
 	<key>com.apple.scrollwheel.scaling</key>
 	<real>0.3125</real>
 	<key>com.apple.sound.beep.flash</key>
 	<integer>0</integer>
+	<key>com.apple.sound.beep.sound</key>
+	<string>/System/Library/Sounds/Funk.aiff</string>
+	<key>com.apple.sound.beep.volume</key>
+	<real>1</real>
+	<key>com.apple.sound.uiaudio.enabled</key>
+	<integer>1</integer>
 	<key>com.apple.springing.delay</key>
 	<real>0.5</real>
 	<key>com.apple.springing.enabled</key>
@@ -183,6 +242,8 @@
 	<key>com.apple.trackpad.scaling</key>
 	<real>3</real>
 	<key>motorola Moto Z (2)</key>
+	<string>1</string>
+	<key>motorola moto z4</key>
 	<string>1</string>
 </dict>
 </plist>
