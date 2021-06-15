@@ -43,7 +43,7 @@
                     :insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces nil
                     :placeOpenBraceOnNewLineForControlBlocks nil))
 ;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
+;; (add-hook 'before-save-hook 'tide-format-before-save)
 
 ;; enable debugger (TODO for now). has support for Javascript in Chrome/Firefox, PHP, Elixir, Go, Python and native GDB/LLDB for C and C++.
 ;(dap-mode 1)
@@ -98,6 +98,10 @@
 (add-hook 'typescript-mode-hook #'lsp)
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'company-mode)
+
+;; for Flow's typescript and markdown files
+(add-hook 'typescript-mode-hook (lambda () (auto-revert-mode t)))
+(add-hook 'markdown-mode-hook (lambda () (auto-revert-mode t)))
 
 
 
