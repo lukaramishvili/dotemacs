@@ -1,0 +1,176 @@
+! 09/11/2018, 13:20:34 https://www.facebook.com/
+www.facebook.com###stream_pagelet
+www.facebook.com##.home_right_column
+
+! all stackexchange sidebars
+###sidebar[role="complementary"][aria-label="sidebar"]
+
+! 18/11/2018, 20:19:10 https://stackoverflow.com/questions/2742852/unicode-characters-in-urls
+stackoverflow.com###sidebar
+
+! 20/01/2019, 11:09:30 https://apple.stackexchange.com/questions/192874/how-do-i-get-the-trackpad-force-touch-to-recognise-a-click-right-after-a-scrol
+apple.stackexchange.com###sidebar
+
+! 23/01/2019, 11:30:09 https://www.hoursforteams.com/#/timers
+www.hoursforteams.com##.ng-isolate-scope.trial-modal
+
+! 24/01/2019, 12:09:30 https://www.youtube.com/watch?v=g2N0TkfrQhY&list=PL2tMgWgIvcWk84VJAsBjMZdnmdEa95pUK
+www.youtube.com##.ytp-iv-player-content.ytp-player-content
+
+! 24/01/2019, 12:09:42 https://www.youtube.com/watch?v=g2N0TkfrQhY&list=PL2tMgWgIvcWk84VJAsBjMZdnmdEa95pUK
+www.youtube.com##.ytp-cards-teaser-text
+
+! 24/01/2019, 12:09:57 https://www.youtube.com/watch?v=g2N0TkfrQhY&list=PL2tMgWgIvcWk84VJAsBjMZdnmdEa95pUK
+www.youtube.com##.ytp-cards-button-icon-default > .ytp-cards-button-icon
+
+! 24/01/2019, 15:24:56 https://www.youtube.com/watch?v=kqVpk0qxmfA&list=PLKsS-HV7qF3PWB2ux_JujxC7MDqT8CGfP
+www.youtube.com##.ytp-cards-teaser-text
+
+! 24/01/2019, 15:25:07 https://www.youtube.com/watch?v=kqVpk0qxmfA&list=PLKsS-HV7qF3PWB2ux_JujxC7MDqT8CGfP
+www.youtube.com##.ytp-cards-button-icon-default > .ytp-cards-button-icon
+
+! 31/01/2019, 16:02:09 https://superuser.com/questions/809150/how-to-make-scutil-login-to-vpn-with-password-on-mac
+superuser.com###sidebar
+
+! 08/02/2019 https://xd.adobe.com
+xd.adobe.com##.displayTable-3RdGm.sidenavStyleview-NaW8p
+
+! 18/02/2019 https://www.cnet.com
+www.cnet.com###videoPlayer1
+
+! 21/02/2019 https://www.huffpost.com
+www.huffpost.com##[src="javascript:void(0)"]
+
+! 24/02/2019 https://www.youtube.com
+www.youtube.com###sections
+
+! 05/03/2019 https://jira.lb.ge
+jira.lb.ge###subtasks-navigation-panel
+jira.lb.ge###tm4j-trace-links-panel-issue-page
+
+! 11/03/2019 https://www.bloomberg.com
+www.bloomberg.com##.bvp-muted-overlay
+www.bloomberg.com###bvp-bvp_pl-411849_Hlsjs_api
+www.bloomberg.com##div.bvp-playlist-slide:nth-of-type(1)
+
+! 21/03/2019 https://www.facebook.com
+www.facebook.com##.egoOrganicColumn.e_ftvwhqfzk.pagelet
+
+! 27/03/2019 https://www.zdnet.com
+www.zdnet.com##.zdnetVideoPlayer
+www.zdnet.com##.preloaded_lightbox
+
+! 27/03/2019 https://techcrunch.com
+techcrunch.com##.share--open.share--fixed.article__social-share
+
+! 27/03/2019 https://www.theparisreview.org
+www.theparisreview.org##.article-tools_desktop > .article-tools-social
+www.theparisreview.org##.article-tools_desktop
+www.theparisreview.org###g-wkxb9p
+
+! 02/04/2019 https://levelup.gitconnected.com
+levelup.gitconnected.com##.js-stickyFooter.u-xs-paddingRight10.u-xs-paddingLeft10.u-zIndexMetabar.u-paddingBottom10.u-paddingTop10.u-borderBox.u-boxShadowTop.u-backgroundWhite.u-width100pct.u-bottom0.u-fixed
+
+! 04/04/2019 https://people.com
+people.com###jumpstart_video_1_html5_api
+people.com###jumpstart_video_1
+
+! 07/04/2019 https://www.google.com
+www.google.com##a[ping*="quora.com"]
+www.google.com##a[href*="quora.com"]
+
+www.google.com##a[ping*="oracle.com"]
+www.google.com##a[href*="oracle.com"]
+
+www.google.com##a[ping*="w3schools.com"]
+www.google.com##a[href*="w3schools.com"]
+
+! 11/04/2019 https://jira.lb.ge
+jira.lb.ge###ghx-tab-cz-closeit-atlassian-subtasks-navigation-agile-subtasks-navigation-panel
+jira.lb.ge###ghx-tab-com-kanoah-test-manager-tm4j-trace-links-panel-agile-board
+jira.lb.ge###ghx-tab-com-riadalabs-jira-plugins-insight-rlabs-agile-panel
+
+! 13/04/2019 https://www.imovies.cc
+www.imovies.cc##.hedgehog-mid-gg
+www.imovies.cc##.hedgehog-overlay-gg
+
+! 16/04/2019 https://edition.cnn.com
+edition.cnn.com##.theo-player-wrapper
+edition.cnn.com###large-media
+
+! 17/04/2019 https://www.techrepublic.com
+www.techrepublic.com##.trVideoPlayer
+www.techrepublic.com##.large.video.shortcode
+
+! 17/04/2019 https://www.reddit.com
+www.reddit.com##._3rY3I9989IzX5QNpC7C9Q3
+
+! 18/04/2019 https://www.google.com
+www.google.com###rhs
+www.google.com###brs > g-section-with-header
+www.google.com###fbarcnt
+www.google.com##[ping*="https://twitter.com"]
+www.google.com##[ping*="https://www.instagram.com"]
+www.google.com##[ping*="https://www.twitch.tv"]
+www.google.com##.kno-kp
+www.google.com##[id*="vidthumb"]
+www.google.com###topstuff
+www.google.com###botstuff
+www.google.com###imagebox_bigimages
+www.google.com##g-scrolling-carousel
+#www.google.com##div[style*=width][style*=height]
+www.google.com##.gws-trips__outer-card
+www.google.com##.exp-outline
+
+! 7/4/2019 https://www.booking.com
+www.booking.com##.soldout_property
+fo
+
+! 12/9/2019 https://www.messenger.com
+www.messenger.com##[data-testid="row_header_id_thread:2069969919685583"]
+www.messenger.com##[data-testid="row_header_id_thread:2036331336470458"]
+www.messenger.com##[data-testid="row_header_id_thread:1454029454841460"]
+www.messenger.com##[data-testid="row_header_id_thread:2619655111449161"]
+www.messenger.com##[data-testid="row_header_id_user:100031268220978"]
+
+##.home-slider-video-bg
+
+! 12/17/2019 http://carload.ge
+carload.ge###contact
+
+! 12/23/2019 http://transit.x
+transit.x###contact
+
+! 12/24/2019 https://phpspreadsheet.readthedocs.io
+phpspreadsheet.readthedocs.io##.rst-badge.rst-versions > .rst-current-version
+
+! 12/26/2019 http://carrent.x
+carrent.x##.parallax.withbg.ppb_header_youtube.withsmallpadding.one
+carrent.x###kirki_google_fonts-css
+carrent.x###youtube_iframe_api
+
+! 3/25/2020 https://www.flaticon.com
+www.flaticon.com###sponsor-partner
+
+! 7/7/2020 https://www.dailymail.co.uk
+www.dailymail.co.uk###p-1005 > .linkro-wocc.link-bogr2
+www.dailymail.co.uk##.resultList_2OW2j
+www.dailymail.co.uk###p-1426
+www.dailymail.co.uk##.beta
+www.dailymail.co.uk##.has-button-share.floating-buttons
+
+! 2020-11-15 https://www.interpressnews.ge
+www.interpressnews.ge##div.rsscombinitems
+www.interpressnews.ge##.topcontentmiddle
+
+! 2021-01-20 https://www.facebook.com
+www.facebook.com##.oyrvap6t.b6rwyo50.fjf4s8hc.f7vcsfb0.btwxx1t3.owycx6da.gs1a9yip.taijpn5t.hpfvmrgz.buofh1pr.pmt1y7k9.g5gj957u.j83agx80.du4w35lb.l9j0dhe7.rq0escxv
+
+! 2021-04-11 https://tbconline.ge
+tbconline.ge##[name="TOP_WIDE_BANNER_HOMEPAGE"]
+tbconline.ge##.right-side-banner
+tbconline.ge##[ng-if="!!dashboardWidgetCtrl.widget.statusBenefits"]
+
+! 2021-05-25 https://www.facebook.com
+www.facebook.com##.cxgpxx05 > div > div.l9j0dhe7 > .aodizinl.e5nlhep0.d2edcug0.pfnyh3mw.cbu4d94t.j83agx80.du4w35lb.l9j0dhe7.rq0escxv > .tgvbjcpo.buofh1pr.cbu4d94t.j83agx80.du4w35lb.l9j0dhe7.rq0escxv > .dati1w0a.hv4rvrfc.d2edcug0.pfnyh3mw.cbu4d94t.j83agx80.du4w35lb.l9j0dhe7.rq0escxv > .irj2b8pg.ew0dbk1b.cbu4d94t.j83agx80 > .knvmm38d.qzhwtbm6 > .hpfvmrgz.d2edcug0.lzcic4wl.p1ri9a11.l94mrbxd.gmql0nx0 > .hzawbc8m.m9osqain.lrazzd5p.g1cxx5fr.a5q79mjw.mdeji52x.c8b282yb.mau55g9w.fe6kdd0r.d9wwppkn.aigsh9s9.nxhoafnm.keod5gw0.a8c37x1j.ht8s03o8.ik7dh3pa.oi732d6d.c1et5uql.qv66sw1b.hpfvmrgz.d2edcug0 > .l9j0dhe7.stjgntxs.ni8dbmo4.a8c37x1j
+
