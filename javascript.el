@@ -50,7 +50,7 @@
 ;(dap-ui-mode 1)
 
 
-(require 'ng2-mode)
+;;(require 'ng2-mode)
 ;; there's ng2-ts-mode and ng2-html-mode (activated automatically).
 
 (require 'lsp-mode)

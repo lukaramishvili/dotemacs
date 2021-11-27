@@ -1,9 +1,4 @@
 
-shopt -s expand_aliases
-
-LC_ALL=en_US.UTF-8
-LC_CTYPE=en_US.UTF-8
-
 # add to ~/.bash_profile
 # if [ -f ~/.bashrc ]; then
 #     . ~/.bashrc
@@ -14,7 +9,25 @@ LC_CTYPE=en_US.UTF-8
 #     source ~/dotemacs/.bashrc
 # fi
 
+LC_ALL=en_US.UTF-8
+LC_CTYPE=en_US.UTF-8
+
+export PATH="~/bin::$PATH"
+
 export PATH="/usr/local/sbin:$PATH"
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+
+shopt -s expand_aliases
+
+
+# # change shell to bash
+# chsh -s /bin/bash
+# # and for root
+# sudo chsh -s /bin/bash
+# disable zsh warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 if [ -d /usr/local/graalvm ]; then
   export GRAALVM_HOME=/usr/local/graalvm
@@ -46,7 +59,20 @@ eval "$(direnv hook bash)"
 
 PATH="/Users/luka/Library/Android/sdk/platform-tools:$PATH"
 
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+# only have java 8 enabled
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+##
+## multiple versions of java
+##
+export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+
+alias java8='export JAVA_HOME=$JAVA_8_HOME'
+alias java11='export JAVA_HOME=$JAVA_11_HOME'
+
+# default to Java 11
+java11
 
 ANDROID_SDK_ROOT="/Users/luka/Library/Android/sdk"
 
@@ -103,6 +129,10 @@ if [ ! -d ~/z.lua ]; then
   git clone https://github.com/skywind3000/z.lua ~/z.lua
 fi
 
+if [ ! -d /usr/local/bin ]; then
+  echo "Asking to create /usr/local/bin"
+  sudo mkdir /usr/local/bin
+fi
 
 # download leiningen install script
 if [ ! -e /usr/local/bin/lein ]; then
@@ -211,22 +241,24 @@ defaults write com.apple.dock slow-motion-allowed -bool true
 # Change to the new shell
 # chsh -s /usr/local/bin/bash
 
-# for gitdiff
-# brew install diff-so-fancy
-# git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
-#
-## The default Git colors are not optimal. The colors used for the diff-so-fancy screenshot:
-# git config --global color.diff-highlight.oldNormal    "red bold"
-# git config --global color.diff-highlight.oldHighlight "red bold 52"
-# git config --global color.diff-highlight.newNormal    "green bold"
-# git config --global color.diff-highlight.newHighlight "green bold 22"
+configure-gitdiff-colors(){
+  # for gitdiff
+  brew install diff-so-fancy
+  git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 
-# git config --global color.diff.meta       "11"
-# git config --global color.diff.frag       "magenta bold"
-# git config --global color.diff.commit     "yellow bold"
-# git config --global color.diff.old        "red bold"
-# git config --global color.diff.new        "green bold"
-# git config --global color.diff.whitespace "red reverse"
+  ## The default Git colors are not optimal. The colors used for the diff-so-fancy screenshot:
+  git config --global color.diff-highlight.oldNormal    "red bold"
+  git config --global color.diff-highlight.oldHighlight "red bold 52"
+  git config --global color.diff-highlight.newNormal    "green bold"
+  git config --global color.diff-highlight.newHighlight "green bold 22"
+
+  git config --global color.diff.meta       "11"
+  git config --global color.diff.frag       "magenta bold"
+  git config --global color.diff.commit     "yellow bold"
+  git config --global color.diff.old        "red bold"
+  git config --global color.diff.new        "green bold"
+  git config --global color.diff.whitespace "red reverse"
+}
 
 # for touchbar/command-line keyboard switcher:
 # git clone https://github.com/myshov/xkbswitch-macosx

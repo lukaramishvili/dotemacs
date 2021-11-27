@@ -2,15 +2,20 @@
 ;;;; Luka Ramishvili's .emacs file
 ;;;;
 
+;;;; Installation:
+;;;; put these lines in ~/dotemacs/.emacs:
+;;   (package-initialize)
+;;   (load-file "~/dotemacs/.emacs")
+
 ;;; Commentary:
 
 ;;; use C-x C-e to reload any s-exp
 
 ;;; Code:
 
-(cd "/projects/")
+(cd "~/projects/")
 
-(setq default-directory "/projects/")
+(setq default-directory "~/projects/")
 
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
@@ -69,8 +74,8 @@
          ;;27decdisableforperf;;rainbow-delimiters
          tagedit
          ;;
-         ;; ensime
-         ;; haskell-mode
+         ;;ensime
+         ;;haskell-mode
          sclang-extensions
          ;;27decdisableforperf;;flymd
          ;;27decdisableforperf;;markdown-mode
@@ -83,10 +88,10 @@
          lsp-mode
          lsp-ui ;; flycheck integration and higher level UI modules
          company
-         company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
+         ;; CANNOT INSTALL ANYMORE company-lsp ;; for lsp-mode's company-mode integration. don't forget to uncomment its use-package above
          ;;; Angular
-         ng2-mode ;; will bring typescript-mode
-         tide ;; typescript interactive devenv
+         ; ng2-mode ;; will bring typescript-mode
+         ;RESTOREtide ;; typescript interactive devenv
          ts-comint ;; ts REPL; requires `sudo npm i -g tsun`
          ;; React
          rjsx-mode
@@ -97,13 +102,14 @@
          ;; flycheck / eslint
          flycheck
          add-node-modules-path
-         ;; prettier-js ;; don't forget to `npm i -g prettier`
+         prettier-js ;; don't forget to `npm i -g prettier`
          ;;; w3m needed for SuperCollider help system
-         w3m
+         ;;w3m
          ;;
-         direnv
+         ;;direnv
          ;;
-         omnisharp))
+         ;;omnisharp
+	 ))
 ;; fetch the list of packages available 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -1620,7 +1626,7 @@ in the appropriate direction to include current line."
 ;; ng2-ts-mode is automatically activated in *.component.ts and *.service.ts ng2.html-mode is automatically activated in *.component.html
 ;; no lookahead/lookbehind in elisp regex, so reset above .html binding
 ;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . ng2-mode));web-mode
-(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . ng2-html-mode))
+;;(add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . ng2-html-mode))
 ;; ng2-html-mode garbles HTML tags on save  
 (add-to-list 'auto-mode-alist '("\\.component\\.html\\'" . html-mode))
 ;; ###### WARNING: don't put extensions directly in the form of ".ext",..
