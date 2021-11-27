@@ -155,6 +155,8 @@ alias crm="cd /projects/flow/flow-crm"
 
 #
 alias sshbk="ssh root@bookulus.ge"
+alias sshgsf="ssh-add /docs/gsf/ssh-key/gsf_id_rsa && ssh root@194.195.241.83"
+alias sshamra="ssh-add /docs/amra/ssh-key/amra_id_rsa && ssh cld9-6997@195.69.143.183"
 
 alias tinker="php artisan tinker"
 alias t="php artisan tinker"
@@ -218,3 +220,43 @@ alias manjaro="ssh manjaro@manjaro.arm"
 alias jhbuild="PATH=.new_local/bin:$PATH jhbuild"
 
 alias noderepl="ts-node -O '{\"module\": \"commonjs\"}'"
+
+alias ns="host -t ns"
+
+
+#### project-specific aliases
+
+#alias sshardi="mosh root@213.131.38.12"
+alias sshardi="ssh root@mobile.ardi.ge"
+
+alias sshalpha="mosh root@139.162.169.65" # IP of app.alpha.ge
+#alias sshlivealpha="echo password: Alpha2021@; mosh zerogravity@185.69.172.54"
+alias sshlivealpha="echo password: Alpha2021@; ssh zerogravity@185.69.172.54"
+
+alias spnews-live="ssh-add ~/Documents/spnews/ssh-key/spnews_live_rsa && ssh ubuntu@135.125.238.78"
+
+alias sshbk="ssh root@bookulus.ge"
+
+alias mssqld-init="docker run -d --name sql_server_demo -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=PassWord2019123' -p 1433:1433 microsoft/mssql-server-linux"
+
+alias mssqld="docker start 9a511a57ea7367246576a266cc295d942c0e3c58e08a514394d12cd93c19f5f7"
+
+alias mssql-connect="mssql -u sa -p PassWord2019123"
+
+alias sshradius="ssh root@104.248.82.163"
+alias sshkalo="ssh-add ~/Documents/kalo/ssh-key/kalo_id_irsa && ssh root@kalo.ge -p 6781"
+alias sshkalodev="echo JsH5MrxcLhC5ePU | pbcopy && ssh root@173.249.60.231"
+
+alias fbdeploy-staging-admin="npm run build && firebase deploy --only hosting:envite-staging-admin"
+alias fbdeploy-vendor-chat="npm run build && firebase deploy --only hosting:envite-vendor-chat"
+alias fbdeploy-vendor-script="npm run build && firebase deploy --only hosting:envite-vendor-script"
+alias fbdeploy-staging-chat="npm run build:staging && firebase deploy --only hosting:envite-staging-chat"
+alias fbdeploy-staging-script="npm run build:staging && firebase deploy --only hosting:envite-staging-script"
+
+alias filezilla-nossh="SSH_AUTH_SOCK=\"\"; /Applications/FileZilla.app/Contents/MacOS/filezilla"
+
+alias sst-start="cd aws-stacks; sst start --stage pr179 --increase-timeout"
+# to resume non-debug normal lambda functioning, we need to deploy sst
+alias sst-end="cd aws-stacks; sst deploy --stage pr179"
+
+#### END project-specific aliases

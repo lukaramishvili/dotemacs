@@ -63,6 +63,22 @@ PATH="~/dotemacs/bin:$PATH"
 # add rabbitmq to PATH
 PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 
+# install sq (jq-like command-line SQL/CSV/XLSX client)
+# brew tap neilotoole/sq
+# brew install sq
+# # add completion to bash (from `sq completion --help`)
+# sq completion bash > /usr/local/etc/bash_completion.d/sq
+
+# add package.json script completion to yarn
+# https://github.com/romainberger/yarn-completion
+# yarn global add yarn-completion
+# wget https://raw.githubusercontent.com/romainberger/yarn-completion/master/yarn-completion.bash -O ~/dotemacs/yarn-completion.bash
+if [ -f ~/dotemacs/yarn-completion.bash ]; then
+    . ~/dotemacs/yarn-completion.bash
+    __yarn_completion_complete k
+fi
+
+
 # Download a youtube playlist
 # --download-archive keeps a list of downloaded files to avoid re-downloading when re-running the script
 # -k would also keep the video file, but for hundreds of songs, takes a huge amount of space
@@ -171,6 +187,13 @@ cdd(){
 # import .csv passwords to Firefox (after closing Firefox):
 # ffpass import --from PASSWORDSFILE.csv -d ~/Library/Application\ Support/Firefox/Profiles/FF_PROFILE_NAME
 
+# change screenshot format to JPG
+# defaults write com.apple.screencapture type jpg;killall SystemUIServer
+alias screenshot-format-jpg="defaults write com.apple.screencapture type jpg;killall SystemUIServer"
+# change screenshot format back to PNG
+# defaults write com.apple.screencapture type png;killall SystemUIServer
+alias screenshot-format-png="defaults write com.apple.screencapture type png;killall SystemUIServer"
+
 # fix non-retina screen subpixel antialiasing on Mojave
 # defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 # enable "Use font smoothing when available" in Preferences > General
@@ -216,7 +239,8 @@ export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 #export PATH=/Applications/XAMPP/bin:$PATH
 
 #PS1="\H:\W \u\$ "
-#export PS1
+PS1="\u: \W$ "
+export PS1
 
 # to enable QuickLook of text files without an extension (e.g. LICENSE, README, Makefile):
 # http://whomwah.github.io/qlstephen/
@@ -234,11 +258,11 @@ export PATH=/usr/local/bin:~/.composer/vendor/bin:$PATH
 #ssh-add ~/.ssh/multiple_id_rsa 2>/dev/null
 
 ssh-add ~/Documents/luka/luka.ge/ssh/luka_ge_id_rsa 2>/dev/null
-ssh-add ~/Documents/ardi/ssh/ardi_id_rsa 2>/dev/null
+#ssh-add ~/Documents/ardi/ssh/ardi_id_rsa 2>/dev/null
 #ssh-add ~/Documents/bookulus/ssh-key/bookulus.ge.id_rsa 2>/dev/null
 #ssh-add ~/Documents/lb/ssh/crmfrontend_id_rsa 2>/dev/null
 
-ssh-add ~/Documents/alpha/ssh-key/alpha_id_rsa 2>/dev/null
+#ssh-add ~/Documents/alpha/ssh-key/alpha_id_rsa 2>/dev/null
 ssh-add ~/Documents/alpha/ssh-key/live/alpha_live_id_rsa 2>/dev/null
 
 # quickly copying the ssh key to the server:
@@ -586,6 +610,11 @@ deploy(){
     then
       git push
       ssh root@apps.luka.ge "cd /usr/share/nginx/html/zerogravity.ge && git pull"
+    elif [ $(pwd) = "/projects/amra" ] || [ $(pwd) = "/projects/amra/frontend" ]
+    then
+      git push
+      ssh-add ~/Documents/alpha/ssh-key/staging/alpha_id_rsa
+      ssh root@app.alpha.ge "cd /var/www/alpha.ge/public/amra/frontend && git pull && yarn install && yarn build --prod"
     else
         git push
         # TODO other projects' deploy paths
@@ -676,10 +705,14 @@ aws-login(){
   ## * added the original access/secret key ids to ~/.aws/credentials
   ## * saved your arn inside ~/.aws/iam-user-arn
   ## * git init && git committed the original access/secret key values in ~/.aws
-  OTP=$(echo "$*" | tr -d '\n\r\t ')
+  echo "Enter AWS profile name:"
+  read AWS_PROFILE_NAME
+  echo "Enter OTP code:"
+  read OTP
+  # OTP=$(echo "$*" | tr -d '\n\r\t ')
   IAM_USER_ARN="`cat ~/.aws/iam-user-arn | tr -d '\n'`"
   $(cd ~/.aws/ && git checkout credentials)
-  export AWS_SESSION=$(aws sts get-session-token --serial-number $IAM_USER_ARN --duration-seconds 129600 --token-code $OTP)
+  export AWS_SESSION=$(aws sts get-session-token --profile $AWS_PROFILE_NAME --serial-number $IAM_USER_ARN --duration-seconds 129600 --token-code $OTP)
   export AWS_ACCESS_KEY_ID=$(echo $AWS_SESSION | jq '.Credentials.AccessKeyId' | sed 's/"//g')
   export AWS_SECRET_ACCESS_KEY=$(echo $AWS_SESSION | jq '.Credentials.SecretAccessKey' | sed 's/"//g')
   export AWS_SESSION_TOKEN=$(echo $AWS_SESSION | jq '.Credentials.SessionToken' | sed 's/"//g')
@@ -720,8 +753,20 @@ AWS_SESSION_TOKEN = $AWS_SESSION_TOKEN" > ~/.aws/credentials
 # chmod ugo-rwx /Library/LaunchDaemons/com.microsoft.autoupdate.helper.plist
 
 
-
-
+upload-file(){
+    echo "user@host:"
+    read $HOST
+    rsync -v -e ssh "$*" $HOST:~
+}
+upload-dir(){
+    echo "user:"
+    read $USER
+    echo "host:"
+    read $HOST
+    echo "remote directory:"
+    read $DEST
+    rsync -r -a -v -e "ssh -l $USER" --delete $HOST:$DEST "$*"
+}
 
 # separate file for aliases
 if [ -f ~/dotemacs/.bash_aliases ]; then

@@ -69,8 +69,8 @@
          ;;27decdisableforperf;;rainbow-delimiters
          tagedit
          ;;
-         ensime
-         haskell-mode
+         ;; ensime
+         ;; haskell-mode
          sclang-extensions
          ;;27decdisableforperf;;flymd
          ;;27decdisableforperf;;markdown-mode
@@ -164,6 +164,10 @@
 
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+;; use M-x markdown-live-preview-mode in an .md buffer
+(custom-set-variables
+  '(markdown-command "/usr/local/bin/pandoc"))
 
 (defun eshell-here ()
   "Open a new shell in the directory associated with the current buffer's file.
@@ -650,6 +654,9 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 (setq-default indent-tabs-mode nil
               tab-width 2
               tab-stop-list (number-sequence 2 200 2))
+;; TODO https://www.emacswiki.org/emacs/IndentationBasics
+;; (defvaralias 'c-basic-offset 'tab-width)
+;; (defvaralias 'cperl-indent-level 'tab-width)
 
 ;; shell scripts
 (setq-default sh-basic-offset 2)
@@ -1626,7 +1633,8 @@ in the appropriate direction to include current line."
 ;; depends on the file containing "import .. from 'react'" by matching the file's contents to a multiline regex.
 ;; an alternative method would require prepending "// -*- mode: rjsx -*-" to each file, which would be unsustainable.
 ;; also
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*import.*react" . rjsx-mode))
+(message "Not auto-enabling rjsx-mode useful for JSX files")
+;; (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*import.*react" . rjsx-mode))
 
 ;; TODO es6 javascript mode - currently this Emacs installation has a bug and...
 ;; ... show packages like flycheck (required for this)
