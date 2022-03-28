@@ -659,6 +659,7 @@ If ADD-EXTRA-LINE-P, add preceding empty line and open a new line below for new 
 ;; disable tab indentation
 (setq-default indent-tabs-mode nil
               tab-width 2
+              sgml-basic-offset 2
               tab-stop-list (number-sequence 2 200 2))
 ;; TODO https://www.emacswiki.org/emacs/IndentationBasics
 ;; (defvaralias 'c-basic-offset 'tab-width)
@@ -1188,9 +1189,9 @@ in the appropriate direction to include current line."
 
 ;; for now, to start a project, cd to the solution directory and run $ dotnet run PROJECTNAME
 
-(eval-after-load
-    'company
-  '(add-to-list 'company-backends #'company-omnisharp))
+;; (eval-after-load
+;;     'company
+;;   '(add-to-list 'company-backends #'company-omnisharp))
 
 (defun my-csharp-mode-setup ()
   (omnisharp-mode)
@@ -1420,7 +1421,7 @@ in the appropriate direction to include current line."
 (setq ido-create-new-buffer 'always)
 
 ;; Emphasize some file extensions over others
-(setq ido-file-extensions-order '(".js" ".ts" ".scss" ".php" ".html" ".blade.php" ".emacs" ".el"))
+(setq ido-file-extensions-order '(".js" ".ts" ".scss" ".php" ".html" ".blade.php" ".edge" ".emacs" ".el"))
 
 ;; This enables ido in all contexts where it could be useful, not just
 ;; for selecting buffer and file names
@@ -1618,6 +1619,7 @@ in the appropriate direction to include current line."
 
 ;; open .scss and .sass files in scss-mode
 (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.edge\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode-with-web-mode-helpers))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode));scss-mode or web-mode
@@ -1733,6 +1735,8 @@ in the appropriate direction to include current line."
 (add-hook 'rjsx-mode-hook 'add-web-mode-html-bindings)
 
 (defun add-web-mode-html-bindings ()
+  (setq-default sgml-basic-offset 2)
+  (setq sgml-basic-offset 2)
   ;; with an annoying popup, flycheck reports too many errors in HTML files.
   (flycheck-mode -1)
   ;; insert new tag

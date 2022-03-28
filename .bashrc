@@ -224,6 +224,9 @@ alias screenshot-format-jpg="defaults write com.apple.screencapture type jpg;kil
 # defaults write com.apple.screencapture type png;killall SystemUIServer
 alias screenshot-format-png="defaults write com.apple.screencapture type png;killall SystemUIServer"
 
+# decrease notification display time
+# defaults write com.apple.notificationcenterui bannerTime 4
+
 # fix non-retina screen subpixel antialiasing on Mojave
 # defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
 # enable "Use font smoothing when available" in Preferences > General
@@ -396,6 +399,10 @@ ff(){
     clear
     f "$*"
 }
+# find running process by name
+fp(){
+  ps aux | grep "$*"
+}
 
 skip(){
   # -U doesn't work (supposed to skip .gitignore/ignore files)
@@ -495,7 +502,7 @@ vcs-commit(){
 }
 # quick commit (cam stands for git commit -a -m )
 cam(){
-    git add . 2>/dev/null
+    # git add . 2>/dev/null
     vcs-commit "$*"
 }
 vcs-checkout-master(){
@@ -647,6 +654,11 @@ deploy(){
       git push
       ssh-add ~/Documents/alpha/ssh-key/staging/alpha_id_rsa
       ssh root@app.alpha.ge "cd /var/www/alpha.ge/public/amra/frontend && git pull && yarn install && yarn build --prod"
+    elif [ $(pwd) = "/projects/promodesk" ]
+    then
+      git push
+      ssh-add ~/Documents/promodesk/ssh-key/promodesk_id_rsa
+      ssh rxsejbky@promodesk.ge "cd ~/promodesk && git pull"
     else
         git push
         # TODO other projects' deploy paths
@@ -661,6 +673,44 @@ qd(){
     vcs-commit "$*"
     deploy # deploy - will update server code on specific projects; git push otherwise
 }
+
+# usage: md2docx source.md output.docx
+md2docx(){
+  if [ -f "$1" ];
+  then
+    pandoc -o "$2" -f markdown -t docx "$1"
+    open "$2"
+  else
+    echo ".md file not found"
+  fi
+}
+
+mp3(){
+  if [ -f "$1" ];
+  then
+      # https://stackoverflow.com/a/32280085/324220
+      mp3_cmd=( ffmpeg -i "$1" -f mp3 -acodec libmp3lame -ab 19200 -ar 44100 -b 320 "$1.mp3" )
+      printf '%q ' "${mp3_cmd[@]}"
+      "${mp3_cmd[@]}"
+    # open "$2"
+  else
+    echo "source file \"$1\" not found"
+  fi
+}
+flac(){
+  if [ -f "$1" ];
+  then
+      # https://stackoverflow.com/a/32280085/324220
+      flac_cmd=( ffmpeg -i "$1" -f flac -ab 19200 -ar 44100 "$1.flac" )
+      printf '%q ' "${flac_cmd[@]}"
+      "${flac_cmd[@]}"
+    # open "$2"
+  else
+    echo "source file \"$1\" not found"
+  fi
+}
+
+
 
 dist-lb(){
     # a project here means specific internal project which uses a specific commit of this repo when releasing to prod
@@ -737,8 +787,11 @@ aws-login(){
   ## * added the original access/secret key ids to ~/.aws/credentials
   ## * saved your arn inside ~/.aws/iam-user-arn
   ## * git init && git committed the original access/secret key values in ~/.aws
-  echo "Enter AWS profile name:"
+  echo "Enter AWS profile name (default violetpay-api-dev:"
   read AWS_PROFILE_NAME
+  if [ !AWS_PROFILE_NAME ]; then
+    AWS_PROFILE_NAME=violetpay-api-dev
+  fi
   echo "Enter OTP code:"
   read OTP
   # OTP=$(echo "$*" | tr -d '\n\r\t ')
@@ -799,6 +852,11 @@ upload-dir(){
     read $DEST
     rsync -r -a -v -e "ssh -l $USER" --delete $HOST:$DEST "$*"
 }
+
+# syntax highlighting, e.g. grep ... | code-bash
+alias code-bash="highlight --syntax bash -O ANSI"
+alias code-javascript="highlight --syntax bash -O ANSI"
+alias code-clojure="highlight --syntax clojure -O ANSI"
 
 # separate file for aliases
 if [ -f ~/dotemacs/.bash_aliases ]; then

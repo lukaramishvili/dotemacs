@@ -61,6 +61,8 @@ alias gc="git commit"
 alias gca="git commit --amend"
 alias gpfl="git push --force-with-lease"
 alias gdc="git diff --cached"
+alias gcp="git checkout -p"
+alias gap="git add -p"
 grd(){
   if [ $(pwd) = "/Users/luka/Development/Flow/flow-services" ] \
   || [ $(pwd) = "/Users/luka/Development/Flow/flow-react-native" ] \
@@ -78,6 +80,7 @@ alias gmd="git merge dev"
 alias gr="git rebase"
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
+alias gma="git merge --abort"
 
 
 alias gw="gulp watch"
@@ -157,6 +160,9 @@ alias crm="cd /projects/flow/flow-crm"
 alias sshbk="ssh root@bookulus.ge"
 alias sshgsf="ssh-add /docs/gsf/ssh-key/gsf_id_rsa && ssh root@194.195.241.83"
 alias sshamra="ssh-add /docs/amra/ssh-key/amra_id_rsa && ssh cld9-6997@195.69.143.183"
+alias sshpromodesk="ssh-add ~/Documents/promodesk/ssh-key/promodesk_id_rsa && ssh rxsejbky@promodesk.ge"
+alias sshtrustdev="ssh-add ~/Documents/trust/ssh-key/trust_id_rsa.pem && ssh ec2-user@3.70.14.199"
+alias sshdigitalnews="ssh-add ~/Documents/digitalnews/ssh-key/digitalnews_id_rsa && ssh root@170.187.188.143"
 
 alias tinker="php artisan tinker"
 alias t="php artisan tinker"
@@ -211,6 +217,8 @@ alias rnrisim="npx react-native run-ios --simulator=\"iPhone 11 Pro Max\""
 alias yri="yarn run ios"
 alias yrs="yarn run storybook"
 alias yra="yarn run android"
+alias ys="yarn start"
+alias r="yarn start"
 
 alias ns="npm start"
 

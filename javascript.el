@@ -2,6 +2,31 @@
 (setq-local js-indent-level 2)
 (setq js-indent-level 2)
 
+;;;;;;;;;;;;
+;; https://github.com/emacs-typescript/typescript.el/issues/4#issuecomment-873485004
+;;;;;;;;;;;;
+(use-package typescript-mode
+  :ensure t
+  :init
+  (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
+  :config
+  (setq typescript-indent-level 2)
+  (add-hook 'typescript-mode #'subword-mode)
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
+
+(use-package tree-sitter
+  :ensure t
+  :hook ((typescript-mode . tree-sitter-hl-mode)
+	 (typescript-tsx-mode . tree-sitter-hl-mode)))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter
+  :config
+  (tree-sitter-require 'tsx)
+  (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-tsx-mode . tsx)))
+;;;;;;;;;;;;
+
 (defun setup-rjsx-mode ()
   "Setup rjsx mode, enable LSP, company, TIDE etc."
   (setq-local indent-line-function 'js-jsx-indent-line)
@@ -14,15 +39,34 @@
   (emmet-mode))
 (add-hook 'rjsx-mode-hook 'setup-rjsx-mode)
 
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+;(flycheck-add-mode 'typescript-tslint 'web-mode)
 
 (defun setup-tide-mode ()
   "Setup Typescript IDE mode."
   (interactive)
   (tide-setup)
+  
+  (setq-local indent-line-function 'js-jsx-indent-line)
+  (setq-local js-indent-level 2)
+  (setq js-indent-level 2)
+  
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+ (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
+  
+  (prettier-js-mode +1)
+  
+  (add-web-mode-html-bindings)
+  (emmet-mode)
+  
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
@@ -91,9 +135,9 @@
 
 ;; Turn on tide-mode in .component.html/.ts files
 ;; (add-hook 'ng2-mode-hook #'setup-tide-mode) didn't work
-(add-hook 'ng2-ts-mode-hook #'lsp)
-(add-hook 'ng2-ts-mode-hook #'setup-tide-mode)
-(add-hook 'ng2-html-mode-hook #'setup-tide-mode)
+;; (add-hook 'ng2-ts-mode-hook #'lsp)
+;; (add-hook 'ng2-ts-mode-hook #'setup-tide-mode)
+;; (add-hook 'ng2-html-mode-hook #'setup-tide-mode)
 
 (add-hook 'typescript-mode-hook #'lsp)
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
