@@ -163,6 +163,7 @@ alias sshamra="ssh-add /docs/amra/ssh-key/amra_id_rsa && ssh cld9-6997@195.69.14
 alias sshpromodesk="ssh-add ~/Documents/promodesk/ssh-key/promodesk_id_rsa && ssh rxsejbky@promodesk.ge"
 alias sshtrustdev="ssh-add ~/Documents/trust/ssh-key/trust_id_rsa.pem && ssh ec2-user@3.70.14.199"
 alias sshdigitalnews="ssh-add ~/Documents/digitalnews/ssh-key/digitalnews_id_rsa && ssh root@170.187.188.143"
+alias sshbadagoni="ssh-add ~/Documents/badagoni/ssh-key/badagoni_id_rsa && ssh root@159.89.20.42"
 
 alias tinker="php artisan tinker"
 alias t="php artisan tinker"
@@ -230,6 +231,11 @@ alias jhbuild="PATH=.new_local/bin:$PATH jhbuild"
 alias noderepl="ts-node -O '{\"module\": \"commonjs\"}'"
 
 alias ns="host -t ns"
+
+
+alias syncthing-reset-folder="curl -X POST -H \"X-API-Key: $SYNCTHING_API_KEY\" http://localhost:8384/rest/system/reset?folder=$SYNCTHING_RESET_FOLDER_NAME"
+
+alias syncthing-connect-port="(sleep 2 && web localhost:9596) & ssh -L 9596:localhost:8384 root@luka.ge"
 
 
 #### project-specific aliases
