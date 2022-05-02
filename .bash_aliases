@@ -240,8 +240,8 @@ alias syncthing-connect-port="(sleep 2 && web localhost:9596) & ssh -L 9596:loca
 
 #### project-specific aliases
 
-#alias sshardi="mosh root@213.131.38.12"
-alias sshardi="ssh root@mobile.ardi.ge"
+#alias sshardi="ssh-add ~/Documents/ardi/ssh/ardi_id_rsa && mosh root@213.131.38.12"
+alias sshardi="ssh-add ~/Documents/ardi/ssh/ardi_id_rsa && ssh root@mobile.ardi.ge"
 
 alias sshalpha="mosh root@139.162.169.65" # IP of app.alpha.ge
 #alias sshlivealpha="echo password: Alpha2021@; mosh zerogravity@185.69.172.54"
