@@ -56,8 +56,19 @@ eval "$(direnv hook bash)"
 # hide login banner in new shell windows
 # touch ~/.hushlogin
 
+# Java home for React Native on Android
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0)
+#SDK exporting
+export ANDROID_HOME=$HOME/Library/Android/sdk
+#Tools exporting
+export PATH=$PATH:$ANDROID_HOME/emulator:$PATH
+export PATH=$PATH:$ANDROID_HOME/tools:$PATH
+export PATH=$PATH:$ANDROID_HOME/tools/bin:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
 
-PATH="/Users/luka/Library/Android/sdk/platform-tools:$PATH"
+# PATH="/Users/luka/Library/Android/sdk/platform-tools:$PATH"
+
+ANDROID_SDK_ROOT="/Users/luka/Library/Android/sdk"
 
 # only have java 8 enabled
 # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
@@ -73,8 +84,6 @@ alias java11='export JAVA_HOME=$JAVA_11_HOME'
 
 # default to Java 11
 java11
-
-ANDROID_SDK_ROOT="/Users/luka/Library/Android/sdk"
 
 # add mysql to PATH
 #PATH="/usr/local/mysql/bin:$PATH"
@@ -164,6 +173,16 @@ function mv() {
 # easier to remember
 alias clipboard="pbcopy"
 
+
+#syncthing-reset-folder(){
+#  echo enter API key
+#  read -ei "$1" SYNCTHING_API_KEY
+#  echo enter folder name
+#  read -ei "$1" SYNCTHING_RESET_FOLDER_NAME
+#  echo enter syncthing port
+#  read -ei "$1| SYNCTHING_PORT
+#  curl -X POST -H "X-API-Key: $SYNCTHING_API_KEY" "http://localhost:$SYNCTHING_PORT/rest/system/reset?folder=$SYNCTHING_RESET_FOLDER_NAME"
+#}
 
 backup-mac-preferences(){
   # backup the app shortcuts preferences plist
@@ -527,7 +546,9 @@ gcd(){
   if [ $(pwd) = "/Users/luka/Development/Flow/flow-services" ] \
   || [ $(pwd) = "/Users/luka/Development/Flow/flow-react-native" ] \
   || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm" ] \
-  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm/app" ];
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm/app" ] \
+  || [ $(pwd) = "/projects/ledap/LeDapRNApp" ] \
+  || [ $(pwd) = "/Users/luka/projects/ledap/LeDapRNApp" ];
     then
         git checkout develop
     else
@@ -689,7 +710,7 @@ mp3(){
   if [ -f "$1" ];
   then
       # https://stackoverflow.com/a/32280085/324220
-      mp3_cmd=( ffmpeg -i "$1" -f mp3 -acodec libmp3lame -ab 19200 -ar 44100 -b 320 "$1.mp3" )
+      mp3_cmd=( ffmpeg -i "$1" -f mp3 -acodec libmp3lame -ab 320k -ar 44100 "$1.mp3" )
       printf '%q ' "${mp3_cmd[@]}"
       "${mp3_cmd[@]}"
     # open "$2"

@@ -67,7 +67,9 @@ grd(){
   if [ $(pwd) = "/Users/luka/Development/Flow/flow-services" ] \
   || [ $(pwd) = "/Users/luka/Development/Flow/flow-react-native" ] \
   || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm" ] \
-  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm/app" ];
+  || [ $(pwd) = "/Users/luka/Development/Flow/flow-crm/app" ] \
+  || [ $(pwd) = "/projects/ledap/LeDapRNApp" ] \
+  || [ $(pwd) = "/Users/luka/projects/ledap/LeDapRNApp" ];
     then
         git rebase develop
     else
@@ -158,8 +160,8 @@ alias crm="cd /projects/flow/flow-crm"
 
 #
 alias sshbk="ssh root@bookulus.ge"
-alias sshgsf="ssh-add /docs/gsf/ssh-key/gsf_id_rsa && ssh root@194.195.241.83"
-alias sshamra="ssh-add /docs/amra/ssh-key/amra_id_rsa && ssh cld9-6997@195.69.143.183"
+alias sshgsf="ssh-add ~/Documents/gsf/ssh-key/gsf_id_rsa && ssh root@194.195.241.83"
+alias sshamra="ssh-add ~/Documents/amra/ssh-key/amra_id_rsa && ssh cld9-6997@195.69.143.183"
 alias sshpromodesk="ssh-add ~/Documents/promodesk/ssh-key/promodesk_id_rsa && ssh rxsejbky@promodesk.ge"
 alias sshtrustdev="ssh-add ~/Documents/trust/ssh-key/trust_id_rsa.pem && ssh ec2-user@3.70.14.199"
 alias sshdigitalnews="ssh-add ~/Documents/digitalnews/ssh-key/digitalnews_id_rsa && ssh root@170.187.188.143"
@@ -180,6 +182,8 @@ alias fix-spotlight='find . -type d -name "node_modules" -exec touch "{}/.metada
 alias w="cd /projects"
 alias w-command="command w"
 alias p="cd /projects"
+
+alias ldrn="/Users/luka/projects/ledap/LeDapRNApp/node_modules/react-native/scripts/launchPackager.command"
 
 # wom serve, then open served url and bring dev server process to front
 #alias ws="cd /projects/wom && php artisan serve --host 0.0.0.0 --port 8000 & (i\
@@ -233,10 +237,10 @@ alias noderepl="ts-node -O '{\"module\": \"commonjs\"}'"
 alias ns="host -t ns"
 
 
-alias syncthing-reset-folder="curl -X POST -H \"X-API-Key: $SYNCTHING_API_KEY\" http://localhost:8384/rest/system/reset?folder=$SYNCTHING_RESET_FOLDER_NAME"
 
 alias syncthing-connect-port="(sleep 2 && web localhost:9596) & ssh -L 9596:localhost:8384 root@luka.ge"
 
+alias apk="adb -d install -r " # path_to_apk
 
 #### project-specific aliases
 
